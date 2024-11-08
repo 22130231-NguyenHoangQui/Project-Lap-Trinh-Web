@@ -52,7 +52,41 @@ div {
 aside {
     display: block;
 }
-
+/* header  */
+.header, .header-wrapper {
+    background-position: 50% 0;
+    background-size: cover;
+    position: relative;
+    transition: background-color .3s, opacity .3s;
+    width: 100%;
+    z-index: 1001;
+}
+.header-top {
+    background-color: #d11a59 !important;
+    min-height: 20px;
+    position: relative;
+}
+.flex-col {
+    margin-right: auto;
+    max-height: 100%;
+}
+.flex-left {
+    margin-right: auto;
+    max-height: 100%;
+}
+.nav {
+    align-items: center;
+    display: inline-block;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.nav .li-first {
+    padding: 0 0;
+}
+.nav li {
+    padding: 0 0.7em;
+}
 /* =====================================
    Title Page Styles
 ===================================== */
