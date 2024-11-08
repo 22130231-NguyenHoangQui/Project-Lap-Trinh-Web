@@ -1,3 +1,13 @@
 .container {
     flex-direction: row;
 }
+/* header */
+.header-postion {
+    position: relative;
+}
+.div-container  a{
+    flex: 0 0 30%;
+}
+.div-container  form {
+    flex: 0 0 70%;
+}

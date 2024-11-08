@@ -3,10 +3,11 @@
     margin-left: auto;
     margin-right: auto;
     height: 100%;
-
     width: 100%;
 }
-
+.container {
+    padding-bottom: 20px;
+}
 .container .row {
     width: 50%;
     margin-left: auto;
