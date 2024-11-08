@@ -52,41 +52,6 @@ div {
 aside {
     display: block;
 }
-/* header  */
-.header, .header-wrapper {
-    background-position: 50% 0;
-    background-size: cover;
-    position: relative;
-    transition: background-color .3s, opacity .3s;
-    width: 100%;
-    z-index: 1001;
-}
-.header-top {
-    background-color: #d11a59 !important;
-    min-height: 20px;
-    position: relative;
-}
-.flex-col {
-    margin-right: auto;
-    max-height: 100%;
-}
-.flex-left {
-    margin-right: auto;
-    max-height: 100%;
-}
-.nav {
-    align-items: center;
-    display: inline-block;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-}
-.nav .li-first {
-    padding: 0 0;
-}
-.nav li {
-    padding: 0 0.7em;
-}
 
 /* =====================================
    Title Page Styles
@@ -97,7 +62,7 @@ aside {
     left: 0;
     margin: 0 !important;
     padding: 0 !important;
-   
+    position: absolute;
     right: 0;
     top: 0;
     
@@ -105,9 +70,8 @@ aside {
 
 /* page title */
 .page-title {
-    margin-top: 70px;
     position: relative;
-    background-color: #45338a;
+    background-color: #de5f8a;
 
 } 
 .featured-title {
@@ -122,7 +86,9 @@ aside {
 }
 
 /* page title bg */
-
+.page-title-bg {
+    overflow: hidden;
+}
 
 .page-title-inner {
     padding-top: 15px;
@@ -154,7 +120,6 @@ aside {
     padding-top: 10px; 
     padding-bottom: 10px; 
     opacity: 1;
-    
 }
 option {
     font-weight: normal;
@@ -186,9 +151,8 @@ option {
     SIDE BAR
 ======================================*/
 .sidebar-inner {
-    
     padding-left: 15px;
-    padding-right: 20px;
+    padding-right: 15px;
 }
 
 .widget {
@@ -241,7 +205,7 @@ option {
 .aws-search-btn_icon {
     border: none;
 }
-/* woocomomerce_filter */
+/* woocomomerce_price_filter */
 .widget_price_filter .ui-slider-horizontal {
     border-radius: 99px;
     height: 5px;
@@ -315,13 +279,7 @@ option {
     border: none;
     padding: 3px 30px;
     background-color: #666666;
-    color: #353c46;
-    font-weight: 600;
-    
-}
-.widget form .price_slider_wrapper .price_slider_amount .price_label {
-    
-    color: #666666;
+
 }
 /* custom */
 .widget_text .custom-html-widget p {
@@ -369,10 +327,6 @@ Wideget Styles
     margin-bottom: 0;
     padding: 0 9.8px 19.6px;
 }
-.padding-p p  {
-    padding: 10px 0;
-}
-
 
 .col-inner {
     background-position: 50% 50%;
@@ -407,9 +361,6 @@ Wideget Styles
     margin-bottom: .1em;
     margin-top: .1em;
 }
-.box-text .price-wraper span  span bdi,span {
-    font-weight: 700;
-}
 
 .box a {
     display: inline-block;
@@ -422,14 +373,12 @@ Wideget Styles
     padding-top: 10px;
 }
 .add-to-cart-button a {
-    border-radius: 5px;
-    padding: 7px 10px;
+    padding: 5px 10px;
     background-color: #dd5f8a;
     font-size: 0.8em;
     font-weight: 500;
     color: #d8d8d8;
 }
-
 
 
 /* =====================================
@@ -441,7 +390,9 @@ main {
     unicode-bidi: isolate;
 }
 
-
+.category-page-row {
+    padding-top: 30px;
+}
 
 /* =====================================
    Responsive Layouts
