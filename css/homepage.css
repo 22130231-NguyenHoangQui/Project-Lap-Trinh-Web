@@ -1,4 +1,107 @@
-.header, .header-wrapper {
+/* =====================================
+   Responsive Layouts
+===================================== */
+
+/* Large Screens */
+@media screen and (min-width: 850px) {
+
+    .large-9 {
+        flex-basis: 100% -20px;
+        max-width: 100% -20px;
+    }
+
+
+    .large-9 .shop-container .large-columns-4>.col {
+        flex-basis: 20%;
+        max-width: 20%;
+    }
+}
+
+/* Medium Screens */
+@media screen and (min-width: 550px) {
+    .medium-columns-3>.col {
+        flex-basis: 33.333333%;
+        max-width: 33.333333%;
+    }
+}
+
+/* Small Screens */
+.small-columns-2>.col {
+    flex-basis: 50%;
+    max-width: 50%;
+}
+
+@media screen and (min-width: 850px) {
+    .col+.col .col-inner {
+        margin-left: 0;
+        margin-right: auto;
+    }
+}
+
+/* =======================
+    Typography Styles
+    ============= */
+a {
+    text-decoration: none;
+    color: #334862;
+}
+
+
+/* =====================================
+       Global Styles
+    ===================================== */
+body {
+    font-weight: 400;
+    font-style: normal;
+    font-family: Lato, sans-serif;
+    line-height: 1.6;
+    
+}
+
+div {
+    display: block;
+}
+
+.container {
+    max-width: 1340px;
+}
+
+.flex-row {
+    align-items: center;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1340px;
+}
+
+.col {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+
+}
+
+aside {
+    display: block;
+}
+
+/* ==================
+    Header
+==========*/
+
+.header,
+.header-wrapper {
     position: relative;
     width: 100%;
     background-position: 50% 0;
@@ -7,7 +110,9 @@
 }
 
 .header-top {
-    background-color: #d11a59 !important;
+    /* #FF69B4#D2B48C#F5F5DC#FFB074#98FF98 */
+
+    background-color: #1E90FF !important;
     min-height: 20px;
 }
 
@@ -25,7 +130,7 @@
 .nav li {
     display: flex;
     flex-grow: 1;
-    color: hsla(0, 0%, 7%, .85);
+    color: white;
     padding: 0 0.7em;
     font-weight: 700;
     font-size: 0.8em;
@@ -36,7 +141,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    color: #999;
+    color: black;
 }
 
 .social-icons a {
@@ -50,7 +155,7 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    background-color: #d11a59;
+    background-color: #1E90FF;
     border: none;
 }
 
@@ -83,16 +188,34 @@
     font-family: Lato, sans-serif;
     font-size: .8em;
 }
-.row.row-center .img-logo  {
+
+.nav.d-flex.list-item li div {
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+}
+
+.nav.d-flex.list-item li div i {
+    width: 5%;
+    text-align: center;
+    font-size: 1.8em;
+    padding: 5px 5px;
+}
+
+.row.row-center .img-logo {
     display: flex;
     justify-content: center;
 }
+
 .row.row-center .img-logo img {
-    
+
     max-height: 60px;
-    
-  
+
+
 }
+
 .row.row-center .col-lg-2 {
     margin-bottom: auto;
     margin-top: auto;
@@ -119,7 +242,7 @@
     font-style: normal;
     font-family: Lato, sans-serif;
     font-size: 1em;
-   
+
 }
 
 .row .bag-shop .col1 {
@@ -137,109 +260,53 @@
     justify-content: center;
     align-items: center;
 }
+
 .bag-shop .fa-bag-shopping {
-    font-size: 1.5em; /* Điều chỉnh kích thước icon */
+    font-size: 1.5em;
+    /* Điều chỉnh kích thước icon */
 }
 
 
-
-/* =====================================
-   Responsive Layouts
-===================================== */
-
-/* Large Screens */
-@media screen and (min-width: 850px) {
-    .large-3 {
-        flex-basis: 25%;
-        max-width: 25%;
-    }
-
-    .large-9 {
-        flex-basis: 75%;
-        max-width: 75%;
-    }
-
-
-    .large-9 .shop-container .large-columns-4>.col {
-        flex-basis: 25%;
-        max-width: 25%;
-    }
+/*main */
+main {
+    display: block;
+    unicode-bidi: isolate;
 }
 
-/* Medium Screens */
-@media screen and (min-width: 550px) {
-    .medium-columns-3>.col {
-        flex-basis: 33.333333%;
-        max-width: 33.333333%;
-    }
+.category-page-row {
+    padding-top: 30px;
+}
+.padding-p {
+    padding: 10px 10px;
+   
 }
 
-/* Small Screens */
-.small-columns-2>.col {
-    flex-basis: 50%;
-    max-width: 50%;
+.col {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+
 }
 
-@media screen and (min-width: 850px) {
-    .col+.col .col-inner {
-        margin-left: 0;
-        margin-right: auto;
-    }
+
+/* * */
+.s3_c {
+    display: flex;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-weight: 500;
+    line-height: 1.23;
+    align-items: center;
+    justify-content: center;
 }
-/* =======================
-    Typography Styles
-    ============= */
-    a {
-        text-decoration: none;
-        color: #334862;
-    }
-    
-    
-    /* =====================================
-       Global Styles
-    ===================================== */
-    body {
-        font-weight: 400;
-        font-style: normal;
-        font-family: Lato, sans-serif;
-        line-height: 1.6;
-    }
-    
-    div {
-        display: block;
-    }
-    
-    .container {
-        max-width: 1340px;
-    }
-    
-    .flex-row {
-        align-items: center;
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: space-between;
-        width: 100%;
-    }
-    
-    .row {
-        display: flex;
-        flex-wrap: wrap;
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-        max-width: 1340px;
-    }
-    
-    .col {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        position: relative;
-    
-    }
-    
-    aside {
-        display: block;
-    }
-    
+/* fix */
+/* .col.box-hover:hover {
+    border: 1px solid #e5e5e5;
+    transition: border-color 0.3s ease;
+}
+
+.col.box-hover .col-inner:hover {
+    color: #999;
+} */
