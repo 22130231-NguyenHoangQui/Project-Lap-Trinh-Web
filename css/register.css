@@ -6,7 +6,9 @@
 
     width: 100%;
 }
-
+.container {
+    padding-bottom: 20px;
+}
 .container .row {
     width: 50%;
     margin-left: auto;
