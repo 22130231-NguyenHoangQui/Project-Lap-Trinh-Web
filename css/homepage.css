@@ -1,47 +1,3 @@
-/* =====================================
-   Responsive Layouts
-===================================== */
-
-/* Large Screens */
-@media screen and (min-width: 850px) {
-
-    .large-9 {
-        display: flex;
-        flex-wrap: wrap;
-        /* Cho phép các cột xuống dòng khi không đủ chỗ */
-    }
-
-    .large-9 .shop-container .large-columns-4>.col {
-        flex-basis: calc(20% - 30px);
-        /* 20% chiều rộng trừ đi khoảng cách giữa các cột */
-        max-width: calc(20% - 30px);
-        /* Đảm bảo không vượt quá 20% chiều rộng */
-
-    }
-
-
-}
-
-/* Medium Screens */
-@media screen and (min-width: 550px) {
-    .medium-columns-3>.col {
-        flex-basis: 33.333333%;
-        max-width: 33.333333%;
-    }
-}
-
-/* Small Screens */
-.small-columns-2>.col {
-    flex-basis: 50%;
-    max-width: 50%;
-}
-
-@media screen and (min-width: 850px) {
-    .col+.col .col-inner {
-        margin-left: 0;
-        margin-right: auto;
-    }
-}
 
 /* =======================
     Typography Styles
@@ -227,20 +183,23 @@ aside {
     margin-top: auto;
 
 }
-
-.row .bag-shop {
+.row.balance-row {
     display: flex;
-    flex-direction: row;
-    flex: 1;
-    flex-grow: 1;
-    align-items: center;
-    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+.row .bag-shop {
+   display: flex;
+   align-items: center;
+   text-align: center;
+   gap: 20px; 
 
 }
 
 .row .bag-shop .col1.text {
-    padding-top: auto;
-    padding-bottom: auto;
+    display: flex;
+    align-items: center;
     text-wrap: nowrap;
     flex-grow: 1;
     color: hsla(0, 0%, 7%, .85);
@@ -297,7 +256,7 @@ main {
 
 }
 
-.container.padding-all-top h4 {
+.container.padding-all-top  h4 {
     width: 100%;
     padding-bottom: 20px;
 }
@@ -314,14 +273,15 @@ main {
 }
 .s3_c {
     display: flex;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding: 5px 15px;
     font-weight: 500;
     line-height: 1.23;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 }
-
+.text-fontweight {
+    font-weight: bold;
+}
 /* fix */
 /* .col.box-hover:hover {
     border: 1px solid #e5e5e5;
