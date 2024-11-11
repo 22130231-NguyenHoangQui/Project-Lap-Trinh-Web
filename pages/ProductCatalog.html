@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/product_catalog.css">
+
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-wrapper">
+            <div class="header-top">
+                <div class=" flex-row d-flex container">
+                    <div class="d-flex flex-col flex-left">
+                        <ul class="nav nav-left nav-small">
+                            <li class="html li-first">Đặt bánh lấy ngay tại Thành phố Hồ Chí Minh</li>
+                            <li class="html li-first">Hệ thống bánh sinh nhật chính hãng</li>
+                            <li class="html li-first">Hotline: 01234576789</li>
+                        </ul>
+                    </div>
+                    <div class="flex-col hide-for-medium flex-right">
+                        <ul class="nav top-bar-nav nav-right nav-small  nav-divided">
+                            <li class="html header-social-icons ">
+                                <div class="social-icons follow-icons">
+                                    <a href="" class="button icon circle">
+                                        <i class="fa-brands fa-facebook" style=" margin-right: auto;"></i>
+                                    </a>
+                                    <a href="" class="button icon circle">
+
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </a>
+                                    <a href="" class="button icon circle">
+
+                                        <i class="fa-regular fa-envelope"></i>
+                                    </a>
+                                    <a href="" class="button icon circle">
+
+                                        <i class="fa-solid fa-phone"></i>
+                                    </a>
+
+                                    <a href="" class="button icon circle">
+
+                                        <i class="fa-brands fa-pinterest"></i>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-center color-header-center ">
+            <div class="row row-center">
+                <div class="col-lg-1 img-logo">
+                    <a href="../pages/HomePage.html">
+                        <img src="../image/imghomepage/logo/logo1.jpg" alt="">
+
+                    </a>
+                </div>
+                <div class="col-lg-8">
+                    <ul class=" nav d-flex  list-item">
+
+                        <a href="../pages/HomePage.html">
+                            <li>Trang chủ</li>
+                        </a>
+                        <div class="dropdown" style=" display:flex; align-items: center;  height: 100%; ">
+                            <a href="../pages/ProductCatalog.html" class="">
+                                <li>Danh mục</li>
+                            </a>
+                            <ul class="dropdown-menu1">
+                                <p
+                                    style="text-wrap: nowrap; padding: 0 10px; font-weight: bold; background-color: white;">
+                                    Danh mục bánh sinh nhật</p>
+                                <li><a href="#category1">Bánh Ăn Nhẹ</a></li>
+                                <li><a href="#category2">Bánh Các Ngày Lễ</a></li>
+                                <li><a href="#category3">Bánh Chai Rượu Và Ly Bia Sang Trọng</a></li>
+                                <li><a href="#category4">Bánh Chủ Nhật</a></li>
+                                <li><a href="#category4">Bánh Công Chúa</a></li>
+                                <li><a href="#category4">Bánh Giáng Sinh (Noel)</a></li>
+                                <li><a href="#category4">Bánh Hoa Quả Tươi Theo Mùa</a></li>
+                                <li><a href="#category4">Bánh Khủng Long</a></li>
+                                <li><a href="#category4">Bánh Kỉ niệm ngày cưới</a></li>
+                                <li><a href="#category4">Bánh Lịch</a></li>
+                                <li><a href="#category4">Bánh Mousse</a></li>
+
+                            </ul>
+                        </div>
+                        <li>
+                            <div class="d-flex ">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <input type="search" name="keyword" id="keyword"
+                                    class="form-control autocomplete-field js-ls"
+                                    placeholder="Tìm kiếm bánh sinh nhật,... " value="" autocomplete="off">
+                            </div>
+
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <div class="d-flex">
+                        <div class="row balance-row">
+                            <div class="bag-shop">
+                                <div class="col1 text">GIỎ HÀNG/0₫</div>
+                                <div class="col1">
+                                    <i class="fa-solid fa-bag-shopping"></i>
+                                </div>
+                                <div class="col1">
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                            id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Tài Khoản
+                                        </button>
+                                        <ul class="dropdown-menu account-dropdown-menu"
+                                            aria-labelledby="dropdownMenuButton">
+                                            <li><a class="dropdown-item" href="SignIn.html">Đăng Nhập</a></li>
+                                            <li><a class="dropdown-item" href="SignUp.html">Đăng Ký</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </header>
+    <main id="main">
+        <div class="row category-page-row">
+            <div class="col large-3">
+                <div id="shop-sidebar" class="sidebar-inner">
+                    <aside class="widget widget_aws_widget">
+                        <div>
+                            <form>
+                                <div class="search-input-container">
+                                    <input type="search" name="s" id="search-input" class="aws-search-field"
+                                        placeholder="Tìm kiếm sản phẩm" autocomplete="off">
+                                    <input type="hidden" name="post_type" value="product">
+                                    <input type="hidden" name="type_aws" value="true">
+                                    <div class="aws-loader"></div>
+                                </div>
+                                <div class="aws-search-btn">
+                                    <span class="aws-search-btn_icon" aria-label="Tìm kiếm">
+                                        <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                            width="24">
+                                            <path
+                                                d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+                                            </path>
+                                        </svg>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </aside>
+
+                    <aside id="woocommerce_price_filter-15" class="widget woocommerce widget_price_filter">
+                        <span class="widget-title shop-sidebar">Lọc theo giá</span>
+                        <div class="is-divider small"></div>
+                        <form>
+                            <div class="price_slider_wrapper">
+                                <div
+                                    class="price_slider ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
+                                    <div class="ui-slider-range ui-corner-all ui-widget-header"
+                                        style="left: 0%; width: 100%;"></div><span tabindex="0"
+                                        class="ui-slider-handle ui-corner-all ui-state-default"
+                                        style="left: 0%;"></span><span tabindex="0"
+                                        class="ui-slider-handle ui-corner-all ui-state-default"
+                                        style="left: 100%;"></span>
+                                </div>
+                                <div class="price_slider_amount" data-step="10">
+                                    <button type="submit" class="button">Lọc</button>
+                                    <div class="price_label">
+                                        Giá <span class="from">230.000₫</span> — <span class="to">1.350.000₫</span>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </aside>
+                    <aside id="custom_html-5" class="widget_text widget widget_custom_html">
+                        <div class="textwidget custom-html-widget">
+                            <p><a href="" style="text-decoration: none; color: inherit; font-weight: bold;">Bánh Kem
+                                    Bento
+                                    Cake 80k</a></p>
+                        </div>
+                    </aside>
+                    <aside id="custom_html-6" class="widget_text widget widget_custom_html">
+                        <div class="textwidget custom-html-widget">
+                            <p><a href="" style="text-decoration: none; color: inherit; font-weight: bold;">Bánh Kem
+                                    Mini
+                                    120k</a></p>
+                        </div>
+                    </aside>
+                    <aside id="woocommerce_product_categories-15" class="widget woocommerce widget_product_categories">
+                        <ul class="product-categories">
+                            <li class="cat-item cat-item-2197"><a href="">Bento Cake</a>
+                            </li>
+                            <li class="cat-item cat-item-2310 current-cat active"><a href="">Bánh Ăn Nhẹ</a></li>
+                            <li class="cat-item cat-item-2658"><a href="">Bánh Mousse</a></li>
+                            <li class="cat-item cat-item-2668"><a href="">Bánh Size
+                                    Lớn</a></li>
+                            <li class="cat-item cat-item-1749"><a
+                                    href="https://tokyogateaux.vn/banh-20-11-banh-20-10-banh-08-03/">Bánh ngày lễ 8.3 -
+                                    20.10 - 20.11</a></li>
+                            <li class="cat-item cat-item-119"><a href="https://tokyogateaux.vn/banh-sinh-nhat/">Bánh
+                                    Sinh Nhật - Bánh Kem - Bánh Gâto</a></li>
+                            <li class="cat-item cat-item-123"><a
+                                    href="https://tokyogateaux.vn/banh-sinh-nhat/banh-sinh-nhat-tre-em/">Bánh Sinh Nhật
+                                    Trẻ Em</a></li>
+                            <li class="cat-item cat-item-120"><a
+                                    href="https://tokyogateaux.vn/banh-sinh-nhat/banh-sinh-nhat-tre-em/banh-sinh-nhat-cho-be-trai/">Bánh
+                                    Sinh Nhật Cho Bé Trai</a></li>
+                            <li class="cat-item cat-item-122"><a
+                                    href="https://tokyogateaux.vn/banh-sinh-nhat/banh-sinh-nhat-tre-em/banh-sinh-nhat-cho-be-trai/banh-sinh-nhat-sieu-nhan/">Bánh
+                                    Siêu Nhân</a></li>
+                            <li class="cat-item cat-item-128"><a
+                                    href="https://tokyogateaux.vn/banh-sinh-nhat/banh-sinh-nhat-tre-em/banh-sinh-nhat-cho-be-trai/banh-sinh-nhat-oto/">Bánh
+                                    Ô Tô</a></li>
+                            <li class="cat-item cat-item-256"><a
+                                    href="https://tokyogateaux.vn/banh-sinh-nhat/banh-sinh-nhat-tre-em/banh-sinh-nhat-cho-be-trai/banh-sinh-nhat-khung-long/">Bánh
+                                    Khủng Long</a></li>
+                            <li class="cat-item cat-item-1590"><a
+                                    href="https://tokyogateaux.vn/banh-sinh-nhat/banh-sinh-nhat-tre-em/banh-sinh-nhat-cho-be-trai/banh-sinh-nhat-cho-be-trai-cuc-ngau-va-sieu-hot/">Mẫu
+                                    Bánh Sinh Nhật Cho Bé Trai Cực Ngầu Và Siêu Hot</a></li>
+                            <li class="cat-item cat-item-125"><a
+                                    href="https://tokyogateaux.vn/banh-sinh-nhat/banh-sinh-nhat-tre-em/banh-sinh-nhat-cho-be-gai/">Bánh
+                                    Sinh Nhật Cho Bé Gái</a></li>
+                            <li class="cat-item cat-item-126"><a
+                                    href="https://tokyogateaux.vn/banh-sinh-nhat/banh-sinh-nhat-tre-em/banh-sinh-nhat-cho-be-gai/banh-sinh-nhat-cong-chua/">Bánh
+                                    Công Chúa</a></li>
+                            <li class="cat-item cat-item-659"><a
+                                    href="https://tokyogateaux.vn/banh-sinh-nhat/banh-sinh-nhat-tre-em/banh-sinh-nhat-cho-be-gai/banh-sinh-nhat-unicorn/">Bánh
+                                    Sinh Nhật Unicorn</a></li>
+                            <li class="cat-item cat-item-1592"><a
+                                    href="https://tokyogateaux.vn/banh-sinh-nhat/banh-sinh-nhat-tre-em/banh-sinh-nhat-cho-be-gai/mau-banh-sinh-nhat-cho-be-gai-cuc-xinh-va-dang-yeu/">Mẫu
+                                    Bánh Sinh Nhật Cho Bé Gái Cực Xinh Và Đáng Yêu</a></li>
+                            <li class="cat-item cat-item-1131"><a
+                                    href="https://tokyogateaux.vn/banh-sinh-nhat/banh-sinh-nhat-tre-em/set-banh-be-trai-be-gai/">Set
+                                    Bánh Bé Trai Bé Gái</a></li>
+                            <li class="cat-item cat-item-1116"><a
+                                    href="https://tokyogateaux.vn/banh-sinh-nhat/banh-sinh-nhat-cho-ban-nam-cap-2/">Bánh
+                                    Sinh Nhật Cho Bạn Nam Cấp 2</a></li>
+                            <li class="cat-item cat-item-1117"><a
+                                    href="https://tokyogateaux.vn/banh-sinh-nhat/banh-sinh-nhat-cho-ban-nu-cap-2/">Bánh
+                                    Sinh Nhật Cho Bạn Nữ Cấp 2</a></li>
+                            <li class="cat-item cat-item-133"><a
+                                    href="https://tokyogateaux.vn/banh-sinh-nhat/banh-sinh-nhat-nguoi-lon/">Bánh Sinh
+                                    Nhật Người Lớn</a></li>
+
+                        </ul>
+                    </aside>
+                </div>
+            </div>
+            <div class="col large-9">
+                <div class="shop-container">
+                    <div class="products row  row-small large-columns-4 medium-columns-3 small-columns padding-p">
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        // document.addEventListener('DOMContentLoaded', function () {
+        //     const productData = JSON.parse(localStorage.getItem("selectedProductData"));
+
+        //     if (productData) {
+        //         const productLink = document.getElementById('productLink');
+        //         const priceDisplay = document.getElementById('priceDisplay');
+        //         const imageDisplay = document.getElementById('imageDisplay');
+        //         const titleDisplay = document.getElementById('titleDisplay');
+
+        //         // Hiển thị thông tin sản phẩm
+        //         titleDisplay.textContent = productData.title;
+        //         priceDisplay.innerHTML = `<span class="woocommerce-Price-amount amount"><bdi style="font-weight: bold;">${productData.price}<span class="woocommerce-Price-currencySymbol">₫</span></bdi></span>`;
+        //         imageDisplay.src = productData.image;
+        //     }
+
+        //     // Xóa dữ liệu sau khi hiển thị
+        //     localStorage.removeItem('selectedProductData');
+        // });
+
+
+
+
+
+        // document.addEventListener("DOMContentLoaded", function () {
+        //     const productLinks = document.querySelectorAll(".product-link");
+
+        //     productLinks.forEach(link => {
+        //         link.addEventListener("click", function (event) {
+        //             event.preventDefault();
+
+        //             const productData = {
+        //                 id: link.getAttribute("data-id"),
+        //                 title: link.getAttribute("data-title"),
+        //                 price: link.getAttribute("data-price"),
+        //                 image: link.getAttribute("data-image")
+        //             };
+
+        //             localStorage.setItem("selectedProduct", JSON.stringify(productData));
+
+        //             window.location.href = "DetailProduct.html";
+        //         });
+        //     });
+        // });
+
+        // Dữ liệu sản phẩm mới
+        const newProducts = [
+            {
+                id: 'BHKT85',
+                name: 'Bánh sinh nhật mẫu đơn hồng',
+                price: '45.000₫',
+                image: './2338.webp',
+                link: '#'
+            },
+            {
+                id: 'ABC123',
+                name: 'Bánh su kem nhân chocolate',
+                price: '60.000₫',
+                image: './su-kem.webp',
+                link: '#'
+            },
+            {
+                id: 'DEF456',
+                name: 'Bánh kem dâu tây',
+                price: '70.000₫',
+                image: './kem-dau-tay.webp',
+                link: '#'
+            },
+            {
+                id: 'XYZ789',
+                name: 'Bánh mousse cà phê',
+                price: '50.000₫',
+                image: './mousse-cafe.webp',
+                link: '#'
+            }
+        ];
+
+        // Hàm để tạo phần tử HTML cho mỗi sản phẩm
+        function createProductHTML(product) {
+            return `
+        <div class="col">
+            <div class="col-inner">
+                <div class="product-small box">
+                    <div class="box-image">
+                        <a href="${product.link}" class="product-link">
+                            <img width="247" height="296" src="${product.image}" alt="${product.name}">
+                        </a>
+                    </div>
+                    <div class="box-text text-center">
+                        <div class="title-wrapper">
+                            <p>
+                                <a href="${product.link}">${product.id} - ${product.name}</a>
+                            </p>
+                        </div>
+                        <div class="price-wrapper">
+                            <span class="price">
+                                <span class="woocommerce-Price-amount amount">
+                                    <bdi style="font-weight: bold;">${product.price}</bdi>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="add-to-cart-button">
+                            <a href="${product.link}">THÊM VÀO GIỎ</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+        }
+
+        // // Chèn các sản phẩm vào trong các ô `col`
+        // function loadProducts() {
+        //     const productContainer = document.querySelector('.products.row.row-small'); // Chọn container của sản phẩm
+
+        //     // Duyệt qua tất cả sản phẩm và thêm chúng vào
+        //     newProducts.forEach(product => {
+        //         productContainer.innerHTML += createProductHTML(product); // Thêm sản phẩm vào container
+        //     });
+        // }
+
+        // // Gọi hàm để tải sản phẩm vào trang
+        // loadProducts();
+
+
+
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Lấy dữ liệu đã chọn từ localStorage, với key mặc định là 'selectedCategory' hoặc 'selectedData' (dành cho nhiều loại dữ liệu)
+            const selectedCategory = localStorage.getItem('selectedCategory') || 'banh_an_nhe';
+            const selectedOtherData = localStorage.getItem('selectedOtherData') || [];  // Lấy dữ liệu khác nếu có, ví dụ danh sách sản phẩm yêu thích, v.v.
+
+            // Lấy danh sách sản phẩm theo category
+            const imageList = imagesByCategory[selectedCategory] || [];
+            const productContainer = document.querySelector('.products.row.row-small');
+
+            // Xóa hết sản phẩm hiện tại trong container
+            productContainer.innerHTML = '';
+
+            // Duyệt qua danh sách sản phẩm và tạo HTML cho từng sản phẩm
+            imageList.forEach((product) => {
+                productContainer.innerHTML += createProductHTML(product);
+            });
+
+            // Xóa thông tin đã chọn từ localStorage (nếu cần)
+            localStorage.removeItem('selectedCategory');
+            localStorage.removeItem('selectedOtherData');
+        });
+
+        const imagesByCategory = {
+            'banh_an_nhe': [
+                { image: '../image/imghomepage/product/product_danhmuc/1.webp', id: 'TRMS4', name: 'Tiramisu Dâu Tây', price: '120.000₫', link: '#' },
+                { image: '../image/imghomepage/product/product_danhmuc/2.webp', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+                { image: '../image/imghomepage/product/product_danhmuc/3.webp', id: 'SH612', name: 'Su dẻo Phô mai', price: '65.000₫', link: '#' },
+                { image: '../image/imghomepage/product/product_danhmuc/4.webp', id: 'VB104', name: 'Mousse Dâu Sữa Chua', price: '55.000₫', link: '#' },
+                { image: '../image/imghomepage/product/product_danhmuc/5.webp', id: 'O1506', name: 'Nama choco cream', price: '55.000₫', link: '#' },
+                { image: '../image/imghomepage/product/product_danhmuc/6.webp', id: 'BM215', name: 'Bông lan trứng muối phomai', price: '55.000₫', link: '#' },
+                { image: '../image/imghomepage/product/product_danhmuc/7.webp', id: 'DU311', name: 'Panna cotta', price: '55.000₫', link: '#' },
+                { image: '../image/imghomepage/product/product_danhmuc/8.webp', id: 'GC703', name: 'Gato cup Matcha', price: '55.000₫', link: '#' },
+                { image: '../image/imghomepage/product/product_danhmuc/9.webp', id: 'TO1502', name: 'Matchamisu', price: '55.000₫', link: '#' },
+                { image: '../image/imghomepage/product/product_danhmuc/10.webp', id: 'VB103', name: 'Mousse Việt Quất Sữa Chua', price: '55.000₫', link: '#' }
+            ],
+            'banh_cac_ngay_le': [
+                { image: '../image/imghomepage/khachhang3.jpg', id: 'Mousse', name: 'Bánh Mousse', price: '80.000₫', link: '#' },
+                { image: '../image/imghomepage/khachhang4.jpg', id: 'Socola', name: 'Bánh Socola', price: '90.000₫', link: '#' }
+            ]
+        };
+
+
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

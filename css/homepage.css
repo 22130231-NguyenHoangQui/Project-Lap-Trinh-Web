@@ -12,11 +12,6 @@ main {
     padding-top: 30px;
 }
 
-/* =====================================
-           Responsive Layouts
-        ===================================== */
-
-
 /* =======================
         Typography Styles
         ============= */
@@ -261,6 +256,43 @@ aside {
 .account-dropdown-menu {
     min-width: 100%;
     box-sizing: border-box;
+    position: absolute;
+}
+
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    
+}
+
+.dropdown-menu.menu-danhmuc{
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    padding: 10px;
+    list-style: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    min-width: 150px;
+    z-index: 10;    
+}
+
+
+.dropdown:hover .dropdown-menu.menu-danhmuc {
+    display: block;
+}
+
+
+
+.dropdown-menu.menu-danhmuc li a {
+    color: #333;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-menu.menu-danhmuc li a:hover {
+    background-color: #f0f0f0;
 }
 
 
@@ -280,7 +312,7 @@ main {
     display: flex;
     gap: 15px;
     flex-wrap: wrap;
-    padding-left: 12px;
+    padding-left: 2px;
 }
 
 .col {
@@ -308,6 +340,7 @@ main {
 
 .box-text.text-center .title-wrapper p {
     padding-top: 10px;
+    white-space: nowrap;
 }
 
 .s3_c {
@@ -322,17 +355,9 @@ main {
 .text-fontweight {
     font-weight: bold;
 }
-
-/* fix */
-/* .col.box-hover:hover {
-    border: 1px solid #e5e5e5;
-    transition: border-color 0.3s ease;
-}
-
-.col.box-hover .col-inner:hover {
-    color: #999;
-} */
-/* s4 */
+/* ==============
+    S4
+    ============= */
 .s4 {
     padding-bottom: 30px;
     padding-top: 40px;

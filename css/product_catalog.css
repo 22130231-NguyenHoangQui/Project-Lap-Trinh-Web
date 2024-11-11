@@ -54,71 +54,64 @@ div {
 aside {
     display: block;
 }
+/* ==================
+    Header
+==========*/
 
-/* header  */
 .header,
 .header-wrapper {
+    position: relative;
+    width: 100%;
     background-position: 50% 0;
     background-size: cover;
-    position: relative;
     transition: background-color .3s, opacity .3s;
-    width: 100%;
-    z-index: 1001;
 }
 
 .header-top {
-    background-color: #d11a59 !important;
+    background-color: #1E90FF !important;
     min-height: 20px;
-    position: relative;
 }
 
 .header .flex-row {
     height: 100%;
 }
-nav.nav-left.nav-small li .html{
-   
-   
-}
-.flex-col {
-
-    max-height: 100%;
-}
-
-.flex-left {
-    margin-right: auto;
-    max-height: 100%;
-}
 
 .nav {
     align-items: center;
-    display: inline-block;
     display: flex;
     flex-flow: row wrap;
     width: 100%;
+}
 
+.nav li {
+    display: flex;
+    flex-grow: 1;
+    color: white;
+    padding: 0 0.7em;
+    font-weight: 700;
+    font-size: 0.8em;
+}
+
+/* Social Icons */
+.social-icons {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: black;
 }
 
 .social-icons a {
-    color: #999;
+    color: inherit;
     font-size: 1.25em;
     transition: color 0.3s ease;
 }
 
-.social-icons {
-    color: #999;
-    display: flex;
-    justify-content: flex-start;
-
-    align-items: center;
-}
-
 .button.icon.circle {
     padding: 0.5em;
-  
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    background-color: #d11a59;
+    background-color: #1E90FF;
     border: none;
 }
 
@@ -126,20 +119,28 @@ nav.nav-left.nav-small li .html{
     font-size: 1em;
 }
 
-.nav li {
-    display: flex;
-    flex-grow: 1;
-    color: hsla(0, 0%, 7%, .85);
-    padding: 0 0.7em;
-    font-weight: 700;
-    font-style: normal;
-    font-family: Lato, sans-serif;
-    font-size: 0.8em;
-}
-
 /* header-center */
 .color-header-center {
     background-color: #ffffff;
+    padding: 0;
+}
+
+.row.row-center {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1340px;
+}
+
+.row.row-center .col-lg-8 {
+    max-width: 65%;
+}
+
+.row.row-center .col-lg-3 {
+    margin-bottom: auto;
+    margin-top: auto;
+    padding-right: 0;
 }
 
 .d-flex.list-item {
@@ -162,35 +163,54 @@ nav.nav-left.nav-small li .html{
     font-family: Lato, sans-serif;
     font-size: .8em;
 }
-.row.row-center .img-logo  {
-    display: flex;
-    justify-content: center;
-}
-.row.row-center .img-logo img {
-    
-    max-height: 60px;
-    
-  
-}
-.row.row-center .col-lg-2 {
-    margin-bottom: auto;
-    margin-top: auto;
 
+.nav.d-flex.list-item li div {
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+}
+
+.nav.d-flex.list-item li div i {
+    width: 5%;
+    text-align: center;
+    font-size: 1.8em;
+    padding: 5px 5px;
+}
+
+.row.row-center .img-logo {
+    display: flex;
+    justify-content: flex-start;
+    margin-right: 20px;
+}
+
+.row.row-center .img-logo img {
+
+    max-height: 60px;
+
+
+}
+
+
+.row.balance-row {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    width: 100%;
 }
 
 .row .bag-shop {
     display: flex;
-    flex-direction: row;
-    flex: 1;
-    flex-grow: 1;
     align-items: center;
-    height: 100%;
-
+    text-align: center;
+    gap: 20px;
+    width: 100%;
 }
 
 .row .bag-shop .col1.text {
-    padding-top: auto;
-    padding-bottom: auto;
+    display: flex;
+    align-items: center;
     text-wrap: nowrap;
     flex-grow: 1;
     color: hsla(0, 0%, 7%, .85);
@@ -198,14 +218,13 @@ nav.nav-left.nav-small li .html{
     font-style: normal;
     font-family: Lato, sans-serif;
     font-size: 1em;
-   
+
 }
 
 .row .bag-shop .col1 {
-
-    width: 100%;
+    flex: 1;
     height: 100%;
-    object-fit: contain;
+
 }
 
 .row .bag-shop .col1 i {
@@ -216,11 +235,60 @@ nav.nav-left.nav-small li .html{
     justify-content: center;
     align-items: center;
 }
+
 .bag-shop .fa-bag-shopping {
-    font-size: 1.5em; /* Điều chỉnh kích thước icon */
+    font-size: 1.5em;
+}
+
+.row .bag-shop .col1 .dropdown button {
+    border-radius: 20px;
+    padding: 5px 15px;
+}
+
+.account-dropdown-menu {
+    min-width: 100%;
+    box-sizing: border-box;
+    position: absolute;
 }
 
 
+.dropdown {
+    position: relative;
+    display: block;
+    
+}
+
+.dropdown-menu1 {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    list-style: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    min-width: 150px;
+    z-index: 10;    
+}
+
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu li {
+   
+    padding: 5px 10px;
+}
+
+.dropdown-menu1 li a {
+    color: #333;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-menu1 li a:hover {
+    background-color: #f0f0f0;
+}
 
 /* =====================================
    Title Page Styles
@@ -319,6 +387,8 @@ option {
 /* =====================================
     SIDE BAR
 ======================================*/
+
+/* === aside1 */
 .sidebar-inner {
     padding-left: 15px;
     padding-right: 15px;
@@ -335,8 +405,7 @@ option {
 
 .sidebar-inner div form .search-input-container {
     flex-grow: 1;
-    flex-shrink: 1;
-    flex-basis: 90%;
+   
     padding-top: 5px;
     padding-bottom: 5px;
 
@@ -345,8 +414,6 @@ option {
 .sidebar-inner div form .aws-search-btn {
     display: flex;
     flex-grow: 0;
-    flex-shrink: 1;
-    flex-basis: 10%;
     align-items: center;
     justify-content: center;
     background-color: #ededed;
@@ -376,7 +443,7 @@ option {
     border: none;
 }
 
-/* woocomomerce_price_filter */
+/* aside2 */
 .widget_price_filter .ui-slider-horizontal {
     border-radius: 99px;
     height: 5px;
@@ -499,13 +566,15 @@ Wideget Styles
     width: 100%;
     padding: 6px 0;
 }
+/* ================ end col large-3 first */
 
 /* =====================================
     col large-9 two
     =================================== */
 .row-small>.col {
     margin-bottom: 0;
-    padding: 0 9.8px 19.6px;
+    padding-bottom: 19.6px;
+    padding-left: 20px;
 }
 
 .col-inner {
@@ -513,24 +582,32 @@ Wideget Styles
     background-repeat: no-repeat;
     background-size: cover;
     flex: 1 0 auto;
-    margin-left: auto;
-    margin-right: auto;
     position: relative;
     width: 100%;
+    border: #3331 1px solid;
+
 }
 
 .box {
-    margin: 0 auto;
     position: relative;
     width: 100%;
 }
 
 .box-image {
     height: auto;
-    margin: 0 auto;
-    overflow: hidden;
-    position: relative;
+    width: 100%;
+    padding: 10px 10px;
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
 }
+.box-image img {
+    display: block; 
+    margin: 0 auto; 
+    max-width: 100%; 
+    height: auto; 
+}
+
 
 .box-text .text-center {
     padding-left: 10px;
@@ -560,6 +637,26 @@ Wideget Styles
     font-size: 0.8em;
     font-weight: 500;
     color: #d8d8d8;
+    margin-bottom: 15px;
+}
+.title-wrapper {
+   display:flex;
+   justify-content: center;
+   
+}
+.title-wrapper a, .title-wrapper a span {
+    display: block;
+    width: 200px;
+    height: 40px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    line-height: 40px;
+   
+}
+.price-wrapper .woocommerce-Price-amount {
+    font-weight: bold;
 }
 
 
