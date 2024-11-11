@@ -1,41 +1,47 @@
+/* =====================================
+       Main Styles
+    ===================================== */
+
+main {
+    display: block;
+    unicode-bidi: isolate;
+    background-color: #ffffff;
+}
+
+.category-page-row {
+    padding-top: 30px;
+}
+
+/* =====================================
+           Responsive Layouts
+        ===================================== */
+
 
 /* =======================
-    Typography Styles
-    ============= */
+        Typography Styles
+        ============= */
 a {
     text-decoration: none;
     color: #334862;
 }
 
-* {
-    box-sizing: border-box;
-}
 
 /* =====================================
-       Global Styles
-    ===================================== */
+           Global Styles
+        ===================================== */
 body {
     font-weight: 400;
     font-style: normal;
     font-family: Lato, sans-serif;
     line-height: 1.6;
-
 }
 
 div {
     display: block;
 }
 
-.container,
-.container-fluid {
-    padding-left: 15px;
-    padding-right: 15px;
-    position: relative;
-}
-
 .container {
     max-width: 1340px;
-    margin: auto;
 }
 
 .flex-row {
@@ -46,6 +52,16 @@ div {
     width: 100%;
 }
 
+
+
+.col {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+
+}
 
 aside {
     display: block;
@@ -119,16 +135,27 @@ aside {
 /* header-center */
 .color-header-center {
     background-color: #ffffff;
+    padding: 0;
 }
 
 .row.row-center {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
     max-width: 1340px;
 }
+
+.row.row-center .col-lg-8 {
+    max-width: 65%;
+}
+
+.row.row-center .col-lg-3 {
+    margin-bottom: auto;
+    margin-top: auto;
+    padding-right: 0;
+}
+
 .d-flex.list-item {
     align-items: center;
     display: flex;
@@ -178,23 +205,20 @@ aside {
 
 }
 
-.row.row-center .col-lg-2 {
-    margin-bottom: auto;
-    margin-top: auto;
 
-}
 .row.balance-row {
     display: flex;
-    margin-left: auto;
-    margin-right: auto;
+    align-items: center;
+    margin: 0;
     width: 100%;
 }
-.row .bag-shop {
-   display: flex;
-   align-items: center;
-   text-align: center;
-   gap: 20px; 
 
+.row .bag-shop {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+    width: 100%;
 }
 
 .row .bag-shop .col1.text {
@@ -211,10 +235,9 @@ aside {
 }
 
 .row .bag-shop .col1 {
-
-    width: 100%;
+    flex: 1;
     height: 100%;
-    object-fit: contain;
+
 }
 
 .row .bag-shop .col1 i {
@@ -228,11 +251,22 @@ aside {
 
 .bag-shop .fa-bag-shopping {
     font-size: 1.5em;
-    /* Điều chỉnh kích thước icon */
+}
+
+.row .bag-shop .col1 .dropdown button {
+    border-radius: 20px;
+    padding: 5px 15px;
+}
+
+.account-dropdown-menu {
+    min-width: 100%;
+    box-sizing: border-box;
 }
 
 
-/*main */
+/*======================================
+    Main 
+   ================================== */
 main {
     display: block;
     unicode-bidi: isolate;
@@ -241,47 +275,54 @@ main {
 .padding-all-top {
     padding-top: 30px;
 }
-.row {
+
+.row.row-cols-lg-5 {
     display: flex;
-    gap: 15px; 
-    flex-wrap: wrap; 
+    gap: 15px;
+    flex-wrap: wrap;
+    padding-left: 12px;
 }
+
 .col {
-    flex: 1 1 calc(20% - 15px); /* Box width adjusted to fit 5 in a row with gap */
+    flex: 1 1 calc(20% - 15px);
     max-width: calc(20% - 15px);
 }
-.padding-p {
 
-    gap: 15px;
 
-}
 
-.container.padding-all-top  h4 {
+.container.padding-all-top h4 {
     width: 100%;
     padding-bottom: 20px;
+
 }
 
 .row.row-cols-1.row-cols-sm-2 {
     display: flex;
 }
-.col.box-hover , .product-small.box {
-   border: 1px solid #e5e5e5;
 
+.col.box-hover,
+.product-small.box {
+    padding: 10px 10px;
+    
 }
+
 .box-text.text-center .title-wrapper p {
     padding-top: 10px;
 }
+
 .s3_c {
     display: flex;
     padding: 5px 15px;
     font-weight: 500;
     line-height: 1.23;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
 }
+
 .text-fontweight {
     font-weight: bold;
 }
+
 /* fix */
 /* .col.box-hover:hover {
     border: 1px solid #e5e5e5;
@@ -349,4 +390,8 @@ main {
 .s5_j {
     font-size: 1.2rem;
     color: #666;
+}
+.box-text1.text-center1 {
+    padding-top: 10px;
+    gap: 0;
 }

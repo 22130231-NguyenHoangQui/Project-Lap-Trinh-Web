@@ -15,7 +15,7 @@
 
 <body>
 
-    <header class="header">
+    <header class="header" >
         <div class="header-wrapper">
             <div class="header-top">
                 <div class=" flex-row d-flex container">
@@ -61,15 +61,15 @@
         <div class="header-center color-header-center ">
             <div class="row row-center">
                 <div class="col-lg-1 img-logo">
-                    <a href="">
+                    <a href="#">
                         <img src="../image/imghomepage/logo1.jpg" alt="">
 
                     </a>
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-7">
                     <ul class=" nav d-flex  list-item">
 
-                        <a href="">
+                        <a href="#">
                             <li>Trang chủ</li>
                         </a>
                         <a href="./Product.html" style="margin-right: 10px;">
@@ -87,20 +87,22 @@
 
                     </ul>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-3" >
                     <div class="d-flex">
-                        <div class="row balance-row">
-                            <a href="" class="bag-shop">
+                        <div class="row balance-row" >
+                            <div class="bag-shop" >
                                 <div class="col1 text">GIỎ HÀNG/0₫</div>
                                 <div class="col1">
                                     <i class="fa-solid fa-bag-shopping"></i>
                                 </div>
                                 <div class="col1">
-                                    <button
-                                        style="text-wrap: nowrap; border-radius: 20px; border: none; padding: 5px 10px;">đăng
-                                        nhập</button>
+                                    <a href="login.html" style="text-wrap: nowrap; border-radius: 20px; border: none; padding: 5px 10px; display: inline-block; text-align: center;">Đăng Nhập</a>
                                 </div>
-                            </a>
+                                <div class="col1">
+                                    <a href="register.html" style="text-wrap: nowrap; border-radius: 20px; border: none; padding: 5px 10px; display: inline-block; text-align: center;">Đăng Ký</a>
+                                </div>
+                                
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -109,7 +111,7 @@
         </div>
     </header>
     <main id="main">
-        <div class="row category-page-row">
+        <div class="row category-page-row  g-4">
             <div class="col large-3">
                 <div id="shop-sidebar" class="sidebar-inner col-inner">
                     <aside id="aws_widget-4" class="widget widget_aws_widget">
@@ -241,12 +243,12 @@
                     </aside>
                 </div>
             </div>
-            <div class="col large-9">
+            <div class="col large-9" >
                 <div class="shop-container">
                     <div class="product-detail">
                         <div class="container">
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-6" style="padding-left: 20px;">
                                     <div class="product-image-wrapper">
                                         <img id="product-image" src="" alt="Product Image" style="width: 100%;">
                                     </div>
@@ -255,7 +257,7 @@
                                         <img src="" alt="">
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-6" style="padding-left: 20px;">
                                     <h1 id="product-title" class="product-title">Tên sản phẩm</h1>
                                     <div class="product-wrapper">
                                         <p>Mô tả ngắn gọn sản phẩm ở đây...</p>
@@ -307,21 +309,28 @@
                         </div>
                     </div>
                 </div>
-                <div class="container">
+                <div class="container container__detail__product" >
                     <ul class="nav__bottom">
+                            <li class="nav-bottom">
                         <a href="">
-                            <li class="nav-bottom">MÔ TẢ</li>
+                            MÔ TẢ
                         </a>
+                    </li>
+                            <li class="nav-bottom1">
                         <a href="">
-                            <li class="nav-bottom">THÔNG TIN BỔ SUNG</li>
+                            THÔNG TIN BỔ SUNG
                         </a>
+                    </li>
+                            <li class="nav-bottom1">
                         <a href="">
-                            <li class="nav-bottom">ĐÁNH GIÁ</li>
+                            ĐÁNH GIÁ
                         </a>
+                    </li>
                     </ul>
                     <h1 id="product-title" class="product-title" style="text-align: center;">Tên sản phẩm</h1>
-                    <p></p>
-                    <p></p>
+                    <p id="product-description"></p>
+                    <p id="product-additional-info"></p>
+                    <p id="product-reviews"></p>
                     <h2>Các size bánh cơ bản tại Chúng tôi:</h2>
                     <p>– Size_16 cao ~8cm (3 – 5 người ăn)<br>
                         – Size_18 cao ~8cm (5 – 7 người ăn)<br>

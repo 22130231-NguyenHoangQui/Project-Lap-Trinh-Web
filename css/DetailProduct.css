@@ -99,6 +99,7 @@ div {
     margin-left: auto;
     margin-right: auto;
     max-width: 1340px;
+    
 }
 
 .col {
@@ -242,7 +243,7 @@ aside {
 
 }
 
-.row.row-center .col-lg-2 {
+.row.row-center .col-lg-3 {
     margin-bottom: auto;
     margin-top: auto;
 
@@ -250,8 +251,8 @@ aside {
 
 .row.balance-row {
     display: flex;
-    margin-left: auto;
-    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
     width: 100%;
 }
 
@@ -260,7 +261,6 @@ aside {
     align-items: center;
     text-align: center;
     gap: 20px;
-
 }
 
 .row .bag-shop .col1.text {
@@ -280,7 +280,7 @@ aside {
 
     width: 100%;
     height: 100%;
-    object-fit: contain;
+  
 }
 
 .row .bag-shop .col1 i {
@@ -294,98 +294,9 @@ aside {
 
 .bag-shop .fa-bag-shopping {
     font-size: 1.5em;
-    /* Điều chỉnh kích thước icon */
-}
-
-/* =====================================
-       Title Page Styles
-    ===================================== */
-/* some */
-.fill {
-    height: 100%;
-    left: 0;
-    margin: 0 !important;
-    padding: 0 !important;
-    position: absolute;
-    right: 0;
-    top: 0;
-
-}
-
-/* page title */
-.page-title {
-    position: relative;
-    background-color: #de5f8a;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-.featured-title {
-
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
-
-}
-
-.container {
-
-    padding-left: 15px;
-    padding-right: 15px;
 }
 
 
-.breadcrumbs {
-    color: #fff;
-    font-weight: 700;
-    letter-spacing: 0;
-    padding: 0;
-}
-
-.uppercase {
-    line-height: 1.2;
-    text-transform: uppercase;
-}
-
-.orderby {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    padding-left: 15px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    opacity: 1;
-}
-
-option {
-    font-weight: normal;
-    display: block;
-    padding-block-start: 0px;
-    padding-block-end: 1px;
-    min-block-size: 1.2em;
-    padding-inline: 2px;
-    white-space: nowrap;
-}
-
-.dark .form-flat .select {
-
-    border-color: hsla(0, 0%, 100%, .09);
-}
-
-.woocommerce-ordering,
-.woocommerce-ordering select {
-    display: inline-block;
-    margin: 5px 0;
-}
-
-.form-flat input:not([type=submit]),
-.form-flat select,
-.form-flat textarea {
-    background-color: rgba(230, 219, 219, 0.856);
-    border-color: rgba(0, 0, 0, .09);
-    border-radius: 99px;
-    box-shadow: none;
-    color: currentColor !important;
-}
 
 /* =====================================
         SIDE BAR
@@ -393,6 +304,7 @@ option {
 .sidebar-inner {
     padding-left: 15px;
     padding-right: 15px;
+    background-color: #f9f9f9;
 }
 
 .widget {
@@ -574,7 +486,6 @@ aside#woocommerce_product_categories-15 .product-categories li {
 /* =====================================
         col large-9 two
         =================================== */
-/* Cấu trúc chung */
 .shop-container {
     padding: 20px;
     background-color: #f9f9f9;
@@ -587,7 +498,6 @@ aside#woocommerce_product_categories-15 .product-categories li {
     padding: 20px;
 }
 
-/* Phần hình ảnh sản phẩm */
 .product-image-wrapper {
     border: 1px solid #e5e5e5;
     border-radius: 8px;
@@ -681,8 +591,9 @@ aside#woocommerce_product_categories-15 .product-categories li {
     display: flex;
     gap: 20px;
     font-size: large;
-   
+
 }
+
 .social-icon i {
     border: #6d6969 2px solid;
     padding: 7px 7px;
@@ -690,22 +601,43 @@ aside#woocommerce_product_categories-15 .product-categories li {
 }
 
 /* large-9 */
+
 .nav__bottom {
     align-items: center;
     display: flex;
-    flex-flow: row wrap;
     width: 100%;
     height: 100%;
     list-style: none;
+    padding: 0;
+    margin: 0;
     
 }
-.nav__bottom li.nav-bottom {
+
+.nav__bottom .nav-bottom {
     display: flex;
+    margin-left: 0;
+    align-items: center;
     color: rgb(2, 2, 2);
-    padding: 0 0.7em;
+    text-align: left;
     font-weight: 700;
     font-size: 0.8em;
+    
+
 }
+
+.nav__bottom .nav-bottom1 {
+    display: flex;
+    margin-left: 0;
+    align-items: center;
+    color: rgb(2, 2, 2);
+    padding: 0 0.7em;
+    text-align: left;
+    font-weight: 700;
+    font-size: 0.8em;
+    
+
+}
+
 .product_same_a {
     display: flex;
     flex-direction: row;
