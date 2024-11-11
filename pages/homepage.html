@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/homepage.css">
 
 </head>
@@ -865,25 +866,8 @@
     </main>
 
 
-    <script>
-        document.querySelectorAll('.dropdown-menu a').forEach(function (categoryLink) {
-            categoryLink.addEventListener('click', function (event) {
-                if (categoryLink.getAttribute('href') !== 'SignIn.html' && categoryLink.getAttribute('href') !== 'SignUp.html') {
 
-                    // Lấy thông tin từ thuộc tính 'data-category' của liên kết
-                    const categoryData = categoryLink.getAttribute('data-category');
-
-                    // Lưu thông tin danh mục vào localStorage
-                    localStorage.setItem('selectedCategory', categoryData);
-
-                    // Chuyển hướng tới trang ProductCatalog.html
-                    window.location.href = 'ProductCatalog.html';
-                }
-            });
-        });
-
-
-    </script>
+    <script src ="../js/homepage.js" ></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
