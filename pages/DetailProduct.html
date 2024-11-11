@@ -4,630 +4,344 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chi tiết sản phẩm</title>
+    <title>Chi Tiết Sản Phẩm</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <link rel="stylesheet" href="../css/DetailProduct.css">
 </head>
 
 <body>
-
-    <header class="header" >
-        <div class="header-wrapper">
-            <div class="header-top">
-                <div class=" flex-row d-flex container">
-                    <div class="d-flex flex-col flex-left">
-                        <ul class="nav nav-left nav-small">
-                            <li class="html li-first">Đặt bánh lấy ngay tại Thành phố Hồ Chí Minh</li>
-                            <li class="html li-first">Hệ thống bánh sinh nhật chính hãng</li>
-                            <li class="html li-first">Hotline: 01234576789</li>
-                        </ul>
-                    </div>
-                    <div class="flex-col hide-for-medium flex-right">
-                        <ul class="nav top-bar-nav nav-right nav-small  nav-divided">
-                            <li class="html header-social-icons ">
-                                <div class="social-icons follow-icons">
-                                    <a href="" class="button icon circle">
-                                        <i class="fa-brands fa-facebook" style=" margin-right: auto;"></i>
+    <div class="header">
+        <div class="header-container">
+            <div class="header-stuck">
+                <div class="header-top" id="top-bar">
+                    <div class="flex-row-top">
+                        <ul class="nav-left">
+                            <li class="nav-topbar">
+                                <strong class="uppercase">
+                                    <a class="nav-top-link" href="../pages/trang-thanh-toan">ĐẶT BÁNH LẤY NGAY TẠI TP.HỒ
+                                        CHÍ MINH
                                     </a>
-                                    <a href="" class="button icon circle">
-
-                                        <i class="fa-brands fa-instagram"></i>
-                                    </a>
-                                    <a href="" class="button icon circle">
-
-                                        <i class="fa-regular fa-envelope"></i>
-                                    </a>
-                                    <a href="" class="button icon circle">
-
-                                        <i class="fa-solid fa-phone"></i>
-                                    </a>
-
-                                    <a href="" class="button icon circle">
-
-                                        <i class="fa-brands fa-pinterest"></i>
-                                    </a>
-                                </div>
+                                </strong>
+                            </li>
+                            <li class="nav-topbar">Cửa hàng Bánh Sinh Nhật IT Cake</li>
+                            <li class="nav-topbar">
+                                <a href="tel:0123456789" style="font-size: 14px">Hotline: 0123 456 789</a>
                             </li>
                         </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+                        <div class="flex-right">
+                            <div class="header-icon">
+                                <a class="icon-button" href="#" target="_blank" title="Follow on Facebook"
+                                    rel="noopener nofollow">
+                                    <i class="bi bi-facebook" style="color: blue"></i>
+                                </a>
+                                <a class="icon-button" href="#" target="_blank" title="Follow on Instagram"
+                                    rel="noopener nofollow">
+                                    <i class="fa-brands fa-square-instagram" style="color: rgb(224, 26, 75)"></i>
+                                </a>
+                                <a class="icon-button" href="#" target="_blank" title="Call us" rel="noopener nofollow">
+                                    <i class="fa-solid fa-square-phone" style="color: green"></i>
+                                </a>
+                                <a class="icon-button" href="#" target="_blank" title="Send us an email"
+                                    rel="noopener nofollow">
+                                    <i class="bi bi-envelope-fill" style="color: black"></i>
+                                </a>
 
-        <div class="header-center color-header-center ">
-            <div class="row row-center">
-                <div class="col-lg-1 img-logo">
-                    <a href="#">
-                        <img src="../image/imghomepage/logo1.jpg" alt="">
-
-                    </a>
-                </div>
-                <div class="col-lg-7">
-                    <ul class=" nav d-flex  list-item">
-
-                        <a href="#">
-                            <li>Trang chủ</li>
-                        </a>
-                        <a href="./Product.html" style="margin-right: 10px;">
-                            <li>Danh mục</li>
-                        </a>
-                        <li>
-                            <div class="d-flex ">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                                <input type="search" name="keyword" id="keyword"
-                                    class="form-control autocomplete-field js-ls"
-                                    placeholder="Tìm kiếm bánh sinh nhật,... " value="" autocomplete="off">
-                            </div>
-
-                        </li>
-
-                    </ul>
-                </div>
-                <div class="col-lg-3" >
-                    <div class="d-flex">
-                        <div class="row balance-row" >
-                            <div class="bag-shop" >
-                                <div class="col1 text">GIỎ HÀNG/0₫</div>
-                                <div class="col1">
-                                    <i class="fa-solid fa-bag-shopping"></i>
-                                </div>
-                                <div class="col1">
-                                    <a href="login.html" style="text-wrap: nowrap; border-radius: 20px; border: none; padding: 5px 10px; display: inline-block; text-align: center;">Đăng Nhập</a>
-                                </div>
-                                <div class="col1">
-                                    <a href="register.html" style="text-wrap: nowrap; border-radius: 20px; border: none; padding: 5px 10px; display: inline-block; text-align: center;">Đăng Ký</a>
-                                </div>
-                                
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                <div class="header-main" id="header-main">
+                    <div class="flex-col">
+                        <div class="logo-in-header" id="logo">
+                            <a href="../pages/homepage.html" title="Cửa Hàng Bánh Sinh Nhật IT Cake" rel="home">
+                                <img src="../image/imghomepage/logo1.jpg" alt="Cửa Hàng Bánh Kem IT Cake">
+                            </a>
+                        </div>
+                        <div class="center-in-header">
+                            <ul class="center-bottom-hd">
+                                <li class="center-home" id="item-ct">
+                                    <a class="home-hd" href="../pages/homepage.html" aria-current="page">TRANG
+                                        CHỦ</a>
+                                </li>
+                                <li class="center-category" id="item-ct">
+                                    <a class="cate-hd" href="../pages/trang-danh-muc" aria-expanded="false"
+                                        aria-haspopup="menu" id="category-click">
+                                        DANH MỤC
+                                    </a>
+                                    <i class="bi bi-caret-down-fill" id="toggle-icon"></i>
+                                    <ul class="sub-menu" id="category-menu">
+                                        <li class="menu-item" id="danhmuc1">
+                                            <a href="../pages/danhmuc1">Danh mục 1</a>
+                                        </li>
+                                        <li class="menu-item" id="danhmuc2">
+                                            <a href="../pages/danhmuc2">Danh mục 2</a>
+                                        </li>
+                                        <li class="menu-item" id="danhmuc3">
+                                            <a href="../pages/danhmuc3">Danh mục 3</a>
+                                        </li>
+                                        <li class="menu-item" id="danhmuc4">
+                                            <a href="../pages/danhmuc4">Danh mục 4</a>
+                                        </li>
+                                        <li class="menu-item" id="danhmuc5">
+                                            <a href="../pages/danhmuc5">Danh mục 5</a>
+                                        </li>
+                                    </ul>
 
-        </div>
-    </header>
-    <main id="main">
-        <div class="row category-page-row  g-4">
-            <div class="col large-3">
-                <div id="shop-sidebar" class="sidebar-inner col-inner">
-                    <aside id="aws_widget-4" class="widget widget_aws_widget">
-                        <div>
-                            <form>
-                                <!-- Ô tìm kiếm -->
-                                <div class="search-input-container">
-                                    <input type="search" name="s" id="6724539fb8650" class="aws-search-field"
-                                        placeholder="Tìm kiếm sản phẩm" autocomplete="off"
-                                        style="width: 100%; height: 100%; padding: 5px 5px;">
-                                    <input type="hidden" name="post_type" value="product">
-                                    <input type="hidden" name="type_aws" value="true">
-                                    <div class="aws-loader"></div>
+                                </li>
+                                <li class="center-introduce" id="item-ct">
+                                    <a class="introduce-hd" href="../pages/trang-gioi-thieu">GIỚI THIỆU</a>
+                                </li>
+                                <div class="search-center-hd" id="item-ct>
+                                    <form class=" search-form" action="#" method="get">
+                                    <div class="search-contai">
+                                        <div class="wrapper-input-se">
+                                            <input class="search-field" type="search" name="s" id="search-input"
+                                                placeholder="Tìm kiếm sản phẩm" autocomplete="off">
+                                            <input type="hidden" name="post_type" value="product">
+                                            <input type="hidden" name="type_aws" value="true">
+                                        </div>
+                                        <span class="btn-icon">
+                                            <i class="bi bi-search"></i>
+                                        </span>
+                                    </div>
+                                    </form>
                                 </div>
-
-                                <!-- Nút tìm kiếm -->
-
-                                <div class="aws-search-btn aws-form-btn">
-                                    <span class="aws-search-btn_icon" aria-label="Tìm kiếm"
-                                        style="height: 100%;  display: flex; align-items: center;">
-                                        <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                            width="24px" style="height: 100%; width: 80%;">
-                                            <path
-                                                d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
-                                            </path>
-                                        </svg>
+                            </ul>
+                        </div>
+                        <div class="right-in-header">
+                            <ul class="con-shopping-cart">
+                                <li class="is-line"></li>
+                                <li class="car-wrapper">
+                                    <a class="car-left" href="../pages/trang-gio-hang" title="Giỏ hàng">
+                                        <span class="car-title">GIỎ HÀNG</span>
+                                        <i class="bi bi-cart-fill"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="con-account">
+                                <li class="is-line"></li>
+                                <li class="car-wrapper">
+                                    <a class="car-left" href="../pages/trang-thong-tin-tai-khoan" title="Giỏ hàng">
+                                        <span class="car-title">TÀI KHOẢN</span>
+                                        <i class="bi bi-person-circle"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--Thu nhỏ-->
+                        <div class="small-center-in-hd"></div>
+                        <div class="small-right-in-hd"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-bg-contai"></div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="product-main">
+            <div class="pr-row">
+                <div id="product-sidebar" class="pr-col">
+                    <aside id="pr-sidebar-search" class="widget">
+                        <div class="search-container">
+                            <form class="search-form" action="#">
+                                <div class="sr-wrapper">
+                                    <label class="search-label" for="search-1">Tìm kiếm sản phẩm</label>
+                                    <input type="search" name="s" id="search-1" placeholder="Tìm kiếm sản phẩm"
+                                        autocomplete="off">
+                                </div>
+                                <div class="sr-wr-icon">
+                                    <span class="sr-btn-icon">
+                                        <i class="bi bi-search"></i>
                                     </span>
                                 </div>
                             </form>
                         </div>
                     </aside>
-
-                    <aside id="woocommerce_price_filter-15" class="widget woocommerce widget_price_filter">
-                        <span class="widget-title shop-sidebar">Lọc theo giá</span>
-                        <div class="is-divider small"></div>
-                        <form>
-                            <div class="price_slider_wrapper">
-                                <div
-                                    class="price_slider ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
-                                    <div class="ui-slider-range ui-corner-all ui-widget-header"
-                                        style="left: 0%; width: 100%;"></div><span tabindex="0"
-                                        class="ui-slider-handle ui-corner-all ui-state-default"
-                                        style="left: 0%;"></span><span tabindex="0"
-                                        class="ui-slider-handle ui-corner-all ui-state-default"
-                                        style="left: 100%;"></span>
-                                </div>
-                                <div class="price_slider_amount" data-step="10">
-                                    <button type="submit" class="button">Lọc</button>
-                                    <div class="price_label">
-                                        Giá <span class="from">230.000₫</span> — <span class="to">1.350.000₫</span>
-                                    </div>
-                                    <div class="clear"></div>
-                                </div>
-                            </div>
-                        </form>
-
-                    </aside>
-                    <aside id="custom_html-5" class="widget_text widget widget_custom_html">
-                        <div class="textwidget custom-html-widget">
-                            <p><a href="" style="text-decoration: none; color: inherit; font-weight: bold;">Bánh Kem
-                                    Bento
-                                    Cake 80k</a></p>
-                        </div>
-                    </aside>
-                    <aside id="custom_html-6" class="widget_text widget widget_custom_html">
-                        <div class="textwidget custom-html-widget">
-                            <p><a href="" style="text-decoration: none; color: inherit; font-weight: bold;">Bánh Kem
-                                    Mini
-                                    120k</a></p>
-                        </div>
-                    </aside>
-                    <aside id="woocommerce_product_categories-15" class="widget woocommerce widget_product_categories">
-                        <ul class="product-categories">
-                            <li class="cat-item cat-item-2197"><a href="">Bento Cake</a>
+                    <aside id="pr-sidebar-list" class="widget">
+                        <ul class="list-categories">
+                            <li class="cate-item">
+                                <a href="#">Danh mục 1</a>
                             </li>
-                            <li class="cat-item cat-item-2310 current-cat active"><a href="">Bánh Ăn Nhẹ</a></li>
-                            <li class="cat-item cat-item-2658"><a href="">Bánh Mousse</a></li>
-                            <li class="cat-item cat-item-2668"><a href="">Bánh Size
-                                    Lớn</a></li>
-                            <li class="cat-item cat-item-1749"><a
-                                    href="https://tokyogateaux.vn/banh-20-11-banh-20-10-banh-08-03/">Bánh ngày lễ 8.3 -
-                                    20.10 - 20.11</a></li>
-                            <li class="cat-item cat-item-119"><a href="https://tokyogateaux.vn/banh-sinh-nhat/">Bánh
-                                    Sinh Nhật - Bánh Kem - Bánh Gâto</a></li>
-                            <li class="cat-item cat-item-123"><a
-                                    href="https://tokyogateaux.vn/banh-sinh-nhat/banh-sinh-nhat-tre-em/">Bánh Sinh Nhật
-                                    Trẻ Em</a></li>
-                            <li class="cat-item cat-item-120"><a
-                                    href="https://tokyogateaux.vn/banh-sinh-nhat/banh-sinh-nhat-tre-em/banh-sinh-nhat-cho-be-trai/">Bánh
-                                    Sinh Nhật Cho Bé Trai</a></li>
-                            <li class="cat-item cat-item-122"><a
-                                    href="https://tokyogateaux.vn/banh-sinh-nhat/banh-sinh-nhat-tre-em/banh-sinh-nhat-cho-be-trai/banh-sinh-nhat-sieu-nhan/">Bánh
-                                    Siêu Nhân</a></li>
-                            <li class="cat-item cat-item-128"><a
-                                    href="https://tokyogateaux.vn/banh-sinh-nhat/banh-sinh-nhat-tre-em/banh-sinh-nhat-cho-be-trai/banh-sinh-nhat-oto/">Bánh
-                                    Ô Tô</a></li>
-                            <li class="cat-item cat-item-256"><a
-                                    href="https://tokyogateaux.vn/banh-sinh-nhat/banh-sinh-nhat-tre-em/banh-sinh-nhat-cho-be-trai/banh-sinh-nhat-khung-long/">Bánh
-                                    Khủng Long</a></li>
-                            <li class="cat-item cat-item-1590"><a
-                                    href="https://tokyogateaux.vn/banh-sinh-nhat/banh-sinh-nhat-tre-em/banh-sinh-nhat-cho-be-trai/banh-sinh-nhat-cho-be-trai-cuc-ngau-va-sieu-hot/">Mẫu
-                                    Bánh Sinh Nhật Cho Bé Trai Cực Ngầu Và Siêu Hot</a></li>
-                            <li class="cat-item cat-item-125"><a
-                                    href="https://tokyogateaux.vn/banh-sinh-nhat/banh-sinh-nhat-tre-em/banh-sinh-nhat-cho-be-gai/">Bánh
-                                    Sinh Nhật Cho Bé Gái</a></li>
-                            <li class="cat-item cat-item-126"><a
-                                    href="https://tokyogateaux.vn/banh-sinh-nhat/banh-sinh-nhat-tre-em/banh-sinh-nhat-cho-be-gai/banh-sinh-nhat-cong-chua/">Bánh
-                                    Công Chúa</a></li>
-                            <li class="cat-item cat-item-659"><a
-                                    href="https://tokyogateaux.vn/banh-sinh-nhat/banh-sinh-nhat-tre-em/banh-sinh-nhat-cho-be-gai/banh-sinh-nhat-unicorn/">Bánh
-                                    Sinh Nhật Unicorn</a></li>
-                            <li class="cat-item cat-item-1592"><a
-                                    href="https://tokyogateaux.vn/banh-sinh-nhat/banh-sinh-nhat-tre-em/banh-sinh-nhat-cho-be-gai/mau-banh-sinh-nhat-cho-be-gai-cuc-xinh-va-dang-yeu/">Mẫu
-                                    Bánh Sinh Nhật Cho Bé Gái Cực Xinh Và Đáng Yêu</a></li>
-                            <li class="cat-item cat-item-1131"><a
-                                    href="https://tokyogateaux.vn/banh-sinh-nhat/banh-sinh-nhat-tre-em/set-banh-be-trai-be-gai/">Set
-                                    Bánh Bé Trai Bé Gái</a></li>
-                            <li class="cat-item cat-item-1116"><a
-                                    href="https://tokyogateaux.vn/banh-sinh-nhat/banh-sinh-nhat-cho-ban-nam-cap-2/">Bánh
-                                    Sinh Nhật Cho Bạn Nam Cấp 2</a></li>
-                            <li class="cat-item cat-item-1117"><a
-                                    href="https://tokyogateaux.vn/banh-sinh-nhat/banh-sinh-nhat-cho-ban-nu-cap-2/">Bánh
-                                    Sinh Nhật Cho Bạn Nữ Cấp 2</a></li>
-                            <li class="cat-item cat-item-133"><a
-                                    href="https://tokyogateaux.vn/banh-sinh-nhat/banh-sinh-nhat-nguoi-lon/">Bánh Sinh
-                                    Nhật Người Lớn</a></li>
-
+                            <li class="cate-item">
+                                <a href="#">Danh mục 2</a>
+                            </li>
+                            <li class="cate-item">
+                                <a href="#">Danh mục 3</a>
+                            </li>
+                            <li class="cate-item">
+                                <a href="#">Danh mục 4</a>
+                            </li>
+                            <li class="cate-item">
+                                <a href="#">Danh mục 5</a>
+                            </li>
                         </ul>
                     </aside>
                 </div>
-            </div>
-            <div class="col large-9" >
-                <div class="shop-container">
-                    <div class="product-detail">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-6" style="padding-left: 20px;">
-                                    <div class="product-image-wrapper">
-                                        <img id="product-image" src="" alt="Product Image" style="width: 100%;">
-                                    </div>
-                                    <div class="img-small">
-
-                                        <img src="" alt="">
-                                    </div>
+                <div class="pr-col">
+                    <div class="pr-col-row">
+                        <div class="pr-left">
+                            <div class="pr-contai-image">
+                                <div class="pr-image">
+                                    <a
+                                        href="https://i0.wp.com/tokyogateaux.vn/wp-content/uploads/2024/09/2457.jpg?fit=800%2C800&ssl=1">
+                                        <img src="https://i0.wp.com/tokyogateaux.vn/wp-content/uploads/2024/09/2457.jpg?fit=510%2C510&ssl=1"
+                                            alt="Bánh sinh nhật Dâu tươi sáng">
+                                    </a>
                                 </div>
-                                <div class="col-lg-6" style="padding-left: 20px;">
-                                    <h1 id="product-title" class="product-title">Tên sản phẩm</h1>
-                                    <div class="product-wrapper">
-                                        <p>Mô tả ngắn gọn sản phẩm ở đây...</p>
-                                    </div>
-                                    <div class="product-short-description">
-                                        <p>Thông tin chi tiết sản phẩm, mô tả hoặc các đặc điểm nổi bật...</p>
-                                    </div>
-                                    <form action="">
-                                        <div class="ux-quantity">
-                                            <input type="button" value="-" class="quantity-button"
-                                                onclick="decreaseQuantity()">
-                                            <input type="text" id="quantity-input" value="1" class="quantity-input"
-                                                readonly>
-                                            <input type="button" value="+" class="quantity-button"
-                                                onclick="increaseQuantity()">
-                                            <button class="add-to-cart-button" style="margin-left: 20px;">Thêm vào
-                                                giỏ</button>
-                                        </div>
-
-                                    </form>
-                                    <ul class="product-info-list">
-                                        <a href="">
-                                            <li>Mẫu Bánh Kem Cho Bé Trai</li>
-                                        </a>
-                                        <a href="">
-                                            <li>Mẫu Bánh Kem Cho Bé Gái</li>
-                                        </a>
-                                        <a href="">
-                                            <li>Mẫu Bánh Kem Cho Nam</li>
-                                        </a>
-                                        <a href="">
-                                            <li>Mẫu Bánh Kem Cho Nữ</li>
-                                        </a>
-                                    </ul>
-                                    <div class="product_meta">
-                                        <span class="posted_in">Danh mục: <span id="categories"></span></span>
-                                        <span class="tagged_as">Từ khóa: <span id="tags"></span></span>
-                                        <span class="posted_in">Product ID: <span id="product-id"></span></span>
-                                    </div>
-
-                                    <div class="social-icon">
-                                        <i class="fa-brands fa-facebook"></i>
-                                        <i class="fa-brands fa-twitter"></i>
-                                        <i class="fa-solid fa-envelope"></i>
-                                        <i class="fa-brands fa-pinterest"></i>
-                                    </div>
+                                <div class="image-tools">
+                                    <a class="button-zoom" href="#product-zoom">
+                                        <i class="bi bi-zoom-in"></i>
+                                    </a>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="pr-right">
+                            <h1 class="product-title">BHQ156 - Bánh sinh nhật Dâu Tươi Sáng</h1>
+                            <div class="is-divider"></div>
+                            <div class="price-wrapper">
+                                <p class="product-page-price ">
+                                    <span class="price-amount"><bdi>250.000<span
+                                                class="price-symbol">₫</span></bdi></span> – <span
+                                        class="price-amount"><bdi>500.000<span
+                                                class="price-symbol">₫</span></bdi></span>
+                                </p>
+                            </div>
+                            <form class="variations-form" action="#">
+                                <table class="variations" cellspacing="0" role="presentation">
+                                    <tbody>
+                                        <tr>
+                                            <th class="label">
+                                                <label for="size-banh-1">Size bánh:</label>
+                                            </th>
+                                            <td class="value">
+                                                <select class name="attribute-size-banh" id="size-banh-1">
+                                                    <option value>Chọn một tùy chọn</option>
+                                                    <option class="attached" value="14" selected="selected">14 cm
+                                                    </option>
+                                                    <option class="attached" value="16">16 cm</option>
+                                                    <option class="attached" value="18">18 cm</option>
+                                                    <option class="attached" value="20">20 cm</option>
+                                                    <option class="attached" value="22">22 cm</option>
+                                                    <option class="attached" value="24">24 cm</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="single-variation">
+                                    <div class="price-contai">
+                                        <span class="price">
+                                            <bdi>
+                                                "250.000"
+                                                <span class="price-symbol">₫</span>
+                                            </bdi>
+                                        </span>
+                                    </div>
+                                    <div class="add-quantity">
+                                        <input class="input-reduce" type="button" value="-">
+                                        <input class="input-qt" type="number" id="quantity-1" name="quantity" value="1"
+                                            size="4" min="1" max step="1" placeholder inputmode="numeric"
+                                            autocomplete="off">
+                                        <input class="input-increase" type="button" value="+">
+                                    </div>
+                                    <button class="button-add" type="submit">THÊM VÀO GIỎ HÀNG</button>
+                                    <input type="hidden" name="gtm4wp_id" value="29736">
+                                    <input type="hidden" name="gtm4wp_internal_id" value="29736">
+                                    <input type="hidden" name="gtm4wp_name"
+                                        value="BHQ156 - Bánh sinh nhật Dâu tươi sáng">
+                                    <input type="hidden" name="gtm4wp_sku" value="BHQ156">
+                                    <input type="hidden" name="gtm4wp_category" value="Danh muc 1 - danhmuc">
+                                    <input type="hidden" name="gtm4wp_price" value="250000">
+                                    <input type="hidden" name="gtm4wp_stocklevel" value="">
+                                    <input type="hidden" name="add-to-cart" value="29736">
+                                    <input type="hidden" name="add-to-cart" value="29736">
+                                    <input type="hidden" name="variation_id" class="variation_id" value="29739">
+                                </div>
+                            </form>
+                            <div class="product-description">
+
+                                <span class="sku_wrapper">Mã: <span class="sku">BHQ156</span></span>
+                                <p>Mô tả:<br>- Bánh sinh nhật Dâu Tươi Sáng trang trí dâu tây tươi với nền bánh được
+                                    decor theo
+                                    phong cách tối giản hiện đại. Chiếc bánh được các bạn trẻ yêu thích.<br>- Thành
+                                    phần:
+                                    Bánh cốt vani, kem tươi, trang trí dâu tươi.
+
+                                </p>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="container container__detail__product" >
-                    <ul class="nav__bottom">
-                            <li class="nav-bottom">
-                        <a href="">
-                            MÔ TẢ
-                        </a>
-                    </li>
-                            <li class="nav-bottom1">
-                        <a href="">
-                            THÔNG TIN BỔ SUNG
-                        </a>
-                    </li>
-                            <li class="nav-bottom1">
-                        <a href="">
-                            ĐÁNH GIÁ
-                        </a>
-                    </li>
-                    </ul>
-                    <h1 id="product-title" class="product-title" style="text-align: center;">Tên sản phẩm</h1>
-                    <p id="product-description"></p>
-                    <p id="product-additional-info"></p>
-                    <p id="product-reviews"></p>
-                    <h2>Các size bánh cơ bản tại Chúng tôi:</h2>
-                    <p>– Size_16 cao ~8cm (3 – 5 người ăn)<br>
-                        – Size_18 cao ~8cm (5 – 7 người ăn)<br>
-                        – Size_20 cao ~8cm (7 – 9 người ăn)<br>
-                        – Size_22 cao ~8cm (9 – 11 người ăn)<br>
-                        – Size_24 cao ~8cm (11 – 13 người ăn)<br>
-                        – Size_26 cao ~8cm (13 – 15 người ăn)</p>
-                    <h2>Các loại bánh cao hiện đại:</h2>
-                    <p>– Size_16 cao ~10 cm (5 – 7 người ăn)<br>
-                        – Size_18 cao ~10cm (7 – 9 người ăn)<br>
-                        – Size_20 cao ~10cm (9 – 11 người ăn)</p>
-                    <p><strong><br>
-                            <em>– Các loại bánh tròn 1 tầng có giá dao động từ 200k – 500k tùy mẫu, đồ trang trí và độ
-                                phức tạp của từng mẫu bánh.</em><br>
-                            <em>– Bánh thông thường gồm 3 lớp (cao ~8cm), cốt bánh gato vani, kem tươi vani.</em><br>
-                            <em>Lựa chọn khác:</em><br>
-                            <em>– Cốt bánh: vị socola, vị matcha, vị dâu</em><br>
-                            <em>– Kem phủ bánh: vị socola, vị matcha, vị café, vị sữa chua</em><br>
-                            <em>– Nhân bánh: các loại mứt theo mùa, các loại hoa quả tươi theo mùa ( vui lòng liên
-                                hệ)</em><br>
-                        </strong></p>
-                    <p>Bánh tại Tokyo Gâteaux có độ ngọt vừa vặn, thanh mát và một chút ngọt nhẹ của kem tươi…<br>
-                        Đặc biệt, bánh tại Tokyo Gâteaux không dùng phụ gia, hương liệu, chất bảo quản, bánh tươi 100%
-                        sản xuất theo quy trình đạt chuẩn VSATTP.<br>
-                        Các loại kem, bơ, nguyên liệu, màu thực phẩm (nếu có) được nhập khẩu tại Úc, Newzealand,
-                        Singapore, Mỹ…. nhằm mang đến cho khách hàng những trải nghiệm an toàn và ngon nhất với tiêu
-                        chuẩn cao nhất.</p>
-                    <p>Tokyo Gâteaux nhận đặt các loại bánh kem theo yêu cầu cho các dịp sinh nhật, tiệc hội nghị, liên
-                        hoan, các dịp kỷ niệm, ngày cưới…. Nhận đặt bánh lấy ngay sau 1h. Các loại bánh phức tạp vui
-                        lòng liên hệ để có thêm thông tin chi tiết</p>
-                    <p>&nbsp;</p>
-                    <h4><strong>Nhận diện bánh thương hiệu Chúng tôi</strong></h4>
-                    <ul>
-                        <li>Bánh đi kèm hộp có tên, địa chỉ, sđt của công ty được in trên vỏ hộp, đế bánh có dán logo
-                            “Tokyo Gâteaux” màu vàng</li>
-                        <li>Đồ tặng kèm theo bánh sinh nhật gồm: Dao cắt bánh + Nến sinh nhật + Thìa + Đĩa</li>
-                        <li>Tokyo Gâteaux nhận chuyển bánh tận nhà, chi phí tính tùy theo độ xa gần</li>
-                    </ul>
-                    <p>&nbsp;</p>
-                    <h4><strong>Chính sách trả lại hàng và hoàn tiền</strong></h4>
-                    <h4>Khách hàng kiểm tra bánh trước khi thanh toán tiền. Khách có thể hoàn trả bánh trong trường hợp:
-                    </h4>
-                    <ul>
-                        <li>Không đúng mẫu đã đặt</li>
-                        <li>Bánh bị trầy xước, va đập</li>
-                        <li>Bánh hỏng do vận chuyển</li>
-                    </ul>
-                    <p>&nbsp;</p>
-                    <p><strong><a>BÁNH SINH NHẬT</a></strong><br>
-                        <a>Địa chỉ: TRƯỜNG ĐẠI HỌC NÔNG LÂM</a><br>
-                        <a>Điện thoại: 0123456789<br>
-                        </a>Website: <a href="">ABC</a><br>
-                        <a>Facebook:</a> <a href="https://www.facebook.com/">https://www.facebook.com/</a><br>
-                        Instagram: <a href="https://www.instagram.com/">https://www.instagram.com/</a>
-                    </p>
-                </div>
-                <div class="sameProduct">
-                    <h3>Sản phẩm tương tự</h3>
-                    <div class="product_same_a">
-                        <div>
-                            <div class="col">
-                                <div class="col-inner">
-                                    <div class="product-small box">
-                                        <div class="box-image">
-                                            <a href="DetailProduct.html" class="product-link" data-id="BHKT85"
-                                                data-title="Bánh sinh nhật mẫu đơn hồng" data-price="45000"
-                                                data-image="../image/imghomepage/khachhang1.jpg">
-                                                <img width="247" height="296" src="../image/imghomepage/khachhang1.jpg"
-                                                    alt="">
-
-                                            </a>
-                                        </div>
-                                        <div class="box-text text-center">
-                                            <div class="title-wraper">
-                                                <p>
-                                                    <a href="">
-                                                        BHKT85 - Bánh sinh nhật mẫu đơn hồng </a>
-                                                </p>
-                                            </div>
-
-                                            <div class="price-wrapper">
-
-                                                <span class="price"><span class="woocommerce-Price-amount amount"><bdi
-                                                            style="font-weight: bold;">45.000<span
-                                                                class="woocommerce-Price-currencySymbol">₫</span></bdi></span></span>
-                                            </div>
-                                            <div class="add-to-cart-button">
-                                                <a href="">THÊM VÀO GIỎ</a>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                        </div>
-                        <div>
-                            <div class="col">
-                                <div class="col-inner">
-                                    <div class="product-small box">
-                                        <div class="box-image">
-                                            <a href="DetailProduct.html" class="product-link" data-id="BHKT85"
-                                                data-title="Bánh sinh nhật mẫu đơn hồng" data-price="45000"
-                                                data-image="../image/imghomepage/khachhang1.jpg">
-                                                <img width="247" height="296" src="../image/imghomepage/khachhang1.jpg"
-                                                    alt="">
-
-                                            </a>
-                                        </div>
-                                        <div class="box-text text-center">
-                                            <div class="title-wraper">
-                                                <p>
-                                                    <a href="">
-                                                        BHKT85 - Bánh sinh nhật mẫu đơn hồng </a>
-                                                </p>
-                                            </div>
-
-                                            <div class="price-wrapper">
-
-                                                <span class="price"><span class="woocommerce-Price-amount amount"><bdi
-                                                            style="font-weight: bold;">45.000<span
-                                                                class="woocommerce-Price-currencySymbol">₫</span></bdi></span></span>
-                                            </div>
-                                            <div class="add-to-cart-button">
-                                                <a href="">THÊM VÀO GIỎ</a>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="col">
-                                <div class="col-inner">
-                                    <div class="product-small box">
-                                        <div class="box-image">
-                                            <a href="DetailProduct.html" class="product-link" data-id="BHKT85"
-                                                data-title="Bánh sinh nhật mẫu đơn hồng" data-price="45000"
-                                                data-image="../image/imghomepage/khachhang1.jpg">
-                                                <img width="247" height="296" src="../image/imghomepage/khachhang1.jpg"
-                                                    alt="">
-
-                                            </a>
-                                        </div>
-                                        <div class="box-text text-center">
-                                            <div class="title-wraper">
-                                                <p>
-                                                    <a href="">
-                                                        BHKT85 - Bánh sinh nhật mẫu đơn hồng </a>
-                                                </p>
-                                            </div>
-
-                                            <div class="price-wrapper">
-
-                                                <span class="price"><span class="woocommerce-Price-amount amount"><bdi
-                                                            style="font-weight: bold;">45.000<span
-                                                                class="woocommerce-Price-currencySymbol">₫</span></bdi></span></span>
-                                            </div>
-                                            <div class="add-to-cart-button">
-                                                <a href="">THÊM VÀO GIỎ</a>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="col">
-                                <div class="col-inner">
-                                    <div class="product-small box">
-                                        <div class="box-image">
-                                            <a href="DetailProduct.html" class="product-link" data-id="BHKT85"
-                                                data-title="Bánh sinh nhật mẫu đơn hồng" data-price="45000"
-                                                data-image="../image/imghomepage/khachhang1.jpg">
-                                                <img width="247" height="296" src="../image/imghomepage/khachhang1.jpg"
-                                                    alt="">
-
-                                            </a>
-                                        </div>
-                                        <div class="box-text text-center">
-                                            <div class="title-wraper">
-                                                <p>
-                                                    <a href="">
-                                                        BHKT85 - Bánh sinh nhật mẫu đơn hồng </a>
-                                                </p>
-                                            </div>
-
-                                            <div class="price-wrapper">
-
-                                                <span class="price"><span class="woocommerce-Price-amount amount"><bdi
-                                                            style="font-weight: bold;">45.000<span
-                                                                class="woocommerce-Price-currencySymbol">₫</span></bdi></span></span>
-                                            </div>
-                                            <div class="add-to-cart-button">
-                                                <a href="">THÊM VÀO GIỎ</a>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="pr-col-footer"></div>
                 </div>
             </div>
-
         </div>
-    </main>
+    </div>
+    <div class="footer">
+        <div class="footer-top">
+            <div class="ft-uniform">
+                <h6>GIỚI THIỆU</h6>
+                <div class="is-divider"></div>
+                <div class="ft-introduce">
+                    <p><a href="../pages/home.html" title="Đi tới Trang Chủ">IT Cake</a> – Bánh sinh nhật đậm chất riêng
+                        của bạn, chúng tôi tự hào mang đến những chiếc bánh sinh
+                        nhật tươi ngon, thiết kế độc đáo và sáng tạo theo yêu cầu. Hãy để IT Cake cùng bạn tạo nên những
+                        khoảnh khắc ngọt ngào và đáng nhớ nhất.</p>
+                    <div class="ft-img">
+                        <a href="//theme.hstatic.net/1000313040/1000406925/14/hg_img1.png?v=2177"
+                            data-fancybox="home-gallery-images" data-caption=""><img
+                                src="//theme.hstatic.net/1000313040/1000406925/14/hg_img_thumb1.png?v=2177" alt=""></a>
+                    </div>
+                </div>
+            </div>
+            <div class="ft-uniform">
+                <h6>LIÊN HỆ</h6>
+                <div class="is-divider"></div>
+                <div class="ft-contact">
+                    <div class="ft-contact-address">
+                        <i class="bi bi-geo-alt-fill" aria-hidden="true"></i> Đại Học Nông Lâm TP.Hồ Chí Minh, Phường
+                        Linh
+                        Trung, Q.Thủ Đức, TP.Hồ Chí Minh
+                    </div>
+                    <div class="ft-contact-tel">
+                        <i class="bi bi-telephone-fill" aria-hidden="true"></i><a href="tel:#"> 0123 456 789</a>
+                    </div>
+                    <div class="ft-contact-email">
+                        <i class="bi bi-envelope-fill" aria-hidden="true"></i><a href="#"> itcake@gmail.com</a>
+                    </div>
+                    <div class="ft-contact-facebook">
+                        <i class="bi bi-facebook" aria-hidden="true"></i><a href="#"> www.facebook-itcake.com</a>
+                    </div>
+                </div>
+            </div>
+            <div class="ft-uniform">
+                <h6>CHÍNH SÁCH</h6>
+                <div class="is-divider"></div>
+                <ul class="ft-policy">
+                    <li><a href="/pages/chinh-sach-va-quy-dinh-chung">Chính sách và quy định chung</a></li>
+                    <li><a href="/pages/chinh-sach-giao-dich-thanh-toan">Chính sách giao dịch, thanh toán</a></li>
+                    <li><a href="/pages/chinh-sach-doi-tra">Chính sách đổi trả</a></li>
+                    <li><a href="/pages/chinh-sach-bao-mat">Chính sách bảo mật</a></li>
+                    <li><a href="/pages/chinh-sach-van-chuyen">Chính sách vận chuyển</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="ft-copyright">
+                Copyrights © 2018 by <a target="_blank" href="../pages/home.html" title="Đi tới Trang Chủ">IT Cake</a>.
+                <!--blank chuyển trang ở tab mới-->
+            </div>
+        </div>
+    </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const productData = JSON.parse(localStorage.getItem("selectedProduct"));
-
-            if (productData) {
-                document.getElementById("product-image").src = productData.image;
-                document.getElementById("product-title").innerText = productData.title;
-                document.getElementById("product-price").innerText = productData.price + "₫";
-            } else {
-                document.getElementById("product-title").innerText = "Không tìm thấy sản phẩm";
-            }
-        });
-        function increaseQuantity() {
-            const quantityInput = document.getElementById("quantity-input");
-            let quantity = parseInt(quantityInput.value, 10);
-            quantity += 1;
-            quantityInput.value = quantity;
-        }
-
-        function decreaseQuantity() {
-            const quantityInput = document.getElementById("quantity-input");
-            let quantity = parseInt(quantityInput.value, 10);
-            if (quantity > 1) {
-                quantity -= 1;
-            }
-            quantityInput.value = quantity;
-        }
-        document.addEventListener("DOMContentLoaded", function () {
-            // Đường dẫn API đến dữ liệu sản phẩm (thay thế bằng URL API thực của bạn)
-            const apiUrl = "https://tokyogateaux.vn/banh-sinh-nhat/";
-
-            // Gọi API để lấy dữ liệu sản phẩm
-            fetch(apiUrl)
-                .then(response => response.json())
-                .then(data => {
-                    // Cập nhật danh mục sản phẩm
-                    const categoriesElement = document.getElementById("categories");
-                    data.categories.forEach(category => {
-                        const categoryLink = document.createElement("a");
-                        categoryLink.href = category.url;
-                        categoryLink.textContent = category.name;
-                        categoryLink.rel = "tag";
-                        categoriesElement.appendChild(categoryLink);
-
-                        // Thêm dấu phẩy sau mỗi danh mục trừ danh mục cuối cùng
-                        categoriesElement.append(", ");
-                    });
-
-                    // Xóa dấu phẩy cuối cùng
-                    if (categoriesElement.lastChild) {
-                        categoriesElement.lastChild.remove();
-                    }
-
-                    // Cập nhật từ khóa sản phẩm
-                    const tagsElement = document.getElementById("tags");
-                    data.tags.forEach(tag => {
-                        const tagLink = document.createElement("a");
-                        tagLink.href = tag.url;
-                        tagLink.textContent = tag.name;
-                        tagLink.rel = "tag";
-                        tagsElement.appendChild(tagLink);
-
-                        // Thêm dấu phẩy sau mỗi từ khóa trừ từ khóa cuối cùng
-                        tagsElement.append(", ");
-                    });
-
-                    // Xóa dấu phẩy cuối cùng
-                    if (tagsElement.lastChild) {
-                        tagsElement.lastChild.remove();
-                    }
-
-                    // Cập nhật ID sản phẩm
-                    const productIdElement = document.getElementById("product-id");
-                    productIdElement.textContent = data.productId;
-                })
-                .catch(error => console.error("Lỗi khi lấy dữ liệu sản phẩm:", error));
-        });
-
-    </script>
-
+    <link rel="stylesheet" href="../js/detailProduct.js">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-
+    <script src="../js/detailProduct.js"></script>
 </body>
 
 </html>
