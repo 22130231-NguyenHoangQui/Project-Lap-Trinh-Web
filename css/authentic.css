@@ -40,18 +40,12 @@ body {
 }
 
 .icon {
+    display: flex;
+    margin-left: 95px;
     position: relative;
     font-size: 60px;
-    color: #FF9933;
+    color: #1E90FF;
     margin-bottom: 20px;
-}
-
-.check-icon {
-    position: absolute;
-    font-size: 24px;
-    color: #007BFF;
-    top: 10px;
-    right: 10px;
 }
 
 h2 {
@@ -83,14 +77,14 @@ input[type="text"] {
     padding: 10px;
     font-size: 16px;
     color: #ffffff;
-    background-color: #FF9933;
+    background-color: #1E90FF;
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
 
 .confirm-button:hover {
-    background-color: #e68a00;
+    background-color: #203be9;
 }
 .success-box {
     background-color: #ffffff;
