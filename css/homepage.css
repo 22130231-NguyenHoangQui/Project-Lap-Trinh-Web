@@ -1,5 +1,8 @@
+
+
+
 /* =====================================
-       Main Styles
+       Setting Styles
     ===================================== */
 
 main {
@@ -24,49 +27,43 @@ a {
 /* =====================================
            Global Styles
         ===================================== */
-body {
-    font-weight: 400;
-    font-style: normal;
-    font-family: Lato, sans-serif;
-    line-height: 1.6;
-}
 
 div {
     display: block;
 }
 
-.container {
-    max-width: 1340px;
-}
-
-.flex-row {
-    align-items: center;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    width: 100%;
-}
-
-
-
-.col {
-    width: 100%;
-    height: 100%;
-    margin: 0;
+html,
+body {
     padding: 0;
-    position: relative;
-
+    margin: 0;
+    font-size: 16px;
+    color: black;
+    font-family: sans-serif, Tahoma;
 }
+
+.container {
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
 
 aside {
     display: block;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
 /* ==================
     Header
 ==========*/
 
-.header,
 .header-wrapper {
     position: relative;
     width: 100%;
@@ -92,8 +89,6 @@ aside {
 }
 
 .nav li {
-    display: flex;
-    flex-grow: 1;
     color: white;
     padding: 0 0.7em;
     font-weight: 700;
@@ -127,7 +122,10 @@ aside {
     font-size: 1em;
 }
 
-/* header-center */
+/* ===========
+header-center
+============== */
+
 .color-header-center {
     background-color: #ffffff;
     padding: 0;
@@ -138,14 +136,32 @@ aside {
     flex-wrap: wrap;
     width: 100%;
     margin: 0 auto;
-    max-width: 1340px;
+    max-width: 1200px;
+    padding: 5px 0;
 }
 
-.row.row-center .col-lg-8 {
-    max-width: 65%;
+
+/* Thiết kế của dropdown tìm kiếm */
+.dropdown-search {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0px;
+    background-color: white;
+    border: 1px solid #ddd;
+    width: 400px;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    z-index: 1000;
 }
 
-.row.row-center .col-lg-3 {
+/* Hiển thị input khi hover vào icon */
+.position-relative:hover .dropdown-search {
+    display: block;
+}
+
+.row.row-center .col-lg-4 {
     margin-bottom: auto;
     margin-top: auto;
     padding-right: 0;
@@ -190,7 +206,8 @@ aside {
 .row.row-center .img-logo {
     display: flex;
     justify-content: flex-start;
-    margin-right: 20px;
+    margin: 0;
+    padding: 0;
 }
 
 .row.row-center .img-logo img {
@@ -263,10 +280,10 @@ aside {
 .dropdown {
     position: relative;
     display: inline-block;
-    
+
 }
 
-.dropdown-menu.menu-danhmuc{
+.dropdown-menu.menu-danhmuc {
     display: none;
     position: absolute;
     top: 100%;
@@ -276,7 +293,7 @@ aside {
     list-style: none;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     min-width: 150px;
-    z-index: 10;    
+    z-index: 10;
 }
 
 
@@ -291,6 +308,7 @@ aside {
     text-decoration: none;
     display: block;
 }
+
 .dropdown-menu.menu-danhmuc li a:hover {
     background-color: #f0f0f0;
 }
@@ -332,10 +350,14 @@ main {
     display: flex;
 }
 
-.col.box-hover,
-.product-small.box {
-    padding: 10px 10px;
+.box-hover
+ {
+    padding: 15px 15px;
     
+
+}
+.product-small.box {
+    padding: 5px 5px;
 }
 
 .box-text.text-center .title-wrapper p {
@@ -355,24 +377,40 @@ main {
 .text-fontweight {
     font-weight: bold;
 }
+
 /* ==============
     S4
     ============= */
-.s4 {
-    padding-bottom: 30px;
-    padding-top: 40px;
-}
+    .s4 {
+        padding-bottom: 30px;
+        padding-top: 40px;
+    }
+    
+    .s {
+        width: 100%;
+    }
+    
+    .s.s4 .container {
+        width: 100%;
+        padding: 0; 
+    }
+    
+    .s4 img {
+        display: block;
+        width: 100%; 
+        height: auto;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
 
-.s {
-    display: block;
-    position: relative;
-    z-index: 1;
-}
-
+/* s5 */
 /* s5 */
 .s5_m {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .s5_i {
@@ -416,6 +454,7 @@ main {
     font-size: 1.2rem;
     color: #666;
 }
+
 .box-text1.text-center1 {
     padding-top: 10px;
     gap: 0;

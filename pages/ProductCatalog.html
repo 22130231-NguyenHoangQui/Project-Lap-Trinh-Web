@@ -15,13 +15,14 @@
 </head>
 
 <body>
-    <header class="header">
+    <header>
         <div class="header-wrapper">
             <div class="header-top">
-                <div class=" flex-row d-flex container">
+                <div class="container d-flex justify-content-between align-items-center">
                     <div class="d-flex flex-col flex-left">
                         <ul class="nav nav-left nav-small">
-                            <li class="html li-first">Đặt bánh lấy ngay tại Thành phố Hồ Chí Minh</li>
+
+                            <li class="html li-first delivery-info">Đặt bánh lấy ngay tại Thành phố Hồ Chí Minh</li>
                             <li class="html li-first">Hệ thống bánh sinh nhật chính hãng</li>
                             <li class="html li-first">Hotline: 01234576789</li>
                         </ul>
@@ -59,94 +60,118 @@
         </div>
 
         <div class="header-center color-header-center ">
-            <div class="row row-center">
-                <div class="col-lg-1 img-logo">
-                    <a href="../pages/HomePage.html">
-                        <img src="../image/imghomepage/logo/logo1.jpg" alt="">
-
-                    </a>
-                </div>
-                <div class="col-lg-8">
-                    <ul class=" nav d-flex  list-item">
-
+            <div class="container d-flex" style="width: 100%;">
+                <div class="row row-center d-flex justify-content-between  align-items-center">
+                    <div class="col-sm-1 col-md-1 col-lg-1 img-logo" style="display: block; width: 10%; padding-left: 10px;">
                         <a href="../pages/HomePage.html">
-                            <li>Trang chủ</li>
-                        </a>
-                        <div class="dropdown" style=" display:flex; align-items: center;  height: 100%; ">
-                            <a href="../pages/ProductCatalog.html" class="">
-                                <li>Danh mục</li>
-                            </a>
-                            <ul class="dropdown-menu1">
-                                <p
-                                    style="text-wrap: nowrap; padding: 0 10px; font-weight: bold; background-color: white;">
-                                    Danh mục bánh sinh nhật</p>
-                                <li><a href="#category1">Bánh Ăn Nhẹ</a></li>
-                                <li><a href="#category2">Bánh Các Ngày Lễ</a></li>
-                                <li><a href="#category3">Bánh Chai Rượu Và Ly Bia Sang Trọng</a></li>
-                                <li><a href="#category4">Bánh Chủ Nhật</a></li>
-                                <li><a href="#category4">Bánh Công Chúa</a></li>
-                                <li><a href="#category4">Bánh Giáng Sinh (Noel)</a></li>
-                                <li><a href="#category4">Bánh Hoa Quả Tươi Theo Mùa</a></li>
-                                <li><a href="#category4">Bánh Khủng Long</a></li>
-                                <li><a href="#category4">Bánh Kỉ niệm ngày cưới</a></li>
-                                <li><a href="#category4">Bánh Lịch</a></li>
-                                <li><a href="#category4">Bánh Mousse</a></li>
+                            <img src="../image/imghomepage/logo/logo1.jpg" alt="" class="img-logo-detail">
 
-                            </ul>
-                        </div>
-                        <li>
-                            <div class="d-flex ">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                                <input type="search" name="keyword" id="keyword"
-                                    class="form-control autocomplete-field js-ls"
-                                    placeholder="Tìm kiếm bánh sinh nhật,... " value="" autocomplete="off">
+                        </a>
+                    </div>
+                    <div class=" col-sm-4 col-md-8 col-lg-11 d-flex justify-content-between align-items-center "
+                        style="width: 87%; height: 100%;">
+                        <ul class=" nav d-flex  list-item" style="margin-left: 10px;">
+
+                            <div class="position-relative" style=" height: 100%; flex-wrap: nowrap;">
+                                <i class="fa-solid fa-magnifying-glass" id="search-icon"
+                                    onclick="toggleSearchDropdown()"
+                                    style="width: 100%; height: 100% ;  display: flex; align-items: center; margin-right: 20px; font-size: large;"></i>
+                                <div id="search-dropdown" class="dropdown-search">
+                                    <input type="search" id="keyword" class="form-control autocomplete-field js-ls"
+                                        placeholder="Tìm kiếm bánh sinh nhật,... " value="" autocomplete="off">
+                                </div>
                             </div>
 
-                        </li>
+                            <a href="#">
+                                <li>Trang chủ</li>
+                            </a>
+                            <div class="dropdown" style=" display:flex; align-items: center;  height: 100%; ">
+                                <a href="../pages/ProductCatalog.html" data-id="2">
+                                    <li>Danh mục</li>
 
-                    </ul>
-                </div>
-                <div class="col-lg-3">
-                    <div class="d-flex">
-                        <div class="row balance-row">
-                            <div class="bag-shop">
-                                <div class="col1 text">GIỎ HÀNG/0₫</div>
-                                <div class="col1">
-                                    <i class="fa-solid fa-bag-shopping"></i>
-                                </div>
-                                <div class="col1">
-                                    <div class="dropdown">
-                                        <button class="btn btn-secondary dropdown-toggle" type="button"
-                                            id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Tài Khoản
-                                        </button>
-                                        <ul class="dropdown-menu account-dropdown-menu"
-                                            aria-labelledby="dropdownMenuButton">
-                                            <li><a class="dropdown-item" href="SignIn.html">Đăng Nhập</a></li>
-                                            <li><a class="dropdown-item" href="SignUp.html">Đăng Ký</a></li>
-                                        </ul>
+                                </a>
+                                <ul class="dropdown-menu menu-danhmuc">
+                                    <p
+                                        style="text-wrap: nowrap; padding: 0 10px; font-weight: bold; background-color: white;">
+                                        Danh mục bánh sinh nhật</p>
+                                    <li><a href="#" class="product-link" data-category="banh_an_nhe">Bánh Ăn
+                                            Nhẹ</a></li>
+                                    <li><a href="#" data-category="banh_cac_ngay_le">Bánh Các Ngày Lễ</a></li>
+                                    <li><a href="#" data-category="banh_chai_ruou">Bánh Chai Rượu Và Ly
+                                            Bia Sang Trọng</a></li>
+                                    <li><a href="#" class="product-link" data-category="banh_chu_nhat">Bánh Chủ
+                                            Nhật</a>
+                                    </li>
+                                    <li><a href="#" data-category="banh_cong_chua">Bánh Công Chúa</a>
+                                    </li>
+                                    <li><a href="#" data-category="banh_giang_sinh">Bánh Giáng Sinh
+                                            (Noel)</a></li>
+                                    <li><a href="#" data-category="banh_hoa_qua_tuoi">Bánh Hoa Quả Tươi
+                                            Theo Mùa</a></li>
+                                    <li><a href="#" data-category="banh_khung_long">Bánh Khủng Long</a>
+                                    </li>
+                                    <li><a href="#" data-category="banh_ki_niem_ngay">Bánh Kỉ niệm ngày
+                                            cưới</a></li>
+                                    <li><a href="#" data-category="banh_lich">Bánh Lịch</a></li>
+                                    <li><a href="#" data-category="banh_mousse">Bánh Mousse</a></li>
+
+                                </ul>
+                            </div>
+                            <a href="#">
+                                <li>Giới thiệu</li>
+                            </a>
+
+
+                        </ul>
+
+
+
+                        <div class="d-flex">
+                            <div class="row balance-row">
+                                <div class="bag-shop">
+                                    <div class="col1 d-flex justify-content-between" style="gap: 10px;">
+                                        <i class="fa-solid fa-bag-shopping"></i>
+                                        <div class="col1 text">
+                                            GIỎ HÀNG/0₫
+                                        </div>
                                     </div>
-                                </div>
 
+                                    <div class="col1">
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Tài Khoản
+                                            </button>
+                                            <ul class="dropdown-menu account-dropdown-menu"
+                                                aria-labelledby="dropdownMenuButton">
+                                                <li><a class="dropdown-item" href="SignIn.html">Đăng Nhập</a></li>
+                                                <li><a class="dropdown-item" href="SignUp.html">Đăng Ký</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
 
         </div>
     </header>
     <main id="main">
+        <div class="container">
         <div class="row category-page-row">
-            <div class="col large-3">
+            <div class="col-lg-3 large-3">
                 <div id="shop-sidebar" class="sidebar-inner">
                     <aside class="widget widget_aws_widget">
                         <div>
                             <form>
                                 <div class="search-input-container">
                                     <input type="search" name="s" id="search-input" class="aws-search-field"
-                                        placeholder="Tìm kiếm sản phẩm" autocomplete="off">
-                                    <input type="hidden" name="post_type" value="product">
+                                        placeholder="Tìm kiếm sản phẩm" autocomplete="off" style="width: 100%; padding-right: 10px;">
+                                    <input type="hidden" name="post_type" value="product" >
                                     <input type="hidden" name="type_aws" value="true">
                                     <div class="aws-loader"></div>
                                 </div>
@@ -170,13 +195,10 @@
                         <form>
                             <div class="price_slider_wrapper">
                                 <div
-                                    class="price_slider ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
-                                    <div class="ui-slider-range ui-corner-all ui-widget-header"
-                                        style="left: 0%; width: 100%;"></div><span tabindex="0"
-                                        class="ui-slider-handle ui-corner-all ui-state-default"
-                                        style="left: 0%;"></span><span tabindex="0"
-                                        class="ui-slider-handle ui-corner-all ui-state-default"
-                                        style="left: 100%;"></span>
+                                    class="price_slider ">
+                                    <div class="price_slider_range"></div>
+                                    <div class="price_slider_handle" id="handle-left"></div>
+                                    <div class="price_slider_handle" id="handle-right" ></div>
                                 </div>
                                 <div class="price_slider_amount" data-step="10">
                                     <button type="submit" class="button">Lọc</button>
@@ -205,14 +227,14 @@
                     </aside>
                     <aside id="woocommerce_product_categories-15" class="widget woocommerce widget_product_categories">
                         <ul class="product-categories">
-                            <li class="cat-item cat-item-2197"><a href="">Bento Cake</a>
+                            <li class="cat-item "><a href="">Bento Cake</a>
                             </li>
-                            <li class="cat-item cat-item-2310 current-cat active"><a href="">Bánh Ăn Nhẹ</a></li>
-                            <li class="cat-item cat-item-2658"><a href="">Bánh Mousse</a></li>
-                            <li class="cat-item cat-item-2668"><a href="">Bánh Size
+                            <li class="cat-item "><a href="">Bánh Ăn Nhẹ</a></li>
+                            <li class="cat-item "><a href="">Bánh Mousse</a></li>
+                            <li class="cat-item "><a href="">Bánh Size
                                     Lớn</a></li>
                             <li class="cat-item cat-item-1749"><a
-                                    href="https://tokyogateaux.vn/banh-20-11-banh-20-10-banh-08-03/">Bánh ngày lễ 8.3 -
+                                    href="https://tokyogateaux.vn/banh-20-11-banh-20-10-banh-08-03/" >Bánh ngày lễ 8.3 -
                                     20.10 - 20.11</a></li>
                             <li class="cat-item cat-item-119"><a href="https://tokyogateaux.vn/banh-sinh-nhat/">Bánh
                                     Sinh Nhật - Bánh Kem - Bánh Gâto</a></li>
@@ -272,12 +294,91 @@
                 </div>
             </div>
         </div>
+    </div>
     </main>
    <script src="../js/productcatalog.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+    const leftHandle = document.getElementById('handle-left');
+    const rightHandle = document.getElementById('handle-right');
+    const priceRange = document.querySelector('.price_slider_range');
+    const fromLabel = document.querySelector('.price_label .from');
+    const toLabel = document.querySelector('.price_label .to');
+    
+    const minValue = 0;  // Giá trị tối thiểu
+    const maxValue = 1350000; // Giá trị tối đa
+    const step = 10000;       // Bước nhảy của thanh trượt
 
+    let leftValue = minValue;
+    let rightValue = maxValue;
+
+    // Hàm cập nhật giá trị của thanh trượt
+    function updateSlider() {
+        const rangeWidth = document.querySelector('.price_slider').offsetWidth;
+        const leftPercent = ((leftValue - minValue) / (maxValue - minValue)) * 100;
+        const rightPercent = ((rightValue - minValue) / (maxValue - minValue)) * 100;
+
+        priceRange.style.left = `${leftPercent}%`;
+        priceRange.style.width = `${rightPercent - leftPercent}%`;
+
+        leftHandle.style.left = `${leftPercent}%`;
+        rightHandle.style.left = `calc(${rightPercent}% - 20px)`;
+
+
+        fromLabel.textContent = formatCurrency(leftValue);
+        toLabel.textContent = formatCurrency(rightValue);
+    }
+
+    function formatCurrency(value) {
+        return value.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+    }
+
+    let isLeftDragging = false;
+    let isRightDragging = false;
+
+    leftHandle.addEventListener('mousedown', function () {
+        isLeftDragging = true;
+    });
+
+    rightHandle.addEventListener('mousedown', function () {
+        isRightDragging = true;
+    });
+
+    document.addEventListener('mousemove', function (e) {
+        if (isLeftDragging || isRightDragging) {
+            const sliderRect = document.querySelector('.price_slider').getBoundingClientRect();
+            const mouseX = e.clientX - sliderRect.left;
+            const sliderWidth = sliderRect.width;
+            let newValue = ((mouseX / sliderWidth) * (maxValue - minValue)) + minValue;
+
+            if (isLeftDragging) {
+                if (newValue < rightValue) {
+                    leftValue = Math.max(minValue, Math.min(newValue, rightValue - step));
+                    updateSlider();
+                }
+            }
+
+            if (isRightDragging) {
+                if (newValue > leftValue) {
+                    rightValue = Math.min(maxValue, Math.max(newValue, leftValue + step));
+                    updateSlider();
+                }
+            }
+        }
+    });
+
+    document.addEventListener('mouseup', function () {
+        isLeftDragging = false;
+        isRightDragging = false;
+    });
+
+    updateSlider();
+});
+
+    </script>
 </body>
 
 </html>

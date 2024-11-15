@@ -17,7 +17,7 @@ function handleLoginForm() {
       } else {
         // Thực hiện hành động đăng nhập thành công
         alert("Đăng nhập thành công!");
-        window.location.href = "../index.html";
+        window.location.href = "../pages/HomePage.html";
       }
     });
 }
