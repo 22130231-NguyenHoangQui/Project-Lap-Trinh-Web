@@ -1,0 +1,78 @@
+
+:root {
+    --primary-color: #1E90FF;
+    --light-color: #f8f9fa;
+    --dark-color: #212529;
+    --text-light: #ffffff;
+}
+/* Tông màu chủ đạo */
+body {
+    background-color: #ffffff;
+    font-family: Tahoma, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+html, body {
+    height: 100%;
+    margin: 0;
+}
+main {
+    flex: 1;
+}
+/* Phần header */
+.hero {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+}
+
+/* Nút button */
+.btn-outline-light {
+    color: var(--text-light);
+    border-color: var(--text-light);
+}
+
+.btn-outline-light:hover {
+    background-color: var(--text-light);
+    color: var(--primary-color);
+    border-color: var(--text-light);
+}
+
+/* Navbar */
+.navbar.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+.nav-tabs .nav-link:hover {
+    background-color: #f1f2f3; /* Nền khi hover */
+    color: #1E90FF;
+}
+.nav-tabs .nav-link {
+    color: #131212; /* Màu chữ */
+    background-color: #fbfdff; /* Nền tab */
+   
+}
+
+
+
+/* Footer */
+footer {
+    background-color: var(--dark-color);
+    color: var(--text-light);
+}
+.custom-policy-btn {
+    color: #1E90FF !important; /* Màu chữ */
+    border: 2px solid #1E90FF;
+}
+
+.custom-policy-btn:hover {
+    background-color: #eceef1;
+    color: #1E90FF !important;
+}
+/* Phần chân trang */
+footer {
+    background-color: var(--dark-color);
+    color: var(--text-light);
+    text-align: center;
+    padding: 20px;
+    margin-top: auto; /* Đẩy footer xuống cuối */
+    width: 100%;
+}

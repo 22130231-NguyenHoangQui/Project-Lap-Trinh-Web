@@ -1,0 +1,35 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.cart-item img {
+    max-width: 100px;
+    height: auto;
+}
+
+.cart-total {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Custom button styles */
+.btn-custom {
+    background-color: #09dd10; /* Green color for the payment button */
+    color: white;
+}
+
+.btn-custom:hover {
+    background-color: #11aa19;
+    color: white; 
+}
+
+/* New style for the "Tiếp tục mua hàng" button */
+.btn-continue {
+    background-color: #0e82f7; /* Sky blue for continue shopping button */
+    color: white;
+}
+
+.btn-continue:hover {
+    background-color: #19538d;
+    color:white;
+}
