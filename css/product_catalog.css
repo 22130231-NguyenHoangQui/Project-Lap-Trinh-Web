@@ -1,64 +1,68 @@
-/* =======================
-    Typography Styles
-    ============= */
-a {
-    text-decoration: none;
-    color: #334862;
-}
+
 
 
 /* =====================================
-   Global Styles
-===================================== */
-body {
-    font-weight: 400;
-    font-style: normal;
-    font-family: Lato, sans-serif;
-    line-height: 1.6;
-}
+       Setting Styles
+    ===================================== */
 
-div {
-    display: block;
-}
-
-.container {
-    max-width: 1340px;
-}
-
-.flex-row {
-    align-items: center;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    width: 100%;
-}
-
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 1340px;
-}
-
-.col {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    position: relative;
-
-}
-
-aside {
-    display: block;
-}
+    main {
+        display: block;
+        unicode-bidi: isolate;
+        background-color: #ffffff;
+    }
+    
+    .category-page-row {
+        padding-top: 30px;
+    }
+    
+    /* =======================
+            Typography Styles
+            ============= */
+    a {
+        text-decoration: none;
+        color: #334862;
+    }
+    
+    
+    /* =====================================
+               Global Styles
+            ===================================== */
+    
+    div {
+        display: block;
+    }
+    
+    html,
+    body {
+        padding: 0;
+        margin: 0;
+        font-size: 16px;
+        color: black;
+        font-family: sans-serif, Tahoma;
+    }
+    
+    .container {
+        width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    
+    
+    
+    aside {
+        display: block;
+    }
+    
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
 /* ==================
     Header
 ==========*/
 
-.header,
 .header-wrapper {
     position: relative;
     width: 100%;
@@ -84,8 +88,6 @@ aside {
 }
 
 .nav li {
-    display: flex;
-    flex-grow: 1;
     color: white;
     padding: 0 0.7em;
     font-weight: 700;
@@ -119,7 +121,10 @@ aside {
     font-size: 1em;
 }
 
-/* header-center */
+/* ===========
+header-center
+============== */
+
 .color-header-center {
     background-color: #ffffff;
     padding: 0;
@@ -130,14 +135,32 @@ aside {
     flex-wrap: wrap;
     width: 100%;
     margin: 0 auto;
-    max-width: 1340px;
+    max-width: 1200px;
+    padding: 5px 0;
 }
 
-.row.row-center .col-lg-8 {
-    max-width: 65%;
+
+/* Thiết kế của dropdown tìm kiếm */
+.dropdown-search {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0px;
+    background-color: white;
+    border: 1px solid #ddd;
+    width: 400px;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    z-index: 1000;
 }
 
-.row.row-center .col-lg-3 {
+/* Hiển thị input khi hover vào icon */
+.position-relative:hover .dropdown-search {
+    display: block;
+}
+
+.row.row-center .col-lg-4 {
     margin-bottom: auto;
     margin-top: auto;
     padding-right: 0;
@@ -182,7 +205,8 @@ aside {
 .row.row-center .img-logo {
     display: flex;
     justify-content: flex-start;
-    margin-right: 20px;
+    margin: 0;
+    padding: 0;
 }
 
 .row.row-center .img-logo img {
@@ -254,41 +278,41 @@ aside {
 
 .dropdown {
     position: relative;
-    display: block;
-    
+    display: inline-block;
+
 }
 
-.dropdown-menu1 {
+.dropdown-menu.menu-danhmuc {
     display: none;
     position: absolute;
     top: 100%;
     left: 0;
     background-color: white;
+    padding: 10px;
     list-style: none;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     min-width: 150px;
-    z-index: 10;    
+    z-index: 10;
 }
 
 
-.dropdown:hover .dropdown-menu {
+.dropdown:hover .dropdown-menu.menu-danhmuc {
     display: block;
 }
 
-.dropdown-menu li {
-   
-    padding: 5px 10px;
-}
 
-.dropdown-menu1 li a {
+
+.dropdown-menu.menu-danhmuc li a {
     color: #333;
     text-decoration: none;
     display: block;
 }
 
-.dropdown-menu1 li a:hover {
+.dropdown-menu.menu-danhmuc li a:hover {
     background-color: #f0f0f0;
 }
+
+
 
 /* =====================================
    Title Page Styles
@@ -305,30 +329,12 @@ aside {
 
 }
 
-/* page title */
-.page-title {
-    position: relative;
-    background-color: #de5f8a;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
 
 .featured-title {
 
     text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
 
 }
-
-.container {
-
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-
-
-
-
 
 .breadcrumbs {
     color: #fff;
@@ -389,10 +395,6 @@ option {
 ======================================*/
 
 /* === aside1 */
-.sidebar-inner {
-    padding-left: 15px;
-    padding-right: 15px;
-}
 
 .widget {
     margin-bottom: 1.5rem;
@@ -444,88 +446,59 @@ option {
 }
 
 /* aside2 */
-.widget_price_filter .ui-slider-horizontal {
-    border-radius: 99px;
-    height: 5px;
-}
-
-.widget_price_filter .ui-slider .ui-slider-range {
-    background-color: #666;
-    border: 0;
-    border-radius: 99px;
-    display: block;
-    font-size: 10px;
-    opacity: .5;
-    position: absolute;
-    z-index: 1;
-}
-
-.widget_price_filter .ui-slider {
+.price_slider {
     position: relative;
-    text-align: left;
+    height: 8px;
+    background-color: #ddd;
+    border-radius: 4px;
+    margin-top: 20px;
+    width: 100%;
 }
 
-.widget_price_filter .ui-slider .ui-slider-handle {
-    background-color: #666;
-    border-radius: 999px;
-    cursor: pointer;
-    height: 15px;
-    outline: none;
+.price_slider_range {
     position: absolute;
-    top: -5px;
-    width: 15px;
-    z-index: 2;
-}
-
-.widget_price_filter .ui-slider .ui-slider-handle:last-child {
-    margin-left: -10px;
-}
-
-.widget_price_filter .ui-slider .ui-slider-handle {
-    background-color: #666;
-    border-radius: 999px;
-    cursor: pointer;
-    height: 15px;
-    outline: none;
-    position: absolute;
-    top: -5px;
-    width: 15px;
-    z-index: 2;
-}
-
-.widget_price_filter .ui-slider-horizontal .ui-slider-range {
-    height: 100%;
     top: 0;
+    left: 0;
+    height: 100%;
+    background-color: #333;
+    border-radius: 4px;
 }
 
-.widget_price_filter .ui-slider .ui-slider-range {
-    background-color: #666;
-    border: 0;
-    border-radius: 99px;
-    display: block;
-    font-size: 10px;
-    opacity: .5;
+.price_slider_handle {
     position: absolute;
+    top: -5px;
+    left: 10px ;
+    width: 20px;
+    height: 20px;
+    background-color: #333;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
     z-index: 1;
 }
 
-.widget form .price_slider_wrapper .price_slider_amount {
-    margin-top: 20px;
+.price_slider_amount {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin-top: 20px;
 }
 
-.widget form .price_slider_wrapper .price_slider_amount button {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border: none;
-    padding: 3px 30px;
-    background-color: #666666;
+.price_label {
+    font-size: 14px;
+}
 
+button {
+    background-color: #666666;
+    color: white;
+    border: none;
+    padding: 3px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.widget form .price_slider_wrapper .price_slider_amount button .price_label   {
+    white-space: nowrap; 
 }
 
 /* custom */
@@ -556,6 +529,18 @@ aside#woocommerce_product_categories-15 .product-categories li {
     text-decoration: none;
     list-style-type: none;
 }
+.widget .product-categories .cat-item a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    position: relative;
+    color: #334862;
+}
+
+.widget .product-categories .cat-item a:hover {
+    color: black;
+}
+
 
 /* =====================
 Wideget Styles
@@ -659,60 +644,3 @@ Wideget Styles
     font-weight: bold;
 }
 
-
-/* =====================================
-   Main Styles
-===================================== */
-
-main {
-    display: block;
-    unicode-bidi: isolate;
-}
-
-.category-page-row {
-    padding-top: 30px;
-}
-
-/* =====================================
-   Responsive Layouts
-===================================== */
-
-/* Large Screens */
-@media screen and (min-width: 850px) {
-    .large-3 {
-        flex-basis: 25%;
-        max-width: 25%;
-    }
-
-    .large-9 {
-        flex-basis: 75%;
-        max-width: 75%;
-    }
-
-
-    .large-9 .shop-container .large-columns-4>.col {
-        flex-basis: 25%;
-        max-width: 25%;
-    }
-}
-
-/* Medium Screens */
-@media screen and (min-width: 550px) {
-    .medium-columns-3>.col {
-        flex-basis: 33.333333%;
-        max-width: 33.333333%;
-    }
-}
-
-/* Small Screens */
-.small-columns-2>.col {
-    flex-basis: 50%;
-    max-width: 50%;
-}
-
-@media screen and (min-width: 850px) {
-    .col+.col .col-inner {
-        margin-left: 0;
-        margin-right: auto;
-    }
-}

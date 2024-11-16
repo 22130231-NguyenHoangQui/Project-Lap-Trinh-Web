@@ -58,7 +58,7 @@
                     <div class="flex-col">
                         <div class="logo-in-header" id="logo">
                             <a href="../pages/homepage.html" title="Cửa Hàng Bánh Sinh Nhật IT Cake" rel="home">
-                                <img src="../image/imghomepage/logo1.jpg" alt="Cửa Hàng Bánh Kem IT Cake">
+                                <img src="../image/imghomepage/logo/logo1.jpg" alt="Cửa Hàng Bánh Kem IT Cake">
                             </a>
                         </div>
                         <div class="center-in-header">
@@ -69,45 +69,47 @@
                                 </li>
                                 <li class="center-category" id="item-ct">
                                     <a class="cate-hd" href="../pages/trang-danh-muc" aria-expanded="false"
-                                        aria-haspopup="menu" id="category-click">
+                                        aria-haspopup="menu">
                                         DANH MỤC
                                     </a>
-                                    <i class="bi bi-caret-down-fill" id="toggle-icon"></i>
-                                    <ul class="sub-menu" id="category-menu">
-                                        <li class="menu-item" id="danhmuc1">
-                                            <a href="../pages/danhmuc1">Danh mục 1</a>
+                                    <button class="category-bt btn btn-secondary dropdown-toggle" type="button"
+                                        id="dropdownMenuButton" data-bs-toggle="dropdown"
+                                        aria-expanded="false"></button>
+                                    <ul class="sub-menu dropdown-menu account-dropdown-menu"
+                                        aria-labelledby="dropdownMenuButton">
+                                        <li class="menu-item"><a class="dropdown-item"
+                                                href="../pages/trang-danh-muc-1">Danh mục 1</a>
                                         </li>
-                                        <li class="menu-item" id="danhmuc2">
-                                            <a href="../pages/danhmuc2">Danh mục 2</a>
+                                        <li class="menu-item"><a class="dropdown-item"
+                                                href="../pages/trang-danh-muc-2">Danh mục 2</a>
                                         </li>
-                                        <li class="menu-item" id="danhmuc3">
-                                            <a href="../pages/danhmuc3">Danh mục 3</a>
+                                        <li class="menu-item"><a class="dropdown-item"
+                                                href="../pages/trang-danh-muc-3">Danh mục 3</a>
                                         </li>
-                                        <li class="menu-item" id="danhmuc4">
-                                            <a href="../pages/danhmuc4">Danh mục 4</a>
+                                        <li class="menu-item"><a class="dropdown-item"
+                                                href="../pages/trang-danh-muc-4">Danh mục 4</a>
                                         </li>
-                                        <li class="menu-item" id="danhmuc5">
-                                            <a href="../pages/danhmuc5">Danh mục 5</a>
-                                        </li>
+                                        <liclass="menu-item"><a class="dropdown-item"
+                                                href="../pages/trang-danh-muc-5">Danh mục 5</a>
+                                            </liclass=>
                                     </ul>
-
                                 </li>
                                 <li class="center-introduce" id="item-ct">
                                     <a class="introduce-hd" href="../pages/trang-gioi-thieu">GIỚI THIỆU</a>
                                 </li>
-                                <div class="search-center-hd" id="item-ct>
-                                    <form class=" search-form" action="#" method="get">
-                                    <div class="search-contai">
-                                        <div class="wrapper-input-se">
-                                            <input class="search-field" type="search" name="s" id="search-input"
-                                                placeholder="Tìm kiếm sản phẩm" autocomplete="off">
-                                            <input type="hidden" name="post_type" value="product">
-                                            <input type="hidden" name="type_aws" value="true">
+                                <div class="search-center-hd" id="item-ct">
+                                    <form class="search-form" action="#" method="get">
+                                        <div class="search-contai">
+                                            <div class="wrapper-input-se">
+                                                <input class="search-field" type="search" name="keyword" id="keyword"
+                                                    placeholder="Tìm kiếm sản phẩm" autocomplete="off">
+                                                <input type="hidden" name="post_type" value="product">
+                                                <input type="hidden" name="type_aws" value="true">
+                                            </div>
+                                            <button class="btn-icon">
+                                                <i class="bi bi-search"></i>
+                                            </button>
                                         </div>
-                                        <span class="btn-icon">
-                                            <i class="bi bi-search"></i>
-                                        </span>
-                                    </div>
                                     </form>
                                 </div>
                             </ul>
@@ -118,17 +120,23 @@
                                 <li class="car-wrapper">
                                     <a class="car-left" href="../pages/trang-gio-hang" title="Giỏ hàng">
                                         <span class="car-title">GIỎ HÀNG</span>
-                                        <i class="bi bi-cart-fill"></i>
+                                        <i class="fa-solid fa-bag-shopping"></i>
                                     </a>
                                 </li>
                             </ul>
                             <ul class="con-account">
                                 <li class="is-line"></li>
                                 <li class="car-wrapper">
-                                    <a class="car-left" href="../pages/trang-thong-tin-tai-khoan" title="Giỏ hàng">
-                                        <span class="car-title">TÀI KHOẢN</span>
-                                        <i class="bi bi-person-circle"></i>
-                                    </a>
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" title="Tài khoản"
+                                        id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Tài Khoản
+                                    </button>
+                                    <ul class="dropdown-menu account-dropdown-menu"
+                                        aria-labelledby="dropdownMenuButton">
+                                        <li><a class="dropdown-item" href="../pages/SignIn.html">Đăng Nhập</a></li>
+                                        <li><a class="dropdown-item" href="../pages/SignUp.html">Đăng Ký</a></li>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
                         </div>
@@ -143,24 +151,8 @@
     </div>
     <div class="main">
         <div class="product-main">
-            <div class="pr-row">
-                <div id="product-sidebar" class="pr-col">
-                    <aside id="pr-sidebar-search" class="widget">
-                        <div class="search-container">
-                            <form class="search-form" action="#">
-                                <div class="sr-wrapper">
-                                    <label class="search-label" for="search-1">Tìm kiếm sản phẩm</label>
-                                    <input type="search" name="s" id="search-1" placeholder="Tìm kiếm sản phẩm"
-                                        autocomplete="off">
-                                </div>
-                                <div class="sr-wr-icon">
-                                    <span class="sr-btn-icon">
-                                        <i class="bi bi-search"></i>
-                                    </span>
-                                </div>
-                            </form>
-                        </div>
-                    </aside>
+            <div class="pr-row row">
+                <div class="pr-left col" id="product-sidebar" >
                     <aside id="pr-sidebar-list" class="widget">
                         <ul class="list-categories">
                             <li class="cate-item">
@@ -181,9 +173,9 @@
                         </ul>
                     </aside>
                 </div>
-                <div class="pr-col">
-                    <div class="pr-col-row">
-                        <div class="pr-left">
+                <div class="pr-right col">
+                    <div class="pr-col-container row">
+                        <div class="pr-left-contai col">
                             <div class="pr-contai-image">
                                 <div class="pr-image">
                                     <a
@@ -199,7 +191,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="pr-right">
+                        <div class="pr-right-contai col">
                             <h1 class="product-title">BHQ156 - Bánh sinh nhật Dâu Tươi Sáng</h1>
                             <div class="is-divider"></div>
                             <div class="price-wrapper">
@@ -275,7 +267,102 @@
                             </div>
                         </div>
                     </div>
-                    <div class="pr-col-footer"></div>
+                    <div class="pr-footer-contai">
+                        <div class="panels">
+                            <div class="woocommerce-Tabs-panel woocommerce-Tabs-panel--reviews panel entry-content active"
+                                id="tab-reviews" role="tabpanel" aria-labelledby="tab-title-reviews">
+                                <div id="reviews" class="woocommerce-Reviews">
+                                    <div id="comments" class="col large-12">
+                                        <h3 class="woocommerce-Reviews-title normal">
+                                            Đánh giá </h3>
+                                        <p class="woocommerce-noreviews">Chưa có đánh giá nào.</p>
+                                    </div>
+                                    <div id="review_form_wrapper" class="large-12 col">
+                                        <div id="review_form" class="col-inner">
+                                            <div class="review-form-inner has-border">
+                                                <div id="respond" class="comment-respond">
+                                                    <h3 id="reply-title" class="comment-reply-title">Hãy là người đầu
+                                                        tiên nhận xét “BHQ156 – Bánh sinh nhật Dâu Tươi Sáng sz14”
+                                                        <small><a rel="nofollow" id="cancel-comment-reply-link"
+                                                                href="/san-pham/bhq156-banh-sinh-nhat-dau-tuoi-sang-sz14/#respond"
+                                                                style="display:none;">Hủy</a></small>
+                                                    </h3>
+                                                    <form action="https://tokyogateaux.vn/wp-comments-post.php"
+                                                        method="post" id="commentform" class="comment-form"
+                                                        novalidate="">
+                                                        <div class="comment-form-rating"><label for="rating">Đánh giá
+                                                                của bạn&nbsp;<span class="required">*</span></label>
+                                                            <p class="stars"> <span> <a class="star-1" href="#">1</a> <a
+                                                                        class="star-2" href="#">2</a> <a class="star-3"
+                                                                        href="#">3</a> <a class="star-4" href="#">4</a>
+                                                                    <a class="star-5" href="#">5</a> </span> </p>
+                                                            <select name="rating" id="rating" required=""
+                                                                style="display: none;">
+                                                                <option value="">Xếp hạng…</option>
+                                                                <option value="5">Rất tốt</option>
+                                                                <option value="4">Tốt</option>
+                                                                <option value="3">Trung bình</option>
+                                                                <option value="2">Không tệ</option>
+                                                                <option value="1">Rất tệ</option>
+                                                            </select>
+                                                        </div>
+                                                        <p class="comment-form-comment"><label for="comment">Nhận xét
+                                                                của bạn&nbsp;<span
+                                                                    class="required">*</span></label><textarea
+                                                                id="comment" name="comment" cols="45" rows="8"
+                                                                required=""></textarea></p>
+                                                        <p class="comment-form-author">
+                                                            <label for="author">Tên&nbsp;<span class="required">*</span>
+                                                            </label>
+                                                            <input id="author" name="author" type="text" value=""
+                                                                size="30" required="">
+                                                        </p>
+                                                        <p class="comment-form-email">
+                                                            <label for="email">Email&nbsp;<span
+                                                                    class="required">*</span></label>
+                                                            <input id="email" name="email" type="email" value=""
+                                                                size="30" required="">
+                                                        </p>
+                                                        <p class="comment-form-cookies-consent">
+                                                            <input id="wp-comment-cookies-consent"
+                                                                name="wp-comment-cookies-consent" type="checkbox"
+                                                                value="yes">
+                                                            <label for="wp-comment-cookies-consent">Lưu
+                                                                tên của tôi, email, và trang web trong trình duyệt này
+                                                                cho lần bình luận kế tiếp của tôi.</label>
+                                                        </p>
+                                                        <p class="form-submit"><input name="submit" type="submit"
+                                                                id="submit" class="submit" value="Gửi đi">
+                                                            <input type="hidden" name="comment_post_ID" value="29736"
+                                                                id="comment_post_ID">
+                                                            <input type="hidden" name="comment_parent"
+                                                                id="comment_parent" value="0">
+                                                        </p>
+                                                        <p style="display: none;">
+                                                            <input type="hidden" id="akismet_comment_nonce"
+                                                                name="akismet_comment_nonce" value="54d5e108e1">
+                                                        </p>
+                                                        <p style="display: none !important;"
+                                                            class="akismet-fields-container" data-prefix="ak_">
+                                                            <label>Δ<textarea name="ak_hp_textarea" cols="45" rows="8"
+                                                                    maxlength="100"></textarea>
+                                                            </label>
+                                                            <input type="hidden" id="ak_js_1" name="ak_js"
+                                                                value="1731449703881">
+                                                        </p>
+                                                    </form>
+                                                </div><!-- #respond -->
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

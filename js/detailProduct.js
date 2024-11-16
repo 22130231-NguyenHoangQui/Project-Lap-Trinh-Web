@@ -12,44 +12,19 @@ function stickyHeader() {
     }
   };
 }
-document.addEventListener("DOMContentLoaded", function () {
-  const categoryLink = document.getElementById("category-click");
-  const categoryMenu = document.getElementById("category-menu");
-  const toggleIcon = document.getElementById("toggle-icon");
+function setMainMarginTop() {
+  const headerContainer = document.querySelector(".header-container");
+  const main = document.querySelector(".main");
 
-  // Sự kiện di chuột vào chữ "DANH MỤC" để hiển thị danh mục
-  categoryLink.addEventListener("mouseover", function () {
-    categoryMenu.style.display = "block";
-  });
+  // Kiểm tra nếu phần tử tồn tại
+  if (headerContainer && main) {
+    // Lấy chiều cao của header-container
+    const headerHeight = headerContainer.offsetHeight;
 
-  // Sự kiện di chuột ra khỏi danh mục để ẩn menu
-  categoryMenu.addEventListener("mouseleave", function () {
-    categoryMenu.style.display = "none";
-  });
+    // Áp dụng chiều cao vào margin-top của main
+    main.style.marginTop = headerHeight + "px";
+  }
+}
 
-  // Sự kiện click vào icon tam giác để ẩn/hiện danh mục
-  toggleIcon.addEventListener("click", function (event) {
-    event.preventDefault(); // Ngăn chặn chuyển hướng khi nhấn vào icon
-    const isExpanded = categoryLink.getAttribute("aria-expanded") === "true";
-
-    // Toggle trạng thái hiển thị menu
-    categoryMenu.style.display = isExpanded ? "none" : "block";
-    categoryLink.setAttribute("aria-expanded", isExpanded ? "false" : "true");
-
-    // Đổi icon tam giác 
-    toggleIcon.classList.toggle("bi-caret-down-fill");
-    toggleIcon.classList.toggle("bi-caret-up-fill");
-  });
-
-  // Ẩn menu nếu nhấp ra ngoài
-  document.addEventListener("click", function (event) {
-    if (
-      !categoryLink.contains(event.target) &&
-      !toggleIcon.contains(event.target) &&
-      !categoryMenu.contains(event.target)
-    ) {
-      categoryMenu.style.display = "none";
-      categoryLink.setAttribute("aria-expanded", "false");
-    }
-  });
-});
+// Lắng nghe sự kiện DOMContentLoaded để đảm bảo mọi phần tử đã được tải
+document.addEventListener("DOMContentLoaded", setMainMarginTop);
