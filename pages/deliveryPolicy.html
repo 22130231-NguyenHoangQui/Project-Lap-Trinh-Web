@@ -10,131 +10,364 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/deliveryPolicy.css">
 </head>
 
 <body>
-    <header class="py-3 mb-0 border-bottom" style="position: relative;">
-        <div class="container-fluid ">
-            <div class="row">
-                <div class="col-lg-5 d-flex align-items-center  align-items-stretch p-2">
-                    <a href="/"
-                        class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto link-body-emphasis text-decoration-none"
-                        style="flex: 0 0 30%;">
-                        <svg class="bi me-2" width="40" height="32">
-                            <use xlink:href="#bootstrap"></use>
-                        </svg>
-                        <span class="fs-4">Logo</span>
-                    </a>
-                    <form class="col-lg-auto mb-3 mb-lg-0 d-flex p-2" role="search" style="flex: 0 0 70%;">
-                        <input type="search" class="form-control me-0" placeholder="Search..." aria-label="Search"
-                            style="   border-radius: 0; " />
-                        <div class="d-flex align-items-center"
-                            style="margin-left: -38px;  height: 38px; background-color: chocolate; padding: 0 15px; border-radius: 10px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-search" viewBox="0 0 16 16">
-                                <path
-                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-                            </svg>
-                        </div>
-                    </form>
-                </div>
-                <div class="col-lg-7 d-flex container"
-                    style="justify-content: flex-end; gap: 30px; padding-right: 30px;">
-                    <a href="" style="text-decoration: none; ">
-                        <div class="d-flex align-items-stretch justify-content  " style="flex-direction: column;">
-                            <div class="icon__header"
-                                style=" margin-left: auto; margin-right: auto; margin-top: 5px; font-size: 1.5rem; color: rgb(190, 187, 184);">
-                                <i class="fa-solid fa-motorcycle" style="color: rgb(136, 123, 123);"></i>
-                            </div>
-                            <div class="texticon_header">Giao hàng</div>
-                        </div>
-                    </a>
-                    <a href="" style="text-decoration: none; ">
-                        <div class="d-flex align-items-stretch justify-content  " style="flex-direction: column;">
-                            <div class="icon__header"
-                                style=" margin-left: auto; margin-right: auto; margin-top: 5px; font-size: 1.5rem; color: rgb(190, 187, 184);">
-                                <i class="fa-regular fa-heart" style="color: rgb(136, 123, 123);"></i>
-                            </div>
-                            <div class="texticon_header">Yêu thích</div>
-                        </div>
-                    </a>
-                    <a href="" style="text-decoration: none; ">
-                        <div class="d-flex align-items-stretch justify-content  " style="flex-direction: column;">
-                            <div class="icon__header"
-                                style=" margin-left: auto; margin-right: auto; margin-top: 5px; font-size: 1.5rem; color: rgb(190, 187, 184);">
-                                <i class="fa-regular fa-circle-question"></i>
-                            </div>
-                            <div class="texticon_header">Trợ giúp</div>
-                        </div>
-                    </a>
-                    <a href="" style="text-decoration: none; ">
-                        <div class="d-flex align-items-stretch justify-content  " style="flex-direction: column;">
-                            <div class="icon__header"
-                                style=" margin-left: auto; margin-right: auto; margin-top: 5px; font-size: 1.5rem; color: rgb(190, 187, 184);">
-                                <i class="fa-solid fa-bag-shopping"></i>
-                            </div>
-                            <div class="texticon_header">Giỏ hàng</div>
-                        </div>
-                    </a>
+    <header>
+        <div class="header-wrapper">
+            <div class="header-top">
+                <div class="container d-flex justify-content-between align-items-center">
+                    <div class="d-flex flex-col flex-left">
+                        <ul class="nav nav-left nav-small">
+
+                            <li class="html li-first delivery-info">Đặt bánh lấy ngay tại Thành phố Hồ Chí Minh</li>
+                            <li class="html li-first">Hệ thống bánh sinh nhật chính hãng</li>
+                            <li class="html li-first">Hotline: 01234576789</li>
+                        </ul>
+                    </div>
+                    <div class="flex-col hide-for-medium flex-right">
+                        <ul class="nav top-bar-nav nav-right nav-small  nav-divided">
+                            <li class="html header-social-icons ">
+                                <div class="social-icons follow-icons">
+                                    <a href="" class="button icon circle">
+                                        <i class="fa-brands fa-facebook" style=" margin-right: auto;"></i>
+                                    </a>
+                                    <a href="" class="button icon circle">
+
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </a>
+                                    <a href="" class="button icon circle">
+
+                                        <i class="fa-regular fa-envelope"></i>
+                                    </a>
+                                    <a href="" class="button icon circle">
+
+                                        <i class="fa-solid fa-phone"></i>
+                                    </a>
+
+                                    <a href="" class="button icon circle">
+
+                                        <i class="fa-brands fa-pinterest"></i>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
+        </div>
+
+        <div class="header-center color-header-center ">
+            <div class="container d-flex" style="width: 100%;">
+                <div class="row row-center d-flex justify-content-between  align-items-center">
+                    <div class="col-sm-1 col-md-1 col-lg-1 img-logo"
+                        style="display: block; width: 10%; padding-left: 10px;">
+                        <a href="../pages/HomePage.html">
+                            <img src="../image/imghomepage/logo/logo1.jpg" alt="" class="img-logo-detail">
+
+                        </a>
+                    </div>
+                    <div class=" col-sm-4 col-md-8 col-lg-11 d-flex justify-content-between align-items-center "
+                        style="width: 87%; height: 100%;">
+                        <ul class=" nav d-flex  list-item" style="margin-left: 10px;">
+
+                            <div class="position-relative" style=" height: 100%; flex-wrap: nowrap;">
+                                <i class="fa-solid fa-magnifying-glass" id="search-icon"
+                                    onclick="toggleSearchDropdown()"
+                                    style="width: 100%; height: 100% ;  display: flex; align-items: center; margin-right: 20px; font-size: large;"></i>
+                                <div id="search-dropdown" class="dropdown-search">
+                                    <input type="search" id="keyword" class="form-control autocomplete-field js-ls"
+                                        placeholder="Tìm kiếm bánh sinh nhật,... " value="" autocomplete="off">
+                                </div>
+                            </div>
+
+                            <a href="#">
+                                <li>Trang chủ</li>
+                            </a>
+                            <div class="dropdown" style=" display:flex; align-items: center;  height: 100%; ">
+                                <a href="../pages/ProductCatalog.html" data-id="2">
+                                    <li>Danh mục</li>
+
+                                </a>
+                                <ul class="dropdown-menu menu-danhmuc">
+                                    <p
+                                        style="text-wrap: nowrap; padding: 0 10px; font-weight: bold; background-color: white;">
+                                        Danh mục bánh sinh nhật</p>
+                                    <li><a href="#" class="product-link" data-category="banh_an_nhe">Bánh Ăn
+                                            Nhẹ</a></li>
+                                    <li><a href="#" data-category="banh_cac_ngay_le">Bánh Các Ngày Lễ</a></li>
+                                    <li><a href="#" data-category="banh_chai_ruou">Bánh Chai Rượu Và Ly
+                                            Bia Sang Trọng</a></li>
+                                    <li><a href="#" class="product-link" data-category="banh_chu_nhat">Bánh Chủ
+                                            Nhật</a>
+                                    </li>
+                                    <li><a href="#" data-category="banh_cong_chua">Bánh Công Chúa</a>
+                                    </li>
+                                    <li><a href="#" data-category="banh_giang_sinh">Bánh Giáng Sinh
+                                            (Noel)</a></li>
+                                    <li><a href="#" data-category="banh_hoa_qua_tuoi">Bánh Hoa Quả Tươi
+                                            Theo Mùa</a></li>
+                                    <li><a href="#" data-category="banh_khung_long">Bánh Khủng Long</a>
+                                    </li>
+                                    <li><a href="#" data-category="banh_ki_niem_ngay">Bánh Kỉ niệm ngày
+                                            cưới</a></li>
+                                    <li><a href="#" data-category="banh_lich">Bánh Lịch</a></li>
+                                    <li><a href="#" data-category="banh_mousse">Bánh Mousse</a></li>
+
+                                </ul>
+                            </div>
+                            <a href="#">
+                                <li>Giới thiệu</li>
+                            </a>
+
+
+                        </ul>
+
+
+
+                        <div class="d-flex">
+                            <div class="row balance-row">
+                                <div class="bag-shop">
+                                    <div class="col1 d-flex justify-content-between" style="gap: 10px;">
+                                        <i class="fa-solid fa-bag-shopping"></i>
+                                        <div class="col1 text">
+                                            GIỎ HÀNG/0₫
+                                        </div>
+                                    </div>
+
+                                    <div class="col1">
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Tài Khoản
+                                            </button>
+                                            <ul class="dropdown-menu account-dropdown-menu"
+                                                aria-labelledby="dropdownMenuButton">
+                                                <li><a class="dropdown-item" href="SignIn.html">Đăng Nhập</a></li>
+                                                <li><a class="dropdown-item" href="SignUp.html">Đăng Ký</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
     </header>
-    <nav class=" bg-body-tertiary border-bottom px-3 py-2" style="flex-grow: 1;">
-        <div class=" d-flex flex-wrap align-items-stretch" style="justify-content: flex-start;">
+    <main class="main">
+        <div class="container">
+            <div class="row g-0">
+                <div class="col-lg-3 d-flex  boder-bottom-box"
+                    style="flex-direction: column; border: rgb(160, 155, 155) 1px solid; display: block; height: 100%;">
+                    <div class=" py-3 px-3"> <a class="nav-link" href="" style="text-decoration: none;"
+                            data-content="chinh-sach-doi-tra">CHÍNH SÁCH ĐỔI, TRẢ, HOÀN TIỀN</a></div>
+                    <div class=" py-3 px-3"> <a class="nav-link" href="" style="text-decoration: none;"
+                            data-content="chinh-sach-bao-mat">CHÍNH SÁCH BẢO MẬT </a>
+                    </div>
+                    <div class=" py-3 px-3"> <a class="nav-link" data-content="huong-dan-thanh-toan" href=""
+                            style="text-decoration: none;">HƯỚNG DẪN THANH TOÁN</a></div>
+                </div>
+                <div class="col-lg-9 d-flex">
+                    <div id="content-area" class="container d-flex"
+                        style="flex-direction: column; flex: 1; margin-left: 20px; gap: 10px;">
+                        <h3>CHÍNH SÁCH QUI ĐỊNH CHUNG</h3>
 
-            <ul class="nav">
-                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">DANH MỤC BÁNH<i
-                            class="fa-solid fa-angle-down" style="margin-left: 5px;"></i></a>
-
-                </li>
-                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-5">BÁNH THEO VỊ<i
-                            class="fa-solid fa-angle-down" style="margin-left: 5px;"></i></a></li>
-                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-5">BÁNH TRẺ EM<i
-                            class="fa-solid fa-angle-down" style="margin-left: 5px;"></i></a></li>
-                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-5">BÁNH KỶ NIỆM<i
-                            class="fa-solid fa-angle-down" style="margin-left: 5px;"></i></a></li>
-                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-5">BÁNH THEO GIÁ TIỀN<i
-                            class="fa-solid fa-angle-down" style="margin-left: 5px;"></i></a></li>
-                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-5">BLOG<i
-                            class="fa-solid fa-angle-down" style="margin-left: 5px;"></i></a></li>
-            </ul>
-        </div>
-    </nav>
+                        <h4>1. CHẤP THUẬN CÁC ĐIỀU KIỆN SỬ DỤNG</h4>
+                        <p>Khi sử dụng Website của tokyogateaux.vn, Quý khách đã mặc nhiên chấp thuận các điều khoản và
+                            điều kiện sử dụng được quy định dưới đây. Để biết được các sửa đổi mới nhất, Quý khách nên
+                            thường xuyên kiểm tra lại “Điều Kiện Sử Dụng”.
 
 
-    <div class="container " style="margin-bottom: 80px;">
-        link
-    </div>
-    <div class="container">
-        <div class="row g-0">
-            <div class="col-lg-3 d-flex " style="flex-direction: column; border: rgb(160, 155, 155) 1px solid; position: relative;">
-               <div class=" py-3 px-3"> <a href="" style="text-decoration: none;">Chính sách bảo mật</a></div>
-               <div class=" py-3 px-3"> <a href="" style="text-decoration: none;">Chính sách giao hàng</a></div>
-               <div class=" py-3 px-3"> <a href="" style="text-decoration: none;">Chính sách xử lý khiếu nại</a></div>
-               <div class=" py-3 px-3"> <a href="" style="text-decoration: none;">Chính sách đổi trả</a></div>
-               <div class=" py-3 px-3"> <a href="" style="text-decoration: none;">Giới thiệu</a></div>
-               <div class=" py-3 px-3"> <a href="" style="text-decoration: none;">Hướng dẫn bảo quản</a></div>
-               <div class=" py-3 px-3"> <a href="" style="text-decoration: none;">Hướng dẫn mua bánh</a></div>
-               <div class=" py-3 px-3"> <a href="" style="text-decoration: none;">Hướng dẫn thanh toán</a></div>
-            </div>
-            <div class="col-lg-9">
-                <div class="container d-flex" style="flex-direction: column;">
-                    <h3 style="padding: 30px 30px;">Chính sách giao hàng</h3>
-                    <p style="padding:0 30px;">web.com giao hàng theo thời gian yêu cầu của khách hàng. Trong một vài trường hợp
-                        bất khả kháng, thời gian giao hàng có thể kéo dài hơn thỏa thuận:
-                    </p>
-                    <ul style="padding:0  60px;">
-                        <li>Nhân viên của chúng tôi không thể liên hệ với khách hàng để xác nhận đơn hàng</li>
-                        <li>Địa chỉ giao hàng khác cung cấp không chính xác hoặc cần thời gian để được chỉ dẫn</li>
-                    </ul>
+                        </p>
+                        <P> Tokyogateaux.vn có quyền thay đổi, điều chỉnh, thêm hay bớt các nội dung của “Điều Kiện Sử
+                            dụng” tại bất kỳ thời điểm nào. Nếu Quý khách vẫn tiếp tục sử dụng Website sau khi có các
+                            thay đổi như vậy thì có nghĩa là Quý khách đã chấp thuận các thay đổi đó.</P>
+                        <h4>2. TÍNH CHẤT CỦA THÔNG TIN HIỂN THỊ</h4>
+                        <p>Các nội dung hiển thị trên Website nhằm mục đích cung cấp thông tin về bánh sinh nhật, thông
+                            tin sản phẩm và dịch vụ mà mà Tokyo Gateaux đang cung cấp.
+
+                            Các thông tin khác liên quan nhằm phục vụ nhu cầu tìm hiểu của khách hàng đều được ghi rõ
+                            nguồn cung cấp.
+                        </p>
+
+                        <h4>3. LIÊN KẾT ĐẾN WEBSITE KHÁC</h4>
+                        <p>Các nội dung hiển thị trên Website nhằm mục đích cung cấp thông tin về bánh sinh nhật, thông
+                            tin sản phẩm và dịch vụ mà mà Tokyo Gateaux đang cung cấp.
+
+                            Các thông tin khác liên quan nhằm phục vụ nhu cầu tìm hiểu của khách hàng đều được ghi rõ
+                            nguồn cung cấp.
+                        </p>
+
+
+                        <h4>4. LIÊN KẾT TỪ WEBSITE KHÁC</h4>
+                        <p>ITCAKE.VN không cho phép bất kỳ nhà cung cấp dịch vụ internet nào được phép “đặt
+                            toàn bộ” hay “nhúng” bất kỳ thành tố nào của Website này sang một trang khác hoặc sử dụng
+                            các kỹ thuật làm thay đổi giao diện / hiển thị mặc định của Website mà chưa có sự đồng ý của
+                            website ITCAKE.
+
+
+                        </p>
+
+
+                        <h4>5. MIỄN TRỪ TRÁCH NHIỆM</h4>
+                        <p>Khi truy cập vào website này, quý khách mặc nhiên đồng ý rằng Tokyogateaux.vn, các nhà cung
+                            cấp khác cùng với đối tác liên kết, nhân viên của họ không chịu bất cứ trách nhiệm nào liên
+                            quan đến thương tật, mất mát, khiếu kiện, thiệt hại trực tiếp hoặc gián tiếp do không lường
+                            trước hoặc do hậu quả để lại dưới bất cứ hình thức nào phát sinh từ việc:
+                        </p>
+                        <p>Tokyogateaux.vn từ chối trách nhiệm hay đưa ra đảm bảo rằng website sẽ không có lỗi vận hành,
+                            an toàn, không bị gián đoạn hay tính chính xác, đầy đủ và đúng hạn của các thông tin hiển
+                            thị.</p>
+                        <p> Thông tin hiển thị tại website này không đi kèm bất kỳ đảm bảo hay cam kết trách nhiệm từ
+                            phía web Tokyogateaux.vn về sự phù hợp của sản phẩm, dịch vụ mà người mua đã lựa chọn:</p>
+                        <ul>
+
+                            <li>(1) Sử dụng các thông tin trên website này.</li>
+                            <li>(2) các truy cập kết nối từ website này.</li>
+                            <li>(3) Đăng ký thành viên, đăng ký nhận thư điện tử hay tham gia vào chương trình khách
+                                hàng thường xuyên của Tokyogateaux.vn</li>
+                        </ul>
+                        <h4>6. QUYỀN SỞ HỮU TRÍ TUỆ</h4>
+                        <p>Các nội dung hiển thị trên Website nhằm mục đích cung cấp thông tin về bánh sinh nhật, thông
+                            tin sản phẩm và dịch vụ mà mà Tokyo Gateaux đang cung cấp.
+
+                            Các thông tin khác liên quan nhằm phục vụ nhu cầu tìm hiểu của khách hàng đều được ghi rõ
+                            nguồn cung cấp.
+                        </p>
+                        <h4>7. ĐIỀU CHỈNH VÀ SỬA ĐỔI</h4>
+                        <p>Các nội dung hiển thị trên Website nhằm mục đích cung cấp thông tin về bánh sinh nhật, thông
+                            tin sản phẩm và dịch vụ mà mà Tokyo Gateaux đang cung cấp.
+
+                            Các thông tin khác liên quan nhằm phục vụ nhu cầu tìm hiểu của khách hàng đều được ghi rõ
+                            nguồn cung cấp.
+                        </p>
+
+
+
+                    </div>
                 </div>
             </div>
-        </div>  
-    </div>
+        </div>
+    </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const contentArea = document.getElementById('content-area');
+
+            const contentData = {
+                "chinh-sach-doi-tra": `
+                           <h4>CHÍNH SÁCH ĐỔI, TRẢ, HOÀN TIỀN</h4>
+<p>Kính thưa quí khách hàng,</p>
+<p>Để chiếc bánh mà chúng tôi cung cấp đến tận tay khách hàng đẹp nhất, ngon nhất, cần có đủ thông tin về cách sử dụng trước, trong, sau bán hàng. Vì lý do đó, chúng tôi công bố thêm chính sách đổi bánh, trả bánh, hoàn tiền để khách hàng biết và sử dụng.</p>
+
+<h4>1. Chính sách đổi bánh</h4>
+<ul>
+    <li>Tất cả những mẫu bánh, những yêu cầu sau khi đã được lên đơn và được sự đồng ý của khách hàng đều được thực hiện 100%. Nếu không đúng 1 trong các yêu cầu, khách hàng có quyền đổi lại bánh và không phải mất thêm chi phí nào.</li>
+    <li>Sau khi có thông tin phản hồi từ khách hàng, chúng tôi sẽ tiến hành đổi ngay để đảm bảo bánh ngon và kịp thời gian cho bữa tiệc là vui nhất, khách hàng không phải chi trả thêm chi phí nào.</li>
+    <li>Khách hàng cần kiểm tra bánh kỹ trước khi nhận để không làm mất thời gian của hai bên và tiện ích hơn trong quá trình xử lý công việc, kịp thời và nhanh nhất.</li>
+</ul>
+
+<h4>2. Chính sách trả bánh và hoàn tiền</h4>
+
+<h4>2.1 Lỗi từ chúng tôi:</h4>
+<ul>
+    <li>Sau khi đặt bánh, nếu khách hàng nhận bánh không đúng như mẫu bánh đã đặt, khách hàng có quyền trả lại bánh mà không mất thêm chi phí nào. Khách hàng cần kiểm tra ngay trước khi nhận bánh và thanh toán tiền.</li>
+    <li>Nếu tiếp tục mua bánh, chúng tôi sẽ làm bánh theo đúng yêu cầu và tiếp tục giao đến địa chỉ khách yêu cầu.</li>
+    <li>Nếu khách không tiếp tục mua bánh, khách đã đặt tiền thì chúng tôi sẽ trả lại 100% số tiền khách đã đặt.</li>
+</ul>
+
+<p><strong>Đặc biệt:</strong></p>
+<ul>
+    <li>Tất cả những chi phí phát sinh từ lúc thực hiện đến lúc hoàn thành khách hàng không phải thêm bất kỳ chi phí nào. Khách hàng chỉ cần kiểm tra kỹ trước khi nhận bánh là đã giúp chúng tôi biết ơn khách hàng rồi ạ!</li>
+</ul>
+
+<h4>2.2 Lỗi từ khách hàng:</h4>
+<ul>
+    <li>Sau khi đặt bánh, khách hàng có lý do đặc biệt nào đó mà không sử dụng được bánh ngay hoặc phải hủy đơn bánh, chúng tôi sẽ thực hiện vào từng trường hợp cụ thể để làm HÀI LÒNG khách hàng. Nếu:</li>
+    <ul>
+        <li>a. Nếu khách hàng đã chuyển khoản mà chúng tôi chưa làm bánh, chúng tôi sẽ hoàn lại 100% số tiền khách hàng đã chuyển khoản.</li>
+        <li>b. Nếu khách hàng đã chuyển khoản mà chúng tôi đã làm bánh, thì coi như khách hàng đã đồng ý, vì bánh sau khi sản xuất theo yêu cầu của khách, chúng tôi không thể hoàn tiền lại được.</li>
+    </ul>
+</ul>
+
+<p>Để có được chiếc bánh ngon, bánh đẹp đến tận tay khách hàng, cần qua nhiều qui trình như tư vấn, lên đơn, sản xuất, đóng gói, ship bánh. Vì thế sự hợp tác chân thành từ khách hàng sẽ giúp chúng tôi có được những sản phẩm và dịch vụ tốt nhất, chúng tôi xin chân thành cảm ơn!</p>
+ 
+                           `,
+                "chinh-sach-bao-mat": `<h4>CHÍNH SÁCH BẢO MẬT THÔNG TIN KHÁCH HÀNG</h4>
+<p>Bạn hoàn toàn có thể yên tâm về các thông tin của mình trên Tokyogateaux.vn bởi chúng tôi ưu tiên hàng đầu trong việc bán hàng và cung cấp dịch vụ bánh sinh nhật tại website. Bạn vui lòng đọc bản “Chính sách bảo mật” dưới đây để hiểu hơn những cam kết mà chúng tôi thực hiện, nhằm tôn trọng và bảo vệ quyền lợi của người truy cập:</p>
+
+<h4>1. THU THẬP THÔNG TIN CÁ NHÂN</h4>
+<p>Để truy cập và sử dụng một số dịch vụ tại <a href="https://tokyogateaux.vn" target="_blank">https://tokyogateaux.vn</a>, bạn có thể sẽ được yêu cầu đăng ký với chúng tôi thông tin cá nhân (Email, Họ tên, Số ĐT liên lạc…). Mọi thông tin khai báo phải đảm bảo tính chính xác và hợp pháp, chúng tôi không chịu mọi trách nhiệm liên quan đến pháp luật của thông tin khai báo, chúng tôi cũng có thể thu thập thông tin về số lần viếng thăm, bao gồm số trang bạn xem, số links (liên kết) bạn click và những thông tin khác liên quan đến việc kết nối đến <a href="https://tokyogateaux.vn" target="_blank">https://tokyogateaux.vn</a>.</p>
+
+<p>Chúng tôi cũng thu thập các thông tin mà trình duyệt Web (Browser) bạn sử dụng mỗi khi truy cập vào <a href="https://tokyogateaux.vn" target="_blank">https://tokyogateaux.vn</a>, bao gồm: địa chỉ IP, loại Browser, ngôn ngữ sử dụng, thời gian và những địa chỉ mà Browser truy xuất đến.</p>
+
+<h4>2. CAM KẾT BẢO VỆ CÁC THÔNG TIN RIÊNG TƯ</h4>
+<p>Thông tin của khách hàng thông qua hệ thống bảo mật của website, không sử dụng nó vì mục đích thương mại hay bất cứ mục đích nào khác. Chúng tôi sử dụng các biện pháp an ninh bảo mật thông tin để chống mất mát, nhầm lẫn hoặc thay đổi dữ liệu trong hệ thống.</p>
+
+<h4>3. CAM KẾT CHỈ SỬ DỤNG THÔNG TIN ĐỂ NHẰM TẠO MÔI TRƯỜNG MUA SẮM AN TOÀN</h4>
+<p>Chúng tôi sử dụng những thông tin thu thập qua website để tạo môi trường mua sắm an toàn, tiện lợi, chuyên nghiệp và nâng cao chất lượng dịch vụ chăm sóc khách hàng. Ngoài ra, những thông tin cũng chỉ được chúng tôi dùng trong việc giải quyết các vấn đề liên quan tới tranh chấp phát sinh trong việc mua bán, thanh toán qua website, và ngăn chặn những hoạt động vi phạm pháp luật Việt Nam.</p>
+
+<h4>4. CAM KẾT KHÔNG CHIA SẺ, BÁN HOẶC CHO THUÊ THÔNG TIN CÁ NHÂN CỦA KHÁCH HÀNG</h4>
+<p>Thông tin của quý khách gửi cho chúng tôi chỉ do nhân viên chúng tôi quản lý và sử dụng cho mục đích liên hệ hoặc gửi email để cung cấp thông tin cho quý khách.</p>
+
+<p>Chúng tôi sẽ gửi các thông tin cá nhân về quý khách cho các công ty hoặc các cá nhân khác trong trường hợp:</p>
+<ul>
+    <li>Chúng tôi được quý khách đồng ý cho tiết lộ thông tin đó.</li>
+    <li>Chúng tôi cần tiết lộ thông tin của quý khách để cung cấp các sản phẩm hoặc dịch vụ liên quan tới việc liên lạc với quý khách.</li>
+    <li>Chúng tôi tuân theo các trát lệnh, lệnh tòa án hoặc thủ tục pháp lý.</li>
+    <li>Chúng tôi thấy rằng các hành động của quý khách trên các trang web của chúng tôi là vi phạm các quy định hướng dẫn sử dụng của chúng tôi đối với các sản phẩm hoặc dịch vụ nhất định.</li>
+</ul>
+
+<h4>5. THAY ĐỔI VỀ CHÍNH SÁCH</h4>
+<p>Nội dung của “Chính sách bảo mật” này có thể thay đổi để phù hợp với các nhu cầu của web <a href="https://tokyogateaux.vn" target="_blank">https://tokyogateaux.vn</a> cũng như nhu cầu và sự phản hồi từ khách hàng nếu có. Khi cập nhật nội dung chính sách này, chúng tôi sẽ chỉnh sửa lại thời gian “Cập nhật lần cuối” bên trên. Nội dung “Chính sách bảo mật” này chỉ áp dụng tại <a href="http://banhsinhnhatngon.vn" target="_blank">http://banhsinhnhatngon.vn</a>, không bao gồm hoặc liên quan đến các bên thứ ba đặt quảng cáo hay có links tại <a href="http://banhsinhnhatngon.vn" target="_blank">http://banhsinhnhatngon.vn</a>. Do đó, chúng tôi đề nghị bạn đọc và tham khảo kỹ nội dung “Chính sách bảo mật” của từng website mà bạn đang truy cập.</p>
+
+<h4>6. THÔNG TIN LIÊN HỆ</h4>
+<p>Chúng tôi luôn hoan nghênh các ý kiến đóng góp, liên hệ và phản hồi thông tin từ bạn về “Chính sách bảo mật” này. Nếu bạn có những thắc mắc liên quan xin vui lòng liên hệ theo hotline: <strong>0902 04 09 90</strong></p>
+
+<p>Tiệm bánh sinh nhật TokyoGateaux.</p>
+
+`,
+                "huong-dan-thanh-toan": `<h4>Hướng dẫn thanh toán</h4>
+<p>Chúng tôi cung cấp 2 hình thức thanh toán:</p>
+<ul>
+    <li><strong>Thanh toán khi nhận hàng (COD)</strong></li>
+    <li><strong>Chuyển khoản qua ngân hàng</strong></li>
+</ul>
+
+<p>Quý khách thanh toán chuyển khoản lưu ý:</p>
+<ul>
+    <li>Sau khi đặt bánh xong vui lòng chờ liên lạc xác nhận đơn hàng từ Tokyo Gateaux trước khi chuyển khoản (8h-20h30).</li>
+</ul>
+
+<p>Mọi thắc mắc vui lòng liên hệ hotline: <strong>0902 04 09 90</strong></p>
+`,
+
+            };
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const contentKey = this.getAttribute('data-content');
+                    if (contentKey && contentData[contentKey]) {
+                        contentArea.innerHTML = contentData[contentKey];
+                    } else {
+                        contentArea.innerHTML = `<h3 style="padding: 30px 30px;">Không tìm thấy nội dung</h3>`;
+                    }
+                });
+            });
+
+        });
+
+    </script>
 </body>
 
 </html>
