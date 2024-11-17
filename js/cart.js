@@ -2,7 +2,13 @@ function updateSubtotal(input) {
     const row = input.closest('tr');
     const price = parseInt(row.children[2].innerText.replace(/₫|,/g, ''));
     const quantity = parseInt(input.value);
-    row.querySelector('.subtotal').innerText = `${(price * quantity).toLocaleString()}₫`;
+
+    if (quantity < 1 || isNaN(quantity)) { 
+        input.value = 1; // Đặt lại số lượng về 1 nếu không hợp lệ
+    }
+
+    const validQuantity = parseInt(input.value); 
+    row.querySelector('.subtotal').innerText = `${(price * validQuantity).toLocaleString()}₫`;
     updateTotal();
 }
 
@@ -14,15 +20,24 @@ function incrementQuantity(button) {
 
 function decrementQuantity(button) {
     const input = button.nextElementSibling;
-    if (input.value > 1) {
+    if (parseInt(input.value) > 1) {
         input.value = parseInt(input.value) - 1;
         updateSubtotal(input);
     }
 }
 
 function removeItem(button) {
-    button.closest('tr').remove();
-    updateTotal();
+    if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này?")) {
+        const row = button.closest('tr');
+        row.remove();
+        updateTotal();
+
+        // Kiểm tra nếu giỏ hàng trống
+        if (document.querySelectorAll('.cart-item').length === 0) {
+            const tbody = document.querySelector('tbody');
+            tbody.innerHTML = '<tr><td colspan="6" class="text-center">Giỏ hàng của bạn trống!</td></tr>';
+        }
+    }
 }
 
 function updateTotal() {
@@ -30,5 +45,16 @@ function updateTotal() {
     document.querySelectorAll('.subtotal').forEach(subtotalCell => {
         total += parseInt(subtotalCell.innerText.replace(/₫|,/g, ''));
     });
+
     document.querySelector('.cart-total').innerText = `Tổng cộng: ${total.toLocaleString()}₫`;
+
+    // Thông báo khuyến mãi
+    const promoMessage = document.querySelector('.promo-message');
+    if (total >= 450000) {
+        promoMessage.innerText = 'Bạn đã đủ điều kiện miễn phí vận chuyển!';
+        promoMessage.style.color = '#28a745';
+    } else {
+        promoMessage.innerText = `Mua thêm ${(450000 - total).toLocaleString()}₫ để được miễn phí vận chuyển.`;
+        promoMessage.style.color = '#dc3545';
+    }
 }

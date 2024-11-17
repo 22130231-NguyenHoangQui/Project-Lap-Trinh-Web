@@ -1,0 +1,43 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.table img {
+    max-width: 80px;
+    border-radius: 5px;
+}
+
+.table .quantity-input {
+    width: 60px;
+}
+
+.btn-success {
+    background-color: #09dd10;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.btn-success:hover {
+    background-color: #0cab15;
+}
+/* Tạo khoảng cách giữa các phần */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* Căn chỉnh biểu tượng chỉnh sửa */
+.card .btn-link {
+    font-size: 1.2rem;
+    color: #ff9900;
+}
+
+.card .btn-link:hover {
+    color: #cc7a00;
+}
+
+/* Ẩn form chỉnh sửa thông tin */
+.d-none {
+    display: none;
+}
