@@ -1,4 +1,4 @@
-
+// lưu dữ liệu vào JSON
 // document.addEventListener('DOMContentLoaded', function () {
 //     const productData = JSON.parse(localStorage.getItem("selectedProductData"));
 
@@ -123,30 +123,135 @@ function createProductHTML(product) {
 // loadProducts();
 
 
+document.addEventListener('DOMContentLoaded', function () {
+    const leftHandle = document.getElementById('handle-left');
+    const rightHandle = document.getElementById('handle-right');
+    const priceRange = document.querySelector('.price_slider_range');
+    const fromLabel = document.querySelector('.price_label .from');
+    const toLabel = document.querySelector('.price_label .to');
+
+    const minValue = 0;
+    const maxValue = 1350000;
+    const step = 10000;
+
+    let leftValue = minValue;
+    let rightValue = maxValue;
+
+    function updateSlider() {
+        const rangeWidth = document.querySelector('.price_slider').offsetWidth;
+        const leftPercent = ((leftValue - minValue) / (maxValue - minValue)) * 100;
+        const rightPercent = ((rightValue - minValue) / (maxValue - minValue)) * 100;
+
+        priceRange.style.left = `${leftPercent}%`;
+        priceRange.style.width = `${rightPercent - leftPercent}%`;
+
+        leftHandle.style.left = `${leftPercent}%`;
+        rightHandle.style.left = `calc(${rightPercent}% - 20px)`;
+
+
+        fromLabel.textContent = formatCurrency(leftValue);
+        toLabel.textContent = formatCurrency(rightValue);
+    }
+
+    function formatCurrency(value) {
+        return value.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+    }
+
+    let isLeftDragging = false;
+    let isRightDragging = false;
+
+    leftHandle.addEventListener('mousedown', function () {
+        isLeftDragging = true;
+    });
+
+    rightHandle.addEventListener('mousedown', function () {
+        isRightDragging = true;
+    });
+
+    document.addEventListener('mousemove', function (e) {
+        if (isLeftDragging || isRightDragging) {
+            const sliderRect = document.querySelector('.price_slider').getBoundingClientRect();
+            const mouseX = e.clientX - sliderRect.left;
+            const sliderWidth = sliderRect.width;
+            let newValue = ((mouseX / sliderWidth) * (maxValue - minValue)) + minValue;
+
+            if (isLeftDragging) {
+                if (newValue < rightValue) {
+                    leftValue = Math.max(minValue, Math.min(newValue, rightValue - step));
+                    updateSlider();
+                }
+            }
+
+            if (isRightDragging) {
+                if (newValue > leftValue) {
+                    rightValue = Math.min(maxValue, Math.max(newValue, leftValue + step));
+                    updateSlider();
+                }
+            }
+        }
+    });
+
+    document.addEventListener('mouseup', function () {
+        isLeftDragging = false;
+        isRightDragging = false;
+    });
+
+    updateSlider();
+});
+
+// is medium hiện đường dẫn của trang
+document.addEventListener("DOMContentLoaded", function () {
+    var isMediumDiv = document.querySelector('.is-medium');
+    var path = window.location.pathname.split('/').filter(function (part) { return part !== ''; });
+
+    var breadcrumbHtml = '<a href="/">Trang Chủ</a>';
+    var urlPath = '/';
+
+    path.forEach(function (part, index) {
+        urlPath += part + '/';
+        breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">' + part.replace(/-/g, ' ') + '</a>';
+    });
+
+    isMediumDiv.innerHTML = breadcrumbHtml;
+});
 
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Lấy dữ liệu đã chọn từ localStorage, với key mặc định là 'selectedCategory' hoặc 'selectedData' (dành cho nhiều loại dữ liệu)
     const selectedCategory = localStorage.getItem('selectedCategory') || 'banh_an_nhe';
-    const selectedOtherData = localStorage.getItem('selectedOtherData') || [];  // Lấy dữ liệu khác nếu có, ví dụ danh sách sản phẩm yêu thích, v.v.
+    const selectedOtherData = localStorage.getItem('selectedOtherData') || [];
 
-    // Lấy danh sách sản phẩm theo category
     const imageList = imagesByCategory[selectedCategory] || [];
     const productContainer = document.querySelector('.products.row.row-small');
 
-    // Xóa hết sản phẩm hiện tại trong container
     productContainer.innerHTML = '';
 
-    // Duyệt qua danh sách sản phẩm và tạo HTML cho từng sản phẩm
     imageList.forEach((product) => {
         productContainer.innerHTML += createProductHTML(product);
     });
 
-    // Xóa thông tin đã chọn từ localStorage (nếu cần)
+    const categoryItems = document.querySelectorAll('.product-categories li');
+    categoryItems.forEach((item) => {
+        const link = item.querySelector('a');
+        if (link && link.textContent.trim() === getCategoryName(selectedCategory)) {
+            item.classList.add('active');
+        } else {
+            item.classList.remove('active');
+        }
+    });
+
     localStorage.removeItem('selectedCategory');
     localStorage.removeItem('selectedOtherData');
 });
+
+function getCategoryName(category) {
+    const categoryMapping = {
+        banh_an_nhe: 'Bánh Ăn Nhẹ',
+        banh_cac_ngay_le: 'Bánh Các Ngày Lễ',
+        banh_chai_ruou: 'Bánh Chai Rượu Và Ly Bia Sang Trọng',
+    };
+    return categoryMapping[category] || category;
+}
 
 const imagesByCategory = {
     'banh_an_nhe': [
@@ -159,26 +264,31 @@ const imagesByCategory = {
         { image: '../image/imghomepage/product/product_danhmuc/7.webp', id: 'DU311', name: 'Panna cotta', price: '55.000₫', link: '#' },
         { image: '../image/imghomepage/product/product_danhmuc/8.webp', id: 'GC703', name: 'Gato cup Matcha', price: '55.000₫', link: '#' },
         { image: '../image/imghomepage/product/product_danhmuc/9.webp', id: 'TO1502', name: 'Matchamisu', price: '55.000₫', link: '#' },
-        { image: '../image/imghomepage/product/product_danhmuc/10.webp', id: 'VB103', name: 'Mousse Việt Quất Sữa Chua', price: '55.000₫', link: '#' }
+        { image: '../image/imghomepage/product/product_danhmuc/10.webp', id: 'VB103', name: 'Mousse Việt Quất Sữa Chua', price: '55.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/9.webp', id: 'TO1502', name: 'Matchamisu', price: '55.000₫', link: '#' },
+
+        { image: '../image/imghomepage/product/product_danhmuc/9.webp', id: 'TO1502', name: 'Matchamisu', price: '55.000₫', link: '#' },
+
     ],
     'banh_cac_ngay_le': [
-        { image: '../image/imghomepage/khachhang3.jpg', id: 'Mousse', name: 'Bánh Mousse', price: '80.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/1.webp', id: 'TRMS4', name: 'Tiramisu Dâu Tây', price: '120.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/2.webp', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
         { image: '../image/imghomepage/khachhang4.jpg', id: 'Socola', name: 'Bánh Socola', price: '90.000₫', link: '#' }
     ],
     'banh_chai_ruou': [
         { image: '../image/imghomepage/khachhang3.jpg', id: 'Mousse', name: 'Bánh Mousse', price: '80.000₫', link: '#' },
         { image: '../image/imghomepage/khachhang4.jpg', id: 'Socola', name: 'Bánh Socola', price: '90.000₫', link: '#' }
-        
+
     ],
-    'banh_chu_nhat' : [
+    'banh_chu_nhat': [
         { image: '../image/imghomepage/khachhang3.jpg', id: 'Mousse', name: 'Bánh Mousse', price: '80.000₫', link: '#' },
         { image: '../image/imghomepage/khachhang4.jpg', id: 'Socola', name: 'Bánh Socola', price: '90.000₫', link: '#' }
     ],
-    'banh_cong_chua' :[
+    'banh_cong_chua': [
         { image: '../image/imghomepage/khachhang3.jpg', id: 'Mousse', name: 'Bánh Mousse', price: '80.000₫', link: '#' },
         { image: '../image/imghomepage/khachhang4.jpg', id: 'Socola', name: 'Bánh Socola', price: '90.000₫', link: '#' }
     ],
-    'banh_giang_sinh' : [
+    'banh_giang_sinh': [
         { image: '../image/imghomepage/khachhang3.jpg', id: 'Mousse', name: 'Bánh Mousse', price: '80.000₫', link: '#' },
         { image: '../image/imghomepage/khachhang4.jpg', id: 'Socola', name: 'Bánh Socola', price: '90.000₫', link: '#' }
     ],

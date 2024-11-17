@@ -59,6 +59,33 @@
     *::after {
         box-sizing: border-box;
     }
+
+
+/* =================
+    is-medium
+    =========== */
+    .is-medium {
+        font-size: 16px;
+        color: #333;
+        font-weight: 400;
+    }
+    
+    .is-medium .divider {
+        color: #888;
+        margin: 0 5px;
+    }
+    
+    .is-medium a {
+        text-decoration: none;
+        color: #007bff;
+    }
+    
+    .is-medium a:hover {
+        text-decoration: underline;
+    }
+    
+
+
 /* ==================
     Header
 ==========*/
@@ -140,7 +167,6 @@ header-center
 }
 
 
-/* Thiết kế của dropdown tìm kiếm */
 .dropdown-search {
     display: none;
     position: absolute;
@@ -155,7 +181,6 @@ header-center
     z-index: 1000;
 }
 
-/* Hiển thị input khi hover vào icon */
 .position-relative:hover .dropdown-search {
     display: block;
 }
@@ -540,6 +565,15 @@ aside#woocommerce_product_categories-15 .product-categories li {
 .widget .product-categories .cat-item a:hover {
     color: black;
 }
+
+/* active  */
+.product-categories li.active {
+    border-left: 4px solid #007bff; 
+    background-color: #f9f9f9;  
+    font-weight: bold;
+      
+}
+
 
 
 /* =====================
