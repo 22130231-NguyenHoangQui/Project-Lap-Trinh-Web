@@ -25,8 +25,6 @@ function setMainMarginTop() {
     main.style.marginTop = headerHeight + "px";
   }
 }
-
-// Lắng nghe sự kiện DOMContentLoaded để đảm bảo mọi phần tử đã được tải
 document.addEventListener("DOMContentLoaded", setMainMarginTop);
 
 function initializeRatingSystem(starSelector, ratingSelector) {
@@ -54,6 +52,80 @@ function initializeRatingSystem(starSelector, ratingSelector) {
     });
   });
 }
-
-// Khởi tạo hệ thống đánh giá
 initializeRatingSystem(".stars a", "#rating");
+
+// Hàm xử lý tăng hoặc giảm giá trị
+function handleQuantityChange(buttonSelector, inputSelector) {
+  const buttons = document.querySelectorAll(buttonSelector);
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", function () {
+      const inputId = button.getAttribute("data-target");
+      const input = document.querySelector(inputId);
+
+      if (input) {
+        let currentValue = parseInt(input.value) || 1;
+        const step = parseInt(input.getAttribute("step")) || 1;
+        const min = parseInt(input.getAttribute("min")) || 1;
+
+        if (button.classList.contains("input-reduce")) {
+          // Giảm giá trị
+          currentValue = Math.max(min, currentValue - step);
+        } else if (button.classList.contains("input-increase")) {
+          // Tăng giá trị
+          currentValue += step;
+        }
+
+        input.value = currentValue;
+      }
+    });
+  });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  handleQuantityChange(".is-form", ".input-qt");
+});
+
+
+function initializeImageModal(modalId, modalImgId, closeBtnSelector, imageLinkSelector) {
+  const modal = document.getElementById(modalId);
+  const modalImg = document.getElementById(modalImgId);
+  const closeBtn = document.querySelector(closeBtnSelector);
+
+  // Hàm mở modal và hiển thị ảnh
+  function openModal(imageSrc) {
+      modal.style.display = "flex"; // Hiển thị modal
+      modalImg.src = imageSrc; // Gán đường dẫn ảnh lớn vào modal
+  }
+
+  // Hàm đóng modal
+  function closeModal() {
+      modal.style.display = "none";
+  }
+
+  // Thêm sự kiện nhấp vào ảnh
+  document.querySelectorAll(imageLinkSelector).forEach(link => {
+      link.addEventListener("click", function (e) {
+          e.preventDefault(); // Ngăn chuyển hướng liên kết
+          openModal(this.href); // Gọi hàm mở modal với ảnh
+      });
+  });
+
+  // Đóng modal khi nhấn "X"
+  closeBtn.addEventListener("click", closeModal);
+
+  // Đóng modal khi nhấp ra ngoài modal
+  modal.addEventListener("click", function (e) {
+      if (e.target === modal) {
+          closeModal();
+      }
+  });
+}
+
+// Sử dụng hàm để khởi tạo
+initializeImageModal(
+  "image-modal",        // ID của modal
+  "modal-img",          // ID của ảnh trong modal
+  ".close",             // Selector của nút đóng
+  ".pr-image a"         // Selector của liên kết ảnh
+);

@@ -67,31 +67,35 @@
                                     <a class="home-hd" href="../pages/homepage.html" aria-current="page">TRANG
                                         CHỦ</a>
                                 </li>
-                                <li class="center-category" id="item-ct">
-                                    <a class="cate-hd" href="../pages/trang-danh-muc" aria-expanded="false"
-                                        aria-haspopup="menu">
+                                <li class="center-category dropdown" id="item-ct">
+                                    <a class="cate-hd" href="../pages/ProductCatalog.html" data-id="2"
+                                        aria-expanded="false" aria-haspopup="menu">
                                         DANH MỤC
                                     </a>
-                                    <button class="category-bt btn btn-secondary dropdown-toggle" type="button"
-                                        id="dropdownMenuButton" data-bs-toggle="dropdown"
-                                        aria-expanded="false"></button>
-                                    <ul class="sub-menu dropdown-menu account-dropdown-menu"
-                                        aria-labelledby="dropdownMenuButton">
-                                        <li class="menu-item"><a class="dropdown-item"
-                                                href="../pages/trang-danh-muc-1">Danh mục 1</a>
+                                    <ul class="dropdown-menu menu-danhmuc">
+                                        <p
+                                            style="text-wrap: nowrap; padding: 0 10px; font-weight: bold; background-color: white;">
+                                            Danh mục bánh sinh nhật</p>
+                                        <li><a href="#" class="product-link" data-category="banh_an_nhe">Bánh Ăn
+                                                Nhẹ</a></li>
+                                        <li><a href="#" data-category="banh_cac_ngay_le">Bánh Các Ngày Lễ</a></li>
+                                        <li><a href="#" data-category="banh_chai_ruou">Bánh Chai Rượu Và Ly
+                                                Bia Sang Trọng</a></li>
+                                        <li><a href="#" class="product-link" data-category="banh_chu_nhat">Bánh Chủ
+                                                Nhật</a>
                                         </li>
-                                        <li class="menu-item"><a class="dropdown-item"
-                                                href="../pages/trang-danh-muc-2">Danh mục 2</a>
+                                        <li><a href="#" data-category="banh_cong_chua">Bánh Công Chúa</a>
                                         </li>
-                                        <li class="menu-item"><a class="dropdown-item"
-                                                href="../pages/trang-danh-muc-3">Danh mục 3</a>
+                                        <li><a href="#" data-category="banh_giang_sinh">Bánh Giáng Sinh
+                                                (Noel)</a></li>
+                                        <li><a href="#" data-category="banh_hoa_qua_tuoi">Bánh Hoa Quả Tươi
+                                                Theo Mùa</a></li>
+                                        <li><a href="#" data-category="banh_khung_long">Bánh Khủng Long</a>
                                         </li>
-                                        <li class="menu-item"><a class="dropdown-item"
-                                                href="../pages/trang-danh-muc-4">Danh mục 4</a>
-                                        </li>
-                                        <liclass="menu-item"><a class="dropdown-item"
-                                                href="../pages/trang-danh-muc-5">Danh mục 5</a>
-                                            </liclass=>
+                                        <li><a href="#" data-category="banh_ki_niem_ngay">Bánh Kỉ niệm ngày
+                                                cưới</a></li>
+                                        <li><a href="#" data-category="banh_lich">Bánh Lịch</a></li>
+                                        <li><a href="#" data-category="banh_mousse">Bánh Mousse</a></li>
                                     </ul>
                                 </li>
                                 <li class="center-introduce" id="item-ct">
@@ -118,7 +122,7 @@
                             <ul class="con-shopping-cart">
                                 <li class="is-line"></li>
                                 <li class="car-wrapper">
-                                    <a class="car-left" href="../pages/trang-gio-hang" title="Giỏ hàng">
+                                    <a class="car-left" href="../pages/shoppingCart.html" title="Giỏ hàng">
                                         <span class="car-title">GIỎ HÀNG</span>
                                         <i class="fa-solid fa-bag-shopping"></i>
                                     </a>
@@ -137,12 +141,7 @@
                                         <li><a class="dropdown-item" href="../pages/SignUp.html">Đăng Ký</a></li>
                                 </li>
                             </ul>
-                            </li>
-                            </ul>
                         </div>
-                        <!--Thu nhỏ-->
-                        <div class="small-center-in-hd"></div>
-                        <div class="small-right-in-hd"></div>
                     </div>
                 </div>
             </div>
@@ -152,31 +151,10 @@
     <div class="main">
         <div class="product-main">
             <div class="pr-row row">
-                <div class="pr-left col" id="product-sidebar">
-                    <aside id="pr-sidebar-list" class="widget">
-                        <ul class="list-categories">
-                            <li class="cate-item">
-                                <a href="#">Danh mục 1</a>
-                            </li>
-                            <li class="cate-item">
-                                <a href="#">Danh mục 2</a>
-                            </li>
-                            <li class="cate-item">
-                                <a href="#">Danh mục 3</a>
-                            </li>
-                            <li class="cate-item">
-                                <a href="#">Danh mục 4</a>
-                            </li>
-                            <li class="cate-item">
-                                <a href="#">Danh mục 5</a>
-                            </li>
-                        </ul>
-                    </aside>
-                </div>
                 <div class="pr-right col">
                     <div class="pr-col-container row">
                         <div class="pr-left-contai col">
-                            <div class="pr-contai-image">
+                            <div class="pr-contai-image" data-columns="4" style="opacity: 1;">
                                 <div class="pr-image">
                                     <a
                                         href="https://i0.wp.com/tokyogateaux.vn/wp-content/uploads/2024/09/2457.jpg?fit=800%2C800&ssl=1">
@@ -184,10 +162,9 @@
                                             alt="Bánh sinh nhật Dâu tươi sáng">
                                     </a>
                                 </div>
-                                <div class="image-tools">
-                                    <a class="button-zoom" href="#product-zoom">
-                                        <i class="bi bi-zoom-in"></i>
-                                    </a>
+                                <div class="modal hidden" id="image-modal">
+                                    <span class="close">&times;</span>
+                                    <img class="modal-content" id="modal-img" alt="Zoomed Image">
                                 </div>
                             </div>
                         </div>
@@ -235,16 +212,18 @@
                                     </div>
                                     <div class="add-quantity">
                                         <div class="btn-quatity">
-                                            <input class="input-reduce is-form" type="button" value="-">
+                                            <input class="input-reduce is-form" type="button" value="-"
+                                                data-target="#quantity-1">
                                             <input class="input-qt" type="number" id="quantity-1" name="quantity"
                                                 value="1" size="4" min="1" max step="1" placeholder inputmode="numeric"
                                                 autocomplete="off">
-                                            <input class="input-increase is-form" type="button" value="+">
+                                            <input class="input-increase is-form" type="button" value="+"
+                                                data-target="#quantity-1">
                                         </div>
                                         <div class="btn-add-contai">
                                             <button class="btn-add cart" type="submit">THÊM VÀO GIỎ HÀNG</button>
                                             <button class="btn-add payment" type="submit">
-                                                <a href="../pages/payment.html">MUA NGAY</a>
+                                                <a href="../pages/payment.html">THANH TOÁN</a>
                                             </button>
                                             <input type="hidden" name="gtm4wp_id" value="29736">
                                             <input type="hidden" name="gtm4wp_internal_id" value="29736">
@@ -353,7 +332,7 @@
                                                             của tôi.</label>
                                                     </p>
                                                     <p class="form-submit">
-                                                        <input class="submit" name="submit" type="submit" id="submit" 
+                                                        <input class="submit" name="submit" type="submit" id="submit"
                                                             value="Gửi đi">
                                                         <input type="hidden" name="comment_post_ID" value="29736"
                                                             id="comment_post_ID">
