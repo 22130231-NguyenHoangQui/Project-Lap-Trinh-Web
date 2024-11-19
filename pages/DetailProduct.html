@@ -135,9 +135,9 @@
                                         aria-labelledby="dropdownMenuButton">
                                         <li><a class="dropdown-item" href="../pages/SignIn.html">Đăng Nhập</a></li>
                                         <li><a class="dropdown-item" href="../pages/SignUp.html">Đăng Ký</a></li>
-                                        </li>
-                                    </ul>
                                 </li>
+                            </ul>
+                            </li>
                             </ul>
                         </div>
                         <!--Thu nhỏ-->
@@ -152,7 +152,7 @@
     <div class="main">
         <div class="product-main">
             <div class="pr-row row">
-                <div class="pr-left col" id="product-sidebar" >
+                <div class="pr-left col" id="product-sidebar">
                     <aside id="pr-sidebar-list" class="widget">
                         <ul class="list-categories">
                             <li class="cate-item">
@@ -228,140 +228,158 @@
                                     <div class="price-contai">
                                         <span class="price">
                                             <bdi>
-                                                "250.000"
+                                                250.000
                                                 <span class="price-symbol">₫</span>
                                             </bdi>
                                         </span>
                                     </div>
                                     <div class="add-quantity">
-                                        <input class="input-reduce" type="button" value="-">
-                                        <input class="input-qt" type="number" id="quantity-1" name="quantity" value="1"
-                                            size="4" min="1" max step="1" placeholder inputmode="numeric"
-                                            autocomplete="off">
-                                        <input class="input-increase" type="button" value="+">
+                                        <div class="btn-quatity">
+                                            <input class="input-reduce is-form" type="button" value="-">
+                                            <input class="input-qt" type="number" id="quantity-1" name="quantity"
+                                                value="1" size="4" min="1" max step="1" placeholder inputmode="numeric"
+                                                autocomplete="off">
+                                            <input class="input-increase is-form" type="button" value="+">
+                                        </div>
+                                        <div class="btn-add-contai">
+                                            <button class="btn-add cart" type="submit">THÊM VÀO GIỎ HÀNG</button>
+                                            <button class="btn-add payment" type="submit">
+                                                <a href="../pages/payment.html">MUA NGAY</a>
+                                            </button>
+                                            <input type="hidden" name="gtm4wp_id" value="29736">
+                                            <input type="hidden" name="gtm4wp_internal_id" value="29736">
+                                            <input type="hidden" name="gtm4wp_name"
+                                                value="BHQ156 - Bánh sinh nhật Dâu tươi sáng">
+                                            <input type="hidden" name="gtm4wp_sku" value="BHQ156">
+                                            <input type="hidden" name="gtm4wp_category" value="Danh muc 1 - danhmuc">
+                                            <input type="hidden" name="gtm4wp_price" value="250000">
+                                            <input type="hidden" name="gtm4wp_stocklevel" value="">
+                                            <input type="hidden" name="add-to-cart" value="29736">
+                                            <input type="hidden" name="add-to-cart" value="29736">
+                                            <input type="hidden" name="variation_id" class="variation_id" value="29739">
+                                        </div>
                                     </div>
-                                    <button class="button-add" type="submit">THÊM VÀO GIỎ HÀNG</button>
-                                    <input type="hidden" name="gtm4wp_id" value="29736">
-                                    <input type="hidden" name="gtm4wp_internal_id" value="29736">
-                                    <input type="hidden" name="gtm4wp_name"
-                                        value="BHQ156 - Bánh sinh nhật Dâu tươi sáng">
-                                    <input type="hidden" name="gtm4wp_sku" value="BHQ156">
-                                    <input type="hidden" name="gtm4wp_category" value="Danh muc 1 - danhmuc">
-                                    <input type="hidden" name="gtm4wp_price" value="250000">
-                                    <input type="hidden" name="gtm4wp_stocklevel" value="">
-                                    <input type="hidden" name="add-to-cart" value="29736">
-                                    <input type="hidden" name="add-to-cart" value="29736">
-                                    <input type="hidden" name="variation_id" class="variation_id" value="29739">
                                 </div>
                             </form>
                             <div class="product-description">
 
-                                <span class="sku_wrapper">Mã: <span class="sku">BHQ156</span></span>
-                                <p>Mô tả:<br>- Bánh sinh nhật Dâu Tươi Sáng trang trí dâu tây tươi với nền bánh được
+                                <span class="description-id">Mã: <span class="sku">BHQ156</span></span>
+                                <span class="description-content">Mô tả:<br>- Bánh sinh nhật Dâu Tươi Sáng trang trí dâu
+                                    tây tươi với nền bánh được
                                     decor theo
                                     phong cách tối giản hiện đại. Chiếc bánh được các bạn trẻ yêu thích.<br>- Thành
                                     phần:
                                     Bánh cốt vani, kem tươi, trang trí dâu tươi.
 
-                                </p>
+                                </span>
                             </div>
                         </div>
                     </div>
                     <div class="pr-footer-contai">
                         <div class="panels">
-                            <div class="woocommerce-Tabs-panel woocommerce-Tabs-panel--reviews panel entry-content active"
-                                id="tab-reviews" role="tabpanel" aria-labelledby="tab-title-reviews">
-                                <div id="reviews" class="woocommerce-Reviews">
-                                    <div id="comments" class="col large-12">
-                                        <h3 class="woocommerce-Reviews-title normal">
-                                            Đánh giá </h3>
+                            <div class="panel-reviews" id="tab-reviews" role="tabpanel"
+                                aria-labelledby="tab-title-reviews">
+                                <div class="woocommerce-reviews" id="reviews">
+                                    <div class="large-reveiw col" id="comments">
+                                        <h3 class="reviews-title">
+                                            ĐÁNH GIÁ</h3>
                                         <p class="woocommerce-noreviews">Chưa có đánh giá nào.</p>
                                     </div>
-                                    <div id="review_form_wrapper" class="large-12 col">
-                                        <div id="review_form" class="col-inner">
-                                            <div class="review-form-inner has-border">
-                                                <div id="respond" class="comment-respond">
-                                                    <h3 id="reply-title" class="comment-reply-title">Hãy là người đầu
-                                                        tiên nhận xét “BHQ156 – Bánh sinh nhật Dâu Tươi Sáng sz14”
-                                                        <small><a rel="nofollow" id="cancel-comment-reply-link"
-                                                                href="/san-pham/bhq156-banh-sinh-nhat-dau-tuoi-sang-sz14/#respond"
-                                                                style="display:none;">Hủy</a></small>
-                                                    </h3>
-                                                    <form action="https://tokyogateaux.vn/wp-comments-post.php"
-                                                        method="post" id="commentform" class="comment-form"
-                                                        novalidate="">
-                                                        <div class="comment-form-rating"><label for="rating">Đánh giá
-                                                                của bạn&nbsp;<span class="required">*</span></label>
-                                                            <p class="stars"> <span> <a class="star-1" href="#">1</a> <a
-                                                                        class="star-2" href="#">2</a> <a class="star-3"
-                                                                        href="#">3</a> <a class="star-4" href="#">4</a>
-                                                                    <a class="star-5" href="#">5</a> </span> </p>
-                                                            <select name="rating" id="rating" required=""
-                                                                style="display: none;">
-                                                                <option value="">Xếp hạng…</option>
-                                                                <option value="5">Rất tốt</option>
-                                                                <option value="4">Tốt</option>
-                                                                <option value="3">Trung bình</option>
-                                                                <option value="2">Không tệ</option>
-                                                                <option value="1">Rất tệ</option>
-                                                            </select>
-                                                        </div>
-                                                        <p class="comment-form-comment"><label for="comment">Nhận xét
-                                                                của bạn&nbsp;<span
-                                                                    class="required">*</span></label><textarea
-                                                                id="comment" name="comment" cols="45" rows="8"
-                                                                required=""></textarea></p>
-                                                        <p class="comment-form-author">
-                                                            <label for="author">Tên&nbsp;<span class="required">*</span>
-                                                            </label>
-                                                            <input id="author" name="author" type="text" value=""
-                                                                size="30" required="">
+                                    <div class="large-reveiw col" id="review-form-wrapper">
+                                        <div class="col-inner" id="review-form">
+                                            <div class="comment-respond" id="respond">
+                                                <h3 class="comment-reply-title" id="reply-title">Hãy là người đầu
+                                                    tiên nhận xét “BHQ156 – Bánh sinh nhật Dâu Tươi Sáng”
+                                                    <small><a rel="nofollow" id="cancel-comment-reply-link" href="#"
+                                                            style="display:none;">Hủy</a>
+                                                    </small>
+                                                </h3>
+                                                <form class="comment-form" action="#" method="post" id="commentform"
+                                                    novalidate="">
+                                                    <div class="comment-form-rating">
+                                                        <label for="rating">Đánh giá
+                                                            của bạn&nbsp;
+                                                            <span class="required">*</span>
+                                                        </label>
+                                                        <p class="stars">
+                                                            <span>
+                                                                <a class="star-1" href="#">
+                                                                    <i class="bi bi-star-fill">
+                                                                        <span>1</span></i></a>
+                                                                <a class="star-2" href="#">
+                                                                    <i class="bi bi-star-fill">
+                                                                        <span>2</span></i></a>
+                                                                <a class="star-3" href="#">
+                                                                    <i class="bi bi-star-fill">
+                                                                        <span>3</span></i></a>
+                                                                <a class="star-4" href="#">
+                                                                    <i class="bi bi-star-fill">
+                                                                        <span>4</span></i></a>
+                                                                <a class="star-5" href="#">
+                                                                    <i class="bi bi-star-fill">
+                                                                        <span>5</span></i></a>
+                                                            </span>
                                                         </p>
-                                                        <p class="comment-form-email">
-                                                            <label for="email">Email&nbsp;<span
-                                                                    class="required">*</span></label>
-                                                            <input id="email" name="email" type="email" value=""
-                                                                size="30" required="">
-                                                        </p>
-                                                        <p class="comment-form-cookies-consent">
-                                                            <input id="wp-comment-cookies-consent"
-                                                                name="wp-comment-cookies-consent" type="checkbox"
-                                                                value="yes">
-                                                            <label for="wp-comment-cookies-consent">Lưu
-                                                                tên của tôi, email, và trang web trong trình duyệt này
-                                                                cho lần bình luận kế tiếp của tôi.</label>
-                                                        </p>
-                                                        <p class="form-submit"><input name="submit" type="submit"
-                                                                id="submit" class="submit" value="Gửi đi">
-                                                            <input type="hidden" name="comment_post_ID" value="29736"
-                                                                id="comment_post_ID">
-                                                            <input type="hidden" name="comment_parent"
-                                                                id="comment_parent" value="0">
-                                                        </p>
-                                                        <p style="display: none;">
-                                                            <input type="hidden" id="akismet_comment_nonce"
-                                                                name="akismet_comment_nonce" value="54d5e108e1">
-                                                        </p>
-                                                        <p style="display: none !important;"
-                                                            class="akismet-fields-container" data-prefix="ak_">
-                                                            <label>Δ<textarea name="ak_hp_textarea" cols="45" rows="8"
-                                                                    maxlength="100"></textarea>
-                                                            </label>
-                                                            <input type="hidden" id="ak_js_1" name="ak_js"
-                                                                value="1731449703881">
-                                                        </p>
-                                                    </form>
-                                                </div><!-- #respond -->
-                                            </div>
+                                                        <select name="rating" id="rating" required=""
+                                                            style="display: none;">
+                                                            <option value="">Xếp hạng…</option>
+                                                            <option value="5">Rất tốt</option>
+                                                            <option value="4">Tốt</option>
+                                                            <option value="3">Trung bình</option>
+                                                            <option value="2">Không tệ</option>
+                                                            <option value="1">Rất tệ</option>
+                                                        </select>
+                                                    </div>
+                                                    <p class="comment-form-comment">
+                                                        <label for="comment">
+                                                            Nhận xét của bạn&nbsp;
+                                                            <span class="required">*</span>
+                                                        </label>
+                                                        <textarea id="comment" name="comment" cols="45" rows="8"
+                                                            required=""></textarea>
+                                                    </p>
+                                                    <p class="comment-form-author">
+                                                        <label for="author">Tên&nbsp;<span class="required">*</span>
+                                                        </label>
+                                                        <input id="author" name="author" type="text" value="" size="30"
+                                                            required="">
+                                                    </p>
+                                                    <p class="comment-form-cookies-consent">
+                                                        <input id="wp-comment-cookies-consent"
+                                                            name="wp-comment-cookies-consent" type="checkbox"
+                                                            value="yes">
+                                                        <label for="wp-comment-cookies-consent">Lưu tên của tôi, email,
+                                                            và trang web trong trình duyệt này cho lần bình luận kế tiếp
+                                                            của tôi.</label>
+                                                    </p>
+                                                    <p class="form-submit">
+                                                        <input class="submit" name="submit" type="submit" id="submit" 
+                                                            value="Gửi đi">
+                                                        <input type="hidden" name="comment_post_ID" value="29736"
+                                                            id="comment_post_ID">
+                                                        <input type="hidden" name="comment_parent" id="comment_parent"
+                                                            value="0">
+                                                    </p>
+                                                    <p style="display: none;">
+                                                        <input type="hidden" id="akismet_comment_nonce"
+                                                            name="akismet_comment_nonce" value="54d5e108e1">
+                                                    </p>
+                                                    <p style="display: none !important;"
+                                                        class="akismet-fields-container" data-prefix="ak_">
+                                                        <label>Δ
+                                                            <textarea name="ak_hp_textarea" cols="45" rows="8"
+                                                                maxlength="100"></textarea>
+                                                        </label>
+                                                        <input type="hidden" id="ak_js_1" name="ak_js"
+                                                            value="1731449703881">
+                                                    </p>
+                                                </form>
+                                            </div><!-- #respond -->
                                         </div>
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>
-                        </li>
-                        </ul>
                     </div>
                 </div>
             </div>
