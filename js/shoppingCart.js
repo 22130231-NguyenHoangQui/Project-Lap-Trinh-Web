@@ -22,3 +22,37 @@ function updateSubtotal() {
   document.querySelector(".cart-summary p:nth-child(2)").textContent =
     "Tổng: " + subtotal.textContent;
 }
+
+
+
+
+function closeCartModal() {
+  const cartModal = document.getElementById('cart-modal');
+  const cartIframe = document.getElementById('cart-iframe');
+
+  console.log("Đang thực hiện đóng modal..."); // Log kiểm tra
+
+  // Ẩn modal
+  cartModal.style.display = 'none';
+  cartModal.classList.remove('show');
+  console.log("Modal đã được ẩn."); // Log sau khi ẩn modal
+
+  // Xóa nội dung của iframe
+  cartIframe.src = '';
+  console.log("Iframe đã được xóa nội dung."); // Log sau khi xóa src của iframe
+}
+
+continueShoppingLink.addEventListener('click', (event) => {
+  event.preventDefault();
+  console.log("Nút 'Tiếp tục mua hàng' được nhấn."); // Log kiểm tra
+  closeCartModal();
+});
+
+
+checkoutLink.addEventListener('click', (event) => {
+  closeCartModal(); 
+
+  setTimeout(() => {
+      window.top.location.href = '../pages/payment.html'; 
+  }, 200);
+});

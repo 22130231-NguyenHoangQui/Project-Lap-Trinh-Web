@@ -199,17 +199,76 @@ document.addEventListener('DOMContentLoaded', function () {
     updateSlider();
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    const cartButton = document.getElementById('cart-button');
+    const cartIframe = document.getElementById('cart-iframe');
+    const cartModal = document.getElementById('cart-modal');
+    const modalOverlay = document.getElementById('modal-overlay');
+
+
+    function updateCartTotal() {
+        const iframeDoc = cartIframe.contentDocument || cartIframe.contentWindow.document;
+    
+        if (!iframeDoc) {
+            console.error('Không thể truy cập nội dung của iframe.');
+            return;
+        }
+    
+        let total = 0;
+        const subtotals = iframeDoc.querySelectorAll('td.subtotal'); // Lấy các ô chứa tổng tiền từ iframe
+    
+        subtotals.forEach(subtotal => {
+            const amount = parseInt(
+                subtotal.textContent.replace(/\D/g, '') // Loại bỏ ký tự không phải số (như "₫")
+            );
+            total += amount;
+        });
+    
+        // Cập nhật nút GIỎ HÀNG với tổng tiền
+        cartButton.innerHTML = `GIỎ HÀNG/${total.toLocaleString()}₫`;
+    }
+    
+
+    cartIframe.addEventListener('load', () => {
+        updateCartTotal(); // Gọi hàm sau khi nội dung iframe đã tải xong
+    });
+    cartButton.addEventListener('click', () => {
+        cartIframe.src = 'shoppingCart.html';
+        cartModal.style.display = 'flex';
+        modalOverlay.style.display = 'block';
+        cartModal.classList.add('show');
+    });
+
+    window.closeCartModal = function () {
+        cartModal.style.display = 'none';
+        modalOverlay.style.display = 'none';
+        cartModal.classList.remove('show')  ;
+        cartIframe.src = '';
+    };
+
+    window.addEventListener('click', (e) => {
+        if (e.target === cartModal) {
+            closeCartModal();
+        }
+    });
+    
+});
+
 // is medium hiện đường dẫn của trang
 document.addEventListener("DOMContentLoaded", function () {
-    var isMediumDiv = document.querySelector('.is-medium');
-    var path = window.location.pathname.split('/').filter(function (part) { return part !== ''; });
+    var isMediumDiv = document.querySelector('.is-medium .container');
+    var path = window.location.pathname.split('/').filter(function (part) { return part !== ''&& part !== 'pages'; });
 
-    var breadcrumbHtml = '<a href="/">Trang Chủ</a>';
+    var breadcrumbHtml = '<a href="../pages/homepage.html">Trang Chủ</a>';
     var urlPath = '/';
 
     path.forEach(function (part, index) {
         urlPath += part + '/';
-        breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">' + part.replace(/-/g, ' ') + '</a>';
+        if (index === path.length - 1 && part === 'ProductCatalog.html') {
+            breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">Danh mục sản phẩm</a>';
+        } else {
+            breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">' + part.replace(/-/g, ' ') + '</a>';
+        }    
     });
 
     isMediumDiv.innerHTML = breadcrumbHtml;

@@ -4,7 +4,7 @@ function handleLoginForm() {
   document
     .getElementById("login-form")
     .addEventListener("submit", function (event) {
-      event.preventDefault(); // Ngăn không cho biểu mẫu được gửi
+      event.preventDefault();
 
       // Lấy giá trị từ các trường nhập liệu
       var username = document.getElementById("username").value;
@@ -17,6 +17,7 @@ function handleLoginForm() {
       } else {
         // Thực hiện hành động đăng nhập thành công
         alert("Đăng nhập thành công!");
+        localStorage.setItem('isLoggedIn', 'true');
         window.location.href = "../pages/HomePage.html";
       }
     });

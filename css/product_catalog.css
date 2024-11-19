@@ -62,22 +62,38 @@
 
 
 /* =================
-    is-medium
+    is-medium và overlay
     =========== */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5); /* Màu đen với độ trong suốt */
+        z-index: 999; /* Đảm bảo lớp phủ nằm trên các nội dung khác */
+    }
+    .modal.show {
+        z-index: 1000; /* Đảm bảo modal nằm trên lớp phủ */
+    }
+    
     .is-medium {
         font-size: 16px;
         color: #333;
-        font-weight: 400;
-    }
+        font-weight: 550;
+        text-decoration: none;
+        background-color: #1E90FF;
+        padding: 10px 10px;
+        }
     
     .is-medium .divider {
-        color: #888;
+        color: black;
         margin: 0 5px;
     }
     
     .is-medium a {
         text-decoration: none;
-        color: #007bff;
+        color: black;
     }
     
     .is-medium a:hover {
