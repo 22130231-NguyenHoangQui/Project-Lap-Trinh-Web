@@ -63,7 +63,3 @@ function applyDiscount() {
         alert("Mã giảm giá không hợp lệ!");
     }
 }
-
-function confirmOrder() {
-    alert("Đơn hàng đã được đặt thành công! Cảm ơn bạn đã mua sắm.");
-}
