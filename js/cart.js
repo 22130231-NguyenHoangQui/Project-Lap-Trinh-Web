@@ -58,3 +58,29 @@ function updateTotal() {
         promoMessage.style.color = '#dc3545';
     }
 }
+
+
+
+
+// is medium hiện đường dẫn của trang
+document.addEventListener("DOMContentLoaded", function () {
+    var isMediumDiv = document.querySelector('.is-medium .container');
+    var path = window.location.pathname.split('/').filter(function (part) { return part !== ''&& part !== 'pages'; });
+
+    var breadcrumbHtml = '<a href="../pages/homepage.html">Trang Chủ</a>';
+    var urlPath = '/';
+
+    path.forEach(function (part, index) {
+        urlPath += part + '/';
+        if (index === path.length - 1 && part === 'shoppingCart.html') {
+            breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">Giỏ hàng</a>';
+        } else {
+            breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">' + part.replace(/-/g, ' ') + '</a>';
+        }    
+    });
+
+    isMediumDiv.innerHTML = breadcrumbHtml;
+});
+
+
+

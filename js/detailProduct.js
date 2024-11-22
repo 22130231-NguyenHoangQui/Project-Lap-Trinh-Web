@@ -1,3 +1,38 @@
+document.addEventListener("DOMContentLoaded", function () {
+  var isMediumDiv = document.querySelector('.is-medium .container');
+  var path = window.location.pathname.split('/').filter(function (part) {
+      return part !== '' && part !== 'pages';
+  });
+
+  // Lấy tiêu đề sản phẩm từ thẻ h1
+  var productTitleElement = document.querySelector('.product-title');
+  var productTitle = productTitleElement ? productTitleElement.textContent.trim() : '';
+  var productSlug = productTitle.toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '') // Loại bỏ ký tự đặc biệt
+      .replace(/\s+/g, '-')         // Thay khoảng trắng bằng dấu gạch ngang
+      .replace(/-+/g, '-');         // Loại bỏ dấu gạch ngang thừa
+
+  var breadcrumbHtml = '<a href="../pages/homepage.html">Trang Chủ</a>';
+  var urlPath = '/';
+
+  path.forEach(function (part, index) {
+      urlPath += part + '/';
+      if (index === path.length - 1 && part === 'detailProduct.html') {
+          breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + productSlug + '">' + 'Danh Mục Sản Phẩm / ' + productTitle + '</a>';
+      } else {
+          breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">' + part.replace(/-/g, ' ') + '</a>';
+      }
+  });
+
+  isMediumDiv.innerHTML = breadcrumbHtml;
+});
+
+
+
+
+
+
+
 // Hàm để tạo hiệu ứng sticky header khi lăn chuột
 function stickyHeader() {
   const header = document.querySelector(".header");

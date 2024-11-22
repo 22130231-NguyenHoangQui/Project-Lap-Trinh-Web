@@ -38,59 +38,71 @@ document.addEventListener("click", function (event) {
 });
 
 
-function closeCartModal() {
-    const cartModal = document.getElementById('cart-modal');
-    const cartIframe = document.getElementById('cart-iframe');
+// function closeCartModal() {
+//     const cartModal = document.getElementById('cart-modal');
+//     const cartIframe = document.getElementById('cart-iframe');
   
-    console.log("Đang thực hiện đóng modal..."); // Log kiểm tra
+//     console.log("Đang thực hiện đóng modal..."); // Log kiểm tra
   
-    // Ẩn modal
-    cartModal.style.display = 'none';
-    cartModal.classList.remove('show');
-    console.log("Modal đã được ẩn."); // Log sau khi ẩn modal
+//     // Ẩn modal
+//     cartModal.style.display = 'none';
+//     cartModal.classList.remove('show');
+//     console.log("Modal đã được ẩn."); // Log sau khi ẩn modal
   
-    // Xóa nội dung của iframe
-    cartIframe.src = '';
-    console.log("Iframe đã được xóa nội dung."); // Log sau khi xóa src của iframe
-  }
+//     // Xóa nội dung của iframe
+//     cartIframe.src = '';
+//     console.log("Iframe đã được xóa nội dung."); // Log sau khi xóa src của iframe
+//   }
 
 
-document.addEventListener('DOMContentLoaded', () => {
-    const cartButton = document.getElementById('cart-button');
-    const cartIframe = document.getElementById('cart-iframe');
-    const cartModal = document.getElementById('cart-modal');
-    const continueShoppingLink = document.getElementById('continue-shopping');
-    const checkoutLink = document.getElementById('checkout');
+// document.addEventListener('DOMContentLoaded', () => {
+//     const cartButton = document.getElementById('cart-button');
+//     const cartIframe = document.getElementById('cart-iframe');
+//     const cartModal = document.getElementById('cart-modal');
+//     const continueShoppingLink = document.getElementById('continue-shopping');
+//     const checkoutLink = document.getElementById('checkout');
 
-    cartButton.addEventListener('click', () => {
-        cartIframe.src = 'shoppingCart.html';
-        cartModal.style.display = 'flex';
-        cartModal.classList.add('show');
-    });
+//     cartButton.addEventListener('click', () => {
+//         cartIframe.src = 'shoppingCart.html';
+//         cartModal.style.display = 'flex';
+//         cartModal.classList.add('show');
+//     });
 
-    window.closeCartModal = function () {
-        cartModal.style.display = 'none';
-        cartModal.classList.remove('show');
-        cartIframe.src = '';
-    };
+//     window.closeCartModal = function () {
+//         cartModal.style.display = 'none';
+//         cartModal.classList.remove('show');
+//         cartIframe.src = '';
+//     };
 
-    window.addEventListener('click', (e) => {
-        if (e.target === cartModal) {
-            closeCartModal();
-        }
-    });
+//     window.addEventListener('click', (e) => {
+//         if (e.target === cartModal) {
+//             closeCartModal();
+//         }
+//     });
    
 
     
-    checkoutLink.addEventListener('click', (event) => {
-        closeCartModal(); 
-        console.log(document.getElementById('checkout')); // Kiểm tra phần tử có tồn tại
-        setTimeout(() => {
-            window.top.location.href = '../pages/payment.html'; 
-        }, 200);
+//     checkoutLink.addEventListener('click', (event) => {
+//         closeCartModal(); 
+//         console.log(document.getElementById('checkout')); // Kiểm tra phần tử có tồn tại
+//         setTimeout(() => {
+//             window.top.location.href = '../pages/payment.html'; 
+//         }, 200);
+//     });
+// });
+
+
+// Chờ DOM sẵn sàng
+document.addEventListener("DOMContentLoaded", function () {
+    // Lấy button bằng id
+    const cartButton = document.getElementById("cart-button");
+
+    // Gắn sự kiện click
+    cartButton.addEventListener("click", function () {
+        // Chuyển hướng sang trang khác
+        window.location.href = "shoppingCart.html"; // Thay bằng URL đích của bạn
     });
 });
-
 
 document.addEventListener('DOMContentLoaded', () => {
     const dropdownMenu = document.querySelector('.account-dropdown-menu');

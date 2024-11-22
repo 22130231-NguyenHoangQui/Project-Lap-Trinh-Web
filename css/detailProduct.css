@@ -1,268 +1,375 @@
-body {
-    font-family: Tahoma, sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    min-height: 100vh;
-    font-size: 16px;
+/* =====================================
+       Setting Styles
+    ===================================== */
+
+    main {
+        display: block;
+        unicode-bidi: isolate;
+        background-color: #ffffff;
+    }
+    
+    .category-page-row {
+        padding-top: 30px;
+    }
+    
+    /* =======================
+            Typography Styles
+            ============= */
+    a {
+        text-decoration: none;
+        color: #334862;
+    }
+    
+    
+    /* =====================================
+               Global Styles
+            ===================================== */
+    
+    div {
+        display: block;
+    }
+    
+    html,
+    body {
+        padding: 0;
+        margin: 0;
+        font-size: 16px;
+        color: black;
+        font-family: sans-serif, Tahoma;
+    }
+    
+    .container {
+        width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    
+    
+    
+    aside {
+        display: block;
+    }
+    
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+
+/* ==================
+    Header
+==========*/
+
+.header-wrapper {
+    position: relative;
+    width: 100%;
+    background-position: 50% 0;
+    background-size: cover;
+    transition: background-color .3s, opacity .3s;
 }
 
-/*Header*/
-.header {
-    padding: 0 20px;
-    margin: 0;
-    max-width: 1200px;
-    background-color: #fff;
-    display: block;
-
-}
-
-.header,
 .header-top {
-    height: 100%;
-
-}
-
-.header-top {
-    background-color: #1E90FF;
+    background-color: #1E90FF !important;
     min-height: 20px;
-    padding: 0 20px;
 }
 
-.header-main {
-    background-color: rgba(255, 255, 255, 0.6);
-    padding: 0 20px;
+.header .flex-row {
+    height: 100%;
 }
 
-.header .flex-row-top,
-.header .flex-col {
-    justify-content: center;
-    display: flex;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.center-in-header>ul,
-.right-in-header,
-.center-in-header ul>li,
-.right-in-header a,
-.search-contai {
-    display: flex;
-
-}
-
-.header .search-contai {
-    justify-content: flex-start;
-}
-
-.center-in-header {
-    width: 100%;
-}
-
-.center-bottom-hd,
-.logo-in-header,
-.con-shopping-cart,
-.con-account {
-    padding: 5px 0;
-    margin: 0;
-    display: flex;
-}
-
-#item-ct {
-    margin: 0 7px;
-}
-
-.car-left i {
-    color: #1E90FF;
-    font-size: 25px;
-}
-
-.header .header-container {
-    width: 100%;
-    margin: 0 auto;
-    top: 0;
-    right: 0;
-    left: 0;
-    position: fixed;
-    max-width: 1200px;
-    z-index: 999;
-    box-shadow: 1px 1px 10px rgba(0, 0, 0, .15);
-}
-
-input[type="search"] {
-    border-color: #b9b9b9;
-    border-width: 3px;
-    border-style: solid;
-    padding: 4px;
-}
-
-.header .btn-icon {
-    border: 3px solid #b9b9b9;
-    background-color: #b9b9b9;
-    box-sizing: border-box;
-    flex-direction: column;
-}
-
-.header-container .header-stuck {
-    transform: translateY(0);
-}
-
-.header .nav-left {
+.nav {
     align-items: center;
     display: flex;
     flex-flow: row wrap;
     width: 100%;
-    padding: 0;
-    margin: 0;
 }
 
-.nav-left .nav-topbar {
-    font-size: 14px;
-    color: #fff;
+.nav li {
+    color: white;
+    padding: 0 0.7em;
+    font-weight: 700;
+    font-size: 0.8em;
 }
 
-.nav-topbar .uppercase {
-    letter-spacing: .05em;
-    font-weight: bolder;
-    line-height: 1.2;
-    text-transform: uppercase;
-}
-
-.header .nav-left>li,
-.header .nav-left>li a {
-    display: inline-block;
-}
-
-.header .nav-left>li {
-    list-style: none;
-    padding-right: 10px;
-
-}
-
-.header-icon {
+/* Social Icons */
+.social-icons {
     display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: black;
+}
+
+.social-icons a {
+    color: inherit;
+    font-size: 1.25em;
+    transition: color 0.3s ease;
+}
+
+.button.icon.circle {
+    padding: 0.5em;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
-    gap: 5px;
-}
-
-.header .icon-button {
-    font-size: 24px;
-    text-decoration: none;
-}
-
-.header .nav-topbar {
-    list-style: none;
-}
-
-.header .uppercase a,
-.header .nav-topbar a {
-    text-decoration: none;
-    color: #fff;
-}
-
-.uppercase a:hover,
-.nav-topbar a:hover {
-    color: lightgrey;
-}
-
-.header #toggle-icon {
-    color: #494747;
-    margin-left: 2px;
-}
-
-.center-bottom-hd li,
-.right-in-header li {
-    list-style: none;
-}
-
-.center-bottom-hd li a,
-.right-in-header li a {
-    text-decoration: none;
-    color: #494747;
-}
-
-.center-bottom-hd li a:hover,
-.right-in-header li a:hover {
-    color: rgb(23, 18, 18);
-}
-
-.logo-in-header img {
-    height: 100%;
-    max-width: 90px;
-}
-
-.con-account .car-wrapper .btn {
-    border-radius: 20px;
-    padding: 5px, 5px;
     background-color: #1E90FF;
-    border: #1E90FF;
+    border: none;
 }
 
-.con-account .car-wrapper .btn:hover {
-    background-color: #0903af;
+.circle i {
+    font-size: 1em;
 }
 
-.right-in-header .is-line {
-    border-left: 2px solid rgba(0, 0, 0, .1);
-    height: 30px;
-    margin: 0 7.5px;
+/* ===========
+header-center
+============== */
+
+.color-header-center {
+    background-color: #ffffff;
+    padding: 0;
+}
+
+.row.row-center {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 5px 0;
+}
+
+
+/* Thiết kế của dropdown tìm kiếm */
+.dropdown-search {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0px;
+    background-color: white;
+    border: 1px solid #ddd;
+    width: 400px;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+/* Hiển thị input khi hover vào icon */
+.position-relative:hover .dropdown-search {
+    display: block;
+}
+
+.row.row-center .col-lg-4 {
+    margin-bottom: auto;
+    margin-top: auto;
+    padding-right: 0;
+}
+
+.d-flex.list-item {
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.d-flex.list-item li {
+    display: flex;
+    flex-grow: 1;
+    color: hsla(0, 0%, 7%, .85);
+    font-weight: 700;
+    font-style: normal;
+    font-family: Lato, sans-serif;
+    font-size: .8em;
+}
+
+.nav.d-flex.list-item li div {
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+}
+
+.nav.d-flex.list-item li div i {
+    width: 5%;
+    text-align: center;
+    font-size: 1.8em;
+    padding: 5px 5px;
+}
+
+.row.row-center .img-logo {
+    display: flex;
+    justify-content: flex-start;
+    margin: 0;
+    padding: 0;
+}
+
+.row.row-center .img-logo img {
+
+    max-height: 60px;
+
+
+}
+
+
+.row.balance-row {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    width: 100%;
+}
+
+.row .bag-shop {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.row .bag-shop .col1.text {
+    display: flex;
+    align-items: center;
+    text-wrap: nowrap;
+    flex-grow: 1;
+    color: hsla(0, 0%, 7%, .85);
+    font-weight: 700;
+    font-style: normal;
+    font-family: Lato, sans-serif;
+    font-size: 1em;
+
+}
+
+.row .bag-shop .col1 {
+    flex: 1;
+    height: 100%;
+
+}
+
+.row .bag-shop .col1 i {
+    display: flex;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.bag-shop .fa-bag-shopping {
+    font-size: 1.5em;
+}
+
+.row .bag-shop .col1 .dropdown button {
+    border-radius: 20px;
+    padding: 5px 15px;
+}
+
+.account-dropdown-menu {
+    min-width: 100%;
+    box-sizing: border-box;
+    position: absolute;
+}
+
+
+.dropdown {
     position: relative;
-    vertical-align: middle;
+    display: inline-block;
+
 }
 
-.header .car-title {
-    white-space: nowrap;
-    padding-right: 5px;
-}
-
-.header .car-left {
-    align-items: flex-end;
-}
-
-.center-category.dropdown {
-    position: relative;
-}
-
-.dropdown-menu {
+.dropdown-menu.menu-danhmuc {
     display: none;
     position: absolute;
     top: 100%;
     left: 0;
     background-color: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    list-style: none;
     padding: 10px;
-    border-radius: 4px;
-    min-width: 200px;
-    white-space: nowrap;
+    list-style: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    min-width: 150px;
+    z-index: 10;
 }
 
-.center-category.dropdown:hover .dropdown-menu {
+
+.dropdown:hover .dropdown-menu.menu-danhmuc {
     display: block;
 }
 
-.dropdown-menu li a {
-    display: block;
-    padding: 8px 12px;
+
+
+.dropdown-menu.menu-danhmuc li a {
+    color: #333;
     text-decoration: none;
-    color: #494747;
-    border-radius: 4px;
+    display: block;
 }
 
-.dropdown-menu p {
-    color: #494747;
-}
-
-.dropdown-menu li a:hover {
+.dropdown-menu.menu-danhmuc li a:hover {
     background-color: #f0f0f0;
-    color: #000;
 }
 
+#cart-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
+
+
+
+
+
+/* =================
+    is-medium và overlay
+    =========== */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5); /* Màu đen với độ trong suốt */
+        z-index: 999; /* Đảm bảo lớp phủ nằm trên các nội dung khác */
+    }
+    .modal.show {
+        z-index: 1000; /* Đảm bảo modal nằm trên lớp phủ */
+    }
+    
+    .is-medium {
+        font-size: 16px;
+        color: #333;
+        font-weight: 550;
+        text-decoration: none;
+        background-color: #1E90FF;
+        padding: 10px 10px;
+        }
+    
+    .is-medium .divider {
+        color: black;
+        margin: 0 5px;
+    }
+    
+    .is-medium a {
+        text-decoration: none;
+        color: black;
+    }
+    
+    .is-medium a:hover {
+        text-decoration: underline;
+    }
+    
 
 
 
