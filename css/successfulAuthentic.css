@@ -60,6 +60,7 @@ aside {
     background-position: 50% 0;
     background-size: cover;
     transition: background-color .3s, opacity .3s;
+
 }
 
 .header-top {
@@ -112,7 +113,7 @@ aside {
     font-size: 1em;
 }
 
-/* Container */
+/* Content Styles */
 .container {
     display: flex;
     align-items: center;
@@ -121,39 +122,43 @@ aside {
     padding: 20px;
 }
 
-h2 {
-    font-weight: bold;
+.success-box {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
 }
 
-label {
-    float: left;
-    opacity: 0.8;
+.success-box .icon {
+    font-size: 60px;
+    color: #28a745;
+    margin-bottom: 20px;
 }
 
-label.required::after {
-    content: "*";
-    color: red;
+.success-box h2 {
+    font-size: 20px;
+    color: #333333;
+    margin-bottom: 10px;
 }
 
-input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.success-box p {
+    font-size: 14px;
+    color: #666666;
+    margin-bottom: 20px;
 }
 
-button {
-    background-color: #1056fa;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 10px;
+.back-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #007BFF;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
 }
 
-button:hover {
-    background-color: #0903af;
+.back-button:hover {
+    background-color: #0056b3;
 }
