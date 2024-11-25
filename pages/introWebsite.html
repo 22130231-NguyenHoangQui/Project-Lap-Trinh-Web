@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- File CSS -->
     <link rel="stylesheet" href="../css/introWebsite.css">
+    <link rel="stylesheet" href="../css/fotter.css">
 </head>
 <body>
     <header>
@@ -67,7 +68,7 @@
                     </div>
                     <div class=" col-sm-4 col-md-8 col-lg-11 d-flex justify-content-between align-items-center "
                         style="width: 87%; height: 100%;">
-                        <ul class=" nav d-flex  list-item" style="margin-left: 10px; width: 25%;">
+                        <ul class=" nav d-flex  list-item" style="margin-left: 10px;width: auto; flex-wrap: nowrap; text-wrap: nowrap;">
 
 
 
@@ -161,6 +162,7 @@
             </div>
 
         </div>
+        
     </header>
 
     <!-- Thanh điều hướng -->
@@ -186,22 +188,29 @@
     <div class="tab-content main">
         <!-- Phần giới thiệu -->
         <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="about-tab">
-            <header class="hero py-5 text-center">
+            <header class="hero py-5 text-center bg-light">
                 <div class="container">
-                    <h1 class="display-4 fw-bold">Hãy ăn mừng khoảnh khắc với những chiếc bánh của chúng tôi</h1>
-                    <p class="lead">Ngon miệng, đẹp mắt và làm từ tâm, bánh của chúng tôi là lựa chọn hoàn hảo cho mọi dịp đặc biệt!</p>
+                    <h1 class="display-4 fw-bold text-primary">
+                        <i class="fas fa-birthday-cake"></i> Hãy ăn mừng khoảnh khắc với những chiếc bánh của chúng tôi
+                    </h1>
+                    <p class="lead text-secondary">
+                        Ngon miệng, đẹp mắt và làm từ tâm, bánh của chúng tôi là lựa chọn hoàn hảo cho mọi dịp đặc biệt!
+                    </p>
                 </div>
             </header>
-            <section class="py-5">
+            <section class="py-5 bg-white">
                 <div class="container text-center">
-                    <h2 class="fw-bold mb-4">Về chúng tôi</h2>
-                    <p class="text-muted">
-                        Tại IT Cakes, chúng tôi chuyên tạo ra những chiếc bánh tuyệt đẹp cho các bữa tiệc sinh nhật, đám cưới và các sự kiện đặc biệt. 
-                        Mỗi chiếc bánh được làm từ nguyên liệu cao cấp và thiết kế để tạo nên những kỷ niệm khó quên.
+                    <h2 class="fw-bold mb-4 text-success">
+                        <i class="fas fa-info-circle"></i> Về chúng tôi
+                    </h2>
+                    <p class="text-muted fs-5">
+                        Tại <span class="fw-bold text-primary">IT Cakes</span>, chúng tôi chuyên tạo ra những chiếc bánh tuyệt đẹp cho các bữa tiệc sinh nhật, 
+                        đám cưới và các sự kiện đặc biệt. Mỗi chiếc bánh được làm từ nguyên liệu cao cấp và thiết kế để tạo nên những kỷ niệm khó quên.
                     </p>
                 </div>
             </section>
         </div>
+        
 
         <!-- Chính sách đổi trả -->
         <section class="tab-pane fade py-5" id="policy" role="tabpanel" aria-labelledby="policy-tab">
@@ -232,15 +241,16 @@
                 <div class="row mt-4">
                     <div class="col-md-4">
                         <i class="fa fa-map-marker-alt fa-2x text-danger"></i>
-                        <p class="mt-2">230A Tô Ngọc Vân, Thủ Đức</p>
+                        <p class="mt-2">Đại Học Nông Lâm TP.Hồ Chí Minh, Phường Linh Trung, Q.Thủ Đức, TP.Hồ Chí Minh</p>
                     </div>
                     <div class="col-md-4">
                         <i class="fa fa-envelope fa-2x text-danger"></i>
-                        <p class="mt-2">homedecorsgn@gmail.com</p>
+                        <p class="mt-2">itcake@gmail.com</p>
                     </div>
                     <div class="col-md-4">
                         <i class="fa fa-phone fa-2x text-danger"></i>
-                        <p class="mt-2">0812262975</p>
+                        <p class="mt-2">012345678
+                        </p>
                     </div>
                 </div>
             </div>
@@ -249,7 +259,71 @@
 
     <!-- Chân trang -->
     <footer>
-        <p>© 2024 IT Cakes. Mọi quyền được bảo lưu.</p>
+        <div class="footer">
+            <!-- Footer Top -->
+            <div class="footer-top">
+                <!-- Giới thiệu -->
+                <div class="ft-uniform">
+                    <h6>GIỚI THIỆU</h6>
+                    <div class="is-divider"></div>
+                    <div class="ft-introduce">
+                        <p>
+                            <a href="../pages/home.html" title="Đi tới Trang Chủ">IT Cake</a> – Bánh sinh nhật đậm chất riêng của bạn. Chúng tôi tự hào mang đến những chiếc bánh sinh nhật tươi ngon, thiết kế độc đáo và sáng tạo theo yêu cầu. 
+                            Hãy để IT Cake cùng bạn tạo nên những khoảnh khắc ngọt ngào và đáng nhớ nhất.
+                        </p>
+                        <div class="ft-img">
+                            <a href="//theme.hstatic.net/1000313040/1000406925/14/hg_img1.png?v=2177"
+                               data-fancybox="home-gallery-images" data-caption="">
+                                <img src="//theme.hstatic.net/1000313040/1000406925/14/hg_img_thumb1.png?v=2177" alt="Hình ảnh IT Cake">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Liên hệ -->
+                <div class="ft-uniform">
+                    <h6>LIÊN HỆ</h6>
+                    <div class="is-divider"></div>
+                    <div class="ft-contact">
+                        <div class="ft-contact-address">
+                            <i class="bi bi-geo-alt-fill" aria-hidden="true"></i> 
+                            Đại Học Nông Lâm TP.Hồ Chí Minh, Phường Linh Trung, Q.Thủ Đức, TP.Hồ Chí Minh
+                        </div>
+                        <div class="ft-contact-tel">
+                            <i class="bi bi-telephone-fill" aria-hidden="true"></i> 
+                            <a href="tel:#">0123 456 789</a>
+                        </div>
+                        <div class="ft-contact-email">
+                            <i class="bi bi-envelope-fill" aria-hidden="true"></i> 
+                            <a href="mailto:itcake@gmail.com">itcake@gmail.com</a>
+                        </div>
+                        <div class="ft-contact-facebook">
+                            <i class="bi bi-facebook" aria-hidden="true"></i> 
+                            <a href="#">www.facebook-itcake.com</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Chính sách -->
+                <div class="ft-uniform">
+                    <h6>CHÍNH SÁCH</h6>
+                    <div class="is-divider"></div>
+                    <ul class="ft-policy">
+                        <li><a href="/pages/chinh-sach-va-quy-dinh-chung">Chính sách và quy định chung</a></li>
+                        <li><a href="/pages/chinh-sach-giao-dich-thanh-toan">Chính sách giao dịch, thanh toán</a></li>
+                        <li><a href="/pages/chinh-sach-doi-tra">Chính sách đổi trả</a></li>
+                        <li><a href="/pages/chinh-sach-bao-mat">Chính sách bảo mật</a></li>
+                        <li><a href="/pages/chinh-sach-van-chuyen">Chính sách vận chuyển</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="ft-copyright">
+                    Copyrights © 2018 by 
+                    <a target="_blank" href="../pages/homepage.html" title="Đi tới Trang Chủ">IT Cake</a>.
+                </div>
+            </div>
+        </div>
+        
     </footer>
 
     <!-- Bootstrap JS -->
