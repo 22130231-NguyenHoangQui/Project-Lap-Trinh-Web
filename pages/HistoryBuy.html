@@ -10,6 +10,7 @@
     integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../css/HistoryBuy.css">
+    <link rel="stylesheet" href="../css/fotter.css">
 </head>
 <body>
     <header>
@@ -68,7 +69,7 @@
                     </div>
                     <div class=" col-sm-4 col-md-8 col-lg-11 d-flex justify-content-between align-items-center "
                         style="width: 87%; height: 100%;">
-                        <ul class=" nav d-flex  list-item" style="margin-left: 10px; width: 25%;">
+                        <ul class=" nav d-flex  list-item" style="margin-left: 10px;width: auto; flex-wrap: nowrap; text-wrap: nowrap;">
 
 
 
@@ -163,49 +164,116 @@
 
         </div>
     </header>
-<div class="container my-5">
-    <h2 class="text-lg font-semibold mb-4">Lịch sử mua hàng</h2>
+    <div class="container my-5">
+        <h2 class="text-lg font-semibold mb-4">Lịch sử mua hàng</h2>
 
-    <!-- Nút lọc trạng thái -->
-    <div class="status-buttons mb-3">
-        <button class="btn btn-primary active" onclick="filterOrders('pending')">Chờ xác nhận</button>
-        <button class="btn btn-secondary" onclick="filterOrders('confirmed')">Đã xác nhận</button>
-        <button class="btn btn-danger" onclick="filterOrders('cancelled')">Đã hủy</button>
+        <!-- Nút lọc trạng thái -->
+        <div class="status-buttons mb-3">
+            <button class="btn btn-primary active" onclick="filterOrders('pending')">Chờ xác nhận</button>
+            <button class="btn btn-secondary" onclick="filterOrders('confirmed')">Đã xác nhận</button>
+            <button class="btn btn-danger" onclick="filterOrders('cancelled')">Đã hủy</button>
+        </div>
+
+        <!-- Bảng danh sách đơn hàng -->
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">STT</th>
+                    <th scope="col">Mã hóa đơn</th>
+                    <th scope="col">Ngày mua</th>
+                    <th scope="col">Tổng tiền</th>
+                    <th scope="col">Trạng thái</th>
+                    <th scope="col">Hành động</th>
+                </tr>
+            </thead>
+            <tbody id="orders">
+                <!-- Danh sách đơn hàng sẽ được render từ script.js -->
+            </tbody>
+        </table>
+
+        <!-- Phần hiển thị chi tiết đơn hàng -->
+        <div id="orderDetails" class="details">
+            <h5>Chi tiết hóa đơn</h5>
+            <p><strong>Mã hóa đơn:</strong> <span id="orderId"></span></p>
+            <p><strong>Ngày mua:</strong> <span id="orderDate"></span></p>
+            <p><strong>Tổng tiền:</strong> <span id="orderTotal"></span></p>
+            <p><strong>Sản phẩm:</strong></p>
+            <ul id="orderItems">
+                <!-- Danh sách sản phẩm sẽ được render từ script.js -->
+            </ul>
+        </div>
     </div>
-
-    <!-- Bảng danh sách đơn hàng -->
-    <table class="table table-bordered">
-        <thead class="thead-light">
-            <tr>
-                <th scope="col">STT</th>
-                <th scope="col">Mã hóa đơn</th>
-                <th scope="col">Ngày mua</th>
-                <th scope="col">Tổng tiền</th>
-                <th scope="col">Trạng thái</th>
-                <th scope="col">Hành động</th>
-            </tr>
-        </thead>
-        <tbody id="orders">
-            <!-- Danh sách đơn hàng sẽ được render từ script.js -->
-        </tbody>
-    </table>
-
-    <!-- Phần hiển thị chi tiết đơn hàng -->
-    <div id="orderDetails" class="details">
-        <h5>Chi tiết hóa đơn</h5>
-        <p><strong>Mã hóa đơn:</strong> <span id="orderId"></span></p>
-        <p><strong>Ngày mua:</strong> <span id="orderDate"></span></p>
-        <p><strong>Tổng tiền:</strong> <span id="orderTotal"></span></p>
-        <p><strong>Sản phẩm:</strong></p>
-        <ul id="orderItems">
-            <!-- Danh sách sản phẩm sẽ được render từ script.js -->
-        </ul>
-    </div>
-</div>
-
-<script src="../js/HistoryBuy.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Chân trang -->
+    <footer>
+        <div class="footer">
+            <!-- Footer Top -->
+            <div class="footer-top">
+                <!-- Giới thiệu -->
+                <div class="ft-uniform">
+                    <h6>GIỚI THIỆU</h6>
+                    <div class="is-divider"></div>
+                    <div class="ft-introduce">
+                        <p>
+                            <a href="../pages/home.html" title="Đi tới Trang Chủ">IT Cake</a> – Bánh sinh nhật đậm chất riêng của bạn. Chúng tôi tự hào mang đến những chiếc bánh sinh nhật tươi ngon, thiết kế độc đáo và sáng tạo theo yêu cầu. 
+                            Hãy để IT Cake cùng bạn tạo nên những khoảnh khắc ngọt ngào và đáng nhớ nhất.
+                        </p>
+                        <div class="ft-img">
+                            <a href="//theme.hstatic.net/1000313040/1000406925/14/hg_img1.png?v=2177"
+                               data-fancybox="home-gallery-images" data-caption="">
+                                <img src="//theme.hstatic.net/1000313040/1000406925/14/hg_img_thumb1.png?v=2177" alt="Hình ảnh IT Cake">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Liên hệ -->
+                <div class="ft-uniform">
+                    <h6>LIÊN HỆ</h6>
+                    <div class="is-divider"></div>
+                    <div class="ft-contact">
+                        <div class="ft-contact-address">
+                            <i class="bi bi-geo-alt-fill" aria-hidden="true"></i> 
+                            Đại Học Nông Lâm TP.Hồ Chí Minh, Phường Linh Trung, Q.Thủ Đức, TP.Hồ Chí Minh
+                        </div>
+                        <div class="ft-contact-tel">
+                            <i class="bi bi-telephone-fill" aria-hidden="true"></i> 
+                            <a href="tel:#">0123 456 789</a>
+                        </div>
+                        <div class="ft-contact-email">
+                            <i class="bi bi-envelope-fill" aria-hidden="true"></i> 
+                            <a href="mailto:itcake@gmail.com">itcake@gmail.com</a>
+                        </div>
+                        <div class="ft-contact-facebook">
+                            <i class="bi bi-facebook" aria-hidden="true"></i> 
+                            <a href="#">www.facebook-itcake.com</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Chính sách -->
+                <div class="ft-uniform">
+                    <h6>CHÍNH SÁCH</h6>
+                    <div class="is-divider"></div>
+                    <ul class="ft-policy">
+                        <li><a href="/pages/chinh-sach-va-quy-dinh-chung">Chính sách và quy định chung</a></li>
+                        <li><a href="/pages/chinh-sach-giao-dich-thanh-toan">Chính sách giao dịch, thanh toán</a></li>
+                        <li><a href="/pages/chinh-sach-doi-tra">Chính sách đổi trả</a></li>
+                        <li><a href="/pages/chinh-sach-bao-mat">Chính sách bảo mật</a></li>
+                        <li><a href="/pages/chinh-sach-van-chuyen">Chính sách vận chuyển</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="ft-copyright">
+                    Copyrights © 2024 by 
+                    <a target="_blank" href="../pages/homepage.html" title="Đi tới Trang Chủ">IT Cake</a>.
+                </div>
+            </div>
+        </div>
+        
+    </footer>
+    <script src="../js/HistoryBuy.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
