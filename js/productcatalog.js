@@ -43,37 +43,24 @@
 //     });
 // });
 
-// Dữ liệu sản phẩm mới
-const newProducts = [
-    {
-        id: 'BHKT85',
-        name: 'Bánh sinh nhật mẫu đơn hồng',
-        price: '45.000₫',
-        image: './2338.webp',
-        link: '#'
-    },
-    {
-        id: 'ABC123',
-        name: 'Bánh su kem nhân chocolate',
-        price: '60.000₫',
-        image: './su-kem.webp',
-        link: '#'
-    },
-    {
-        id: 'DEF456',
-        name: 'Bánh kem dâu tây',
-        price: '70.000₫',
-        image: './kem-dau-tay.webp',
-        link: '#'
-    },
-    {
-        id: 'XYZ789',
-        name: 'Bánh mousse cà phê',
-        price: '50.000₫',
-        image: './mousse-cafe.webp',
-        link: '#'
-    }
-];
+
+
+
+document.querySelectorAll('.dropdown-menu a').forEach(function (categoryLink) {
+    categoryLink.addEventListener('click', function (event) {
+        if (categoryLink.getAttribute('href') !== 'SignIn.html' && categoryLink.getAttribute('href') !== 'SignUp.html') {
+
+
+            const categoryData = categoryLink.getAttribute('data-category');
+
+            localStorage.setItem('selectedCategory', categoryData);
+
+
+            window.location.href = 'ProductCatalog.html';
+        }
+    });
+});
+
 
 
 function createProductHTML(product) {
@@ -109,18 +96,7 @@ function createProductHTML(product) {
 `;
 }
 
-// // Chèn các sản phẩm vào trong các ô `col`
-// function loadProducts() {
-//     const productContainer = document.querySelector('.products.row.row-small'); // Chọn container của sản phẩm
 
-//     // Duyệt qua tất cả sản phẩm và thêm chúng vào
-//     newProducts.forEach(product => {
-//         productContainer.innerHTML += createProductHTML(product); // Thêm sản phẩm vào container
-//     });
-// }
-
-// // Gọi hàm để tải sản phẩm vào trang
-// loadProducts();
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -199,60 +175,107 @@ document.addEventListener('DOMContentLoaded', function () {
     updateSlider();
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    const cartButton = document.getElementById('cart-button');
-    const cartIframe = document.getElementById('cart-iframe');
-    const cartModal = document.getElementById('cart-modal');
-    const modalOverlay = document.getElementById('modal-overlay');
+document.querySelectorAll('.product-categories li').forEach(function (categoryItem) {
+    categoryItem.addEventListener('click', function (event) {
+        event.preventDefault(); // Prevent default link behavior
+        const categoryData = categoryItem.getAttribute('data-category');
 
+        // Store the selected category in localStorage
+        localStorage.setItem('selectedCategory', categoryData);
 
-    function updateCartTotal() {
-        const iframeDoc = cartIframe.contentDocument || cartIframe.contentWindow.document;
-    
-        if (!iframeDoc) {
-            console.error('Không thể truy cập nội dung của iframe.');
-            return;
-        }
-    
-        let total = 0;
-        const subtotals = iframeDoc.querySelectorAll('td.subtotal'); // Lấy các ô chứa tổng tiền từ iframe
-    
-        subtotals.forEach(subtotal => {
-            const amount = parseInt(
-                subtotal.textContent.replace(/\D/g, '') // Loại bỏ ký tự không phải số (như "₫")
-            );
-            total += amount;
-        });
-    
-        // Cập nhật nút GIỎ HÀNG với tổng tiền
-        cartButton.innerHTML = `GIỎ HÀNG/${total.toLocaleString()}₫`;
-    }
-    
-
-    cartIframe.addEventListener('load', () => {
-        updateCartTotal(); // Gọi hàm sau khi nội dung iframe đã tải xong
+        // Reload the products based on selected category
+        loadProducts(categoryData);
     });
-    cartButton.addEventListener('click', () => {
-        cartIframe.src = 'shoppingCart.html';
-        cartModal.style.display = 'flex';
-        modalOverlay.style.display = 'block';
-        cartModal.classList.add('show');
-    });
-
-    window.closeCartModal = function () {
-        cartModal.style.display = 'none';
-        modalOverlay.style.display = 'none';
-        cartModal.classList.remove('show')  ;
-        cartIframe.src = '';
-    };
-
-    window.addEventListener('click', (e) => {
-        if (e.target === cartModal) {
-            closeCartModal();
-        }
-    });
-    
 });
+
+// Function to load products based on the selected category
+function loadProducts(category) {
+    const imageList = imagesByCategory[category] || [];
+    const productContainer = document.querySelector('.products.row.row-small');
+
+    productContainer.innerHTML = '';  // Clear previous products
+
+    imageList.forEach((product) => {
+        productContainer.innerHTML += createProductHTML(product);
+    });
+
+    // Mark the active category
+    const categoryItems = document.querySelectorAll('.product-categories li');
+    categoryItems.forEach((item) => {
+        const link = item.querySelector('a');
+        if (link && link.textContent.trim() === getCategoryName(category)) {
+            item.classList.add('active');
+        } else {
+            item.classList.remove('active');
+        }
+    });
+}
+
+// Helper function to get category name from the mapping
+function getCategoryName(category) {
+    const categoryMapping = {
+        'banh_an_nhe': 'Bánh Ăn Nhẹ',
+        'banh_cac_ngay_le': 'Bánh Các Ngày Lễ',
+        'banh_chai_ruou': 'Bánh Chai Rượu Và Ly Bia Sang Trọng',
+    };
+    return categoryMapping[category] || category;
+}
+
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     const cartButton = document.getElementById('cart-button');
+//     const cartIframe = document.getElementById('cart-iframe');
+//     const cartModal = document.getElementById('cart-modal');
+//     const modalOverlay = document.getElementById('modal-overlay');
+
+
+//     function updateCartTotal() {
+//         const iframeDoc = cartIframe.contentDocument || cartIframe.contentWindow.document;
+    
+//         if (!iframeDoc) {
+//             console.error('Không thể truy cập nội dung của iframe.');
+//             return;
+//         }
+    
+//         let total = 0;
+//         const subtotals = iframeDoc.querySelectorAll('td.subtotal'); // Lấy các ô chứa tổng tiền từ iframe
+    
+//         subtotals.forEach(subtotal => {
+//             const amount = parseInt(
+//                 subtotal.textContent.replace(/\D/g, '') // Loại bỏ ký tự không phải số (như "₫")
+//             );
+//             total += amount;
+//         });
+    
+//         // Cập nhật nút GIỎ HÀNG với tổng tiền
+//         cartButton.innerHTML = `GIỎ HÀNG/${total.toLocaleString()}₫`;
+//     }
+    
+
+//     cartIframe.addEventListener('load', () => {
+//         updateCartTotal(); // Gọi hàm sau khi nội dung iframe đã tải xong
+//     });
+//     cartButton.addEventListener('click', () => {
+//         cartIframe.src = 'shoppingCart.html';
+//         cartModal.style.display = 'flex';
+//         modalOverlay.style.display = 'block';
+//         cartModal.classList.add('show');
+//     });
+
+//     window.closeCartModal = function () {
+//         cartModal.style.display = 'none';
+//         modalOverlay.style.display = 'none';
+//         cartModal.classList.remove('show')  ;
+//         cartIframe.src = '';
+//     };
+
+//     window.addEventListener('click', (e) => {
+//         if (e.target === cartModal) {
+//             closeCartModal();
+//         }
+//     });
+    
+// });
 
 // is medium hiện đường dẫn của trang
 document.addEventListener("DOMContentLoaded", function () {
@@ -277,7 +300,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    const selectedCategory = localStorage.getItem('selectedCategory') || 'banh_an_nhe';
+    const selectedCategory = localStorage.getItem('selectedCategory') || '2';
     const selectedOtherData = localStorage.getItem('selectedOtherData') || [];
 
     const imageList = imagesByCategory[selectedCategory] || [];
@@ -313,7 +336,10 @@ function getCategoryName(category) {
 }
 
 const imagesByCategory = {
-    'banh_an_nhe': [
+    '2':[ { image: '../image/imghomepage/product/product_danhmuc/1.webp', id: 'TRMS4', name: 'Tiramisu Dâu Tây', price: '120.000₫', link: '#' }
+    ]
+    
+    ,'banh_an_nhe': [
         { image: '../image/imghomepage/product/product_danhmuc/1.webp', id: 'TRMS4', name: 'Tiramisu Dâu Tây', price: '120.000₫', link: '#' },
         { image: '../image/imghomepage/product/product_danhmuc/2.webp', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
         { image: '../image/imghomepage/product/product_danhmuc/3.webp', id: 'SH612', name: 'Su dẻo Phô mai', price: '65.000₫', link: '#' },

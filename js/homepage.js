@@ -94,13 +94,10 @@ document.addEventListener("click", function (event) {
 
 // Chờ DOM sẵn sàng
 document.addEventListener("DOMContentLoaded", function () {
-    // Lấy button bằng id
     const cartButton = document.getElementById("cart-button");
 
-    // Gắn sự kiện click
     cartButton.addEventListener("click", function () {
-        // Chuyển hướng sang trang khác
-        window.location.href = "shoppingCart.html"; // Thay bằng URL đích của bạn
+        window.location.href = "shoppingCart.html"; 
     });
 });
 
@@ -108,20 +105,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const dropdownMenu = document.querySelector('.account-dropdown-menu');
 
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const userRole = localStorage.getItem('userRole'); 
 
     if (isLoggedIn) {
-        dropdownMenu.innerHTML = `
-            <li><a class="dropdown-item" href="#"> Xin Chào: Tài</a></li>
-            <li><a class="dropdown-item" href="HistoryBuy.html">Lịch sử mua hàng</a></li>
-            <li><a class="dropdown-item" href="changeInformation.html">Thay đổi thông tin</a></li>
-            <li><a class="dropdown-item" href="changePassword.html">Đổi mật khẩu</a></li>
-            <li><a class="dropdown-item" href="SignIn.html" id="logoutButton">Đăng Xuất</a></li>
-        `;
+        if (userRole === 'admin') {
+            dropdownMenu.innerHTML = `
+                <li><a class="dropdown-item" href="#"> Xin Chào: Admin</a></li>
+                <li><a class="dropdown-item" href="ManageAdmin.html">Quản lý</a></li>
+                <li><a class="dropdown-item" href="SignIn.html" id="logoutButton">Đăng Xuất</a></li>
+            `;
+        } else {
+            dropdownMenu.innerHTML = `
+                <li><a class="dropdown-item" href="#"> Xin Chào: Tài</a></li>
+                <li><a class="dropdown-item" href="HistoryBuy.html">Lịch sử mua hàng</a></li>
+                <li><a class="dropdown-item" href="changeInformation.html">Thay đổi thông tin</a></li>
+                <li><a class="dropdown-item" href="changePassword.html">Đổi mật khẩu</a></li>
+                <li><a class="dropdown-item" href="SignIn.html" id="logoutButton">Đăng Xuất</a></li>
+            `;
+        }
 
         const logoutButton = document.getElementById('logoutButton');
         logoutButton.addEventListener('click', () => {
             localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userRole');
             location.reload();
         });
     }
 });
+
