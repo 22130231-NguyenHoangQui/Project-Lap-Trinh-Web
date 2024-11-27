@@ -1,3 +1,8 @@
+
+
+
+
+
 function decreaseQuantity() {
   let quantity = document.getElementById("quantity");
   if (quantity.value > 1) {

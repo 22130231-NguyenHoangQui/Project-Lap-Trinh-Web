@@ -1,6 +1,59 @@
+
+window.onload = function() {
+    // Lấy giỏ hàng từ localStorage
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    console.log(cart);
+    
+    // Kiểm tra nếu giỏ hàng có sản phẩm
+    if (cart.length > 0) {
+        const cartContainer = document.getElementById('cart-items');
+  
+        // Duyệt qua từng sản phẩm trong giỏ hàng
+        cart.forEach(product => {
+            // Tạo một hàng mới cho mỗi sản phẩm
+            const row = document.createElement('tr');
+            row.classList.add('cart-item');
+  
+            // Cập nhật thông tin cho từng cột trong hàng
+            row.innerHTML = `
+                <td>
+                    <img src="${product.image}" alt="${product.id}">
+                    <span class="ms-2">${product.id}</span>
+                </td>
+                <td>Kích thước: ${product.diameter}</td>
+                <td>${product.price}
+                </td>
+
+                <td>
+                    <div class="d-flex align-items-center">
+                        <button class="btn btn-outline-secondary btn-sm me-1" onclick="decrementQuantity(this)"><i class="fas fa-minus"></i></button>
+                        <input type="number" class="form-control text-center w-25" value="1" onchange="updateSubtotal(this)">
+                        <button class="btn btn-outline-secondary btn-sm ms-1" onclick="incrementQuantity(this)"><i class="fas fa-plus"></i></button>
+                    </div>
+                </td>
+                <td class="subtotal">${product.price}</td>
+                <td>
+                    <button class="btn btn-danger btn-sm" onclick="removeItem(this)">Xóa</button>
+                </td>
+            `;
+            
+            cartContainer.appendChild(row);
+        });
+    } else {
+        const cartContainer = document.getElementById('cart-items');
+        cartContainer.innerHTML = '<tr><td colspan="6" class="text-center">Giỏ hàng của bạn hiện tại không có sản phẩm.</td></tr>';
+    }
+    updateTotal();
+  };
+  
+
+
 function updateSubtotal(input) {
     const row = input.closest('tr');
-    const price = parseInt(row.children[2].innerText.replace(/₫|,/g, ''));
+    console.log();
+    
+    const price = parseInt(row.children[2].innerText.replace(/₫|,/g, '').trim());
+    console.log("Giá sau khi làm sạch:", price); 
     const quantity = parseInt(input.value);
 
     if (quantity < 1 || isNaN(quantity)) { 

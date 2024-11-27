@@ -316,6 +316,39 @@ aside {
     background-color: #f0f0f0;
 }
 
+
+
+/* =================
+    is-medium và overlay
+    =========== */
+
+    
+    .is-medium {
+        font-size: 16px;
+        color: #333;
+        font-weight: 550;
+        text-decoration: none;
+        background-color: #1E90FF;
+        padding: 10px 10px;
+        }
+    
+    .is-medium .divider {
+        color: black;
+        margin: 0 5px;
+    }
+    
+    .is-medium a {
+        text-decoration: none;
+        color: black;
+    }
+    
+    .is-medium a:hover {
+        text-decoration: underline;
+    }
+    
+
+
+
 /* ====================
             MAIN
  ================== */
@@ -465,21 +498,18 @@ aside {
 }
 
 .table.table1 th:nth-child(1), .table.table1 td:nth-child(1) {
-    width: 10%;
+    width: 20%;
 }
 .table.table1 th:nth-child(2), .table.table1 td:nth-child(2) {
     width: 20%;
 }
 .table.table1 th:nth-child(3), .table.table1 td:nth-child(3) {
-    width: 10%;
+    width: 20%;
 }
 .table.table1 th:nth-child(4), .table.table1 td:nth-child(4) {
     width: 20%;
 }
 .table.table1 th:nth-child(5), .table.table1 td:nth-child(5) {
-    width: 20%;
-}
-.table.table1 th:nth-child(6), .table.table1 td:nth-child(6) {
     width: 20%;
 }
 

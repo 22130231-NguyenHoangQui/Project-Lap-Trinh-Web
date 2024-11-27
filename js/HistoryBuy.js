@@ -38,6 +38,11 @@ function renderOrders(filterStatus = null) {
                         <button class="btn btn-danger btn-sm" onclick="cancelOrder(${order.id})">
                             <i class="fa fa-times"></i> Hủy
                         </button>` : ""}
+
+                     ${order.status === "cancelled" ? `
+                        <button class="btn btn-danger btn-sm" onclick="deleteOrder(${order.id})">
+                            <i class="fa fa-trash"></i> Xóa
+                        </button>` : ""}
                 </td>
             </tr>
         `;
@@ -84,6 +89,7 @@ function viewDetails(orderId) {
         document.getElementById("orderDate").textContent = order.date;
         document.getElementById("orderTotal").textContent = order.total;
         document.getElementById("orderItems").innerHTML = order.items.map(item => `<li>${item}</li>`).join("");
+            
         document.getElementById("orderDetails").style.display = "block";
     }
 }

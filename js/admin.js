@@ -33,11 +33,34 @@ customersLink.addEventListener('click', function (e) {
     document.getElementById('myChart').style.display = 'none';
 });
 
-catalogsLink.addEventListener('click',function (e) {
+catalogsLink.addEventListener('click', function (e) {
     e.preventDefault();
     displayCataLogs(1);
     document.getElementById('myChart').style.display = 'none';
 });
+
+
+// duong dan
+
+document.addEventListener("DOMContentLoaded", function () {
+    var isMediumDiv = document.querySelector('.is-medium .container');
+    var path = window.location.pathname.split('/').filter(function (part) { return part !== '' && part !== 'pages'; });
+
+    var breadcrumbHtml = '<a href="../pages/homepage.html">Trang Chủ</a>';
+    var urlPath = '/';
+
+    path.forEach(function (part, index) {
+        urlPath += part + '/';
+        if (index === path.length - 1 && part === 'ManageAdmin.html') {
+            breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">Quản Lý</a>';
+        } else {
+            breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">' + part.replace(/-/g, ' ') + '</a>';
+        }
+    });
+
+    isMediumDiv.innerHTML = breadcrumbHtml;
+});
+
 
 // tổng quan dashboard
 document.addEventListener('DOMContentLoaded', function () {
@@ -127,7 +150,7 @@ function displayCataLogs(page) {
     const endIndex = page * catalogsPerPage;
     const paginatedCataLogs = catalogs.slice(startIndex, endIndex);
     console.log("123");
-    
+
     let tableHTML = `
         <table class="table table2">
             <thead>
@@ -141,7 +164,7 @@ function displayCataLogs(page) {
             <tbody>
     `;
 
-    paginatedCataLogs.forEach((catalog,index) => {
+    paginatedCataLogs.forEach((catalog, index) => {
         tableHTML += `
             <tr>
                  <td>${startIndex + index + 1}</td>
@@ -316,7 +339,7 @@ function displayProducts(page) {
                     <th>STT</th>
                     <th>SẢN PHẨM</th>
                     <th>GIÁ BÁN</th>
-                    <th>SỐ LƯỢNG</th>
+                    <th>CHI TIẾT</th>
                     <th>TRẠNG THÁI</th>
                     <th></th>
                 </tr>
@@ -329,11 +352,11 @@ function displayProducts(page) {
             <tr>
                 <td>${product.id}</td>
                 <td>
-                <img src="${product.image}" alt="${product.name}" style="width: 50px; height: 50px; object-fit: cover; margin-right: 10px;">
+                <img src="${product.image}" style="width: 50px; height: 50px; object-fit: cover; margin-right: 10px;">
                 ${product.name}
+
                 </td>
                 <td>${product.price}</td>
-                <td>${product.count}</td>
                 <td>${product.status}</td>
                 <td>
 
@@ -351,7 +374,9 @@ function displayProducts(page) {
                 </td>
                 </tr>
         `;
+        console.log(product);
     });
+
 
     tableHTML += `</tbody></table>`;
 
@@ -563,28 +588,84 @@ const customers = [
 
 
 const products = [
-    { id: 1, name: "Bánh Chocolate", category: "Bánh", price: 25, status: "Bánh chocolate ngọt ngào với lớp kem phủ.", image: "path_to_image1.jpg" },
-    { id: 2, name: "Bánh Vanilla", category: "Bánh", price: 20, status: "Bánh bông lan vanilla nhẹ nhàng.", image: "path_to_image2.jpg" },
-    { id: 3, name: "Bánh Dâu Tây", category: "Bánh", price: 30, status: "Bánh dâu tây tươi ngon với những trái dâu chín.", image: "path_to_image3.jpg" },
-    { id: 4, name: "Bánh Red Velvet", category: "Bánh", price: 40, status: "Bánh Red Velvet mềm mịn, phủ kem phô mai.", image: "path_to_image4.jpg" },
-    { id: 5, name: "Bánh Chanh", category: "Bánh", price: 22, status: "Bánh chanh tươi mát với lớp glaze ngọt ngào.", image: "path_to_image5.jpg" },
-    { id: 6, name: "Bánh Carrot", category: "Bánh", price: 28, status: "Bánh cà rốt với hạt óc chó và lớp kem phô mai.", image: "path_to_image6.jpg" }
-];
+    {
+        id: 1,
+        image: "../image/imghomepage/product/product_danhmuc/3.webp",
+        name: "Bánh Chocolate", category: "Bánh", price: 25, status: "Bánh chocolate ngọt ngào với lớp kem phủ."
+    },
+    {
+        id: 2,
+        image: "../image/imghomepage/product/product_danhmuc/1.webp",
 
+        name: "Bánh Vanilla", category: "Bánh", price: 20, status: "Bánh bông lan vanilla nhẹ nhàng."
+    },
+    {
+        id: 3,
+        image: "../image/imghomepage/product/product_danhmuc/2.webp",
+
+        name: "Bánh Dâu Tây", category: "Bánh", price: 30, status: "Bánh dâu tây tươi ngon với những trái dâu chín."
+    },
+    {
+        id: 4,
+        image: "../image/imghomepage/product/product_danhmuc/4.webp",
+
+        name: "Bánh Red Velvet", category: "Bánh", price: 40, status: "Bánh Red Velvet mềm mịn, phủ kem phô mai."
+    },
+    {
+        id: 5,
+        image: "../image/imghomepage/product/product_danhmuc/5.webp",
+
+        name: "Bánh Chanh", category: "Bánh", price: 22, status: "Bánh chanh tươi mát với lớp glaze ngọt ngào."
+    },
+    {
+        id: 6,
+        image: "../image/imghomepage/product/product_danhmuc/6.webp",
+
+        name: "Bánh Carrot", category: "Bánh", price: 28, status: "Bánh cà rốt với hạt óc chó và lớp kem phô mai."
+    }
+,
+{
+    id: 7,
+    image: "../image/imghomepage/product/product_danhmuc/7.webp",
+
+    name: "Bánh Chanh", category: "Bánh", price: 22, status: "Bánh chanh tươi mát với lớp glaze ngọt ngào."
+}
+,
+{
+    id: 8,
+    image: "../image/imghomepage/product/product_danhmuc/8.webp",
+
+    name: "Bánh Chanh", category: "Bánh", price: 22, status: "Bánh chanh tươi mát với lớp glaze ngọt ngào."
+}
+,
+{
+    id: 9,
+    image: "../image/imghomepage/product/product_danhmuc/9.webp",
+
+    name: "Bánh Chanh", category: "Bánh", price: 22, status: "Bánh chanh tươi mát với lớp glaze ngọt ngào."
+}
+,
+{
+    id: 10,
+    image: "../image/imghomepage/product/product_danhmuc/10.webp",
+
+    name: "Bánh Chanh", category: "Bánh", price: 22, status: "Bánh chanh tươi mát với lớp glaze ngọt ngào."
+}
+];
 const catalogs = [
-    { id: 1, name: "Danh mục 1" },
-    { id: 2, name: "Danh mục 2" },
-    { id: 3, name: "Danh mục 3" },
-    { id: 4, name: "Danh mục 4" },
-    { id: 5, name: "Danh mục 5" },
-    { id: 6, name: "Danh mục 6" },
-    { id: 7, name: "Danh mục 7" },
-    { id: 8, name: "Danh mục 8" },
-    { id: 9, name: "Danh mục 9" },
-    { id: 10, name: "Danh mục 10" },
-    { id: 11, name: "Danh mục 11" },
-    { id: 12, name: "Danh mục 12" },
-    { id: 13, name: "Danh mục 13" },
-    { id: 14, name: "Danh mục 14" },
-    { id: 15, name: "Danh mục 15" }
+    { id: 1, name: "Bánh Sinh Nhật Truyền Thống" },
+    { id: 2, name: "Bánh Sinh Nhật Dâu Tây" },
+    { id: 3, name: "Bánh Sinh Nhật Socola" },
+    { id: 4, name: "Bánh Sinh Nhật Phô Mai" },
+    { id: 5, name: "Bánh Sinh Nhật Trái Cây" },
+    { id: 6, name: "Bánh Sinh Nhật Kèm Kem" },
+    { id: 7, name: "Bánh Sinh Nhật Caramel" },
+    { id: 8, name: "Bánh Sinh Nhật Red Velvet" },
+    { id: 9, name: "Bánh Sinh Nhật Matcha" },
+    { id: 10, name: "Bánh Sinh Nhật Hoa Quả" },
+    { id: 11, name: "Bánh Sinh Nhật Bơ Sữa" },
+    { id: 12, name: "Bánh Sinh Nhật Chocolate" },
+    { id: 13, name: "Bánh Sinh Nhật Mousse" },
+    { id: 14, name: "Bánh Sinh Nhật Gelato" },
+    { id: 15, name: "Bánh Sinh Nhật Hồng Sâm" }
 ];
