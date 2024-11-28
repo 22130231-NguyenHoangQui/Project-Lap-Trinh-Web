@@ -11,14 +11,20 @@ function handleLoginForm() {
       var password = document.getElementById("password").value;
 
       // Kiểm tra thông tin đăng nhập
-      if (username !== "Qui" || password !== "123") {
-        // Hiển thị thông báo lỗi nếu thông tin không chính xác
-        document.getElementById("error-message").style.display = "block";
-      } else {
-        // Thực hiện hành động đăng nhập thành công
+      if (username === "Qui" || password === "123") {
         alert("Đăng nhập thành công!");
         localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('userRole', 'user');
         window.location.href = "../pages/HomePage.html";
+      } else if (username === "admin" && password === "admin") {
+        // Tài khoản admin
+        alert("Đăng nhập thành công (Admin)!");
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('userRole', 'admin'); // Lưu vai trò
+        window.location.href = "../pages/HomePage.html";
+      } else {
+        // Hiển thị thông báo lỗi nếu thông tin không chính xác
+        document.getElementById("error-message").style.display = "block";
       }
     });
 }
