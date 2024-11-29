@@ -85,6 +85,9 @@ function addToCart() {
   // Chuyển hướng tới trang giỏ hàng
   window.location.href = '../pages/shoppingCart.html';
 }
+function ToPayment(){  
+  window.location.href = "../pages/payment.html"; 
+}
 
 
 function setMainMarginTop() {

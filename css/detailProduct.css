@@ -766,6 +766,23 @@ h3 {
     max-width: 30px;
     width: 100%;
 }
+.pr-contai-image {
+    position: relative;
+    width: 100%; /* Đảm bảo chiều rộng chiếm toàn khung */
+    height: 300px; /* Đặt chiều cao cố định hoặc tùy chỉnh theo nhu cầu */
+    overflow: hidden; /* Đảm bảo phần ảnh vượt quá container sẽ bị ẩn */
+}
+
+
+.pr-image img {
+    height: 100%;
+    width: auto; /* Đảm bảo ảnh giữ tỷ lệ đúng */
+    object-fit: cover; /* Đảm bảo ảnh lấp đầy khung nhưng không bị méo */
+    object-position: center; /* Căn giữa ảnh nếu bị crop */
+    image-rendering: crisp-edges; /* Giữ hình ảnh rõ nét */
+    image-rendering: -webkit-optimize-contrast;
+}
+
 
 .pr-contai-image .modal {
     display: none;

@@ -216,23 +216,27 @@
 
                 </ul>
             </div>
-            <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4 boder-right">
+            <div class="container col-md-9 ms-sm-auto col-lg-10 px-md-4 boder-right">
                 <div class="container   d-flex justify-content-between align-items-center  border-bottom mt-3">
                     <h1 class="h2  mb-0" id="contentTitle">Tổng Quan</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class=" me-2" style="padding-right: 30px;">
                             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
                             <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-                            
-                            
+
+
                         </div>
 
                     </div>
                 </div>
+                
+                <div class="contentDate container" id="contentDiv" style="display: none;">
+                  
+                </div>
                 <div class="container">
                     <div id="content" class="mt-5"></div>
                     <canvas class="my-4 w-100" id="myChart" width="2860" height="1207" style="color: black;"></canvas>
-                    
+
                 </div>
             </div>
         </div>
@@ -298,22 +302,66 @@
             <button id="saveButton" type="button" onclick="saveChanges()">LƯU</button>
         </form>
     </div>
-    <div id="formContainer" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; background: white; padding: 20px; border: 1px solid #ddd; box-shadow: 0 0 10px rgba(0,0,0,0.2);">
-        <h2>Form Mới</h2>
-        <form>
-            <div>
-                <label for="username">Tên tài khoản:</label>
-                <input type="text" id="username" name="username" required>
+
+    <div id="editFormProduct" class="container-changeInfor" style="display: none;">
+        <h2>Chỉnh sửa sản phẩm</h2>
+        <div id="verification"></div>
+        <form id="editForm1">
+            <div class="form-group">
+                <label for="editProductName" class="required">Tên sản phẩm</label>
+                <input type="text" id="editProductName" name="productName" placeholder="Nhập tên sản phẩm" required>
             </div>
-            <div>
-                <label for="email1">Email:</label>
-                <input type="email" id="email1" name="email1" required>
+
+            <div class="form-group">
+                <label for="editPrice" class="required">Giá bán</label>
+                <input type="number" id="editPrice" name="price" placeholder="Nhập giá bán" required>
             </div>
-            <button type="submit">Lưu</button>
-            <button type="button" onclick="closeFormSetting()">Đóng</button>
+
+            <div class="form-group">
+                <label for="editCategory" class="required">Thể loại</label>
+                <input type="text" id="editCategory" name="category" placeholder="Nhập thể loại" required>
+            </div>
+
+            <div class="form-group">
+                <label for="editHeight" class="required">Chiều cao (cm)</label>
+                <input type="number" id="editHeight" name="height" placeholder="Nhập chiều cao" required>
+            </div>
+
+            <div class="form-group">
+                <label for="editDiameter" class="required">Đường kính (cm)</label>
+                <input type="number" id="editDiameter" name="diameter" placeholder="Nhập đường kính" required>
+            </div>
+
+            <div class="form-group">
+                <label for="editDetail" class="required">Mô tả sản phẩm</label>
+                <textarea id="editDetail" name="detail" placeholder="Nhập mô tả sản phẩm" required
+                    style="width: 100%;"></textarea>
+            </div>
+
+            <!-- Hình ảnh -->
+            <div class="form-group">
+                <label for="editImage" class="required">Hình ảnh hiện tại:</label>
+                <img id="editImagePreview" src="" alt="Preview" style="width: 100px; height: 100px; object-fit: cover;">
+                <img id="editImagePreview1" src="" alt="Preview"
+                    style="width: 100px; height: 100px; object-fit: cover; margin-left: 10px;">
+
+            </div>
+
+            <div class="form-group">
+                <label for="editImage" class="required">Thay đổi hình ảnh:</label>
+                <input type="file" id="editImage" name="image" accept="image/*">
+            </div>
+
+
+            <!-- Nút hành động -->
+            <button id="saveButton1" type="button" class="btn btn-primary" onclick="saveChanges()">LƯU</button>
         </form>
     </div>
-    
+
+
+
+
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
