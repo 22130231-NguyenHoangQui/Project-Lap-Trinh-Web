@@ -62,21 +62,21 @@ document.querySelectorAll('.dropdown-menu a').forEach(function (categoryLink) {
 });
 
 
-
 function createProductHTML(product) {
+    const productData = encodeURIComponent(JSON.stringify(product)); // Mã hóa chuỗi JSON để tránh lỗi cú pháp
     return `
 <div class="col">
     <div class="col-inner">
         <div class="product-small box">
             <div class="box-image">
-                <a href="${product.link}" class="product-link">
+                <a href="#" class="product-link" onclick="saveProductData('${productData}')">
                     <img width="247" height="296" src="${product.image}" alt="${product.name}">
                 </a>
             </div>
             <div class="box-text text-center">
                 <div class="title-wrapper">
                     <p>
-                        <a href="${product.link}">${product.id} - ${product.name}</a>
+                        <a href="#" onclick="saveProductData('${productData}')">${product.id} - ${product.name}</a>
                     </p>
                 </div>
                 <div class="price-wrapper">
@@ -87,13 +87,35 @@ function createProductHTML(product) {
                     </span>
                 </div>
                 <div class="add-to-cart-button">
-                    <a href="${product.link}">THÊM VÀO GIỎ</a>
+                    <a href="#" onclick="saveProductData('${productData}')">THÊM VÀO GIỎ</a>
+                </div>
+                <div class="product-description" style="display:none;">
+                    <span class="description-id">Mã: <span class="sku">${product.id}</span></span>
+                    <span class="description-content">Mô tả: <br>${product.description}</span>
+                </div>
+                 <div class="size-wrapper" style="display:none;">
+                    <p ><strong>Đường kính:</strong> ${product.diameter}</p> <!-- Hiển thị đường kính -->
+                    <p><strong>Chiều cao:</strong> ${product.height}</p> <!-- Hiển thị chiều cao -->
                 </div>
             </div>
         </div>
     </div>
 </div>
 `;
+}
+
+function saveProductData(encodedProduct) {
+    // Giải mã và parse JSON từ chuỗi mã hóa
+    const product = JSON.parse(decodeURIComponent(encodedProduct));
+
+    // Lưu dữ liệu vào Local Storage
+    localStorage.setItem('selectedProduct', JSON.stringify(product));
+
+    // In ra console để kiểm tra
+    console.log("Sản phẩm được lưu:", product);
+
+    // Chuyển hướng sang trang chi tiết sản phẩm
+    window.location.href = 'detailProduct.html';
 }
 
 
@@ -189,95 +211,31 @@ document.querySelectorAll('.product-categories li').forEach(function (categoryIt
 });
 
 // Function to load products based on the selected category
-function loadProducts(category) {
-    const imageList = imagesByCategory[category] || [];
-    const productContainer = document.querySelector('.products.row.row-small');
+// function loadProducts(category) {
+//     const imageList = imagesByCategory[category] || [];
+//     const productContainer = document.querySelector('.products.row.row-small');
 
-    productContainer.innerHTML = '';  // Clear previous products
+//     productContainer.innerHTML = '';  // Clear previous products
 
-    imageList.forEach((product) => {
-        productContainer.innerHTML += createProductHTML(product);
-    });
-
-    // Mark the active category
-    const categoryItems = document.querySelectorAll('.product-categories li');
-    categoryItems.forEach((item) => {
-        const link = item.querySelector('a');
-        if (link && link.textContent.trim() === getCategoryName(category)) {
-            item.classList.add('active');
-        } else {
-            item.classList.remove('active');
-        }
-    });
-}
-
-// Helper function to get category name from the mapping
-function getCategoryName(category) {
-    const categoryMapping = {
-        'banh_an_nhe': 'Bánh Ăn Nhẹ',
-        'banh_cac_ngay_le': 'Bánh Các Ngày Lễ',
-        'banh_chai_ruou': 'Bánh Chai Rượu Và Ly Bia Sang Trọng',
-    };
-    return categoryMapping[category] || category;
-}
-
-
-// document.addEventListener('DOMContentLoaded', () => {
-//     const cartButton = document.getElementById('cart-button');
-//     const cartIframe = document.getElementById('cart-iframe');
-//     const cartModal = document.getElementById('cart-modal');
-//     const modalOverlay = document.getElementById('modal-overlay');
-
-
-//     function updateCartTotal() {
-//         const iframeDoc = cartIframe.contentDocument || cartIframe.contentWindow.document;
-    
-//         if (!iframeDoc) {
-//             console.error('Không thể truy cập nội dung của iframe.');
-//             return;
-//         }
-    
-//         let total = 0;
-//         const subtotals = iframeDoc.querySelectorAll('td.subtotal'); // Lấy các ô chứa tổng tiền từ iframe
-    
-//         subtotals.forEach(subtotal => {
-//             const amount = parseInt(
-//                 subtotal.textContent.replace(/\D/g, '') // Loại bỏ ký tự không phải số (như "₫")
-//             );
-//             total += amount;
-//         });
-    
-//         // Cập nhật nút GIỎ HÀNG với tổng tiền
-//         cartButton.innerHTML = `GIỎ HÀNG/${total.toLocaleString()}₫`;
-//     }
-    
-
-//     cartIframe.addEventListener('load', () => {
-//         updateCartTotal(); // Gọi hàm sau khi nội dung iframe đã tải xong
-//     });
-//     cartButton.addEventListener('click', () => {
-//         cartIframe.src = 'shoppingCart.html';
-//         cartModal.style.display = 'flex';
-//         modalOverlay.style.display = 'block';
-//         cartModal.classList.add('show');
+//     imageList.forEach((product) => {
+//         productContainer.innerHTML += createProductHTML(product);
 //     });
 
-//     window.closeCartModal = function () {
-//         cartModal.style.display = 'none';
-//         modalOverlay.style.display = 'none';
-//         cartModal.classList.remove('show')  ;
-//         cartIframe.src = '';
-//     };
-
-//     window.addEventListener('click', (e) => {
-//         if (e.target === cartModal) {
-//             closeCartModal();
+//     // Mark the active category
+//     const categoryItems = document.querySelectorAll('.product-categories li');
+//     categoryItems.forEach((item) => {
+//         const link = item.querySelector('a');
+//         if (link && link.textContent.trim() === getCategoryName(category)) {
+//             item.classList.add('active');
+//         } else {
+//             item.classList.remove('active');
 //         }
 //     });
-    
-// });
+// }
 
-// is medium hiện đường dẫn của trang
+
+
+
 document.addEventListener("DOMContentLoaded", function () {
     var isMediumDiv = document.querySelector('.is-medium .container');
     var path = window.location.pathname.split('/').filter(function (part) { return part !== ''&& part !== 'pages'; });
@@ -336,12 +294,22 @@ function getCategoryName(category) {
 }
 
 const imagesByCategory = {
-    '2':[ { image: '../image/imghomepage/product/product_danhmuc/1.webp', id: 'TRMS4', name: 'Tiramisu Dâu Tây', price: '120.000₫', link: '#' }
+    '2':[ { image: '../image/imghomepage/product/product_danhmuc/7.webp', id: 'TRMS4', name: 'Tiramisu Dâu Tây', price: '120,000₫', link: '#' ,
+        description: 'Tiramisu Dâu Tây mềm mại với lớp kem mịn và vị chua ngọt của dâu tây tươi, một sự kết hợp tuyệt vời cho những ai yêu thích vị ngọt nhẹ nhàng.',   diameter: '16cm',  
+        height: '5cm' }
     ]
     
     ,'banh_an_nhe': [
-        { image: '../image/imghomepage/product/product_danhmuc/1.webp', id: 'TRMS4', name: 'Tiramisu Dâu Tây', price: '120.000₫', link: '#' },
-        { image: '../image/imghomepage/product/product_danhmuc/2.webp', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/7.webp', id: 'TRMS4', name: 'Tiramisu Dâu Tây', price: '300,000₫', link: '#' ,
+            description: 'Tiramisu Dâu Tây mềm mại với lớp kem mịn và vị chua ngọt của dâu tây tươi, một sự kết hợp tuyệt vời cho những ai yêu thích vị ngọt nhẹ nhàng.', diameter: '22cm',  
+            height: '6cm'},
+        { image: '../image/imghomepage/product/product_danhmuc/2.webp', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1,180,000₫', link: '#' ,
+             description: 'Bánh sinh nhật Su Sing Hoa Quả có lớp bánh xốp mềm, kem tươi mát lạnh và các loại trái cây tươi ngon, thích hợp cho mọi dịp lễ hội.', diameter: '22cm',  
+        height: '6cm'
+
+
+
+         },
         { image: '../image/imghomepage/product/product_danhmuc/3.webp', id: 'SH612', name: 'Su dẻo Phô mai', price: '65.000₫', link: '#' },
         { image: '../image/imghomepage/product/product_danhmuc/4.webp', id: 'VB104', name: 'Mousse Dâu Sữa Chua', price: '55.000₫', link: '#' },
         { image: '../image/imghomepage/product/product_danhmuc/5.webp', id: 'O1506', name: 'Nama choco cream', price: '55.000₫', link: '#' },

@@ -213,17 +213,40 @@
             </table>
 
             <!-- Phần hiển thị chi tiết đơn hàng -->
-            <div id="orderDetails" class="details">
+            <div id="orderDetails" class="details" style="display: none;">
                 <h5>Chi tiết hóa đơn</h5>
-                <p><strong>Mã hóa đơn:</strong> <span id="orderId"></span></p>
-                <p><strong>Ngày mua:</strong> <span id="orderDate"></span></p>
-                <p><strong>Tổng tiền:</strong> <span id="orderTotal"></span></p>
-                <p><strong>Sản phẩm:</strong></p>
-                <ul id="orderItems">
-                    <!-- Danh sách sản phẩm sẽ được render từ script.js -->
-                </ul>
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th>Mã hóa đơn</th>
+                            <td id="orderId"></td>
+                        </tr>
+                        <tr>
+                            <th>Ngày mua</th>
+                            <td id="orderDate"></td>
+                        </tr>
+                        <tr>
+                            <th>Tổng tiền</th>
+                            <td id="orderTotal"></td>
+                        </tr>
+                        <tr>
+                            <th>Sản phẩm</th>
+                            <td>
+                                <ul id="orderItems" style="list-style-type: none; padding: 0; margin: 0;"></ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Ảnh sản phẩm</th>
+                            <td>
+                                <img id="orderImage" src="../image/imghomepage/product/product_danhmuc/2.webp" alt="Ảnh sản phẩm" style="max-width: 100%; height: auto;">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+            
         </div>
+        
     </main>
     <!-- Chân trang -->
     <footer>
