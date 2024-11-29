@@ -1,10 +1,6 @@
 /* body */
 body {
     font-family: Tahoma, sans-serif;
-    background-color: #f9f9f9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 /* main */
 .container.container1 {
@@ -30,7 +26,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
+}
+.form-terms input {
+    margin-right: 10px; /* Khoảng cách giữa checkbox và label */
+}
+
+.form-terms label {
+    display: inline-block; /* Đảm bảo label nằm trên cùng dòng */
 }
 
 .form-terms input {
@@ -41,7 +43,7 @@ body {
     text-align: left;
 }
 
-#signup-form input,
+.info-login input,.info-customer input,
 select {
     width: 100%;
     padding: 10px;
@@ -54,12 +56,6 @@ select {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-}
-
-.form-group.form1 lable {
-    width: 40%;
-    text-align: right;
 
 }
 
