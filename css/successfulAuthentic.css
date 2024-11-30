@@ -7,7 +7,9 @@
     flex-grow: 1;
     padding: 20px;
 }
-
+main{
+    background: linear-gradient(to bottom, #eef2f3, #a9cff0);
+}
 .success-box {
     background-color: #ffffff;
     padding: 20px;

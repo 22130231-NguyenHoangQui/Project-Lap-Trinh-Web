@@ -322,6 +322,20 @@ header-center
     align-items: center;
 }
 
+#cart-container.active {
+    background-color: white; /* Màu nền khi active */
+    border-radius: 5px;
+}
+
+#cart-container.active i {
+    color: #1E90FF; /* Màu icon khi active */
+    transition: color 0.3s ease;
+}
+
+#cart-container.active #cart-button {
+    color: #1E90FF; /* Màu chữ khi active */
+    font-weight: bold;
+}
 
 
 
@@ -352,7 +366,7 @@ header-center
         color: #333;
         font-weight: 550;
         text-decoration: none;
-        background-color: #1E90FF;
+        background-color: rgb(241, 237, 252);
         padding: 10px 10px;
         }
     

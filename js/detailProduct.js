@@ -85,27 +85,11 @@ function addToCart() {
   // Chuyển hướng tới trang giỏ hàng
   window.location.href = '../pages/shoppingCart.html';
 }
-
-
-
-
-
-
-
-// Hàm để tạo hiệu ứng sticky header khi lăn chuột
-function stickyHeader() {
-  const header = document.querySelector(".header");
-  const headerStuck = document.querySelector(".header-container");
-  const stickyClass = "is-sticky"; // Thêm class để áp dụng hiệu ứng sticky
-
-  window.onscroll = function () {
-    if (window.scrollY > 0) {
-      headerStuck.classList.add(stickyClass); // Thêm class khi cuộn xuống
-    } else {
-      headerStuck.classList.remove(stickyClass); // Loại bỏ class khi cuộn lên đầu
-    }
-  };
+function ToPayment(){  
+  window.location.href = "../pages/payment.html"; 
 }
+
+
 function setMainMarginTop() {
   const headerContainer = document.querySelector(".header-container");
   const main = document.querySelector(".main");
@@ -149,36 +133,51 @@ function initializeRatingSystem(starSelector, ratingSelector) {
 initializeRatingSystem(".stars a", "#rating");
 
 // Hàm xử lý tăng hoặc giảm giá trị
-function handleQuantityChange(buttonSelector, inputSelector) {
-  const buttons = document.querySelectorAll(buttonSelector);
+document.addEventListener("DOMContentLoaded", function () {
+  const unitPrice = 250000; // Giá mỗi sản phẩm
+  const priceElement = document.querySelector("#product-price"); // Thẻ hiển thị giá
+  const quantityInput = document.querySelector("#quantity-1"); // Input số lượng
 
-  buttons.forEach((button) => {
-    button.addEventListener("click", function () {
-      const inputId = button.getAttribute("data-target");
-      const input = document.querySelector(inputId);
+  // Hàm cập nhật giá
+  function updatePrice() {
+    const quantity = parseInt(quantityInput.value) || 1;
+    const totalPrice = unitPrice * quantity;
+    priceElement.textContent = totalPrice.toLocaleString("vi-VN") + "₫";
+  }
 
-      if (input) {
-        let currentValue = parseInt(input.value) || 1;
-        const step = parseInt(input.getAttribute("step")) || 1;
-        const min = parseInt(input.getAttribute("min")) || 1;
+  // Hàm xử lý tăng/giảm số lượng
+  function handleQuantityChange(buttonSelector) {
+    const buttons = document.querySelectorAll(buttonSelector);
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", function () {
+        const step = parseInt(quantityInput.getAttribute("step")) || 1;
+        const min = parseInt(quantityInput.getAttribute("min")) || 1;
+        let currentValue = parseInt(quantityInput.value) || 1;
 
         if (button.classList.contains("input-reduce")) {
-          // Giảm giá trị
           currentValue = Math.max(min, currentValue - step);
         } else if (button.classList.contains("input-increase")) {
-          // Tăng giá trị
           currentValue += step;
         }
 
-        input.value = currentValue;
-      }
+        quantityInput.value = currentValue;
+        updatePrice(); // Cập nhật giá sau khi thay đổi số lượng
+      });
     });
-  });
-}
+  }
 
-document.addEventListener("DOMContentLoaded", function () {
-  handleQuantityChange(".is-form", ".input-qt");
+  // Lắng nghe sự kiện thay đổi số lượng trực tiếp từ input
+  quantityInput.addEventListener("input", updatePrice);
+
+  // Kích hoạt hàm tăng/giảm
+  handleQuantityChange(".is-form");
+
+  // Cập nhật giá ban đầu (nếu cần)
+  updatePrice();
 });
+
+
 
 
 function initializeImageModal(modalId, modalImgId, closeBtnSelector, imageLinkSelector) {
