@@ -1,4 +1,24 @@
+// đường dẫn hiện ở dưới header
+document.addEventListener("DOMContentLoaded", function () {
+    var isMediumDiv = document.querySelector('.is-medium .container');
+    var path = window.location.pathname.split('/').filter(function (part) { return part !== '' && part !== 'pages'; });
 
+    var breadcrumbHtml = '<a href="../pages/homepage.html">Trang Chủ</a>';
+    var urlPath = '/';
+
+    path.forEach(function (part, index) {
+        urlPath += part + '/';
+        if (index === path.length - 1 && part === 'ManageAdmin.html') {
+            breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">Quản Lý</a>';
+        } else {
+            breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">' + part.replace(/-/g, ' ') + '</a>';
+        }
+    });
+
+    isMediumDiv.innerHTML = breadcrumbHtml;
+});
+
+// khởi tạo các biến để click side bar
 const dashboardLink = document.getElementById('dashboardLink');
 const ordersLink = document.getElementById('ordersLink');
 const productsLink = document.getElementById('productsLink');
@@ -7,6 +27,7 @@ const catalogsLink = document.getElementById('catalogsLink');
 const contentDiv = document.getElementById('content');
 
 
+// click để hiện thị tương ứng
 dashboardLink.addEventListener('click', function (e) {
     e.preventDefault();
     changeContent('Dashboard', null);
@@ -39,30 +60,7 @@ catalogsLink.addEventListener('click', function (e) {
     document.getElementById('myChart').style.display = 'none';
 });
 
-
-// duong dan
-
-document.addEventListener("DOMContentLoaded", function () {
-    var isMediumDiv = document.querySelector('.is-medium .container');
-    var path = window.location.pathname.split('/').filter(function (part) { return part !== '' && part !== 'pages'; });
-
-    var breadcrumbHtml = '<a href="../pages/homepage.html">Trang Chủ</a>';
-    var urlPath = '/';
-
-    path.forEach(function (part, index) {
-        urlPath += part + '/';
-        if (index === path.length - 1 && part === 'ManageAdmin.html') {
-            breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">Quản Lý</a>';
-        } else {
-            breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">' + part.replace(/-/g, ' ') + '</a>';
-        }
-    });
-
-    isMediumDiv.innerHTML = breadcrumbHtml;
-});
-
-
-// tổng quan dashboard
+// khi load trang thì sẽ hiện ra trang này
 document.addEventListener('DOMContentLoaded', function () {
     const dashboardLink = document.getElementById('dashboardLink');
     dashboardLink.classList.add('active');
@@ -79,6 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+// tải canvas và log ra để test xem có tải được không
 window.addEventListener('DOMContentLoaded', (event) => {
     console.log("DOM đã tải xong!");
 
@@ -142,8 +141,91 @@ function changeContent(title, content, buttonConfigs = []) {
 
         buttonContainer.appendChild(button);
     });
+    const hiden = document.getElementById('contentDiv');
+    hiden.style.display = 'none';
+
 }
 
+// hàm thay đổi content hóa đơn 
+/* các biến để thay đổi  :
+    tiêu đề : contentTitle
+    thêm bộ lọc hóa đơn theo ngày : contentDiv
+    nội dung với danh sách ở trong : content        
+    icon để thêm sản phẩm, khách hàng ,..( có thể không thêm gì nếu đó là hóa đơn,
+    ...)
+
+
+    style.display: block để hiện lên các phần tử còn mặc định là none để ẩn
+    innerHTML = [title,button,...]
+        
+        
+        */
+function changeContentOrders(title, content, buttonConfigs = []) {
+    const contentTitle = document.getElementById('contentTitle');
+    const contentDiv = document.getElementById('contentDiv');
+    const contentContainer = document.getElementById('content');
+    const buttonContainer = document.querySelector('.btn-toolbar .me-2');
+
+    // Cập nhật tiêu đề , content , nút button 
+    contentTitle.style.display = 'block';
+    contentTitle.innerHTML = title;
+    contentContainer.innerHTML = content;
+    buttonContainer.innerHTML = '';
+
+    buttonConfigs.forEach(config => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'btn btn-sm btn-outline-secondary';
+        button.innerHTML = `<i class="${config.icon}"></i>`;
+
+        if (config.action) {
+            button.addEventListener('click', config.action);
+        }
+
+        buttonContainer.appendChild(button);
+    });
+
+    /*hàm filterDateDiv tạo ra để chứa bộ lọc của hóa đơn
+        class là div class="filter-date mt-3" và bên trong là phần inner HTML ở dưới  */
+    const filterDateDiv = document.createElement('div');
+    filterDateDiv.className = 'filter-date mt-3';
+    filterDateDiv.innerHTML = `
+        <div class="row filter-date123" id="contentDATE">
+          
+            <div class="col-lg-6">
+                <label for="statusFilter">Chọn trạng thái:</label>
+                <select class="form-select" id="statusSelect">
+                    <option value="">Chọn trạng thái</option>
+                    <option value="pending">Chờ xử lý</option>
+                    <option value="completed">Hoàn thành</option>
+                    <option value="cancelled">Đã hủy</option>
+                </select>
+            </div>
+              <div class="col-lg-6">
+                <label for="dateFilter">Chọn ngày:</label>
+                <div class="d-flex">
+                <input type="date" id="dateFilter" class="form-control">
+                <button type="button" class="btn btn-primary" id="filterButton" onclick="filterByDate()" style="margin-left: 5px;">Lọc</button>
+            </div>
+
+                </div>
+        </div>
+    `;
+
+    contentDiv.innerHTML = '';
+    const hiden = document.getElementById('contentDiv');
+    hiden.style.display = 'block';
+    contentDiv.appendChild(filterDateDiv);
+}
+
+/* các hàm hiện thị danh mục, khách hàng, sản phẩm,... khi click
+display*(page) -> để hiện trang số mấy để hiện thì
+// hiện thị danh mục
+// hiện thị hóa đơn
+// hiện thị người dùng
+// hiện thị sản phẩm
+
+*/
 function displayCataLogs(page) {
     const catalogsPerPage = 10;
     const startIndex = (page - 1) * catalogsPerPage;
@@ -167,14 +249,14 @@ function displayCataLogs(page) {
     paginatedCataLogs.forEach((catalog, index) => {
         tableHTML += `
             <tr>
-                 <td>${startIndex + index + 1}</td>
-                <td>${catalog.id}</td>
-                <td>${catalog.name}</td>
+                 <td class="cate1">${startIndex + index + 1}</td>
+                <td class="cate1">${catalog.id}</td>
+                <td class="cate1">${catalog.name}</td>
                 <td>
-                  <button class="icon-button" onclick="openEditForm(this)">
-               <i class="fa-solid fa-basket-shopping"></i>
-            </button>
-                 <button class="icon-button" onclick="openEditForm(this)">
+                  <button class="icon-button" onclick="deleteRowCate(this)">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+                 <button class="icon-button" onclick="openEditFormCate(this)">
                     <i class="fa-solid fa-pen"></i>
                 </button>
               
@@ -198,11 +280,10 @@ function displayCataLogs(page) {
 
     paginationHTML += '</ul></nav>';
 
-    changeContent('Orders', tableHTML + paginationHTML, [
-        { icon: 'fa-solid fa-gear', action: openFormSetting }
+    changeContent('Danh mục', tableHTML + paginationHTML, [
+        { icon: 'fa-solid fa-gear', action: openFormCate }
     ]);
 }
-
 
 function displayOrders(page) {
     const ordersPerPage = 10;
@@ -251,9 +332,11 @@ function displayOrders(page) {
 
     paginationHTML += '</ul></nav>';
 
-    changeContent('Orders', tableHTML + paginationHTML);
-}
+    changeContentOrders('Hóa đơn', tableHTML + paginationHTML, [
+    ]);
 
+
+}
 
 
 function displayCustomers(page) {
@@ -292,7 +375,7 @@ function displayCustomers(page) {
                 <td>${customer.isVerified}</td>
                 <td id="status-${customer.id}">${customer.status}</td>
               <td>
-                <button class="icon-button" onclick="openEditForm(this)">
+                <button class="icon-button" onclick="openFormAddCustomer(this)">
                     <i class="fa-solid fa-pen"></i>
                 </button>
                 <button class="icon-button" onclick="toggleStatus(this)">
@@ -321,10 +404,10 @@ function displayCustomers(page) {
     paginationHTML += '</ul></nav>';
 
     changeContent('Quản lý tài khoản', tableHTML + paginationHTML, [
-        { icon: 'fa-solid fa-gear', action: openFormSetting }
+        { icon: 'fa-solid fa-gear', action: openFormCustomerSetting }
     ]);
-}
 
+}
 
 function displayProducts(page) {
     const productsPerPage = 10;
@@ -350,25 +433,26 @@ function displayProducts(page) {
     paginatedProducts.forEach(product => {
         tableHTML += `
             <tr>
-                <td>${product.id}</td>
-                <td>
-                <img src="${product.image}" style="width: 50px; height: 50px; object-fit: cover; margin-right: 10px;">
-                ${product.name}
-
+                <td class="pro">${product.id}</td>
+              <td class="pro">
+                    <img src="${product.image}" alt="Product Image" style="width: 50px; height: 50px; object-fit: cover; margin-right: 10px;">
+                    <span class="product-name">${product.name}</span>
                 </td>
-                <td>${product.price}</td>
-                <td>${product.status}</td>
+
+                <td class="pro">${product.price}</td>
+                <td class="pro">${product.detail}</td>
+                <td  id="status-${product.id}">${product.status}</td>
                 <td>
 
-                <button class="icon-button" onclick="openEditForm(this)">
-               <i class="fa-solid fa-basket-shopping"></i>
-            </button>
+                <button class="icon-button" onclick="deleteRow(this)">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
 
 
-                          <button class="icon-button" onclick="openEditForm(this)">
+                 <button class="icon-button" onclick="openEditFormProduct(this)">
                     <i class="fa-solid fa-pen"></i>
                 </button>
-                <button class="icon-button" onclick="toggleStatus(this)">
+                <button class="icon-button" onclick="toggleStatusProduct(this)">
                     <i class="fa-solid fa-lock"></i>
                 </button>   
                 </td>
@@ -393,42 +477,36 @@ function displayProducts(page) {
 
     paginationHTML += '</ul></nav>';
 
-    changeContent('Products', tableHTML + paginationHTML, [
-        { icon: 'fa-solid fa-gear', action: openFormSetting }
+    changeContent('Sản phẩm', tableHTML + paginationHTML, [
+        { icon: 'fa-solid fa-gear', action: openFormAddProduct }
     ]);
 }
 
 
+/**
+// CÁC SỰ KIỆN TRONG  QUẢN LÝ TÀI KHOẢN 
+ * thêm khách hàng  
+ * 
+ */
+function openFormAddCustomer() {
+    const formContainer = document.getElementById('formContainer');
+    const overlay = document.getElementById('overlay');
 
-// active 
-function toggleStatus(button) {
-    // Lấy dòng của customer từ button
-    const row = button.closest('tr'); // Tìm đến hàng chứa button
-    const statusCell = row.querySelector('td[id^="status-"]'); // Lấy cột status (dựa trên id)
+    formContainer.style.display = 'block';
+    overlay.style.display = 'block';
 
-    // Kiểm tra và thay đổi nội dung status
-    if (statusCell.textContent === "Active") {
-        statusCell.textContent = "Inactive";
-    } else {
-        statusCell.textContent = "Active";
-    }
-
-    // Thay đổi icon trong nút
-    const icon = button.querySelector('i');
-    if (statusCell.textContent === "Active") {
-        icon.classList.remove('fa-lock');
-        icon.classList.add('fa-unlock');
-    } else {
-        icon.classList.remove('fa-unlock');
-        icon.classList.add('fa-lock');
-    }
+    overlay.addEventListener('click', closeFormAddCustomer);
 }
 
+// thay đổi thông tin
 
+function closeFormAddCustomer() {
+    const formContainer = document.getElementById('formContainer');
+    formContainer.style.display = 'none';
+    overlay.style.display = 'none';
+}
 
-
-// icon pen thay đổi dữ liệu
-function openEditForm(button) {
+function openFormCustomerSetting(button) {
     const row = button.closest("tr");
     const columns = row.querySelectorAll("td");
 
@@ -454,6 +532,10 @@ function openEditForm(button) {
     document.getElementById("editFormContainer").style.display = "block";
     document.getElementById("overlay").style.display = "block";
 }
+function closeForm() {
+    document.getElementById("editFormContainer").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+}
 
 function saveChanges(row) {
     const name = document.getElementById("fname").value;
@@ -471,35 +553,205 @@ function saveChanges(row) {
 }
 
 
-function openFormSetting() {
-    const formContainer = document.getElementById('formContainer');
-    const overlay = document.getElementById('overlay');
 
-    formContainer.style.display = 'block';
-    overlay.style.display = 'block';
+// khóa hoặc mở tài khoản
+function toggleStatus(button) {
+    // Lấy dòng của customer từ button
+    const row = button.closest('tr'); // Tìm đến hàng chứa button
+    const statusCell = row.querySelector('td[id^="status-"]'); // Lấy cột status (dựa trên id)
 
-    overlay.addEventListener('click', closeFormSetting);
+    // Kiểm tra và thay đổi nội dung status
+    if (statusCell.textContent === "Active") {
+        statusCell.textContent = "Inactive";
+    } else {
+        statusCell.textContent = "Active";
+    }
+
+    // Thay đổi icon trong nút
+    const icon = button.querySelector('i');
+    if (statusCell.textContent === "Active") {
+        icon.classList.remove('fa-lock');
+        icon.classList.add('fa-unlock');
+    } else {
+        icon.classList.remove('fa-unlock');
+        icon.classList.add('fa-lock');
+    }
 }
 
-function closeFormSetting() {
-    const formContainer = document.getElementById('formContainer');
-    formContainer.style.display = 'none';
+
+// CÁC SỰ KIỆN TRONG QUẢN LÝ SẢN PHẨM
+function openFormAddProduct() {
+    const formProduct = document.getElementById('formProduct');
+    const overlay = document.getElementById('overlay');
+
+    formProduct.style.display = 'block'
+    overlay.style.display = 'block'
+    console.log(123);
+
+    overlay.addEventListener('click', closeFormAddProduct);
+    console.log(123);
+
+}
+
+function closeFormAddProduct() {
+    const formProduct = document.getElementById('formProduct');
+    console.log(123);
+
+    formProduct.style.display = 'none';
     overlay.style.display = 'none';
+    console.log(123);
+
+}
+
+function toggleStatusProduct(button) {
+    // Lấy dòng của customer từ button
+    const row = button.closest('tr'); // Tìm đến hàng chứa button
+    const statusCell = row.querySelector('td[id^="status-"]'); // Lấy cột status (dựa trên id)
+
+    // Kiểm tra và thay đổi nội dung status
+    if (statusCell.textContent === "Đang bán") {
+        statusCell.textContent = "KHÔNG BÁN";
+    } else {
+        statusCell.textContent = "Đang bán";
+    }
+
+    // Thay đổi icon trong nút
+    const icon = button.querySelector('i');
+    if (statusCell.textContent === "Đang bán") {
+        icon.classList.remove('fa-lock');
+        icon.classList.add('fa-unlock');
+    } else {
+        icon.classList.remove('fa-unlock');
+        icon.classList.add('fa-lock');
+    }
+}
+
+function openEditFormProduct(button) {
+    const row = button.closest("tr");
+    const columns = row.querySelectorAll(".pro");
+
+
+    const name = columns[1].textContent.trim();
+    const price = columns[2].textContent;
+    const detail = columns[3].textContent;
+    const imageElement = columns[1].querySelector("img"); // Tìm thẻ <img> trong cột thứ 2
+    const imageSrc = imageElement ? imageElement.src : ""; // Đường dẫn ảnh (src)
+
+
+    document.getElementById("editProductName").value = name;
+    document.getElementById("editPrice").value = price;
+    document.getElementById("editDetail").value = detail;
+    const previewImage = document.getElementById("editImagePreview");
+    const previewImage1 = document.getElementById("editImagePreview1");
+
+    if (previewImage) {
+        previewImage.src = imageSrc;
+        previewImage1.src = "../image/imghomepage/product/product_danhmuc/1.webp";
+    }
+    document.getElementById("saveButton1").onclick = function () {
+        saveChangesProduct(row);
+    };
+
+    document.getElementById("editFormProduct").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+
+}
+function saveChangesProduct(row) {
+    const name = document.getElementById("editProductName").value;
+
+    const detail = document.getElementById("editDetail").value;
+    const price = document.getElementById("editPrice").value;
+    // const previewImage = document.getElementById("editImagePreview");
+
+    row.querySelector("td.pro:nth-child(2) .product-name").textContent = name;
+    row.querySelector("td.pro:nth-child(3)").textContent = price;
+    row.querySelector("td.pro:nth-child(4)").textContent = detail;
+
+    closeFormProductEdit();
+
+}
+function deleteRow(button) {
+    const row = button.closest("tr");
+
+    // Xác nhận trước khi xóa
+    const confirmDelete = confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?");
+    if (confirmDelete) {
+        // Xóa hàng khỏi bảng
+        row.remove();
+        alert("Sản phẩm đã được xóa thành công.");
+    }
+}
+// CÁC SỰ KIỆN TRONG DANH MỤC
+
+
+function openFormCate() {
+    const formProduct = document.getElementById('editFormCate');
+    const overlay = document.getElementById('overlay');
+
+    formProduct.style.display = 'block'
+    overlay.style.display = 'block'
+
+    overlay.addEventListener('click', closeFormCate);
 }
 
 
 
 document.getElementById("overlay").addEventListener("click", closeForm);
 
-function closeForm() {
-    document.getElementById("editFormContainer").style.display = "none";
-    document.getElementById("overlay").style.display = "none";
+
+function closeFormCate() {
+    const formProduct = document.getElementById('editFormCate');
+    formProduct.style.display = 'none';
+    overlay.style.display = 'none';
+}
+
+function deleteRowCate(button) {
+    const row = button.closest("tr");
+
+    // Xác nhận trước khi xóa
+    const confirmDelete = confirm("Bạn có chắc chắn muốn xóa danh mục này không?");
+    if (confirmDelete) {
+        // Xóa hàng khỏi bảng
+        row.remove();
+        alert("Danh mục đã được xóa thành công.");
+    }
+}
+
+function openEditFormCate(button) {
+    const row = button.closest("tr");
+    const columns = row.querySelectorAll(".cate1");
+
+
+    const name = columns[2].textContent.trim();
+
+
+
+    document.getElementById("editCateName1").value = name;
+
+
+    document.getElementById("saveButtonCate").onclick = function () {
+        saveChangesCate(row);
+    };
+
+    document.getElementById("editFormCate").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+
+}
+
+function saveChangesCate(row) {
+    const name = document.getElementById("editCateName1").value;
+
+
+    row.querySelector("td.pro:nth-child(2) .cate-name").textContent = name;
+
+    console.log(213);
+    
+    closeFormCate();
+
 }
 
 
-
-
-// Data
+// Dữ liệu mẫu
 const orders = [
     { id: 1, name: "Chocolate Cake", customer: "Alice", date: "2024-10-10", price: "$25" },
     { id: 2, name: "Vanilla Cake", customer: "Bob", date: "2024-10-12", price: "$20" },
@@ -586,72 +838,99 @@ const customers = [
     }
 ];
 
-
 const products = [
     {
         id: 1,
         image: "../image/imghomepage/product/product_danhmuc/3.webp",
-        name: "Bánh Chocolate", category: "Bánh", price: 25, status: "Bánh chocolate ngọt ngào với lớp kem phủ."
+        name: "Bánh Chocolate",
+        category: "Bánh",
+        price: 25,
+        detail: "Bánh chocolate ngọt ngào với lớp kem phủ.",
+        status: "Đang bán"
     },
     {
         id: 2,
         image: "../image/imghomepage/product/product_danhmuc/1.webp",
-
-        name: "Bánh Vanilla", category: "Bánh", price: 20, status: "Bánh bông lan vanilla nhẹ nhàng."
+        name: "Bánh Vanilla",
+        category: "Bánh",
+        price: 20,
+        detail: "Bánh bông lan vanilla nhẹ nhàng.",
+        status: "Đang bán"
     },
     {
         id: 3,
         image: "../image/imghomepage/product/product_danhmuc/2.webp",
-
-        name: "Bánh Dâu Tây", category: "Bánh", price: 30, status: "Bánh dâu tây tươi ngon với những trái dâu chín."
+        name: "Bánh Dâu Tây",
+        category: "Bánh",
+        price: 30,
+        detail: "Bánh dâu tây tươi ngon với những trái dâu chín.",
+        status: "Đang bán"
     },
     {
         id: 4,
         image: "../image/imghomepage/product/product_danhmuc/4.webp",
-
-        name: "Bánh Red Velvet", category: "Bánh", price: 40, status: "Bánh Red Velvet mềm mịn, phủ kem phô mai."
+        name: "Bánh Red Velvet",
+        category: "Bánh",
+        price: 40,
+        detail: "Bánh Red Velvet mềm mịn, phủ kem phô mai.",
+        status: "Đang bán"
     },
     {
         id: 5,
         image: "../image/imghomepage/product/product_danhmuc/5.webp",
-
-        name: "Bánh Chanh", category: "Bánh", price: 22, status: "Bánh chanh tươi mát với lớp glaze ngọt ngào."
+        name: "Bánh Chanh",
+        category: "Bánh",
+        price: 22,
+        detail: "Bánh chanh tươi mát với lớp glaze ngọt ngào.",
+        status: "Đang bán"
     },
     {
         id: 6,
         image: "../image/imghomepage/product/product_danhmuc/6.webp",
-
-        name: "Bánh Carrot", category: "Bánh", price: 28, status: "Bánh cà rốt với hạt óc chó và lớp kem phô mai."
+        name: "Bánh Carrot",
+        category: "Bánh",
+        price: 28,
+        detail: "Bánh cà rốt với hạt óc chó và lớp kem phô mai.",
+        status: "Đang bán"
+    },
+    {
+        id: 7,
+        image: "../image/imghomepage/product/product_danhmuc/7.webp",
+        name: "Bánh Chanh",
+        category: "Bánh",
+        price: 22,
+        detail: "Bánh chanh tươi mát với lớp glaze ngọt ngào.",
+        status: "Đang bán"
+    },
+    {
+        id: 8,
+        image: "../image/imghomepage/product/product_danhmuc/8.webp",
+        name: "Bánh Chanh",
+        category: "Bánh",
+        price: 22,
+        detail: "Bánh chanh tươi mát với lớp glaze ngọt ngào.",
+        status: "Đang bán"
+    },
+    {
+        id: 9,
+        image: "../image/imghomepage/product/product_danhmuc/9.webp",
+        name: "Bánh Chanh",
+        category: "Bánh",
+        price: 22,
+        detail: "Bánh chanh tươi mát với lớp glaze ngọt ngào.",
+        status: "Đang bán"
+    },
+    {
+        id: 10,
+        image: "../image/imghomepage/product/product_danhmuc/10.webp",
+        name: "Bánh Chanh",
+        category: "Bánh",
+        price: 22,
+        detail: "Bánh chanh tươi mát với lớp glaze ngọt ngào.",
+        status: "Đang bán"
     }
-,
-{
-    id: 7,
-    image: "../image/imghomepage/product/product_danhmuc/7.webp",
-
-    name: "Bánh Chanh", category: "Bánh", price: 22, status: "Bánh chanh tươi mát với lớp glaze ngọt ngào."
-}
-,
-{
-    id: 8,
-    image: "../image/imghomepage/product/product_danhmuc/8.webp",
-
-    name: "Bánh Chanh", category: "Bánh", price: 22, status: "Bánh chanh tươi mát với lớp glaze ngọt ngào."
-}
-,
-{
-    id: 9,
-    image: "../image/imghomepage/product/product_danhmuc/9.webp",
-
-    name: "Bánh Chanh", category: "Bánh", price: 22, status: "Bánh chanh tươi mát với lớp glaze ngọt ngào."
-}
-,
-{
-    id: 10,
-    image: "../image/imghomepage/product/product_danhmuc/10.webp",
-
-    name: "Bánh Chanh", category: "Bánh", price: 22, status: "Bánh chanh tươi mát với lớp glaze ngọt ngào."
-}
 ];
+
 const catalogs = [
     { id: 1, name: "Bánh Sinh Nhật Truyền Thống" },
     { id: 2, name: "Bánh Sinh Nhật Dâu Tây" },

@@ -11,6 +11,9 @@
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/settingAll.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/fotter.css">
     <link rel="stylesheet" href="../css/admin.css">
 
 
@@ -77,7 +80,7 @@
 
 
 
-                            <a href="#">
+                            <a href="../pages/homepage.html">
                                 <li>Trang chủ</li>
                             </a>
                             <div class="dropdown" style=" display:flex; align-items: center;  height: 100%; ">
@@ -172,7 +175,6 @@
         <div class="container"></div>
     </div>
     <main>
-        <!-- <img src="../image/imghomepage/product/product_default/1.webp" alt=""> -->
         <div class="row" style="margin-top: 30px; ">
             <div class="col-lg-2  boder-left">
                 <div class="d-flex align-items-center gap-1" style="margin-top: 30px;">
@@ -216,31 +218,77 @@
 
                 </ul>
             </div>
-            <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4 boder-right">
+            <div class="container col-md-9 ms-sm-auto col-lg-10 px-md-4 boder-right">
                 <div class="container   d-flex justify-content-between align-items-center  border-bottom mt-3">
                     <h1 class="h2  mb-0" id="contentTitle">Tổng Quan</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class=" me-2" style="padding-right: 30px;">
                             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
                             <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-                            
-                            
+
+
                         </div>
 
                     </div>
                 </div>
+
+                <div class="contentDate container" id="contentDiv" style="display: none;">
+
+                </div>
                 <div class="container">
                     <div id="content" class="mt-5"></div>
                     <canvas class="my-4 w-100" id="myChart" width="2860" height="1207" style="color: black;"></canvas>
-                    
+
                 </div>
             </div>
         </div>
     </main>
 
+    <!-- overlay mờ khi hiện form  -->
     <div id="overlay" class="overlay"></div>
 
-    <div id="editFormContainer" class="container-changeInfor" style="display: none;">
+    <!-- form thêm người dùng  -->
+    <div id="formContainer" class="create-user12 user" style="display: none; ">
+        <button onclick="closeFormSetting()"
+            style="position: absolute; top: 10px; right: 10px; background: transparent; border: none; font-size: 18px; cursor: pointer;">&times;</button>
+
+        <h2 style="text-align: center;">Thêm Người Dùng</h2>
+
+        <form class="d-flex form-user" style="flex-direction: column;" id="addUserForm">
+            <div class="form-group mt-3">
+                <label for="username" class="required">Tên Đăng Nhập</label>
+                <input type="text" id="username" name="username" placeholder="Nhập tên đăng nhập" required>
+            </div>
+
+            <div class="form-group mt-3">
+
+                <label for="password" class="required">Mật Khẩu</label>
+                <input type="password" id="password1" name="password" placeholder="Nhập mật khẩu" required>
+            </div>
+
+            <div class="form-group mt-3">
+
+                <label for="confirmPassword" class="required">Nhập Lại Mật Khẩu</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Nhập lại mật khẩu"
+                    required>
+            </div>
+
+            <div class="form-group mt-3">
+
+                <label for="email" class="required">Email</label>
+                <input type="email" id="email1" name="email" placeholder="Nhập email" required>
+            </div>
+
+            <!-- Nút Lưu -->
+            <div style="text-align: center; margin-top: 20px;">
+                <button type="submit" id="saveButton123" class="btn btn-primary">Lưu</button>
+            </div>
+        </form>
+    </div>
+
+
+    <!-- form ẩn khi click thêm người dùng -->
+    <div id="editFormContainer" class=" create-user12 user" style="display: none;">
         <h2>Thay Đổi Thông Tin</h2>
         <div id="verification"></div>
         <form id="editForm">
@@ -295,25 +343,186 @@
                 <input type="text" id="receive" name="dia_chi_nhan_hang" placeholder="Nhập địa chỉ nhận hàng" required>
             </div>
 
-            <button id="saveButton" type="button" onclick="saveChanges()">LƯU</button>
+            <button id="saveButton" type="button" onclick="closeFormSetting">LƯU</button>
         </form>
     </div>
-    <div id="formContainer" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; background: white; padding: 20px; border: 1px solid #ddd; box-shadow: 0 0 10px rgba(0,0,0,0.2);">
-        <h2>Form Mới</h2>
-        <form>
-            <div>
-                <label for="username">Tên tài khoản:</label>
-                <input type="text" id="username" name="username" required>
+
+    <!-- form ẩn khi click để thay đổi sản phẩm -->
+    <!-- Form để thêm/chỉnh sửa sản phẩm -->
+    <!--  -->
+    <div id="formProduct" class="product addproduct" style="display: none; margin-top: 60px;">
+        <!-- Nút đóng form -->
+        <button onclick="closeFormAddProduct()"
+            style="position: absolute; top: 10px; right: 10px; background: transparent; border: none; font-size: 18px; cursor: pointer;">&times;</button>
+
+        <!-- Tiêu đề -->
+        <h2 class="text-center">Thêm sản phẩm</h2>
+
+        <!-- Form chỉnh sửa sản phẩm -->
+        <form id="editFormProduct123" class="row g-3" style="height: auto;">
+            <!-- Tên sản phẩm -->
+            <div class="form-group">
+                <label for="editProductName123" class="form-label">Tên sản phẩm</label>
+                <input type="text" class="form-control" id="editProductName123" name="productName"
+                    placeholder="Nhập tên sản phẩm" required>
             </div>
-            <div>
-                <label for="email1">Email:</label>
-                <input type="email" id="email1" name="email1" required>
+
+            <div class="form-group">
+
+                <label for="editPrice123" class="form-label">Giá bán</label>
+                <input type="number" class="form-control" id="editPrice123" name="price" placeholder="Nhập giá bán"
+                    required>
             </div>
-            <button type="submit">Lưu</button>
-            <button type="button" onclick="closeFormSetting()">Đóng</button>
+
+            <div class="form-group">
+
+                <label for="editCategory1" class="form-label">Thể loại</label>
+                <input type="text" class="form-control" id="editCategory1" name="category" placeholder="Nhập thể loại"
+                    required>
+            </div>
+
+            <div class="form-group">
+
+                <label for="editHeight123" class="form-label">Chiều cao (cm)</label>
+                <input type="number" class="form-control" id="editHeight123" name="height" placeholder="Nhập chiều cao"
+                    required>
+            </div>
+            <div class="form-group">
+
+                <label for="editDiameter123" class="form-label">Đường kính (cm)</label>
+                <input type="number" class="form-control" id="editDiameter123" name="diameter"
+                    placeholder="Nhập đường kính" required>
+            </div>
+
+            <div class="form-group ">
+
+                <label for="editDetail11" class="form-label" style="padding-bottom: 30px;">Mô tả sản phẩm</label>
+                <textarea class="form-control" id="editDetail11" name="detail" placeholder="Nhập mô tả sản phẩm"
+                    rows="2" required></textarea>
+            </div>
+
+            <!-- Hình ảnh -->
+            <div class="form-group">
+                <label class="form-label">Hình ảnh hiện tại:</label>
+                <div class="d-flex align-items-center">
+                    <img id="editImagePreview" src="" alt="Preview" class="img-thumbnail me-2"
+                        style="width: 100px; height: 100px; object-fit: cover;">
+                    <img id="editImagePreview1" src="" alt="Preview" class="img-thumbnail"
+                        style="width: 100px; height: 100px; object-fit: cover;">
+                    <button type="button" class="btn btn-danger ms-3" onclick="removeCurrentImages()">Xóa hình
+                        ảnh</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+
+                <label for="editImage123" class="form-label">Thay đổi hình ảnh</label>
+                <input type="file" class="form-control" id="editImage123" name="image" accept="image/*">
+            </div>
+
+            <div class="form-group justify-content-between">
+
+                <button type="button" class="btn btn-secondary me-2" onclick="closeFormAddProduct()">Hủy</button>
+                <button type="submit" class="btn btn-primary" onclick="saveProduct()">Lưu</button>
+            </div>
         </form>
     </div>
-    
+
+    <!-- form  khi click để thay đổi sản phẩm -->
+    <div id="editFormProduct" class="container-changeInfor" style="display: none;">
+        <h2>Chỉnh sửa sản phẩm</h2>
+        <div id="verification"></div>
+        <form id="editForm1">
+            <div class="form-group">
+                <label for="editProductName" class="required">Tên sản phẩm</label>
+                <input type="text" id="editProductName" name="productName" placeholder="Nhập tên sản phẩm" required>
+            </div>
+
+            <div class="form-group">
+                <label for="editPrice" class="required">Giá bán</label>
+                <input type="number" id="editPrice" name="price" placeholder="Nhập giá bán" required>
+            </div>
+
+            <div class="form-group">
+                <label for="editCategory" class="required">Thể loại</label>
+                <input type="text" id="editCategory" name="category" placeholder="Nhập thể loại" required>
+            </div>
+
+            <div class="form-group">
+                <label for="editHeight" class="required">Chiều cao (cm)</label>
+                <input type="number" id="editHeight" name="height" placeholder="Nhập chiều cao" required>
+            </div>
+
+            <div class="form-group">
+                <label for="editDiameter" class="required">Đường kính (cm)</label>
+                <input type="number" id="editDiameter" name="diameter" placeholder="Nhập đường kính" required>
+            </div>
+
+            <div class="form-group">
+                <label for="editDetail" class="required">Mô tả sản phẩm</label>
+                <textarea id="editDetail" name="detail" placeholder="Nhập mô tả sản phẩm" required
+                    style="width: 100%;"></textarea>
+            </div>
+
+            <!-- Hình ảnh -->
+            <div class="form-group">
+                <label for="editImage" class="required">Hình ảnh hiện tại:</label>
+                <img id="editImagePreview" src="" alt="Preview" style="width: 100px; height: 100px; object-fit: cover;">
+                <img id="editImagePreview1" src="" alt="Preview"
+                    style="width: 100px; height: 100px; object-fit: cover; margin-left: 10px;">
+
+            </div>
+
+            <div class="form-group">
+                <label for="editImage" class="required">Thay đổi hình ảnh:</label>
+                <input type="file" id="editImage" name="image" accept="image/*">
+            </div>
+
+
+            <!-- Nút hành động -->
+            <button id="saveButton1" type="button" class="btn btn-primary" onclick="saveChanges()">LƯU</button>
+        </form>
+    </div>
+
+
+    <!-- form để thêm danh mục  -->
+    <div id="   " class="container py-4 px-4 border " style="display: none; max-width: 500px; margin: auto;">
+        <h2 class="text-center mb-4">Thêm danh mục</h2>
+
+        <div id="verification" class="alert alert-warning d-none"></div>
+
+        <form id="editFormCateBaby">
+            <div class="mb-3">
+                <label for="editCateName" class="form-label required">Tên danh mục</label>
+                <input type="text" id="editCateName" name="productName1" class="form-control"
+                    placeholder="Nhập tên danh mục" required>
+            </div>
+
+            <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-secondary me-2" onclick="closeFormCate()">Hủy</button>
+                <button type="submit" class="btn btn-primary" id="saveButtonCate">Thêm</button>
+            </div>
+        </form>
+    </div>
+    <div id="editFormCate" class="container py-4 px-4 border " style="display: none; max-width: 500px; margin: auto;">
+        <h2 class="text-center mb-4">Chỉnh sửa danh mục</h2>
+
+        <div id="verification" class="alert alert-warning d-none"></div>
+
+        <form id="editFormCateBaby1">
+            <div class="mb-3">
+                <label for="editCateName" class="form-label required">Tên danh mục</label>
+                <input type="text" id="editCateName1" name="productName1" class="form-control"
+                    placeholder="Nhập tên danh mục" required>
+            </div>
+
+            <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-secondary me-2" onclick="closeFormCate()">Hủy</button>
+                <button type="submit" class="btn btn-primary" id="saveButtonCate1" onclick="saveChangesCate()">Thêm</button>
+            </div>
+        </form>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
