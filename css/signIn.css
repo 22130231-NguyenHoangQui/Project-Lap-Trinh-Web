@@ -1,44 +1,62 @@
+
 /* body */
 body {
     font-family: Tahoma, sans-serif;
-    height: 100vh;
-    margin: 0;
+    background: #a9cff0;
 }
 
-
-/* main */
-
+/* main container */
+main{
+    background: linear-gradient(to bottom, #eef2f3, #a9cff0);
+}
 .container.container1 {
-
-    background-color: white;
-    margin: 20px;
+    background-color: white;  /* Đảm bảo phần tử này có nền trắng */
+    margin: 80px auto;
     padding: 20px;
     width: 450px;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); /* Tăng độ mờ và bán kính đổ bóng */
+    border: 2px solid #cccfd1; /* Viền xanh nổi bật */
     text-align: center;
+    position: relative;
 }
 
+/* Close button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: #333;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
 
-/* duoi or main */
+.close-btn:hover {
+    color: #ff0000;
+}
+
+/* Logo */
 .img-logo1 {
     width: 60%;
     height: auto;
     padding: 30px;
 }
 
-
+/* Title */
 .title-form {
     font-weight: bold;
 }
 
+/* Error message */
 #error-message {
     color: red;
     display: none;
 }
 
-
+/* Forgot password link */
 .forgot {
     color: #007bff;
     text-decoration: none;
@@ -54,6 +72,7 @@ body {
     border: 1px solid #ccc;
 }
 
+/* Submit button */
 .button-submit {
     background-color: #1056fa;
     color: white;
@@ -68,9 +87,11 @@ body {
     background-color: #0903af;
 }
 
+/* Footer */
 .footer {
     margin-top: 10px;
 }
+
 .footer a{
     color: #1056fa;
 }

@@ -355,3 +355,44 @@ li {
 .nav-link:hover {
     color: #000;
 }
+.navbar.bg-primary {
+    background-color: #007bff !important; /* Màu nền chính */
+    padding: 10px 0; /* Khoảng cách dọc */
+    border-bottom: 2px solid #0056b3; /* Đường viền dưới */
+}
+
+.navbar .nav-tabs {
+    border-bottom: none; /* Loại bỏ viền mặc định của nav-tabs */
+    justify-content: center; /* Căn giữa danh sách */
+}
+
+.nav-tabs .nav-link {
+    color: #343a40; /* Màu chữ */
+    background-color: #ffffff; /* Màu nền tab */
+    border: 1px solid #dee2e6; /* Đường viền */
+    border-radius: 5px; /* Bo góc */
+    margin: 0 5px; /* Khoảng cách giữa các tab */
+    padding: 10px 15px; /* Khoảng cách bên trong */
+    transition: all 0.3s ease-in-out; /* Hiệu ứng chuyển đổi */
+}
+
+.nav-tabs .nav-link:hover {
+    background-color: #f8f9fa; /* Nền khi hover */
+    color: #0056b3; /* Màu chữ khi hover */
+    border-color: #ced4da; /* Đổi màu viền khi hover */
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #007bff; /* Nền của tab đang được chọn */
+    color: #ffffff; /* Màu chữ khi tab được chọn */
+    border-color: #0056b3; /* Viền của tab đang được chọn */
+}
+.nav a.active li {
+    color: #1E90FF; /* Màu chữ nổi bật */
+    font-weight: bold; /* Tô đậm chữ */
+    border-bottom: 2px solid #1E90FF; /* Gạch chân chỉ mục */
+}
+
+.nav a li:hover {
+    color: #1E90FF; /* Đổi màu khi hover */
+}
