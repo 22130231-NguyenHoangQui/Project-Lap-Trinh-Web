@@ -1,3 +1,23 @@
+// đường dẫn hiện ở dưới header
+document.addEventListener("DOMContentLoaded", function () {
+    var isMediumDiv = document.querySelector('.is-medium .container');
+    var path = window.location.pathname.split('/').filter(function (part) { return part !== '' && part !== 'pages'; });
+
+    var breadcrumbHtml = '<a href="../pages/homepage.html">Trang Chủ</a>';
+    var urlPath = '/';
+
+    path.forEach(function (part, index) {
+        urlPath += part + '/';
+        if (index === path.length - 1 && part === 'ManageAdmin.html') {
+            breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">Quản Lý</a>';
+        } else {
+            breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">' + part.replace(/-/g, ' ') + '</a>';
+        }
+    });
+
+    isMediumDiv.innerHTML = breadcrumbHtml;
+});
+
 // khởi tạo các biến để click side bar
 const dashboardLink = document.getElementById('dashboardLink');
 const ordersLink = document.getElementById('ordersLink');
@@ -40,29 +60,7 @@ catalogsLink.addEventListener('click', function (e) {
     document.getElementById('myChart').style.display = 'none';
 });
 
-
-// đường dẫn 
-document.addEventListener("DOMContentLoaded", function () {
-    var isMediumDiv = document.querySelector('.is-medium .container');
-    var path = window.location.pathname.split('/').filter(function (part) { return part !== '' && part !== 'pages'; });
-
-    var breadcrumbHtml = '<a href="../pages/homepage.html">Trang Chủ</a>';
-    var urlPath = '/';
-
-    path.forEach(function (part, index) {
-        urlPath += part + '/';
-        if (index === path.length - 1 && part === 'ManageAdmin.html') {
-            breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">Quản Lý</a>';
-        } else {
-            breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">' + part.replace(/-/g, ' ') + '</a>';
-        }
-    });
-
-    isMediumDiv.innerHTML = breadcrumbHtml;
-});
-
-
-// tổng quan dashboard
+// khi load trang thì sẽ hiện ra trang này
 document.addEventListener('DOMContentLoaded', function () {
     const dashboardLink = document.getElementById('dashboardLink');
     dashboardLink.classList.add('active');
@@ -79,6 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+// tải canvas và log ra để test xem có tải được không
 window.addEventListener('DOMContentLoaded', (event) => {
     console.log("DOM đã tải xong!");
 
@@ -143,25 +142,34 @@ function changeContent(title, content, buttonConfigs = []) {
         buttonContainer.appendChild(button);
     });
     const hiden = document.getElementById('contentDiv');
-    hiden.style.display= 'none';
-    
+    hiden.style.display = 'none';
+
 }
 
+// hàm thay đổi content hóa đơn 
+/* các biến để thay đổi  :
+    tiêu đề : contentTitle
+    thêm bộ lọc hóa đơn theo ngày : contentDiv
+    nội dung với danh sách ở trong : content        
+    icon để thêm sản phẩm, khách hàng ,..( có thể không thêm gì nếu đó là hóa đơn,
+    ...)
 
+
+    style.display: block để hiện lên các phần tử còn mặc định là none để ẩn
+    innerHTML = [title,button,...]
+        
+        
+        */
 function changeContentOrders(title, content, buttonConfigs = []) {
     const contentTitle = document.getElementById('contentTitle');
     const contentDiv = document.getElementById('contentDiv');
-    const contentContainer = document.getElementById('content');  // Để cập nhật phần bảng
+    const contentContainer = document.getElementById('content');
+    const buttonContainer = document.querySelector('.btn-toolbar .me-2');
 
-    // Cập nhật tiêu đề
+    // Cập nhật tiêu đề , content , nút button 
     contentTitle.style.display = 'block';
     contentTitle.innerHTML = title;
-
-    // Cập nhật nội dung chính
     contentContainer.innerHTML = content;
-
-    // Cập nhật các button nếu có
-    const buttonContainer = document.querySelector('.btn-toolbar .me-2');
     buttonContainer.innerHTML = '';
 
     buttonConfigs.forEach(config => {
@@ -177,7 +185,8 @@ function changeContentOrders(title, content, buttonConfigs = []) {
         buttonContainer.appendChild(button);
     });
 
-    // Thêm phần lọc theo ngày vào contentDate
+    /*hàm filterDateDiv tạo ra để chứa bộ lọc của hóa đơn
+        class là div class="filter-date mt-3" và bên trong là phần inner HTML ở dưới  */
     const filterDateDiv = document.createElement('div');
     filterDateDiv.className = 'filter-date mt-3';
     filterDateDiv.innerHTML = `
@@ -203,25 +212,20 @@ function changeContentOrders(title, content, buttonConfigs = []) {
         </div>
     `;
 
-    // Thêm phần lọc vào contentDiv (phần lọc ở trên cùng)
     contentDiv.innerHTML = '';
     const hiden = document.getElementById('contentDiv');
-    hiden.style.display= 'block';
+    hiden.style.display = 'block';
     contentDiv.appendChild(filterDateDiv);
 }
 
-
-
-function filterByDate() {
-    const status = document.getElementById('statusSelect').value;
-    const date = document.getElementById('dateFilter').value;
-    console.log(`Lọc theo trạng thái: ${status}, ngày: ${date}`);
-    // Thêm logic lọc ở đây
-}
-
-
-
+/* các hàm hiện thị danh mục, khách hàng, sản phẩm,... khi click
+display*(page) -> để hiện trang số mấy để hiện thì
 // hiện thị danh mục
+// hiện thị hóa đơn
+// hiện thị người dùng
+// hiện thị sản phẩm
+
+*/
 function displayCataLogs(page) {
     const catalogsPerPage = 10;
     const startIndex = (page - 1) * catalogsPerPage;
@@ -245,14 +249,14 @@ function displayCataLogs(page) {
     paginatedCataLogs.forEach((catalog, index) => {
         tableHTML += `
             <tr>
-                 <td>${startIndex + index + 1}</td>
-                <td>${catalog.id}</td>
-                <td>${catalog.name}</td>
+                 <td class="cate1">${startIndex + index + 1}</td>
+                <td class="cate1">${catalog.id}</td>
+                <td class="cate1">${catalog.name}</td>
                 <td>
-                  <button class="icon-button" onclick="openEditForm(this)">
-               <i class="fa-solid fa-basket-shopping"></i>
-            </button>
-                 <button class="icon-button" onclick="openEditForm(this)">
+                  <button class="icon-button" onclick="deleteRowCate(this)">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+                 <button class="icon-button" onclick="openEditFormCate(this)">
                     <i class="fa-solid fa-pen"></i>
                 </button>
               
@@ -276,12 +280,11 @@ function displayCataLogs(page) {
 
     paginationHTML += '</ul></nav>';
 
-    changeContent('Orders', tableHTML + paginationHTML, [
+    changeContent('Danh mục', tableHTML + paginationHTML, [
         { icon: 'fa-solid fa-gear', action: openFormCate }
     ]);
 }
 
-// hiện thị hóa đơn
 function displayOrders(page) {
     const ordersPerPage = 10;
     const startIndex = (page - 1) * ordersPerPage;
@@ -329,15 +332,13 @@ function displayOrders(page) {
 
     paginationHTML += '</ul></nav>';
 
-    changeContentOrders('Products', tableHTML + paginationHTML, [
-        { icon: 'fa-solid fa-gear', action: openFormProduct }
+    changeContentOrders('Hóa đơn', tableHTML + paginationHTML, [
     ]);
-    
-    
+
+
 }
 
 
-// hiện thị người dùng
 function displayCustomers(page) {
     const customersPerPage = 10;
     const startIndex = (page - 1) * customersPerPage;
@@ -374,7 +375,7 @@ function displayCustomers(page) {
                 <td>${customer.isVerified}</td>
                 <td id="status-${customer.id}">${customer.status}</td>
               <td>
-                <button class="icon-button" onclick="openEditForm(this)">
+                <button class="icon-button" onclick="openFormAddCustomer(this)">
                     <i class="fa-solid fa-pen"></i>
                 </button>
                 <button class="icon-button" onclick="toggleStatus(this)">
@@ -403,12 +404,11 @@ function displayCustomers(page) {
     paginationHTML += '</ul></nav>';
 
     changeContent('Quản lý tài khoản', tableHTML + paginationHTML, [
-        { icon: 'fa-solid fa-gear', action: openFormSetting }
+        { icon: 'fa-solid fa-gear', action: openFormCustomerSetting }
     ]);
-    
+
 }
 
-// hiện thị sản phẩm
 function displayProducts(page) {
     const productsPerPage = 10;
     const startIndex = (page - 1) * productsPerPage;
@@ -477,20 +477,36 @@ function displayProducts(page) {
 
     paginationHTML += '</ul></nav>';
 
-    changeContent('Products', tableHTML + paginationHTML, [
-        { icon: 'fa-solid fa-gear', action: openFormProduct }
+    changeContent('Sản phẩm', tableHTML + paginationHTML, [
+        { icon: 'fa-solid fa-gear', action: openFormAddProduct }
     ]);
 }
 
 
-
-
-
-
-
+/**
 // CÁC SỰ KIỆN TRONG  QUẢN LÝ TÀI KHOẢN 
-// icon pen thay đổi dữ liệu
-function openEditForm(button) {
+ * thêm khách hàng  
+ * 
+ */
+function openFormAddCustomer() {
+    const formContainer = document.getElementById('formContainer');
+    const overlay = document.getElementById('overlay');
+
+    formContainer.style.display = 'block';
+    overlay.style.display = 'block';
+
+    overlay.addEventListener('click', closeFormAddCustomer);
+}
+
+// thay đổi thông tin
+
+function closeFormAddCustomer() {
+    const formContainer = document.getElementById('formContainer');
+    formContainer.style.display = 'none';
+    overlay.style.display = 'none';
+}
+
+function openFormCustomerSetting(button) {
     const row = button.closest("tr");
     const columns = row.querySelectorAll("td");
 
@@ -516,6 +532,10 @@ function openEditForm(button) {
     document.getElementById("editFormContainer").style.display = "block";
     document.getElementById("overlay").style.display = "block";
 }
+function closeForm() {
+    document.getElementById("editFormContainer").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+}
 
 function saveChanges(row) {
     const name = document.getElementById("fname").value;
@@ -533,23 +553,8 @@ function saveChanges(row) {
 }
 
 
-function openFormSetting() {
-    const formContainer = document.getElementById('formContainer');
-    const overlay = document.getElementById('overlay');
 
-    formContainer.style.display = 'block';
-    overlay.style.display = 'block';
-
-    overlay.addEventListener('click', closeFormSetting);
-}
-
-function closeFormSetting() {
-    const formContainer = document.getElementById('formContainer');
-    formContainer.style.display = 'none';
-    overlay.style.display = 'none';
-}
-
-// active  
+// khóa hoặc mở tài khoản
 function toggleStatus(button) {
     // Lấy dòng của customer từ button
     const row = button.closest('tr'); // Tìm đến hàng chứa button
@@ -575,21 +580,27 @@ function toggleStatus(button) {
 
 
 // CÁC SỰ KIỆN TRONG QUẢN LÝ SẢN PHẨM
-
-function openFormProduct() {
+function openFormAddProduct() {
     const formProduct = document.getElementById('formProduct');
     const overlay = document.getElementById('overlay');
 
     formProduct.style.display = 'block'
     overlay.style.display = 'block'
+    console.log(123);
 
-    overlay.addEventListener('click', closeFormProduct);
+    overlay.addEventListener('click', closeFormAddProduct);
+    console.log(123);
+
 }
 
-function closeFormProduct() {
+function closeFormAddProduct() {
     const formProduct = document.getElementById('formProduct');
+    console.log(123);
+
     formProduct.style.display = 'none';
     overlay.style.display = 'none';
+    console.log(123);
+
 }
 
 function toggleStatusProduct(button) {
@@ -656,7 +667,7 @@ function saveChangesProduct(row) {
     row.querySelector("td.pro:nth-child(3)").textContent = price;
     row.querySelector("td.pro:nth-child(4)").textContent = detail;
 
-    closeFormProduct();
+    closeFormProductEdit();
 
 }
 function deleteRow(button) {
@@ -674,7 +685,7 @@ function deleteRow(button) {
 
 
 function openFormCate() {
-    const formProduct = document.getElementById('formCate');
+    const formProduct = document.getElementById('editFormCate');
     const overlay = document.getElementById('overlay');
 
     formProduct.style.display = 'block'
@@ -683,28 +694,61 @@ function openFormCate() {
     overlay.addEventListener('click', closeFormCate);
 }
 
+
+
+document.getElementById("overlay").addEventListener("click", closeForm);
+
+
 function closeFormCate() {
-    const formProduct = document.getElementById('formCate');
+    const formProduct = document.getElementById('editFormCate');
     formProduct.style.display = 'none';
     overlay.style.display = 'none';
 }
 
-document.getElementById("overlay").addEventListener("click", closeForm);
-document.getElementById("overlay").addEventListener("click", closeFormProduct);
+function deleteRowCate(button) {
+    const row = button.closest("tr");
 
-
-function closeForm() {
-    document.getElementById("editFormContainer").style.display = "none";
-    document.getElementById("overlay").style.display = "none";
+    // Xác nhận trước khi xóa
+    const confirmDelete = confirm("Bạn có chắc chắn muốn xóa danh mục này không?");
+    if (confirmDelete) {
+        // Xóa hàng khỏi bảng
+        row.remove();
+        alert("Danh mục đã được xóa thành công.");
+    }
 }
 
+function openEditFormCate(button) {
+    const row = button.closest("tr");
+    const columns = row.querySelectorAll(".cate1");
 
-function closeFormProduct() {
-    document.getElementById("editFormProduct").style.display = "none";
-    document.getElementById("overlay").style.display = "none";
+
+    const name = columns[2].textContent.trim();
+
+
+
+    document.getElementById("editCateName1").value = name;
+
+
+    document.getElementById("saveButtonCate").onclick = function () {
+        saveChangesCate(row);
+    };
+
+    document.getElementById("editFormCate").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+
 }
 
+function saveChangesCate(row) {
+    const name = document.getElementById("editCateName1").value;
 
+
+    row.querySelector("td.pro:nth-child(2) .cate-name").textContent = name;
+
+    console.log(213);
+    
+    closeFormCate();
+
+}
 
 
 // Dữ liệu mẫu
