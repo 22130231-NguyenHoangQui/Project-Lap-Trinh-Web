@@ -2,6 +2,7 @@
 body {
     font-family: Tahoma, sans-serif;
 }
+
 /* main */
 .container.container1 {
     background-color: white;
@@ -27,12 +28,15 @@ body {
     align-items: center;
     justify-content: center;
 }
+
 .form-terms input {
-    margin-right: 10px; /* Khoảng cách giữa checkbox và label */
+    margin-right: 10px;
+    /* Khoảng cách giữa checkbox và label */
 }
 
 .form-terms label {
-    display: inline-block; /* Đảm bảo label nằm trên cùng dòng */
+    display: inline-block;
+    /* Đảm bảo label nằm trên cùng dòng */
 }
 
 .form-terms input {
@@ -43,7 +47,8 @@ body {
     text-align: left;
 }
 
-.info-login input,.info-customer input,
+.info-login input,
+.info-customer input,
 select {
     width: 100%;
     padding: 10px;
@@ -110,4 +115,8 @@ label.required::after,
     text-decoration: underline;
     color: blue;
     cursor: pointer;
+}
+
+.form-group .wrapper span {
+    color: red;
 }
