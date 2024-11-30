@@ -8,7 +8,9 @@
     flex-grow: 1;
     padding: 20px;
 }
-
+main{
+    background: linear-gradient(to bottom, #eef2f3, #a9cff0);
+}
 /* Hộp xác thực */
 .verification-box {
     background-color: #ffffff;

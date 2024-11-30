@@ -111,7 +111,7 @@
 
                                 </ul>
                             </div>
-                            <a href="../pages/introWebsite.html">
+                            <a href="../pages/introWebsite.html" class="active">
                                 <li>Giới thiệu</li>
                             </a>
 
@@ -167,6 +167,23 @@
 
         </div>
     </header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <div class="d-flex justify-content-center my-4">
+                <ul class="nav nav-tabs" id="navbarNav" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="about-tab" href="../pages/introWebsite.html" role="tab">Giới thiệu</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="policy-tab" href="../pages/deliveryPolicy.html" role="tab">Chính sách</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+
     <main class="main">
         <div class="container">
             <div class="row g-0">
@@ -303,11 +320,9 @@
                 <h6>CHÍNH SÁCH</h6>
                 <div class="is-divider"></div>
                 <ul class="ft-policy">
-                    <li><a href="/pages/chinh-sach-va-quy-dinh-chung">Chính sách và quy định chung</a></li>
-                    <li><a href="/pages/chinh-sach-giao-dich-thanh-toan">Chính sách giao dịch, thanh toán</a></li>
-                    <li><a href="/pages/chinh-sach-doi-tra">Chính sách đổi trả</a></li>
-                    <li><a href="/pages/chinh-sach-bao-mat">Chính sách bảo mật</a></li>
-                    <li><a href="/pages/chinh-sach-van-chuyen">Chính sách vận chuyển</a></li>
+                    <li><a href="#" class="footer-link" data-content="chinh-sach-doi-tra">Chính sách đổi, trả, hoàn tiền</a></li>
+                    <li><a href="#" class="footer-link" data-content="chinh-sach-bao-mat">Chính sách bảo mật</a></li>
+                    <li><a href="#" class="footer-link" data-content="huong-dan-thanh-toan">Hướng dẫn thanh toán</a></li>
                 </ul>
             </div>
         </div>
@@ -318,120 +333,11 @@
             </div>
         </div>
 </footer>
+    <script src="../js/deliveryPolicy.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const navLinks = document.querySelectorAll('.nav-link');
-            const contentArea = document.getElementById('content-area');
-
-            const contentData = {
-                "chinh-sach-doi-tra": `
-                           <h4>CHÍNH SÁCH ĐỔI, TRẢ, HOÀN TIỀN</h4>
-<p>Kính thưa quí khách hàng,</p>
-<p>Để chiếc bánh mà chúng tôi cung cấp đến tận tay khách hàng đẹp nhất, ngon nhất, cần có đủ thông tin về cách sử dụng trước, trong, sau bán hàng. Vì lý do đó, chúng tôi công bố thêm chính sách đổi bánh, trả bánh, hoàn tiền để khách hàng biết và sử dụng.</p>
-
-<h4>1. Chính sách đổi bánh</h4>
-<ul>
-    <li>Tất cả những mẫu bánh, những yêu cầu sau khi đã được lên đơn và được sự đồng ý của khách hàng đều được thực hiện 100%. Nếu không đúng 1 trong các yêu cầu, khách hàng có quyền đổi lại bánh và không phải mất thêm chi phí nào.</li>
-    <li>Sau khi có thông tin phản hồi từ khách hàng, chúng tôi sẽ tiến hành đổi ngay để đảm bảo bánh ngon và kịp thời gian cho bữa tiệc là vui nhất, khách hàng không phải chi trả thêm chi phí nào.</li>
-    <li>Khách hàng cần kiểm tra bánh kỹ trước khi nhận để không làm mất thời gian của hai bên và tiện ích hơn trong quá trình xử lý công việc, kịp thời và nhanh nhất.</li>
-</ul>
-
-<h4>2. Chính sách trả bánh và hoàn tiền</h4>
-
-<h4>2.1 Lỗi từ chúng tôi:</h4>
-<ul>
-    <li>Sau khi đặt bánh, nếu khách hàng nhận bánh không đúng như mẫu bánh đã đặt, khách hàng có quyền trả lại bánh mà không mất thêm chi phí nào. Khách hàng cần kiểm tra ngay trước khi nhận bánh và thanh toán tiền.</li>
-    <li>Nếu tiếp tục mua bánh, chúng tôi sẽ làm bánh theo đúng yêu cầu và tiếp tục giao đến địa chỉ khách yêu cầu.</li>
-    <li>Nếu khách không tiếp tục mua bánh, khách đã đặt tiền thì chúng tôi sẽ trả lại 100% số tiền khách đã đặt.</li>
-</ul>
-
-<p><strong>Đặc biệt:</strong></p>
-<ul>
-    <li>Tất cả những chi phí phát sinh từ lúc thực hiện đến lúc hoàn thành khách hàng không phải thêm bất kỳ chi phí nào. Khách hàng chỉ cần kiểm tra kỹ trước khi nhận bánh là đã giúp chúng tôi biết ơn khách hàng rồi ạ!</li>
-</ul>
-
-<h4>2.2 Lỗi từ khách hàng:</h4>
-<ul>
-    <li>Sau khi đặt bánh, khách hàng có lý do đặc biệt nào đó mà không sử dụng được bánh ngay hoặc phải hủy đơn bánh, chúng tôi sẽ thực hiện vào từng trường hợp cụ thể để làm HÀI LÒNG khách hàng. Nếu:</li>
-    <ul>
-        <li>a. Nếu khách hàng đã chuyển khoản mà chúng tôi chưa làm bánh, chúng tôi sẽ hoàn lại 100% số tiền khách hàng đã chuyển khoản.</li>
-        <li>b. Nếu khách hàng đã chuyển khoản mà chúng tôi đã làm bánh, thì coi như khách hàng đã đồng ý, vì bánh sau khi sản xuất theo yêu cầu của khách, chúng tôi không thể hoàn tiền lại được.</li>
-    </ul>
-</ul>
-
-<p>Để có được chiếc bánh ngon, bánh đẹp đến tận tay khách hàng, cần qua nhiều qui trình như tư vấn, lên đơn, sản xuất, đóng gói, ship bánh. Vì thế sự hợp tác chân thành từ khách hàng sẽ giúp chúng tôi có được những sản phẩm và dịch vụ tốt nhất, chúng tôi xin chân thành cảm ơn!</p>
- 
-                           `,
-                "chinh-sach-bao-mat": `<h4>CHÍNH SÁCH BẢO MẬT THÔNG TIN KHÁCH HÀNG</h4>
-<p>Bạn hoàn toàn có thể yên tâm về các thông tin của mình trên ITCAKE.vn bởi chúng tôi ưu tiên hàng đầu trong việc bán hàng và cung cấp dịch vụ bánh sinh nhật tại website. Bạn vui lòng đọc bản “Chính sách bảo mật” dưới đây để hiểu hơn những cam kết mà chúng tôi thực hiện, nhằm tôn trọng và bảo vệ quyền lợi của người truy cập:</p>
-
-<h4>1. THU THẬP THÔNG TIN CÁ NHÂN</h4>
-<p>Để truy cập và sử dụng một số dịch vụ tại ITCAKE.vn, bạn có thể sẽ được yêu cầu đăng ký với chúng tôi thông tin cá nhân (Email, Họ tên, Số ĐT liên lạc…). Mọi thông tin khai báo phải đảm bảo tính chính xác và hợp pháp, chúng tôi không chịu mọi trách nhiệm liên quan đến pháp luật của thông tin khai báo, chúng tôi cũng có thể thu thập thông tin về số lần viếng thăm, bao gồm số trang bạn xem, số links (liên kết) bạn click và những thông tin khác liên quan đến việc kết nối đến
-    ITCAKE.vn.</p>
-
-<p>Chúng tôi cũng thu thập các thông tin mà trình duyệt Web (Browser) bạn sử dụng mỗi khi truy cập vào ITCAKE.vn, bao gồm: địa chỉ IP, loại Browser, ngôn ngữ sử dụng, thời gian và những địa chỉ mà Browser truy xuất đến.</p>
-
-<h4>2. CAM KẾT BẢO VỆ CÁC THÔNG TIN RIÊNG TƯ</h4>
-<p>Thông tin của khách hàng thông qua hệ thống bảo mật của website, không sử dụng nó vì mục đích thương mại hay bất cứ mục đích nào khác. Chúng tôi sử dụng các biện pháp an ninh bảo mật thông tin để chống mất mát, nhầm lẫn hoặc thay đổi dữ liệu trong hệ thống.</p>
-
-<h4>3. CAM KẾT CHỈ SỬ DỤNG THÔNG TIN ĐỂ NHẰM TẠO MÔI TRƯỜNG MUA SẮM AN TOÀN</h4>
-<p>Chúng tôi sử dụng những thông tin thu thập qua website để tạo môi trường mua sắm an toàn, tiện lợi, chuyên nghiệp và nâng cao chất lượng dịch vụ chăm sóc khách hàng. Ngoài ra, những thông tin cũng chỉ được chúng tôi dùng trong việc giải quyết các vấn đề liên quan tới tranh chấp phát sinh trong việc mua bán, thanh toán qua website, và ngăn chặn những hoạt động vi phạm pháp luật Việt Nam.</p>
-
-<h4>4. CAM KẾT KHÔNG CHIA SẺ, BÁN HOẶC CHO THUÊ THÔNG TIN CÁ NHÂN CỦA KHÁCH HÀNG</h4>
-<p>Thông tin của quý khách gửi cho chúng tôi chỉ do nhân viên chúng tôi quản lý và sử dụng cho mục đích liên hệ hoặc gửi email để cung cấp thông tin cho quý khách.</p>
-
-<p>Chúng tôi sẽ gửi các thông tin cá nhân về quý khách cho các công ty hoặc các cá nhân khác trong trường hợp:</p>
-<ul>
-    <li>Chúng tôi được quý khách đồng ý cho tiết lộ thông tin đó.</li>
-    <li>Chúng tôi cần tiết lộ thông tin của quý khách để cung cấp các sản phẩm hoặc dịch vụ liên quan tới việc liên lạc với quý khách.</li>
-    <li>Chúng tôi tuân theo các trát lệnh, lệnh tòa án hoặc thủ tục pháp lý.</li>
-    <li>Chúng tôi thấy rằng các hành động của quý khách trên các trang web của chúng tôi là vi phạm các quy định hướng dẫn sử dụng của chúng tôi đối với các sản phẩm hoặc dịch vụ nhất định.</li>
-</ul>
-
-<h4>5. THAY ĐỔI VỀ CHÍNH SÁCH</h4>
-<p>Nội dung của “Chính sách bảo mật” này có thể thay đổi để phù hợp với các nhu cầu của web ITCAKE.vn cũng như nhu cầu và sự phản hồi từ khách hàng nếu có. Khi cập nhật nội dung chính sách này, chúng tôi sẽ chỉnh sửa lại thời gian “Cập nhật lần cuối” bên trên. Nội dung “Chính sách bảo mật” này chỉ áp dụng tại <a href="http://banhsinhnhatngon.vn" target="_blank">http://banhsinhnhatngon.vn</a>, không bao gồm hoặc liên quan đến các bên thứ ba đặt quảng cáo hay có links tại <a href="http://banhsinhnhatngon.vn" target="_blank">http://banhsinhnhatngon.vn</a>. Do đó, chúng tôi đề nghị bạn đọc và tham khảo kỹ nội dung “Chính sách bảo mật” của từng website mà bạn đang truy cập.</p>
-
-<h4>6. THÔNG TIN LIÊN HỆ</h4>
-<p>Chúng tôi luôn hoan nghênh các ý kiến đóng góp, liên hệ và phản hồi thông tin từ bạn về “Chính sách bảo mật” này. Nếu bạn có những thắc mắc liên quan xin vui lòng liên hệ theo hotline: <strong>0902 04 09 90</strong></p>
-
-<p>Tiệm bánh sinh nhật ITCAKE.vn</p>
-
-`,
-                "huong-dan-thanh-toan": `<h4>Hướng dẫn thanh toán</h4>
-<p>Chúng tôi cung cấp 2 hình thức thanh toán:</p>
-<ul>
-    <li><strong>Thanh toán khi nhận hàng (COD)</strong></li>
-    <li><strong>Chuyển khoản qua ngân hàng</strong></li>
-</ul>
-
-<p>Quý khách thanh toán chuyển khoản lưu ý:</p>
-<ul>
-    <li>Sau khi đặt bánh xong vui lòng chờ liên lạc xác nhận đơn hàng từ ITCAKE.vn trước khi chuyển khoản (8h-20h30).</li>
-</ul>
-
-<p>Mọi thắc mắc vui lòng liên hệ hotline: <strong>0902 04 09 90</strong></p>
-`,
-
-            };
-
-            navLinks.forEach(link => {
-                link.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const contentKey = this.getAttribute('data-content');
-                    if (contentKey && contentData[contentKey]) {
-                        contentArea.innerHTML = contentData[contentKey];
-                    } else {
-                        contentArea.innerHTML = `<h3 style="padding: 30px 30px;">Không tìm thấy nội dung</h3>`;
-                    }
-                });
-            });
-
-        });
-
-    </script>
+     
 </body>
 
 </html>
