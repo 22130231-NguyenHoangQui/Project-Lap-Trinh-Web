@@ -74,7 +74,7 @@
 
 
 
-                            <a href="#">
+                            <a href="../pages/homepage.html">
                                 <li>Trang chủ</li>
                             </a>
                             <div class="dropdown" style=" display:flex; align-items: center;  height: 100%; ">
@@ -175,13 +175,17 @@
                     <div class="pr-right col">
                         <div class="pr-col-container row">
                             <div class="pr-left-contai col">
-                                <div class="pr-contai-image" data-columns="4" style="opacity: 1;">
-                                    <div class="pr-image">
+
+                                <div class="pr-contai-image" data-columns="4" style="opacity: 1; height: 100%;">
+                                    <div class="pr-image" style="height: 100%;">
                                         <a
-                                            href="https://i0.wp.com/tokyogateaux.vn/wp-content/uploads/2024/09/2457.jpg?fit=800%2C800&ssl=1">
+                                            href="..\image\imghomepage\product\product_danhmuc\theo_danh_muc\banh_bento\BBT03.png">
+                               
                                             <img class="product-image" id="product-img"
                                                 src="..\image\imghomepage\product\product_danhmuc\theo_danh_muc\banh_bento\BBT03.png"
-                                                alt="Bánh 1">
+                                                alt="Bánh 1"
+                                                style="height: auto; width: 100%; object-fit: cover;"
+                                                >
                                         </a>
                                     </div>
                                     <div class="modal hidden" id="image-modal">
@@ -243,7 +247,7 @@
                                                 <button class="btn-add cart" type="button" onclick="addToCart()">
                                                    THÊM VÀO GIỎ HÀNG
                                                    </button>
-                                                <button class="btn-add payment" type="submit">
+                                                <button class="btn-add payment" type="button" onclick="ToPayment()">
                                                     <a href="../pages/payment.html">MUA NGAY</a>
                                                 </button>
                                                 <input type="hidden" name="gtm4wp_id" value="29736">
