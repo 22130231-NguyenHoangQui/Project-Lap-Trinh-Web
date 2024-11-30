@@ -1,8 +1,13 @@
-/* body */
+/* Body */
 body {
     font-family: Tahoma, sans-serif;
+    background-color: #f0f0f0;
+    backdrop-filter: blur(5px); /* Làm mờ nhẹ nền phía sau */
 }
-/* main */
+main{
+    background: linear-gradient(to bottom, #eef2f3, #a9cff0);
+}
+/* Container chính */
 .container.container1 {
     background-color: white;
     margin: 20px;
@@ -10,11 +15,32 @@ body {
     width: 450px;
     height: auto;
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); /* Tăng độ mờ và bán kính đổ bóng */
+    border: 2px solid #cccfd1; /* Viền xanh nổi bật */
     text-align: center;
+    position: relative; /* Để định vị các phần tử con như nút "X" */
+    z-index: 10; /* Đảm bảo phần này nằm trên cùng */
 }
 
-/* duoi or main */
+/* Nút "X" */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: #333;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.close-btn:hover {
+    color: #ff0000;
+}
+
+/* Tiêu đề thông tin */
 .info {
     display: flex;
     font-weight: bold;
@@ -22,28 +48,24 @@ body {
     color: rgba(0, 0, 0, 0.65);
 }
 
+/* Phần điều khoản */
 .form-terms {
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 .form-terms input {
     margin-right: 10px; /* Khoảng cách giữa checkbox và label */
+    width: auto;
 }
 
 .form-terms label {
     display: inline-block; /* Đảm bảo label nằm trên cùng dòng */
 }
 
-.form-terms input {
-    width: auto;
-}
-
-#verification {
-    text-align: left;
-}
-
-.info-login input,.info-customer input,
+/* Input và Select */
+.info-login input, .info-customer input,
 select {
     width: 100%;
     padding: 10px;
@@ -52,17 +74,18 @@ select {
     border-radius: 5px;
 }
 
+/* Các nhóm form */
 .form-group.form1 {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
 }
 
 .form-group.form1 .wrapper {
     width: 60%;
 }
 
+/* Button chính */
 button.button-real {
     background-color: #1056fa;
     color: white;
@@ -74,10 +97,11 @@ button.button-real {
     margin-top: 10px;
 }
 
-button.button-real:focus {
+button.button-real:hover {
     background-color: #0903af;
 }
 
+/* Nhãn bắt buộc */
 label {
     margin-bottom: 5px;
 }
@@ -88,6 +112,7 @@ label.required::after,
     color: red;
 }
 
+/* Phần giới tính */
 .wrapper-gender {
     width: 60%;
     display: flex;
@@ -101,11 +126,11 @@ label.required::after,
     justify-content: space-between;
 }
 
-
 .gender-container input {
     margin: 2px;
 }
 
+/* Link xác minh */
 .verify-now {
     text-decoration: underline;
     color: blue;
