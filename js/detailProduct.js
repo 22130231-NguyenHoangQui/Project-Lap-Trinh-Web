@@ -132,7 +132,8 @@ function initializeRatingSystem(starSelector, ratingSelector) {
 }
 initializeRatingSystem(".stars a", "#rating");
 
-// Hàm xử lý tăng hoặc giảm giá trị
+
+
 document.addEventListener("DOMContentLoaded", function () {
   const unitPrice = 250000; // Giá mỗi sản phẩm
   const priceElement = document.querySelector("#product-price"); // Thẻ hiển thị giá
@@ -156,9 +157,10 @@ document.addEventListener("DOMContentLoaded", function () {
         let currentValue = parseInt(quantityInput.value) || 1;
 
         if (button.classList.contains("input-reduce")) {
+          // Đảm bảo giá trị không nhỏ hơn min
           currentValue = Math.max(min, currentValue - step);
         } else if (button.classList.contains("input-increase")) {
-          currentValue += step;
+          currentValue += step; // Tăng giá trị
         }
 
         quantityInput.value = currentValue;
@@ -168,7 +170,11 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Lắng nghe sự kiện thay đổi số lượng trực tiếp từ input
-  quantityInput.addEventListener("input", updatePrice);
+  quantityInput.addEventListener("input", function () {
+    const currentValue = parseInt(quantityInput.value) || 1;
+    quantityInput.value = Math.max(1, currentValue); // Đảm bảo giá trị không nhỏ hơn 1
+    updatePrice();
+  });
 
   // Kích hoạt hàm tăng/giảm
   handleQuantityChange(".is-form");
@@ -179,41 +185,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
-function initializeImageModal(modalId, modalImgId, closeBtnSelector, imageLinkSelector) {
-  const modal = document.getElementById(modalId);
-  const modalImg = document.getElementById(modalImgId);
-  const closeBtn = document.querySelector(closeBtnSelector);
-
-  // Hàm mở modal và hiển thị ảnh
-  function openModal(imageSrc) {
-    modal.style.display = "flex"; // Hiển thị modal
-    modalImg.src = imageSrc; // Gán đường dẫn ảnh lớn vào modal
-  }
-
-  // Hàm đóng modal
-  function closeModal() {
-    modal.style.display = "none";
-  }
-
-  // Thêm sự kiện nhấp vào ảnh
-  document.querySelectorAll(imageLinkSelector).forEach(link => {
-    link.addEventListener("click", function (e) {
-      e.preventDefault(); // Ngăn chuyển hướng liên kết
-      openModal(this.href); // Gọi hàm mở modal với ảnh
-    });
-  });
-
-  // Đóng modal khi nhấn "X"
-  closeBtn.addEventListener("click", closeModal);
-
-  // Đóng modal khi nhấp ra ngoài modal
-  modal.addEventListener("click", function (e) {
-    if (e.target === modal) {
-      closeModal();
-    }
-  });
-}
 
 // Sử dụng hàm để khởi tạo
 initializeImageModal(
