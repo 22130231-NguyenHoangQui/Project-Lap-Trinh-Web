@@ -42,11 +42,9 @@ document.querySelectorAll('.dropdown-menu a').forEach(function (categoryLink) {
  */
 document.querySelectorAll('.product-categories li').forEach(function (categoryItem) {
     categoryItem.addEventListener('click', function (event) {
-        event.preventDefault(); // Prevent default link behavior
+        event.preventDefault(); 
         const categoryData = categoryItem.getAttribute('data-category');
-        // Store the selected category in localStorage
         localStorage.setItem('selectedCategory', categoryData);
-        // Reload the products based on selected category
         loadProducts(categoryData);
     });
 });
@@ -240,7 +238,7 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             item.classList.remove('active');
         }
-    });
+    });    
 
     localStorage.removeItem('selectedCategory');
     localStorage.removeItem('selectedOtherData');
