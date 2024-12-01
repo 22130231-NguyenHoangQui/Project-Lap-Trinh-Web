@@ -493,10 +493,10 @@ function displayProducts(page) {
     function openFormAddCustomer() {
         const formContainer = document.getElementById('formContainer');
         const overlay = document.getElementById('overlay');
-
+        
         formContainer.style.display = 'block';
         overlay.style.display = 'block';
-
+        
         overlay.addEventListener('click', closeFormAddCustomer);
     }
 
@@ -585,11 +585,11 @@ function toggleStatus(button) {
 function openFormAddProduct() {
     const formProduct = document.getElementById('formProduct');
     const overlay = document.getElementById('overlay');
-
+    
     formProduct.style.display = 'block'
     overlay.style.display = 'block'
     console.log(123);
-
+    
     overlay.addEventListener('click', closeFormAddProduct);
     console.log(123);
 
@@ -703,6 +703,10 @@ function openFormCate() {
 
 
 document.getElementById("overlay").addEventListener("click", closeForm);
+document.getElementById("overlay").addEventListener("click", closeFormEditCate);
+document.getElementById("overlay").addEventListener("click", closeFormProductEdit);
+
+
 
 
 function closeFormCate() {
