@@ -406,7 +406,7 @@ function displayCustomers(page) {
     paginationHTML += '</ul></nav>';
 
     changeContent('Quản lý tài khoản', tableHTML + paginationHTML, [
-        { icon: 'fa-solid fa-gear', action: openFormAddCustomer}
+        { icon: 'fa-solid fa-gear', action: openFormAddCustomer }
     ]);
 
 }
@@ -487,58 +487,60 @@ function displayProducts(page) {
 
 /**
 // CÁC SỰ KIỆN TRONG  QUẢN LÝ TÀI KHOẢN 
- * thêm khách hàng  
- * 
+ * thêm khách hàng
+ * đóng form thêm khách hàng
+ * thay đổi thông tin
+ * đóng form thay đổi thông tin
+ * lưu thay đổi vô cột
+ * khóa hoặc mở tài khoản với icon  
  */
-    function openFormAddCustomer() {
-        const formContainer = document.getElementById('formContainer');
-        const overlay = document.getElementById('overlay');
+function openFormAddCustomer() {
+    const formContainer = document.getElementById('formContainer');
+    const overlay = document.getElementById('overlay');
 
-        formContainer.style.display = 'block';
-        overlay.style.display = 'block';
+    formContainer.style.display = 'block';
+    overlay.style.display = 'block';
 
-        overlay.addEventListener('click', closeFormAddCustomer);
-    }
-
-    // thay đổi thông tin
-
-    function closeFormAddCustomer() {
-        const formContainer = document.getElementById('formContainer');
-        formContainer.style.display = 'none';
-        overlay.style.display = 'none';
-    }
-
-    function openFormCustomerSetting(button) {
-        const row = button.closest("tr");
-        const columns = row.querySelectorAll("td");
+    overlay.addEventListener('click', closeFormAddCustomer);
+}
 
 
-        const stt = columns[0].textContent;
-        const name = columns[1].textContent;
-        const phone = columns[2].textContent;
-        const email = columns[3].textContent;
-        const address = columns[4].textContent;
-        const password = columns[4].textContent;
+function closeFormAddCustomer() {
+    const formContainer = document.getElementById('formContainer');
+    formContainer.style.display = 'none';
+    overlay.style.display = 'none';
+}
+
+function openFormCustomerSetting(button) {
+    const row = button.closest("tr");
+    const columns = row.querySelectorAll("td");
+
+
+    const stt = columns[0].textContent;
+    const name = columns[1].textContent;
+    const phone = columns[2].textContent;
+    const email = columns[3].textContent;
+    const address = columns[4].textContent;
+    const password = columns[4].textContent;
 
 
 
-        document.getElementById("fname").value = name;
-        document.getElementById("email").value = email;
-        document.getElementById("sdt").value = phone;
+    document.getElementById("fname").value = name;
+    document.getElementById("email").value = email;
+    document.getElementById("sdt").value = phone;
 
-        document.getElementById("saveButton").onclick = function () {
-            saveChanges(row);
-        };
+    document.getElementById("saveButton").onclick = function () {
+        saveChanges(row);
+    };
 
 
-        document.getElementById("editFormContainer").style.display = "block";
-        document.getElementById("overlay").style.display = "block";
-    }
+    document.getElementById("editFormContainer").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+}
 function closeForm() {
     document.getElementById("editFormContainer").style.display = "none";
     document.getElementById("overlay").style.display = "none";
 }
-
 function saveChanges(row) {
     const name = document.getElementById("fname").value;
     const email = document.getElementById("email").value;
@@ -554,9 +556,6 @@ function saveChanges(row) {
     closeForm();
 }
 
-
-
-// khóa hoặc mở tài khoản
 function toggleStatus(button) {
     // Lấy dòng của customer từ button
     const row = button.closest('tr'); // Tìm đến hàng chứa button
@@ -582,6 +581,12 @@ function toggleStatus(button) {
 
 
 // CÁC SỰ KIỆN TRONG QUẢN LÝ SẢN PHẨM
+/**
+// thêm sản phẩm( icon nằm cùng dòng với tiêu đề khi click ) 
+ * đóng form sản phẩm , khi click ngẫu nhiên vô overlay thì cũng đóng form
+* chỉnh sửa sản phẩm khi click vô icon nằm ở table
+khóa sản phẩm ,xóa sản phẩm
+ */
 function openFormAddProduct() {
     const formProduct = document.getElementById('formProduct');
     const overlay = document.getElementById('overlay');
@@ -604,30 +609,6 @@ function closeFormAddProduct() {
     console.log(123);
 
 }
-
-function toggleStatusProduct(button) {
-    // Lấy dòng của customer từ button
-    const row = button.closest('tr'); // Tìm đến hàng chứa button
-    const statusCell = row.querySelector('td[id^="status-"]'); // Lấy cột status (dựa trên id)
-
-    // Kiểm tra và thay đổi nội dung status
-    if (statusCell.textContent === "Đang bán") {
-        statusCell.textContent = "KHÔNG BÁN";
-    } else {
-        statusCell.textContent = "Đang bán";
-    }
-
-    // Thay đổi icon trong nút
-    const icon = button.querySelector('i');
-    if (statusCell.textContent === "Đang bán") {
-        icon.classList.remove('fa-lock');
-        icon.classList.add('fa-unlock');
-    } else {
-        icon.classList.remove('fa-unlock');
-        icon.classList.add('fa-lock');
-    }
-}
-
 function openEditFormProduct(button) {
     const row = button.closest("tr");
     const columns = row.querySelectorAll(".pro");
@@ -636,8 +617,8 @@ function openEditFormProduct(button) {
     const name = columns[1].textContent.trim();
     const price = columns[2].textContent;
     const detail = columns[3].textContent;
-    const imageElement = columns[1].querySelector("img"); // Tìm thẻ <img> trong cột thứ 2
-    const imageSrc = imageElement ? imageElement.src : ""; // Đường dẫn ảnh (src)
+    const imageElement = columns[1].querySelector("img");
+    const imageSrc = imageElement ? imageElement.src : "";
 
 
     document.getElementById("editProductName").value = name;
@@ -658,6 +639,7 @@ function openEditFormProduct(button) {
     document.getElementById("overlay").style.display = "block";
 
 }
+
 function saveChangesProduct(row) {
     const name = document.getElementById("editProductName").value;
 
@@ -679,17 +661,45 @@ function closeFormProductEdit() {
 function deleteRow(button) {
     const row = button.closest("tr");
 
-    // Xác nhận trước khi xóa
     const confirmDelete = confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?");
     if (confirmDelete) {
-        // Xóa hàng khỏi bảng
         row.remove();
         alert("Sản phẩm đã được xóa thành công.");
     }
 }
+/**
+ * hàm ở dưới được gọi khi hiện display product ở trên nằm trong click icon
+ * row và statuscell sẽ duyệt tới dòng để lấy id của dòng cùng với status
+ * khi click thì sẽ duyệt tới icon để thay đổi class làm thay đổi icon
+ */
+function toggleStatusProduct(button) {
+    const row = button.closest('tr');
+    const statusCell = row.querySelector('td[id^="status-"]');
+    if (statusCell.textContent === "Đang bán") {
+        statusCell.textContent = "KHÔNG BÁN";
+    } else {
+        statusCell.textContent = "Đang bán";
+    }
+
+    const icon = button.querySelector('i');
+    if (statusCell.textContent === "Đang bán") {
+        icon.classList.remove('fa-lock');
+        icon.classList.add('fa-unlock');
+    } else {
+        icon.classList.remove('fa-unlock');
+        icon.classList.add('fa-lock');
+    }
+}
+
+
 // CÁC SỰ KIỆN TRONG DANH MỤC
-
-
+/**
+ * form thêm danh mục
+ * đóng form danh mục
+ * xóa dòng danh mục
+ * mở form chỉnh sửa danh mục
+ * lưu chỉnh sửa danh mục
+ */
 function openFormCate() {
     const formProduct = document.getElementById('addFormCate');
     const overlay = document.getElementById('overlay');
@@ -699,12 +709,6 @@ function openFormCate() {
 
     overlay.addEventListener('click', closeFormCate);
 }
-
-
-
-document.getElementById("overlay").addEventListener("click", closeForm);
-
-
 function closeFormCate() {
     const formProduct = document.getElementById('addFormCate');
     formProduct.style.display = 'none';
@@ -714,10 +718,8 @@ function closeFormCate() {
 function deleteRowCate(button) {
     const row = button.closest("tr");
 
-    // Xác nhận trước khi xóa
     const confirmDelete = confirm("Bạn có chắc chắn muốn xóa danh mục này không?");
     if (confirmDelete) {
-        // Xóa hàng khỏi bảng
         row.remove();
         alert("Danh mục đã được xóa thành công.");
     }
@@ -736,7 +738,7 @@ function openEditFormCate(button) {
 
 
     document.getElementById("saveButtonCate1").onclick = function () {
-    console.log(123);
+        console.log(123);
 
         saveChangesCate(row);
     };
@@ -749,12 +751,12 @@ function openEditFormCate(button) {
 function saveChangesCate(row) {
     const name = document.getElementById("editCateName1").value;
     console.log(name);
-    
+
 
     row.querySelector("td.cate1:nth-child(3)").textContent = name;
 
     console.log(213);
-    
+
     closeFormEditCate();
 
 }
@@ -762,6 +764,14 @@ function closeFormEditCate() {
     document.getElementById("editFormCate").style.display = "none";
     document.getElementById("overlay").style.display = "none";
 }
+
+/**
+ * click ngẫu nhiên vô overlay thì ẩn các form
+ */
+
+document.getElementById("overlay").addEventListener("click", closeForm);
+document.getElementById("overlay").addEventListener("click", closeFormEditCate);
+document.getElementById("overlay").addEventListener("click", closeFormProductEdit);
 
 
 // Dữ liệu mẫu

@@ -1,51 +1,27 @@
-// lưu dữ liệu vào JSON
-// document.addEventListener('DOMContentLoaded', function () {
-//     const productData = JSON.parse(localStorage.getItem("selectedProductData"));
+/**
+ * Hàm hiện thị đường dẫn của trang đang ở hiện tại
+ */
+document.addEventListener("DOMContentLoaded", function () {
+    var isMediumDiv = document.querySelector('.is-medium .container');
+    var path = window.location.pathname.split('/').filter(function (part) { return part !== ''&& part !== 'pages'; });
 
-//     if (productData) {
-//         const productLink = document.getElementById('productLink');
-//         const priceDisplay = document.getElementById('priceDisplay');
-//         const imageDisplay = document.getElementById('imageDisplay');
-//         const titleDisplay = document.getElementById('titleDisplay');
+    var breadcrumbHtml = '<a href="../pages/homepage.html">Trang Chủ</a>';
+    var urlPath = '/';
 
-//         // Hiển thị thông tin sản phẩm
-//         titleDisplay.textContent = productData.title;
-//         priceDisplay.innerHTML = `<span class="woocommerce-Price-amount amount"><bdi style="font-weight: bold;">${productData.price}<span class="woocommerce-Price-currencySymbol">₫</span></bdi></span>`;
-//         imageDisplay.src = productData.image;
-//     }
+    path.forEach(function (part, index) {
+        urlPath += part + '/';
+        if (index === path.length - 1 && part === 'ProductCatalog.html') {
+            breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">Danh mục sản phẩm</a>';
+        } else {
+            breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">' + part.replace(/-/g, ' ') + '</a>';
+        }    
+    });
 
-//     // Xóa dữ liệu sau khi hiển thị
-//     localStorage.removeItem('selectedProductData');
-// });
-
-
-
-
-
-// document.addEventListener("DOMContentLoaded", function () {
-//     const productLinks = document.querySelectorAll(".product-link");
-
-//     productLinks.forEach(link => {
-//         link.addEventListener("click", function (event) {
-//             event.preventDefault();
-
-//             const productData = {
-//                 id: link.getAttribute("data-id"),
-//                 title: link.getAttribute("data-title"),
-//                 price: link.getAttribute("data-price"),
-//                 image: link.getAttribute("data-image")
-//             };
-
-//             localStorage.setItem("selectedProduct", JSON.stringify(productData));
-
-//             window.location.href = "DetailProduct.html";
-//         });
-//     });
-// });
-
-
-
-
+    isMediumDiv.innerHTML = breadcrumbHtml;
+});
+/**
+ * hàm fix cho vấn đề danh mục bị lỗi
+ */
 document.querySelectorAll('.dropdown-menu a').forEach(function (categoryLink) {
     categoryLink.addEventListener('click', function (event) {
         if (categoryLink.getAttribute('href') !== 'SignIn.html' && categoryLink.getAttribute('href') !== 'SignUp.html') {
@@ -61,66 +37,9 @@ document.querySelectorAll('.dropdown-menu a').forEach(function (categoryLink) {
     });
 });
 
-
-function createProductHTML(product) {
-    const productData = encodeURIComponent(JSON.stringify(product)); // Mã hóa chuỗi JSON để tránh lỗi cú pháp
-    return `
-<div class="col">
-    <div class="col-inner">
-        <div class="product-small box">
-            <div class="box-image">
-                <a href="#" class="product-link" onclick="saveProductData('${productData}')">
-                    <img width="247" height="296" src="${product.image}" alt="${product.name}">
-                </a>
-            </div>
-            <div class="box-text text-center">
-                <div class="title-wrapper">
-                    <p>
-                        <a href="#" onclick="saveProductData('${productData}')">${product.id} - ${product.name}</a>
-                    </p>
-                </div>
-                <div class="price-wrapper">
-                    <span class="price">
-                        <span class="woocommerce-Price-amount amount">
-                            <bdi style="font-weight: bold;">${product.price}</bdi>
-                        </span>
-                    </span>
-                </div>
-                <div class="add-to-cart-button">
-                    <a href="#" onclick="saveProductData('${productData}')">THÊM VÀO GIỎ</a>
-                </div>
-                <div class="product-description" style="display:none;">
-                    <span class="description-id">Mã: <span class="sku">${product.id}</span></span>
-                    <span class="description-content">Mô tả: <br>${product.description}</span>
-                </div>
-                 <div class="size-wrapper" style="display:none;">
-                    <p ><strong>Đường kính:</strong> ${product.diameter}</p> <!-- Hiển thị đường kính -->
-                    <p><strong>Chiều cao:</strong> ${product.height}</p> <!-- Hiển thị chiều cao -->
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-`;
-}
-
-function saveProductData(encodedProduct) {
-    // Giải mã và parse JSON từ chuỗi mã hóa
-    const product = JSON.parse(decodeURIComponent(encodedProduct));
-
-    // Lưu dữ liệu vào Local Storage
-    localStorage.setItem('selectedProduct', JSON.stringify(product));
-
-    // In ra console để kiểm tra
-    console.log("Sản phẩm được lưu:", product);
-
-    // Chuyển hướng sang trang chi tiết sản phẩm
-    window.location.href = 'detailProduct.html';
-}
-
-
-
-
+/**
+ * hàm thay đổi giá giúp khi kéo thay thì sẽ thay đổi giá tương ứng
+ */
 document.addEventListener('DOMContentLoaded', function () {
     const leftHandle = document.getElementById('handle-left');
     const rightHandle = document.getElementById('handle-right');
@@ -196,69 +115,58 @@ document.addEventListener('DOMContentLoaded', function () {
 
     updateSlider();
 });
-
-document.querySelectorAll('.product-categories li').forEach(function (categoryItem) {
-    categoryItem.addEventListener('click', function (event) {
-        event.preventDefault(); // Prevent default link behavior
-        const categoryData = categoryItem.getAttribute('data-category');
-
-        // Store the selected category in localStorage
-        localStorage.setItem('selectedCategory', categoryData);
-
-        // Reload the products based on selected category
-        loadProducts(categoryData);
-    });
-});
-
-// Function to load products based on the selected category
-// function loadProducts(category) {
-//     const imageList = imagesByCategory[category] || [];
-//     const productContainer = document.querySelector('.products.row.row-small');
-
-//     productContainer.innerHTML = '';  // Clear previous products
-
-//     imageList.forEach((product) => {
-//         productContainer.innerHTML += createProductHTML(product);
-//     });
-
-//     // Mark the active category
-//     const categoryItems = document.querySelectorAll('.product-categories li');
-//     categoryItems.forEach((item) => {
-//         const link = item.querySelector('a');
-//         if (link && link.textContent.trim() === getCategoryName(category)) {
-//             item.classList.add('active');
-//         } else {
-//             item.classList.remove('active');
-//         }
-//     });
-// }
-
-
-
-
-document.addEventListener("DOMContentLoaded", function () {
-    var isMediumDiv = document.querySelector('.is-medium .container');
-    var path = window.location.pathname.split('/').filter(function (part) { return part !== ''&& part !== 'pages'; });
-
-    var breadcrumbHtml = '<a href="../pages/homepage.html">Trang Chủ</a>';
-    var urlPath = '/';
-
-    path.forEach(function (part, index) {
-        urlPath += part + '/';
-        if (index === path.length - 1 && part === 'ProductCatalog.html') {
-            breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">Danh mục sản phẩm</a>';
-        } else {
-            breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">' + part.replace(/-/g, ' ') + '</a>';
-        }    
-    });
-
-    isMediumDiv.innerHTML = breadcrumbHtml;
-});
+/**
+ * hàm mã hóa để loại bỏ ký tự đồng thời bảo mật
+ *  tạo sản phẩm tương ứng với product tương ứng của danh mục đã click ( hàm hổ trợ cho hàm hiện thị sản phẩm ở dưới)
+ */
+function createProductHTML(product) {
+    const productData = encodeURIComponent(JSON.stringify(product));
+    return `
+<div class="col">
+    <div class="col-inner">
+        <div class="product-small box">
+            <div class="box-image">
+                <a href="#" class="product-link" onclick="saveProductData('${productData}')">
+                    <img width="247" height="296" src="${product.image}" alt="${product.name}">
+                </a>
+            </div>
+            <div class="box-text text-center">
+                <div class="title-wrapper">
+                    <p>
+                        <a href="#" onclick="saveProductData('${productData}')">${product.id} - ${product.name}</a>
+                    </p>
+                </div>
+                <div class="price-wrapper">
+                    <span class="price">
+                        <span class="woocommerce-Price-amount amount">
+                            <bdi style="font-weight: bold;">${product.price}</bdi>
+                        </span>
+                    </span>
+                </div>
+                <div class="add-to-cart-button">
+                    <a href="#" onclick="saveProductData('${productData}')">THÊM VÀO GIỎ</a>
+                </div>
+                <div class="product-description" style="display:none;">
+                    <span class="description-id">Mã: <span class="sku">${product.id}</span></span>
+                    <span class="description-content">Mô tả: <br>${product.description}</span>
+                </div>
+                 <div class="size-wrapper" style="display:none;">
+                    <p ><strong>Đường kính:</strong> ${product.diameter}</p> <!-- Hiển thị đường kính -->
+                    <p><strong>Chiều cao:</strong> ${product.height}</p> <!-- Hiển thị chiều cao -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+`;
+}
 
 
-
+/**
+ * hàm hiện thị sản phẩm tương ứng và mặc định khi vào trang
+ */
 document.addEventListener('DOMContentLoaded', function () {
-    const selectedCategory = localStorage.getItem('selectedCategory') || '2';
+    const selectedCategory = localStorage.getItem('selectedCategory') || 'banh_an_nhe';
     const selectedOtherData = localStorage.getItem('selectedOtherData') || [];
 
     const imageList = imagesByCategory[selectedCategory] || [];
@@ -284,6 +192,10 @@ document.addEventListener('DOMContentLoaded', function () {
     localStorage.removeItem('selectedOtherData');
 });
 
+
+/**
+ * hàm lấy tên ra để cho hover  
+ */
 function getCategoryName(category) {
     const categoryMapping = {
         banh_an_nhe: 'Bánh Ăn Nhẹ',
@@ -291,6 +203,25 @@ function getCategoryName(category) {
         banh_chai_ruou: 'Bánh Chai Rượu Và Ly Bia Sang Trọng',
     };
     return categoryMapping[category] || category;
+}
+
+
+
+/**
+ * lưu data vô để hiện thị chi tiết sản phẩm tương ứng
+ */
+function saveProductData(encodedProduct) {
+    // Giải mã và parse JSON từ chuỗi mã hóa
+    const product = JSON.parse(decodeURIComponent(encodedProduct));
+
+    // Lưu dữ liệu vào Local Storage
+    localStorage.setItem('selectedProduct', JSON.stringify(product));
+
+    // In ra console để kiểm tra
+    console.log("Sản phẩm được lưu:", product);
+
+    // Chuyển hướng sang trang chi tiết sản phẩm
+    window.location.href = 'detailProduct.html';
 }
 
 const imagesByCategory = {

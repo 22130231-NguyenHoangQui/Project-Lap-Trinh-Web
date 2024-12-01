@@ -1,106 +1,7 @@
-document.querySelectorAll('.dropdown-menu a').forEach(function (categoryLink) {
-    categoryLink.addEventListener('click', function (event) {
-        if (categoryLink.getAttribute('href') !== 'SignIn.html' && categoryLink.getAttribute('href') !== 'SignUp.html') {
-
-
-            const categoryData = categoryLink.getAttribute('data-category');
-
-            localStorage.setItem('selectedCategory', categoryData);
-
-
-            window.location.href = 'ProductCatalog.html';
-        }
-    });
-});
-
-
-
-
-
-
-function toggleSearchDropdown() {
-    var dropdown = document.getElementById("search-dropdown");
-
-    if (dropdown.classList.contains("show")) {
-        dropdown.classList.remove("show");
-    } else {
-        dropdown.classList.add("show");
-    }
-}
-
-document.addEventListener("click", function (event) {
-    var icon = document.getElementById("search-icon");
-    var dropdown = document.getElementById("search-dropdown");
-
-    if (!icon.contains(event.target) && !dropdown.contains(event.target)) {
-        dropdown.classList.remove("show");
-    }
-});
-
-
-// function closeCartModal() {
-//     const cartModal = document.getElementById('cart-modal');
-//     const cartIframe = document.getElementById('cart-iframe');
-  
-//     console.log("Đang thực hiện đóng modal..."); // Log kiểm tra
-  
-//     // Ẩn modal
-//     cartModal.style.display = 'none';
-//     cartModal.classList.remove('show');
-//     console.log("Modal đã được ẩn."); // Log sau khi ẩn modal
-  
-//     // Xóa nội dung của iframe
-//     cartIframe.src = '';
-//     console.log("Iframe đã được xóa nội dung."); // Log sau khi xóa src của iframe
-//   }
-
-
-// document.addEventListener('DOMContentLoaded', () => {
-//     const cartButton = document.getElementById('cart-button');
-//     const cartIframe = document.getElementById('cart-iframe');
-//     const cartModal = document.getElementById('cart-modal');
-//     const continueShoppingLink = document.getElementById('continue-shopping');
-//     const checkoutLink = document.getElementById('checkout');
-
-//     cartButton.addEventListener('click', () => {
-//         cartIframe.src = 'shoppingCart.html';
-//         cartModal.style.display = 'flex';
-//         cartModal.classList.add('show');
-//     });
-
-//     window.closeCartModal = function () {
-//         cartModal.style.display = 'none';
-//         cartModal.classList.remove('show');
-//         cartIframe.src = '';
-//     };
-
-//     window.addEventListener('click', (e) => {
-//         if (e.target === cartModal) {
-//             closeCartModal();
-//         }
-//     });
-   
-
-    
-//     checkoutLink.addEventListener('click', (event) => {
-//         closeCartModal(); 
-//         console.log(document.getElementById('checkout')); // Kiểm tra phần tử có tồn tại
-//         setTimeout(() => {
-//             window.top.location.href = '../pages/payment.html'; 
-//         }, 200);
-//     });
-// });
-
-
-// Chờ DOM sẵn sàng
-document.addEventListener("DOMContentLoaded", function () {
-    const cartButton = document.getElementById("cart-button");
-
-    cartButton.addEventListener("click", function () {
-        window.location.href = "shoppingCart.html"; 
-    });
-});
-
+/**
+ * hàm check nếu khi đăng nhập qua mà trong local có biến là admin hay user thì hiện các 
+ * dropdown item tương ứng
+ */
 document.addEventListener('DOMContentLoaded', () => {
     const dropdownMenu = document.querySelector('.account-dropdown-menu');
 
@@ -132,4 +33,58 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+/**
+ * hàm fix cho vấn đề hiện dropdown danh mục bị click vô đăng nhập hoặc đăng ký
+ */
+document.querySelectorAll('.dropdown-menu a').forEach(function (categoryLink) {
+    categoryLink.addEventListener('click', function (event) {
+        if (categoryLink.getAttribute('href') !== 'SignIn.html' && categoryLink.getAttribute('href') !== 'SignUp.html') {
+
+
+            const categoryData = categoryLink.getAttribute('data-category');
+
+            localStorage.setItem('selectedCategory', categoryData);
+
+
+            window.location.href = 'ProductCatalog.html';
+        }
+    });
+});
+
+/**
+ * hàm show dropdownitem
+ */
+function toggleSearchDropdown() {
+    var dropdown = document.getElementById("search-dropdown");
+
+    if (dropdown.classList.contains("show")) {
+        dropdown.classList.remove("show");
+    } else {
+        dropdown.classList.add("show");
+    }
+}
+
+document.addEventListener("click", function (event) {
+    var icon = document.getElementById("search-icon");
+    var dropdown = document.getElementById("search-dropdown");
+
+    if (!icon.contains(event.target) && !dropdown.contains(event.target)) {
+        dropdown.classList.remove("show");
+    }
+});
+
+/**
+ * hàm để click button thì chuyến
+ * sang trang shoppingcart
+ */
+document.addEventListener("DOMContentLoaded", function () {
+    const cartButton = document.getElementById("cart-button");
+
+    cartButton.addEventListener("click", function () {
+        window.location.href = "shoppingCart.html"; 
+    });
+});
+
+
 
