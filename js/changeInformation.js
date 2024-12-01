@@ -1,4 +1,4 @@
-const xac_thuc = true; // Biến xác thực
+const xac_thuc = false; // Biến xác thực
 const userId = 123;
 function checkVerification(userId) {
   //Thay thế đoạn này bằng truy vấn dữ liệu từ MySQL thông qua API(cuối kì)
