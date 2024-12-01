@@ -366,7 +366,7 @@ header-center
         color: #333;
         font-weight: 550;
         text-decoration: none;
-        background-color: rgb(241, 237, 252);
+        background-color: #5ea8f3;
         padding: 10px 10px;
         }
     
@@ -470,3 +470,67 @@ header-center
     background-color: #19538d;
     color:white;
 }                        
+.d-flex.align-items-center {
+    justify-content: center; /* Căn giữa nội dung bên trong theo chiều ngang */
+    gap: 5px; /* Khoảng cách giữa nút và ô nhập số lượng */
+}
+/* ========================
+   Table Styling
+======================== */
+
+th {
+    text-align: center;
+}
+.table tbody td {
+    padding: 10px; /* Khoảng cách bên trong ô */
+    text-align: center; /* Căn giữa chữ */
+    vertical-align: middle; /* Căn giữa theo chiều dọc */
+    font-size: 0.9rem; /* Kích thước chữ vừa phải */
+    color: black; /* Màu chữ */
+}
+
+.table tbody td:first-child {
+    text-align: left; /* Căn trái cột đầu tiên (sản phẩm) */
+}
+
+.table tbody td:last-child {
+    text-align: center; /* Căn giữa cột thao tác */
+}
+
+/* Style cho nút bấm */
+.table .btn {
+    padding: 5px 10px;
+    font-size: 0.85rem;
+    border-radius: 4px;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.btn-outline-secondary {
+    border-color: #6c757d;
+    color: #6c757d;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: white;
+}
+
+/* Responsive Table */
+@media (max-width: 768px) {
+    .table tbody td {
+        font-size: 0.8rem; /* Giảm kích thước chữ trên màn hình nhỏ */
+        padding: 8px;
+    }
+
+    .table-header th {
+        font-size: 0.8rem; /* Giảm kích thước tiêu đề */
+    }
+}

@@ -204,7 +204,18 @@ header-center
     border-radius: 20px;
     padding: 5px 15px;
 }
+.col1:hover i.fa-bag-shopping {
+    color: #007bff; /* Thay đổi màu icon khi hover */
+    transform: scale(1.2); /* Phóng to icon */
+    transition: transform 0.3s ease, color 0.3s ease;
+}
 
+.col1:hover #cart-button {
+    color: #007bff; /* Màu chữ khi hover */
+    background-color: #007bff; /* Màu nền của nút khi hover */
+    border-radius: 5px; /* Thêm góc bo tròn cho nút nếu cần */
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
 .account-dropdown-menu {
     min-width: 100%;
     box-sizing: border-box;

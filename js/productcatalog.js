@@ -404,5 +404,16 @@ const imagesByCategory = {
     ]
 };
 
+/**
+ * hàm để click button thì chuyến
+ * sang trang shoppingcart
+ */
+document.addEventListener("DOMContentLoaded", function () {
+    const cartButton = document.getElementById("cart-button");
+
+    cartButton.addEventListener("click", function () {
+        window.location.href = "shoppingCart.html"; 
+    });
+});
 
 

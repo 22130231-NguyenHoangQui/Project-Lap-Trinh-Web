@@ -318,6 +318,26 @@ aside {
 .boder-bottom-box .py-3 {
     border: rgb(160, 155, 155) 1px solid;
 }
+/* Highlight khi hover */
+.col-lg-3 .py-3:hover {
+    background-color: #f8f9fa; /* Màu nền khi hover */
+    border-left: 4px solid #1E90FF; /* Đường viền bên trái nổi bật */
+    transition: all 0.3s ease; /* Hiệu ứng mượt */
+}
+
+/* Highlight khi active */
+.col-lg-3 .py-3.active {
+    background-color: #1E90FF; /* Màu nền khi active */
+    color: #ffffff; /* Màu chữ khi active */
+    font-weight: bold; /* Đậm chữ */
+}
+
+/* Link trong mục khi hover */
+.col-lg-3 .py-3 a:hover {
+    color: #1E90FF; /* Đổi màu chữ link */
+    text-decoration: underline; /* Gạch chân link */
+}
+
 
 
 /* setting some */
