@@ -300,6 +300,7 @@ function displayOrders(page) {
                     <th>Customer</th>
                     <th>Order Date</th>
                     <th>Price</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -313,6 +314,7 @@ function displayOrders(page) {
                 <td>${order.customer}</td>
                 <td>${order.date}</td>
                 <td>${order.price}</td>
+                <td>${order.status}</td>
             </tr>
         `;
     });
@@ -375,7 +377,7 @@ function displayCustomers(page) {
                 <td>${customer.isVerified}</td>
                 <td id="status-${customer.id}">${customer.status}</td>
               <td>
-                <button class="icon-button" onclick="openFormAddCustomer(this)">
+                <button class="icon-button" onclick="openFormCustomerSetting(this)">
                     <i class="fa-solid fa-pen"></i>
                 </button>
                 <button class="icon-button" onclick="toggleStatus(this)">
@@ -404,7 +406,7 @@ function displayCustomers(page) {
     paginationHTML += '</ul></nav>';
 
     changeContent('Quản lý tài khoản', tableHTML + paginationHTML, [
-        { icon: 'fa-solid fa-gear', action: openFormCustomerSetting }
+        { icon: 'fa-solid fa-gear', action: openFormAddCustomer}
     ]);
 
 }
@@ -488,50 +490,50 @@ function displayProducts(page) {
  * thêm khách hàng  
  * 
  */
-function openFormAddCustomer() {
-    const formContainer = document.getElementById('formContainer');
-    const overlay = document.getElementById('overlay');
+    function openFormAddCustomer() {
+        const formContainer = document.getElementById('formContainer');
+        const overlay = document.getElementById('overlay');
 
-    formContainer.style.display = 'block';
-    overlay.style.display = 'block';
+        formContainer.style.display = 'block';
+        overlay.style.display = 'block';
 
-    overlay.addEventListener('click', closeFormAddCustomer);
-}
+        overlay.addEventListener('click', closeFormAddCustomer);
+    }
 
-// thay đổi thông tin
+    // thay đổi thông tin
 
-function closeFormAddCustomer() {
-    const formContainer = document.getElementById('formContainer');
-    formContainer.style.display = 'none';
-    overlay.style.display = 'none';
-}
+    function closeFormAddCustomer() {
+        const formContainer = document.getElementById('formContainer');
+        formContainer.style.display = 'none';
+        overlay.style.display = 'none';
+    }
 
-function openFormCustomerSetting(button) {
-    const row = button.closest("tr");
-    const columns = row.querySelectorAll("td");
-
-
-    const stt = columns[0].textContent;
-    const name = columns[1].textContent;
-    const phone = columns[2].textContent;
-    const email = columns[3].textContent;
-    const address = columns[4].textContent;
-    const password = columns[4].textContent;
+    function openFormCustomerSetting(button) {
+        const row = button.closest("tr");
+        const columns = row.querySelectorAll("td");
 
 
-
-    document.getElementById("fname").value = name;
-    document.getElementById("email").value = email;
-    document.getElementById("sdt").value = phone;
-
-    document.getElementById("saveButton").onclick = function () {
-        saveChanges(row);
-    };
+        const stt = columns[0].textContent;
+        const name = columns[1].textContent;
+        const phone = columns[2].textContent;
+        const email = columns[3].textContent;
+        const address = columns[4].textContent;
+        const password = columns[4].textContent;
 
 
-    document.getElementById("editFormContainer").style.display = "block";
-    document.getElementById("overlay").style.display = "block";
-}
+
+        document.getElementById("fname").value = name;
+        document.getElementById("email").value = email;
+        document.getElementById("sdt").value = phone;
+
+        document.getElementById("saveButton").onclick = function () {
+            saveChanges(row);
+        };
+
+
+        document.getElementById("editFormContainer").style.display = "block";
+        document.getElementById("overlay").style.display = "block";
+    }
 function closeForm() {
     document.getElementById("editFormContainer").style.display = "none";
     document.getElementById("overlay").style.display = "none";
@@ -670,6 +672,10 @@ function saveChangesProduct(row) {
     closeFormProductEdit();
 
 }
+function closeFormProductEdit() {
+    document.getElementById("editFormProduct").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+}
 function deleteRow(button) {
     const row = button.closest("tr");
 
@@ -685,7 +691,7 @@ function deleteRow(button) {
 
 
 function openFormCate() {
-    const formProduct = document.getElementById('editFormCate');
+    const formProduct = document.getElementById('addFormCate');
     const overlay = document.getElementById('overlay');
 
     formProduct.style.display = 'block'
@@ -700,7 +706,7 @@ document.getElementById("overlay").addEventListener("click", closeForm);
 
 
 function closeFormCate() {
-    const formProduct = document.getElementById('editFormCate');
+    const formProduct = document.getElementById('addFormCate');
     formProduct.style.display = 'none';
     overlay.style.display = 'none';
 }
@@ -729,7 +735,9 @@ function openEditFormCate(button) {
     document.getElementById("editCateName1").value = name;
 
 
-    document.getElementById("saveButtonCate").onclick = function () {
+    document.getElementById("saveButtonCate1").onclick = function () {
+    console.log(123);
+
         saveChangesCate(row);
     };
 
@@ -740,35 +748,41 @@ function openEditFormCate(button) {
 
 function saveChangesCate(row) {
     const name = document.getElementById("editCateName1").value;
+    console.log(name);
+    
 
-
-    row.querySelector("td.pro:nth-child(2) .cate-name").textContent = name;
+    row.querySelector("td.cate1:nth-child(3)").textContent = name;
 
     console.log(213);
     
-    closeFormCate();
+    closeFormEditCate();
 
+}
+function closeFormEditCate() {
+    document.getElementById("editFormCate").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
 }
 
 
 // Dữ liệu mẫu
 const orders = [
-    { id: 1, name: "Chocolate Cake", customer: "Alice", date: "2024-10-10", price: "$25" },
-    { id: 2, name: "Vanilla Cake", customer: "Bob", date: "2024-10-12", price: "$20" },
-    { id: 3, name: "Strawberry Cake", customer: "Charlie", date: "2024-10-13", price: "$30" },
-    { id: 4, name: "Red Velvet Cake", customer: "David", date: "2024-10-14", price: "$40" },
-    { id: 5, name: "Lemon Cake", customer: "Eva", date: "2024-10-15", price: "$22" },
-    { id: 6, name: "Carrot Cake", customer: "Frank", date: "2024-10-16", price: "$28" },
-    { id: 7, name: "Black Forest Cake", customer: "Grace", date: "2024-10-17", price: "$35" },
-    { id: 8, name: "Coffee Cake", customer: "Hank", date: "2024-10-18", price: "$27" },
-    { id: 9, name: "Banana Cake", customer: "Ivy", date: "2024-10-19", price: "$24" },
-    { id: 10, name: "Chiffon Cake", customer: "Jack", date: "2024-10-20", price: "$26" },
-    { id: 11, name: "Mango Cake", customer: "Kate", date: "2024-10-21", price: "$33" },
-    { id: 12, name: "Coconut Cake", customer: "Liam", date: "2024-10-22", price: "$29" },
-    { id: 13, name: "Peach Cake", customer: "Mona", date: "2024-10-23", price: "$32" },
-    { id: 14, name: "Pumpkin Cake", customer: "Nina", date: "2024-10-24", price: "$34" },
-    { id: 15, name: "Raspberry Cake", customer: "Oscar", date: "2024-10-25", price: "$37" }
+    { id: 1, name: "Bánh sinh nhật vị socola", customer: "Alice", date: "2024-10-10", price: "$25", status: "Chờ xử lý" },
+    { id: 2, name: "Bánh sinh nhật vị vani", customer: "Bob", date: "2024-10-12", price: "$20", status: "Hoàn thành" },
+    { id: 3, name: "Bánh sinh nhật vị dâu", customer: "Charlie", date: "2024-10-13", price: "$30", status: "Đã hủy" },
+    { id: 4, name: "Bánh sinh nhật Red Velvet", customer: "David", date: "2024-10-14", price: "$40", status: "Hoàn thành" },
+    { id: 5, name: "Bánh sinh nhật vị chanh", customer: "Eva", date: "2024-10-15", price: "$22", status: "Chờ xử lý" },
+    { id: 6, name: "Bánh sinh nhật vị cà rốt", customer: "Frank", date: "2024-10-16", price: "$28", status: "Hoàn thành" },
+    { id: 7, name: "Bánh sinh nhật rừng đen", customer: "Grace", date: "2024-10-17", price: "$35", status: "Chờ xử lý" },
+    { id: 8, name: "Bánh sinh nhật vị cà phê", customer: "Hank", date: "2024-10-18", price: "$27", status: "Đã hủy" },
+    { id: 9, name: "Bánh sinh nhật vị chuối", customer: "Ivy", date: "2024-10-19", price: "$24", status: "Hoàn thành" },
+    { id: 10, name: "Bánh sinh nhật Chiffon", customer: "Jack", date: "2024-10-20", price: "$26", status: "Chờ xử lý" },
+    { id: 11, name: "Bánh sinh nhật vị xoài", customer: "Kate", date: "2024-10-21", price: "$33", status: "Hoàn thành" },
+    { id: 12, name: "Bánh sinh nhật vị dừa", customer: "Liam", date: "2024-10-22", price: "$29", status: "Chờ xử lý" },
+    { id: 13, name: "Bánh sinh nhật vị đào", customer: "Mona", date: "2024-10-23", price: "$32", status: "Hoàn thành" },
+    { id: 14, name: "Bánh sinh nhật vị bí ngô", customer: "Nina", date: "2024-10-24", price: "$34", status: "Đã hủy" },
+    { id: 15, name: "Bánh sinh nhật vị mâm xôi", customer: "Oscar", date: "2024-10-25", price: "$37", status: "Chờ xử lý" }
 ];
+
 const customers = [
     {
         id: 1,
