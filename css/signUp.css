@@ -4,6 +4,8 @@ body {
     background-color: #f0f0f0;
     backdrop-filter: blur(5px); /* Làm mờ nhẹ nền phía sau */
 }
+
+/* main */
 main{
     background: linear-gradient(to bottom, #eef2f3, #a9cff0);
 }
@@ -56,14 +58,27 @@ main{
 }
 
 .form-terms input {
+    margin-right: 10px;
+    /* Khoảng cách giữa checkbox và label */
     margin-right: 10px; /* Khoảng cách giữa checkbox và label */
     width: auto;
 }
 
 .form-terms label {
-    display: inline-block; /* Đảm bảo label nằm trên cùng dòng */
+    display: inline-block;
+    /* Đảm bảo label nằm trên cùng dòng */
 }
 
+.form-terms input {
+    width: auto;
+}
+
+#verification {
+    text-align: left;
+}
+
+.info-login input,
+.info-customer input,
 /* Input và Select */
 .info-login input, .info-customer input,
 select {
@@ -135,4 +150,8 @@ label.required::after,
     text-decoration: underline;
     color: blue;
     cursor: pointer;
+}
+
+.form-group .wrapper span {
+    color: red;
 }

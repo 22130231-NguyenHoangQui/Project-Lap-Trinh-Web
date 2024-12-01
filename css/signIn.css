@@ -91,3 +91,7 @@ main{
 .footer {
     margin-top: 10px;
 }
+
+.footer a{
+    color: #1056fa;
+}

@@ -5,7 +5,6 @@ body.body-a {
     /* display: flex;
     justify-content: center;
     align-items: center; */
-   
 }
 
 /* main  */
@@ -22,10 +21,12 @@ main{
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
+
 .h2-change {
     font-weight: bold;
 }
-#verification{
+
+#verification {
     text-align: left;
 }
 
@@ -51,7 +52,7 @@ select {
 
 }
 
-.form-group.form1 input {
+.form-group.form1 div {
     width: 60%;
 }
 
@@ -98,8 +99,12 @@ label.required::after,
     margin: 2px;
 }
 
-.verify-now{
+.verify-now {
     text-decoration: underline;
     color: blue;
     cursor: pointer;
+}
+
+.form-group div span {
+    color: red;
 }
