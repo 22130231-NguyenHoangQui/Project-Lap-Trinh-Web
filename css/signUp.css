@@ -1,27 +1,35 @@
 /* Body */
 body {
     font-family: Tahoma, sans-serif;
-    background-color: #f0f0f0;
-    backdrop-filter: blur(5px); /* Làm mờ nhẹ nền phía sau */
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    background: linear-gradient(to bottom, #eef2f3, #a9cff0);
+    padding: 30px;
+
 }
 
 /* main */
-main{
-    background: linear-gradient(to bottom, #eef2f3, #a9cff0);
+main {
+    background-color: transparent;
 }
+
 /* Container chính */
 .container.container1 {
     background-color: white;
-    margin: 20px;
-    padding: 20px;
+    padding: 30px;
     width: 450px;
     height: auto;
     border-radius: 10px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); /* Tăng độ mờ và bán kính đổ bóng */
-    border: 2px solid #cccfd1; /* Viền xanh nổi bật */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    /* Tăng độ mờ và bán kính đổ bóng */
+    border: 2px solid #cccfd1;
+    /* Viền xanh nổi bật */
     text-align: center;
-    position: relative; /* Để định vị các phần tử con như nút "X" */
-    z-index: 10; /* Đảm bảo phần này nằm trên cùng */
+    position: relative;
+    z-index: 10;
 }
 
 /* Nút "X" */
@@ -60,7 +68,8 @@ main{
 .form-terms input {
     margin-right: 10px;
     /* Khoảng cách giữa checkbox và label */
-    margin-right: 10px; /* Khoảng cách giữa checkbox và label */
+    margin-right: 10px;
+    /* Khoảng cách giữa checkbox và label */
     width: auto;
 }
 
@@ -79,8 +88,8 @@ main{
 
 .info-login input,
 .info-customer input,
-/* Input và Select */
-.info-login input, .info-customer input,
+.info-login input,
+.info-customer input,
 select {
     width: 100%;
     padding: 10px;
@@ -154,4 +163,24 @@ label.required::after,
 
 .form-group .wrapper span {
     color: red;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 20px;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+    color: #111;
+}
+
+h2 {
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #1056fa;
 }
