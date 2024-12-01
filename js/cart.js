@@ -1,9 +1,31 @@
+// is medium hiện đường dẫn của trang
+document.addEventListener("DOMContentLoaded", function () {
+    var isMediumDiv = document.querySelector('.is-medium .container');
+    var path = window.location.pathname.split('/').filter(function (part) { return part !== ''&& part !== 'pages'; });
 
+    var breadcrumbHtml = '<a href="../pages/homepage.html">Trang Chủ</a>';
+    var urlPath = '/';
+
+    path.forEach(function (part, index) {
+        urlPath += part + '/';
+        if (index === path.length - 1 && part === 'shoppingCart.html') {
+            breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">Giỏ hàng</a>';
+        } else {
+            breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">' + part.replace(/-/g, ' ') + '</a>';
+        }    
+    });
+
+    isMediumDiv.innerHTML = breadcrumbHtml;
+});
+
+
+/**
+ * hàm để cật nhật thông tin sản phẩm vào giỏ hàng click thêm vào giỏ hàng ở trang 
+ * chi tiết sản phẩm
+ */
 window.onload = function() {
     // Lấy giỏ hàng từ localStorage
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    console.log(cart);
-    
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];    
     // Kiểm tra nếu giỏ hàng có sản phẩm
     if (cart.length > 0) {
         const cartContainer = document.getElementById('cart-items');
@@ -47,13 +69,15 @@ window.onload = function() {
   };
   
 
-
+/**
+ * dùng các hàm để lọc đ,',',...
+ * và tổng cộng lại giá của các sản phẩm
+ *  
+ */
 function updateSubtotal(input) {
     const row = input.closest('tr');
-    console.log();
     
     const price = parseInt(row.children[2].innerText.replace(/₫|,/g, '').trim());
-    console.log("Giá sau khi làm sạch:", price); 
     const quantity = parseInt(input.value);
 
     if (quantity < 1 || isNaN(quantity)) { 
@@ -65,6 +89,10 @@ function updateSubtotal(input) {
     updateTotal();
 }
 
+/**
+ * hàm tăng giảm số lượng thì sẽ cật nhật lại giá
+ * hàm xóa item khỏi giỏ hàng 
+ */
 function incrementQuantity(button) {
     const input = button.previousElementSibling;
     input.value = parseInt(input.value) + 1;
@@ -78,7 +106,6 @@ function decrementQuantity(button) {
         updateSubtotal(input);
     }
 }
-
 function removeItem(button) {
     if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này?")) {
         const row = button.closest('tr');
@@ -93,6 +120,9 @@ function removeItem(button) {
     }
 }
 
+/**
+ * hàm tính xem đã đủ điều kiện miễn phí vẫn chuyển chưa
+ */
 function updateTotal() {
     let total = 0;
     document.querySelectorAll('.subtotal').forEach(subtotalCell => {
@@ -112,28 +142,6 @@ function updateTotal() {
     }
 }
 
-
-
-
-// is medium hiện đường dẫn của trang
-document.addEventListener("DOMContentLoaded", function () {
-    var isMediumDiv = document.querySelector('.is-medium .container');
-    var path = window.location.pathname.split('/').filter(function (part) { return part !== ''&& part !== 'pages'; });
-
-    var breadcrumbHtml = '<a href="../pages/homepage.html">Trang Chủ</a>';
-    var urlPath = '/';
-
-    path.forEach(function (part, index) {
-        urlPath += part + '/';
-        if (index === path.length - 1 && part === 'shoppingCart.html') {
-            breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">Giỏ hàng</a>';
-        } else {
-            breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">' + part.replace(/-/g, ' ') + '</a>';
-        }    
-    });
-
-    isMediumDiv.innerHTML = breadcrumbHtml;
-});
 
 
 
