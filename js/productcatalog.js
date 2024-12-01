@@ -38,6 +38,60 @@ document.querySelectorAll('.dropdown-menu a').forEach(function (categoryLink) {
 });
 
 /**
+ * 
+ */
+document.querySelectorAll('.product-categories li').forEach(function (categoryItem) {
+    categoryItem.addEventListener('click', function (event) {
+        event.preventDefault(); // Prevent default link behavior
+        const categoryData = categoryItem.getAttribute('data-category');
+        // Store the selected category in localStorage
+        localStorage.setItem('selectedCategory', categoryData);
+        // Reload the products based on selected category
+        loadProducts(categoryData);
+    });
+});
+
+
+
+
+// Function to load products based on the selected category
+function loadProducts(category) {
+    const imageList = imagesByCategory[category] || [];
+    const productContainer = document.querySelector('.products.row.row-small');
+    productContainer.innerHTML = '';  // Clear previous products
+    imageList.forEach((product) => {
+        productContainer.innerHTML += createProductHTML(product);
+    });
+    // Mark the active category
+    const categoryItems = document.querySelectorAll('.product-categories li');
+    categoryItems.forEach((item) => {
+        const link = item.querySelector('a');
+        if (link && link.textContent.trim() === getCategoryName(category)) {
+            item.classList.add('active');
+        } else {
+            item.classList.remove('active');
+        }
+    });
+}
+
+/**
+ * hàm lấy tên ra để cho hover  
+ */
+function getCategoryName(category) {
+    const categoryMapping = {
+        banh_an_nhe: 'Bánh Sinh Nhật Ăn Nhẹ',
+        banh_cac_ngay_le: 'Bánh Sinh Nhật Các Ngày Lễ',
+        banh_chai_ruou: 'Bánh Sinh Nhật Sang Trọng',
+        banh_hoa: 'Bánh Sinh Nhật Hoa',
+        banh_man: 'Bánh Sinh Nhật Mặn',
+        banh_hien_dai: 'Bánh Hiện Đại',
+        banh_mau_trai: 'Bánh Sinh Nhật Mẫu Bé Trai',
+        banh_mau_gai:'Bánh Sinh Nhật Cho Bé Gái',
+        banh_mau:'Bánh Sinh Nhật Mẫu In 3D'
+    };
+    return categoryMapping[category] || category;
+}
+/**
  * hàm thay đổi giá giúp khi kéo thay thì sẽ thay đổi giá tương ứng
  */
 document.addEventListener('DOMContentLoaded', function () {
@@ -193,17 +247,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-/**
- * hàm lấy tên ra để cho hover  
- */
-function getCategoryName(category) {
-    const categoryMapping = {
-        banh_an_nhe: 'Bánh Ăn Nhẹ',
-        banh_cac_ngay_le: 'Bánh Các Ngày Lễ',
-        banh_chai_ruou: 'Bánh Chai Rượu Và Ly Bia Sang Trọng',
-    };
-    return categoryMapping[category] || category;
-}
+
 
 
 
@@ -245,48 +289,120 @@ const imagesByCategory = {
         { image: '../image/imghomepage/product/product_danhmuc/4.webp', id: 'VB104', name: 'Mousse Dâu Sữa Chua', price: '55.000₫', link: '#' },
         { image: '../image/imghomepage/product/product_danhmuc/5.webp', id: 'O1506', name: 'Nama choco cream', price: '55.000₫', link: '#' },
         { image: '../image/imghomepage/product/product_danhmuc/6.webp', id: 'BM215', name: 'Bông lan trứng muối phomai', price: '55.000₫', link: '#' },
-        { image: '../image/imghomepage/product/product_danhmuc/7.webp', id: 'DU311', name: 'Panna cotta', price: '55.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/1.webp', id: 'DU311', name: 'Panna cotta', price: '55.000₫', link: '#' },
         { image: '../image/imghomepage/product/product_danhmuc/8.webp', id: 'GC703', name: 'Gato cup Matcha', price: '55.000₫', link: '#' },
         { image: '../image/imghomepage/product/product_danhmuc/9.webp', id: 'TO1502', name: 'Matchamisu', price: '55.000₫', link: '#' },
         { image: '../image/imghomepage/product/product_danhmuc/10.webp', id: 'VB103', name: 'Mousse Việt Quất Sữa Chua', price: '55.000₫', link: '#' },
-        { image: '../image/imghomepage/product/product_danhmuc/9.webp', id: 'TO1502', name: 'Matchamisu', price: '55.000₫', link: '#' },
-
-        { image: '../image/imghomepage/product/product_danhmuc/9.webp', id: 'TO1502', name: 'Matchamisu', price: '55.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/3.webp', id: 'SH612', name: 'Su dẻo Phô mai', price: '65.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/4.webp', id: 'VB104', name: 'Mousse Dâu Sữa Chua', price: '55.000₫', link: '#' },
+    
 
     ],
-    'banh_cac_ngay_le': [
-        { image: '../image/imghomepage/product/product_danhmuc/1.webp', id: 'TRMS4', name: 'Tiramisu Dâu Tây', price: '120.000₫', link: '#' },
-        { image: '../image/imghomepage/product/product_danhmuc/2.webp', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
-        { image: '../image/imghomepage/khachhang4.jpg', id: 'Socola', name: 'Bánh Socola', price: '90.000₫', link: '#' }
-    ],
+'banh_cac_ngay_le': [
+    { image: '../image/imghomepage/product/product_danhmuc/1.webp', id: 'A1B23', name: 'Bánh Lễ Tình Nhân', price: '350.000₫', link: '#' },
+    { image: '../image/imghomepage/product/product_danhmuc/2.webp', id: 'X2Y10', name: 'Bánh Giáng Sinh', price: '450.000₫', link: '#' },
+    { image: '../image/imghomepage/product/product_danhmuc/4.webp', id: 'Z7K41', name: 'Bánh Tết Nguyên Đán', price: '600.000₫', link: '#' },
+    { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_bento/BBT01.png', id: 'M9J56', name: 'Lễ Phục Sinh', price: '500.000₫', link: '#' },
+    { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_bento/BBT02.png', id: 'Q2W78', name: 'Lễ Tạ Ơn', price: '550.000₫', link: '#' },
+    { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_bento/BBT03.png', id: 'J3K74', name: 'Ngày Quốc Khánh', price: '480.000₫', link: '#' },
+    { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_bento/BBT04.png', id: 'B9L83', name: 'Bánh Sinh Nhật Ngày Phụ Nữ Việt Nam', price: '400.000₫', link: '#' },
+    { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_bento/BBT05.png', id: 'E6P39', name: 'Bánh Sinh Nhật Lễ Quốc Tế Phụ Nữ', price: '450.000₫', link: '#' },
+    { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_bento/BBT06.png', id: 'N8C29', name: 'Bánh Sinh Nhật Ngày Halloween', price: '700.000₫', link: '#' },
+    { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_bento/BBT07.png', id: 'L1M68', name: 'Bánh Sinh Nhật Ngày Phụ Nữ Quốc Tế', price: '650.000₫', link: '#' },
+    { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_bento/BBT08.png', id: 'V4F27', name: 'Bánh Sinh Nhật Tết Trung Thu', price: '380.000₫', link: '#' },
+    { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_bento/BBT09.png', id: 'S5Z38', name: 'Bánh Sinh Nhật Ngày Sinh Nhật', price: '800.000₫', link: '#' }
+],
+
     'banh_chai_ruou': [
         { image: '../image/imghomepage/khachhang3.jpg', id: 'Mousse', name: 'Bánh Mousse', price: '80.000₫', link: '#' },
         { image: '../image/imghomepage/khachhang4.jpg', id: 'Socola', name: 'Bánh Socola', price: '90.000₫', link: '#' }
 
     ],
-    'banh_chu_nhat': [
-        { image: '../image/imghomepage/khachhang3.jpg', id: 'Mousse', name: 'Bánh Mousse', price: '80.000₫', link: '#' },
-        { image: '../image/imghomepage/khachhang4.jpg', id: 'Socola', name: 'Bánh Socola', price: '90.000₫', link: '#' }
+    'banh_mau': [
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/mau_in_3D/BI01.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/mau_in_3D/BI02.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/mau_in_3D/BI03.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/mau_in_3D/BI04.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/mau_in_3D/BI05.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/mau_in_3D/BI06.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/mau_in_3D/BI07.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/mau_in_3D/BI08.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/mau_in_3D/BI09.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/mau_in_3D/BI10.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
     ],
-    'banh_cong_chua': [
-        { image: '../image/imghomepage/khachhang3.jpg', id: 'Mousse', name: 'Bánh Mousse', price: '80.000₫', link: '#' },
-        { image: '../image/imghomepage/khachhang4.jpg', id: 'Socola', name: 'Bánh Socola', price: '90.000₫', link: '#' }
+    'banh_mau_trai': [
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/mau_be_trai/BT01.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/mau_be_trai/BT02.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/mau_be_trai/BT03.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/mau_be_trai/BT04.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/mau_be_trai/BT05.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/mau_be_trai/BT06.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/mau_be_trai/BT07.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/mau_be_trai/BT08.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/mau_be_trai/BT09.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/mau_be_trai/BT10.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
     ],
-    'banh_giang_sinh': [
-        { image: '../image/imghomepage/khachhang3.jpg', id: 'Mousse', name: 'Bánh Mousse', price: '80.000₫', link: '#' },
-        { image: '../image/imghomepage/khachhang4.jpg', id: 'Socola', name: 'Bánh Socola', price: '90.000₫', link: '#' }
+    'banh_mau_gai': [
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/mau_be_gai/BG01.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/mau_be_gai/BG02.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/mau_be_gai/BG03.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/mau_be_gai/BG04.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/mau_be_gai/BG05.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/mau_be_gai/BG06.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/mau_be_gai/BG07.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/mau_be_gai/BG08.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/mau_be_gai/BG09.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/mau_be_gai/BG10.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+     ],
+    'banh_hien_dai': [
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/hien_dai_sang_trong/HD01.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/hien_dai_sang_trong/HD02.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/hien_dai_sang_trong/HD03.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/hien_dai_sang_trong/HD04.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/hien_dai_sang_trong/HD05.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/hien_dai_sang_trong/HD06.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/hien_dai_sang_trong/HD07.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/hien_dai_sang_trong/HD08.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/hien_dai_sang_trong/HD09.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/hien_dai_sang_trong/HD10.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+ 
     ],
-    'banh_ki_niem_ngay': [
-        { image: '../image/imghomepage/khachhang3.jpg', id: 'Mousse', name: 'Bánh Mousse', price: '80.000₫', link: '#' },
-        { image: '../image/imghomepage/khachhang4.jpg', id: 'Socola', name: 'Bánh Socola', price: '90.000₫', link: '#' }
+    'banh_man': [
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_man/BM01.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_man/BM02.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_man/BM08.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_man/BM04.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_man/BM05.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_man/BM06.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_man/BM07.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_man/BM08.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_man/BM09.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_man/BM10.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+ 
     ],
-    'banh_lich': [
-        { image: '../image/imghomepage/khachhang3.jpg', id: 'Mousse', name: 'Bánh Mousse', price: '80.000₫', link: '#' },
-        { image: '../image/imghomepage/khachhang4.jpg', id: 'Socola', name: 'Bánh Socola', price: '90.000₫', link: '#' }
-    ],
-    'banh_mousse': [
-        { image: '../image/imghomepage/khachhang3.jpg', id: 'Mousse', name: 'Bánh Mousse', price: '80.000₫', link: '#' },
-        { image: '../image/imghomepage/khachhang4.jpg', id: 'Socola', name: 'Bánh Socola', price: '90.000₫', link: '#' }
+    'banh_hoa': [
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_hoa/BH01.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_hoa/BH02.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_hoa/BH03.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_hoa/BH04.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_hoa/BH05.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_hoa/BH06.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_hoa/BH07.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_hoa/BH08.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_hoa/BH09.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_hoa/BH10.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_hoa/BH11.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_hoa/BH12.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_hoa/BH13.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_hoa/BH14.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_hoa/BH15.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_hoa/BH16.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_hoa/BH17.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_hoa/BH18.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_hoa/BH19.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+        { image: '../image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_hoa/BH20.png', id: 'BTL12', name: 'Bánh sinh nhật Su Sing Hoa Quả sz14', price: '1.180.000₫', link: '#' },
+
+
     ]
 };
 

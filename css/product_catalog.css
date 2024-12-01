@@ -203,7 +203,7 @@ option {
     font-size: 14px;
 }
 
-button {
+.button.button-loc {
     background-color: #666666;
     color: white;
     border: none;
