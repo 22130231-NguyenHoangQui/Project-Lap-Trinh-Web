@@ -355,6 +355,16 @@
 .btn-success:hover {
     background-color: #0cab15;
 }
+.btn-second {
+    background-color: #e67812;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.btn-second:hover {
+    background-color: #b64605;
+    color:white;
+}
 /* Tạo khoảng cách giữa các phần */
 .card {
     border: 1px solid #ddd;
@@ -375,4 +385,44 @@
 /* Ẩn form chỉnh sửa thông tin */
 .d-none {
     display: none;
+}
+.modal-form {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Nền mờ */
+    z-index: 1050; /* Đảm bảo nổi lên trên */
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.card {
+    height: 100%; /* Bắt các thẻ card có chiều cao 100% của cột cha */
+    display: flex;
+    flex-direction: column; /* Đảm bảo nội dung bên trong xếp theo cột */
+    justify-content: space-between; /* Đẩy các phần tử ra để không bị chen chúc */
+}
+
+.card {
+    height: 100%; /* Bắt các thẻ card có chiều cao 100% của cột cha */
+    display: flex;
+    flex-direction: column; /* Đảm bảo nội dung bên trong xếp theo cột */
+    justify-content: space-between; /* Đẩy các phần tử ra để không bị chen chúc */
+}
+
+.col-md-6 {
+    display: flex;
+    flex-direction: column; /* Bảo toàn layout theo chiều dọc */
 }

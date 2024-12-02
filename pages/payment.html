@@ -170,11 +170,10 @@
         
         <!-- Thông tin khách hàng và địa chỉ nhận hàng -->
         <div class="row mb-3">
-            <!-- Thông tin khách hàng -->
             <div class="col-md-6">
                 <div class="card p-4">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h5>Thông tin khách hàng</h5>
+                        <h5>Địa chỉ nhận hàng</h5>
                         <button class="btn btn-link p-0" onclick="editCustomerInfo()">
                             <i class="fas fa-edit"></i>
                         </button>
@@ -183,54 +182,48 @@
                         <li><strong>Họ tên:</strong> <span id="customer-name-display">Nguyễn Văn A</span></li>
                         <li><strong>Số điện thoại:</strong> <span id="customer-phone-display">0123 456 789</span></li>
                         <li><strong>Email:</strong> <span id="customer-email-display">nguyenvana@example.com</span></li>
+                        <li><strong>Địa chỉ nhận hàng:</strong> <span id="shipping-address-display" class="mb-0">137 Trần Văn Ơn, Quận 9, TP.HCM</span></li>
                     </ul>
                 </div>
             </div>
     
-            <!-- Địa chỉ nhận hàng -->
+            
             <div class="col-md-6">
                 <div class="card p-4">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h5>Địa chỉ nhận hàng</h5>
-                        <button class="btn btn-link p-0" onclick="editShippingAddress()">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                    </div>
-                    <p id="shipping-address-display" class="mb-0">137 Trần Văn Ơn, Quận 9, TP.HCM</p>
+                    <div class="s14_gt">THỜI GIAN GIAO HÀNG:</div>
+                    <ul class="s14_gn">
+                        <li>Khung giờ giao hàng: 08:00 - 19:00 thứ 2 - Chủ Nhật. </li>
+                        <li>Thời gian giao hàng dự kiến có thể thay đổi tùy vào khu vực và đơn vị vận chuyển.</li>
+                        <li>Miễn phí vận chuyển trong bán kính 3km cho các đơn hàng trên 450,000</li>
+                    </ul>
                 </div>
             </div>
         </div>
-    
-        <!-- Form chỉnh sửa thông tin khách hàng (ẩn mặc định) -->
-        <div class="card p-4 mb-3 d-none" id="edit-customer-form">
-            <h5>Chỉnh sửa thông tin khách hàng</h5>
-            <form>
-                <div class="mb-3">
-                    <label for="customer-name" class="form-label">Họ tên</label>
-                    <input type="text" id="customer-name" class="form-control" value="Nguyễn Văn A">
-                </div>
-                <div class="mb-3">
-                    <label for="customer-phone" class="form-label">Số điện thoại</label>
-                    <input type="text" id="customer-phone" class="form-control" value="0123 456 789">
-                </div>
-                <div class="mb-3">
-                    <label for="customer-email" class="form-label">Email</label>
-                    <input type="email" id="customer-email" class="form-control" value="nguyenvana@example.com">
-                </div>
-                <button type="button" class="btn btn-success" onclick="saveCustomerInfo()">Lưu</button>
-            </form>
-        </div>
-    
-        <!-- Form chỉnh sửa địa chỉ nhận hàng (ẩn mặc định) -->
-        <div class="card p-4 mb-3 d-none" id="edit-address-form">
-            <h5>Chỉnh sửa địa chỉ nhận hàng</h5>
-            <form>
-                <div class="mb-3">
-                    <label for="shipping-address" class="form-label">Địa chỉ</label>
-                    <input type="text" id="shipping-address" class="form-control" value="137 Trần Văn Ơn, Quận 9, TP.HCM">
-                </div>
-                <button type="button" class="btn btn-success" onclick="saveShippingAddress()">Lưu</button>
-            </form>
+        <!-- Form chỉnh sửa thông tin và địa chỉ khách hàng -->
+        <div class="modal-form d-none" id="edit-customer-form">
+            <div class="modal-content">
+                <h5>Chỉnh sửa thông tin khách hàng</h5>
+                <form>
+                    <div class="mb-3">
+                        <label for="customer-name" class="form-label">Họ tên</label>
+                        <input type="text" id="customer-name" class="form-control" value="Nguyễn Văn A">
+                    </div>
+                    <div class="mb-3">
+                        <label for="customer-phone" class="form-label">Số điện thoại</label>
+                        <input type="text" id="customer-phone" class="form-control" value="0123 456 789">
+                    </div>
+                    <div class="mb-3">
+                        <label for="customer-email" class="form-label">Email</label>
+                        <input type="email" id="customer-email" class="form-control" value="nguyenvana@example.com">
+                    </div>
+                    <div class="mb-3">
+                        <label for="shipping-address" class="form-label">Địa chỉ nhận hàng</label>
+                        <input type="text" id="shipping-address" class="form-control" value="137 Trần Văn Ơn, Quận 9, TP.HCM">
+                    </div>
+                    <button type="button" class="btn btn-success" onclick="saveCustomerInfo()">Lưu</button>
+                    <button type="button" class="btn btn-second" onclick="closeCustomerForm()">Hủy</button>
+                </form>
+            </div>
         </div>
 
         <!-- Bảng sản phẩm -->
@@ -255,40 +248,25 @@
                     </td>
                     <td>16cm</td>
                     <td>120,000₫</td>
-                    <td>
-                        <input type="number" class="form-control text-center quantity-input" value="1" min="1" onchange="updateSubtotal(this)">
-                    </td>
-                    <td class="subtotal">120,000₫</td>
+                    <td>4</td>
+                        
+                    <td class="subtotal">480,000₫</td>
                 </tr>
-                <!-- <tr>
-                    <td>2</td>
-                    <td>
-                        <img src="../image/imghomepage/product/product_danhmuc/theo_danh_muc/mau_be_trai/BT04.png" alt="Bánh Ô Tô Màu Vàng" class="img-fluid rounded" style="max-width: 80px;">
-                        <span class="ms-2">Bánh Ô Tô Màu Vàng</span>
-                    </td>
-                    <td>18cm</td>
-                    <td>520,000₫</td>
-                    <td>
-                        <input type="number" class="form-control text-center quantity-input" value="1" min="1" onchange="updateSubtotal(this)">
-                    </td>
-                    <td class="subtotal">520,000₫</td>
-                </tr> -->
             </tbody>
         </table>
 
-        <!-- Tổng thanh toán và mã giảm giá -->
+        <!-- Tổng thanh toán  -->
         <div class="card p-4">
             <h5>Thông tin thanh toán</h5>
             <div class="mb-3">
-                <label for="discount-code" class="form-label">Nhập mã giảm giá</label>
-                <div class="input-group">
-                    <input type="text" class="form-control" id="discount-code" placeholder="Nhập mã giảm giá">
-                    <button class="btn btn-outline-secondary" onclick="applyDiscount()">Áp dụng</button>
+                <div class="message-to-shop mt-4">
+                    <label for="shopMessage" class="form-label">Lời nhắn:</label>
+                    <textarea id="shopMessage" class="form-control" rows="3" placeholder="Nhập lời nhắn cho shop tại đây..."></textarea>
                 </div>
             </div>
-            <p>Tổng tiền hàng: <span id="total-price">1,480,000₫</span></p>
+            <p>Tổng tiền hàng: <span id="total-price">480.000₫</span></p>
             <p>Phí vận chuyển: <span>Miễn phí</span></p>
-            <p><strong>Tổng thanh toán: <span id="final-price">1,480,000₫</span></strong></p>
+            <p><strong>Tổng thanh toán: <span id="final-price">480.000₫</span></strong></p>
         </div>
         
         <button class="btn btn-success btn-lg mt-3" onclick="window.location.href = '../pages/orderSuccessfully.html'">Đặt hàng</button>
