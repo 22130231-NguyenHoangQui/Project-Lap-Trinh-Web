@@ -259,6 +259,11 @@
         <div class="card p-4">
             <h5>Thông tin thanh toán</h5>
             <div class="mb-3">
+                <div class="input-group">
+                    <button class="btn btn-outline-secondary" id="view-discounts-btn">Xem mã giảm giá</button>
+                    <input type="text" class="form-control" id="discount-code" placeholder="Nhập mã giảm giá">
+                    <button class="btn btn-outline-secondary" onclick="applyDiscount()">Áp dụng</button>
+                </div>
                 <div class="message-to-shop mt-4">
                     <label for="shopMessage" class="form-label">Lời nhắn:</label>
                     <textarea id="shopMessage" class="form-control" rows="3" placeholder="Nhập lời nhắn cho shop tại đây..."></textarea>
@@ -268,7 +273,27 @@
             <p>Phí vận chuyển: <span>Miễn phí</span></p>
             <p><strong>Tổng thanh toán: <span id="final-price">480.000₫</span></strong></p>
         </div>
-        
+                <!-- Modal hiển thị mã giảm giá -->
+        <div class="modal-form d-none" id="discount-modal">
+            <div class="modal-content">
+                <h5>Danh sách mã giảm giá</h5>
+                <ul id="discount-list">
+                    <li data-code="DISCOUNT10" class="discount-item">
+                        <div>
+                            <strong>Mã: DISCOUNT10</strong> - Giảm 10%<br>
+                            <span>Thời hạn đến: 31/12/2024</span>
+                        </div>
+                    </li>
+                    <li data-code="FREESHIP" class="discount-item">
+                        <div>
+                            <strong>Mã: FREESHIP</strong> - Miễn phí vận chuyển<br>
+                            <span>Thời hạn đến: 15/01/2025</span>
+                        </div>
+                    </li>
+                </ul>
+                <button type="button" class="btn btn-success" onclick="closeDiscountModal()">Đóng</button>
+            </div>
+        </div>
         <button class="btn btn-success btn-lg mt-3" onclick="window.location.href = '../pages/orderSuccessfully.html'">Đặt hàng</button>
     </div>
     <!-- Chân trang -->
