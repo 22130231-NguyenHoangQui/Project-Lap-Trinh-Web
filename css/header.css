@@ -22,7 +22,7 @@ header {
 }
 
 .header-top {
-    background-color: #1E90FF !important;
+    background: linear-gradient(to left, #5abfd8, #3a97e9);
     min-height: 20px;
 }
 
@@ -63,7 +63,6 @@ header {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    background-color: #1E90FF;
     border: none;
 }
 

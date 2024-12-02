@@ -6,7 +6,7 @@
     
         .is-medium {
             font-size: 16px;
-            color: #333;
+            color: white;
             font-weight: 550;
             text-decoration: none;
             background-color:#5ea8f3; 
@@ -14,13 +14,13 @@
         }
         
         .is-medium .divider {
-            color: black;
+            color: white;
             margin: 0 5px;
         }
         
         .is-medium a {
             text-decoration: none;
-            color: black;
+            color: white;
         }
         
         .is-medium a:hover {

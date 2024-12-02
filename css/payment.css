@@ -426,3 +426,35 @@
     display: flex;
     flex-direction: column; /* Bảo toàn layout theo chiều dọc */
 }
+#discount-modal .modal-content {
+    max-width: 400px;
+    text-align: center;
+}
+#discount-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+#discount-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+.discount-item {
+    cursor: pointer;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.2s;
+}
+.discount-item:hover {
+    background-color: #f0f8ff;
+}
+.discount-item div {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.5;
+}
+.discount-item span {
+    color: #555;
+    font-size: 0.9em;
+}
+
