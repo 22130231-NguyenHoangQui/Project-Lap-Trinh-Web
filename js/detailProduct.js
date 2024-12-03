@@ -184,6 +184,17 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+/**
+ * hàm để click button thì chuyến
+ * sang trang shoppingcart
+ */
+document.addEventListener("DOMContentLoaded", function () {
+  const cartButton = document.getElementById("cart-button");
+
+  cartButton.addEventListener("click", function () {
+      window.location.href = "shoppingCart.html"; 
+  });
+});
 
 
 // Sử dụng hàm để khởi tạo
