@@ -25,12 +25,13 @@ const productsLink = document.getElementById('productsLink');
 const customersLink = document.getElementById('customersLink');
 const catalogsLink = document.getElementById('catalogsLink');
 const contentDiv = document.getElementById('content');
+const discount = document.getElementById('discountLink');
 
 
 // click để hiện thị tương ứng
 dashboardLink.addEventListener('click', function (e) {
     e.preventDefault();
-    changeContent('Dashboard', null);
+    changeContent('Tổng Quan', null);
     document.getElementById('myChart').style.display = 'block';
 });
 
@@ -60,6 +61,12 @@ catalogsLink.addEventListener('click', function (e) {
     document.getElementById('myChart').style.display = 'none';
 });
 
+discount.addEventListener('click', function (e) {
+    e.preventDefault();
+    displayDiscount(1);
+    document.getElementById('myChart').style.display = 'none';
+});
+
 // khi load trang thì sẽ hiện ra trang này
 document.addEventListener('DOMContentLoaded', function () {
     const dashboardLink = document.getElementById('dashboardLink');
@@ -78,45 +85,111 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 // tải canvas và log ra để test xem có tải được không
-window.addEventListener('DOMContentLoaded', (event) => {
-    console.log("DOM đã tải xong!");
+// Đoạn HTML bạn muốn chèn vào
+var htmlContent = `
+  <div class="container mt-5" style="width: auto;">
+    <div class="row text-center mb-4">
+  <div class="col-md-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Đơn hàng hôm nay</h5>
+        <p id="orders-today" class="card-text text-primary fs-4">0</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Doanh thu hôm nay</h5>
+        <p id="revenue-today" class="card-text text-success fs-4">0 VND</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Sản phẩm bán được</h5>
+        <p id="products-sold" class="card-text text-info fs-4">0</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Tổng doanh thu tháng</h5>
+        <p id="monthly-revenue" class="card-text text-warning fs-4">0 VND</p>
+      </div>
+    </div>
+  </div>
+</div>
 
-    const ctx = document.getElementById('myChart').getContext('2d');
-    if (ctx) {
-        console.log("Canvas đã được tìm thấy!");
-    } else {
-        console.error("Canvas không được tìm thấy!");
-    }
 
-    try {
-        const myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    tooltip: {
-                        enabled: true
-                    }
-                }
-            }
-        });
-        console.log("Biểu đồ đã được khởi tạo!");
-    } catch (error) {
-        console.error("Có lỗi khi tạo biểu đồ:", error);
-    }
-});
+   <div class="row">
+  <div class="col-md-12">
+    <div class="card shadow">
+      <div class="card-header bg-primary text-white text-center">
+        <h5>Khách hàng có lượng mua cao nhất</h5>
+      </div>
+      <div class="card-body">
+        <!-- Bảng hiển thị khách hàng -->
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>STT</th>
+              <th>Họ và Tên</th>
+              <th>Email</th>
+              <th>Số điện thoại</th>
+              <th>Lượng mua (sản phẩm)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Nguyễn Văn A</td>
+              <td>nguyenvana@example.com</td>
+              <td>0901234567</td>
+              <td>50</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Trần Thị B</td>
+              <td>tranthib@example.com</td>
+              <td>0902345678</td>
+              <td>45</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Phan Quang C</td>
+              <td>phanquangc@example.com</td>
+              <td>0903456789</td>
+              <td>40</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Lê Minh D</td>
+              <td>leminhd@example.com</td>
+              <td>0904567890</td>
+              <td>30</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Vũ Đức E</td>
+              <td>vuduce@example.com</td>
+              <td>0905678901</td>
+              <td>25</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+`;
+
+// Tải nội dung HTML vào div với id="myChart"
+document.getElementById("myChart").innerHTML = htmlContent;
+
 
 
 // thay đổi content
@@ -484,6 +557,72 @@ function displayProducts(page) {
     ]);
 }
 
+function displayDiscount(page) {
+    const discountsPerPage = 10; // Số lượng giảm giá mỗi trang
+    const startIndex = (page - 1) * discountsPerPage;
+    const endIndex = page * discountsPerPage;
+    const paginatedDiscounts = discounts.slice(startIndex, endIndex); // Giả sử 'discounts' là danh sách các giảm giá
+
+    let tableHTML = `
+        <table class="table tableDiscount">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>SẢN PHẨM</th>
+                    <th>GIẢM GIÁ</th>
+                    <th>CHI TIẾT</th>
+                    <th>TRẠNG THÁI</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+
+    paginatedDiscounts.forEach(discount => {
+        tableHTML += `
+            <tr>
+                <td class="dis">${discount.id}</td>
+                <td class="dis">
+                    <img src="${discount.productImage}" alt="Product Image" style="width: 50px; height: 50px; object-fit: cover; margin-right: 10px;">
+                    <span class="product-name">${discount.productName}</span>
+                </td>
+                <td class="dis">${discount.discountPrice}%</td>
+                <td class="dis">${discount.detail}</td>
+                <td id="status-${discount.id}">${discount.status}</td>
+                <td>
+                    <button class="icon-button" onclick="deleteRowDiscount(this)">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                    <button class="icon-button" onclick="openEditDiscountForm(this)">
+                        <i class="fa-solid fa-pen"></i>
+                    </button>
+                </td>
+            </tr>
+        `;
+    });
+
+    tableHTML += `</tbody></table>`;
+
+    let paginationHTML = '<nav><ul class="pagination justify-content-center">';
+
+    const totalPages = Math.ceil(discounts.length / discountsPerPage);
+    for (let i = 1; i <= totalPages; i++) {
+        paginationHTML += `
+            <li class="page-item ${i === page ? 'active' : ''}">
+                <a class="page-link" href="#" onclick="changePageDiscounts(${i})">${i}</a>
+            </li>
+        `;
+    }
+
+    paginationHTML += '</ul></nav>';
+
+    // Giả sử changeContent() sẽ thay thế nội dung trong trang với bảng và phân trang.
+    changeContent('Giảm giá sản phẩm', tableHTML + paginationHTML, [
+        { icon: 'fa-solid fa-gear', action: openEditFormCate }
+    ]);
+}
+
+
 
 /**
 // CÁC SỰ KIỆN TRONG  QUẢN LÝ TÀI KHOẢN 
@@ -766,12 +905,69 @@ function closeFormEditCate() {
 }
 
 /**
+ * Quản lý giảm giá
+ */
+function openEditDiscountForm(button) {
+    const row = button.closest("tr");
+    const columns = row.querySelectorAll(".dis");
+
+
+    const name = columns[1].textContent.trim();
+    const price = columns[2].textContent;
+    const detail = columns[3].textContent;
+    const imageElement = columns[1].querySelector("img");
+    const imageSrc = imageElement ? imageElement.src : "";
+
+
+
+    document.getElementById("editDiscountName").value = name;
+    document.getElementById("editOriginalPrice").value = price;
+    document.getElementById("editDiscountPrice").value = detail;
+
+
+
+    document.getElementById("saveButtonDiscount").onclick = function () {
+        console.log(123);
+
+        saveChangesDiscount(row);
+    };
+
+    document.getElementById("editDiscount").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+}
+
+function saveChangesDiscount(row) {
+   
+    closeFormEditDiscount();
+
+}
+
+function closeFormEditDiscount() {
+    document.getElementById("editDiscount").style.display = "none";
+    document.getElementById("overlay").style.display="none";
+}
+
+
+
+function deleteRowDiscount(button) {
+    const row = button.closest("tr");
+
+    const confirmDelete = confirm("Bạn có chắc chắn muốn xóa danh mục này không?");
+    if (confirmDelete) {
+        row.remove();
+        alert("Danh mục đã được xóa thành công.");
+    }
+}
+
+/**
  * click ngẫu nhiên vô overlay thì ẩn các form
  */
 
 document.getElementById("overlay").addEventListener("click", closeForm);
 document.getElementById("overlay").addEventListener("click", closeFormEditCate);
 document.getElementById("overlay").addEventListener("click", closeFormProductEdit);
+document.getElementById("overlay").addEventListener("click", closeFormEditDiscount);
+
 
 
 // Dữ liệu mẫu
@@ -792,6 +988,61 @@ const orders = [
     { id: 14, name: "Bánh sinh nhật vị bí ngô", customer: "Nina", date: "2024-10-24", price: "$34", status: "Đã hủy" },
     { id: 15, name: "Bánh sinh nhật vị mâm xôi", customer: "Oscar", date: "2024-10-25", price: "$37", status: "Chờ xử lý" }
 ];
+
+const discounts = [
+    {
+        id: 1,
+        productName: 'Bánh Sinh Nhật Socola',
+        productImage: 'path_to_image/socola.jpg',
+        originalPrice: 500000,
+        discountPrice: getRandomDiscount(), // Giảm giá ngẫu nhiên từ 0 đến 100
+        detail: 'Giảm giá cho các đơn hàng từ 2 chiếc trở lên.',
+        status: 'Đang áp dụng'
+    },
+    {
+        id: 2,
+        productName: 'Bánh Sinh Nhật Dâu Tây',
+        productImage: 'path_to_image/dautay.jpg',
+        originalPrice: 600000,
+        discountPrice: getRandomDiscount(),
+        detail: 'Giảm giá cho các đơn hàng thanh toán qua ví điện tử.',
+        status: 'Đang áp dụng'
+    },
+    {
+        id: 3,
+        productName: 'Bánh Sinh Nhật Trái Cây',
+        productImage: 'path_to_image/traicay.jpg',
+        originalPrice: 550000,
+        discountPrice: getRandomDiscount(),
+        detail: 'Giảm giá cho khách hàng mua bánh sinh nhật trong tuần này.',
+        status: 'Sắp hết hạn'
+    },
+    {
+        id: 4,
+        productName: 'Bánh Sinh Nhật Matcha',
+        productImage: 'path_to_image/matcha.jpg',
+        originalPrice: 650000,
+        discountPrice: getRandomDiscount(),
+        detail: 'Giảm giá cho đơn hàng từ 3 chiếc trở lên.',
+        status: 'Đang áp dụng'
+    },
+    {
+        id: 5,
+        productName: 'Bánh Sinh Nhật Kem',
+        productImage: 'path_to_image/kem.jpg',
+        originalPrice: 450000,
+        discountPrice: getRandomDiscount(),
+        detail: 'Giảm giá cho khách hàng lần đầu mua.',
+        status: 'Đang áp dụng'
+    }
+];
+
+// Hàm sinh giá trị giảm giá ngẫu nhiên từ 0 đến 100
+function getRandomDiscount() {
+    return Math.floor(Math.random() * 101); // Trả về giá trị ngẫu nhiên từ 0 đến 100
+}
+
+
 
 const customers = [
     {
