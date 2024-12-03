@@ -223,8 +223,8 @@
 
                 </ul>
             </div>
-            <div class="container col-md-9 ms-sm-auto col-lg-10 px-md-4 boder-right" style="width: auto;">
-                <div class="container   d-flex justify-content-between align-items-center  border-bottom mt-3">
+            <div class="container col-md-9 ms-sm-auto col-lg-10 px-md-4 boder-right" style="width: max-content;">
+                <div class="container   d-flex justify-content-between align-items-center  border-bottom mt-3" style="width: max-width;">
                     <h1 class="h2  mb-0" id="contentTitle">Tổng Quan</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class=" me-2" style="padding-right: 30px;">
@@ -240,7 +240,7 @@
                 <div class="contentDate container" id="contentDiv" style="display: none;">
 
                 </div>
-                <div class="container">
+                <div class="container" >
                     <div id="content" class="mt-5"></div>
                   <div id="myChart"></div>
                 </div>
@@ -260,28 +260,48 @@
 
         <form class="d-flex form-user" style="flex-direction: column;" id="addUserForm">
             <div class="form-group mt-3">
+                <label for="username" class="required">ID Người dùng</label>
+                <input type="text" id="idnguoidung" name="username" placeholder="Nhập ID Người dùng" required>
+            </div>
+            <div class="form-group">
                 <label for="username" class="required">Tên Đăng Nhập</label>
                 <input type="text" id="username" name="username" placeholder="Nhập tên đăng nhập" required>
             </div>
 
-            <div class="form-group mt-3">
+            <div class="form-group">
 
                 <label for="password" class="required">Mật Khẩu</label>
                 <input type="password" id="password1" name="password" placeholder="Nhập mật khẩu" required>
             </div>
 
-            <div class="form-group mt-3">
+            <div class="form-group ">
 
-                <label for="confirmPassword" class="required">Nhập Lại Mật Khẩu</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Nhập lại mật khẩu"
+                <label for="confirmPassword" class="required">Nhập Email</label>
+                <input type="password" id="emailNguoiDung" name="confirmPassword" placeholder="Nhập Email"
                     required>
             </div>
+            <div class="form-group">
 
-            <div class="form-group mt-3">
+                <label for="confirmPassword" class="required">Nhập Số Điện Thoại</label>
+                <input type="password" id="sdtNguoiDung" name="confirmPassword" placeholder="Nhập Số Điện Thoại"
+                    required>
+            </div>
+            <div class="form-group">
 
                 <label for="email" class="required">Email</label>
                 <input type="email" id="email1" name="email" placeholder="Nhập email" required>
             </div>
+            <div class="form-group">
+                <label for="role" class="required">Chọn Vai Trò</label>
+                <select id="role" name="role" class="form-control" required>
+                    <option value="" disabled selected>-- Chọn vai trò --</option>
+                    <option value="user">USER</option>
+                    <option value="admin">ADMIN</option>
+                </select>
+            </div>
+            
+
+          
 
             <!-- Nút Lưu -->
             <div style="text-align: center; margin-top: 20px;">
@@ -300,31 +320,22 @@
         <div id="verification"></div>
         <form id="editForm">
             <div class="form-group">
-                <label for="fname" class="required">Họ và tên</label>
-                <input type="text" id="fname" name="ho_ten" placeholder="Nhập họ và tên" required>
+                <label for="fname" class="required">Tên Đăng Nhập</label>
+                <input type="text" id="fname" name="ho_ten" placeholder="Nhập tên đăng nhập" required>
             </div>
-
-            <div class="form-group">
-                <label for="sdt" class="required">Số điện thoại</label>
-                <input type="text" id="sdt" name="so_dien_thoai" placeholder="Nhập số điện thoại" required>
-            </div>
-
             <div class="form-group">
                 <label for="email" class="required">Email</label>
                 <input type="email" id="email" name="email" placeholder="Nhập email" required>
             </div>
             <div class="form-group">
-                <label for="password" class="required">Mật khẩu</label>
-                <input type="password" id="password" name="password" placeholder="Nhập password" required>
+                <label for="sdt" class="required">Số điện thoại</label>
+                <input type="text" id="sdt" name="so_dien_thoai" placeholder="Nhập số điện thoại" required>
             </div>
 
-            <div class="form-group un-set" style="width: 100%;">
-                <label class="lgender" style="width: 80%;">Giới tính</label>
-                <div class="gender-container" style="width: 10%;">
-                    <label><input type="radio" name="gender" value="Nam" checked> Nam</label>
-                    <label><input type="radio" name="gender" value="Nữ"> Nữ</label>
-                    <label><input type="radio" name="gender" value="Khác"> Khác</label>
-                </div>
+          
+            <div class="form-group">
+                <label for="password" class="required">Mật khẩu</label>
+                <input type="password" id="password" name="password" placeholder="Nhập password" required>
             </div>
             <div class="form-group">
                 <label class="lgender">Chức vụ</label>
@@ -333,21 +344,6 @@
                     <label><input type="radio" name="gender" value="Admin"> Admin</label>
                     <label><input type="radio" name="gender" value="Khách"> Khách</label>
                 </div>
-            </div>
-
-            <div class="form-group">
-                <label for="date" class="required">Ngày sinh</label>
-                <input type="date" id="date" name="ngay_sinh" required>
-            </div>
-
-            <div class="form-group">
-                <label for="address" class="required">Địa chỉ</label>
-                <input type="text" id="address" name="dia_chi" placeholder="Nhập địa chỉ" required>
-            </div>
-
-            <div class="form-group">
-                <label for="receive" class="required">Địa chỉ nhận hàng</label>
-                <input type="text" id="receive" name="dia_chi_nhan_hang" placeholder="Nhập địa chỉ nhận hàng" required>
             </div>
 
             <button id="saveButton" type="button" onclick="closeFormSetting">LƯU</button>
@@ -531,18 +527,57 @@
     </div>
 
     <!-- form để chỉnh sửa và thêm giảm giá -->
+    <div id="addFormDiscount" class="container py-4 px-4 border" style="display: none; max-width: 500px; margin: auto;">
+        <h2 class="text-center mb-4">Thêm giảm giá</h2>
+    
+        <div id="verification" class="alert alert-warning d-none"></div>
+    
+        <form id="editFormDiscount">
+            <div class="mb-3">
+                <label for="discountCode" class="form-label required">Mã giảm giá</label>
+                <input type="text" id="discountCode" name="discountCode" class="form-control" placeholder="Nhập mã giảm giá" required>
+            </div>
+    
+            <div class="mb-3">
+                <label for="discountPercentage" class="form-label required">Giảm giá (%)</label>
+                <input type="number" id="discountPercentage" name="discountPercentage" class="form-control" placeholder="Nhập tỷ lệ giảm giá" min="0" max="100" required>
+            </div>
+    
+            <div class="mb-3">
+                <label for="discountDetail" class="form-label required">Chi tiết</label>
+                <input type="text" id="discountDetail" name="discountDetail" class="form-control" placeholder="Nhập chi tiết giảm giá" required>
+            </div>
+    
+            <div class="mb-3">
+                <label for="startDate" class="form-label required">Ngày bắt đầu</label>
+                <input type="date" id="startDate" name="startDate" class="form-control" required>
+            </div>
+    
+            <div class="mb-3">
+                <label for="promotionDays" class="form-label required">Số ngày khuyến mãi</label>
+                <input type="number" id="promotionDays" name="promotionDays" class="form-control" placeholder="Nhập số ngày khuyến mãi" min="1" required>
+            </div>
+    
+            <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-secondary me-2" onclick="closeFormDiscount()">Hủy</button>
+                <button type="submit" class="btn btn-primary" id="saveButtonDiscount">Thêm</button>
+            </div>
+        </form>
+    </div>
+    
+
+
+
+
     <div id="editDiscount" class="container py-4 px-4 border" style="display: none; max-width: 500px; margin: auto;">
         <div class="modal-content">
             <h4>Chỉnh sửa giảm giá</h4>
             <form id="editDiscountForm">
                 <div class="mb-3">
-                    <label for="editCateName1" class="form-label">Tên sản phẩm</label>
-                    <input type="text" class="form-control" id="editDiscountName" placeholder="Nhập tên sản phẩm">
+                    <label for="editCateName1" class="form-label">Mã Giảm Giá</label>
+                    <input type="text" class="form-control" id="editDiscountName" placeholder="Nhập Mã Giảm Giá">
                 </div>
-                <div class="mb-3">
-                    <label for="editOriginalPrice" class="form-label">Giá gốc</label>
-                    <input type="number" class="form-control" id="editOriginalPrice" placeholder="Nhập giá gốc">
-                </div>
+        
                 <div class="mb-3">
                     <label for="editDiscountPrice" class="form-label">Giá giảm</label>
                     <input type="number" class="form-control" id="editDiscountPrice" placeholder="Nhập giá giảm">
@@ -552,14 +587,14 @@
                     <input type="text" class="form-control" id="editDetailDiscount" placeholder="Nhập chi tiết giảm giá">
                 </div>
                 <div class="mb-3">
-                    <label for="editStatus" class="form-label">Trạng thái</label>
-                    <select class="form-select" id="editStatus">
-                        <option value="Đang áp dụng">Đang áp dụng</option>
-                        <option value="Sắp hết hạn">Sắp hết hạn</option>
-                        <option value="Hết hạn">Hết hạn</option>
-                    </select>
+                    <label for="startDate" class="form-label required">Ngày bắt đầu</label>
+                    <input type="date" id="startDateEdit" name="startDate" class="form-control" required>
                 </div>
-                <button type="button" id="saveButtonDiscount" class="btn btn-primary">Lưu thay đổi</button>
+                <div class="mb-3">
+                    <label for="editDetail" class="form-label">Số ngày khuyến mãi</label>
+                    <input type="text" class="form-control" id="editDetailDiscount123" placeholder="Nhập số ngày khuyến mãi">
+                </div>
+                <button type="button" id="saveButtonDiscount123" class="btn btn-primary">Lưu thay đổi</button>
                 <button type="button" class="btn btn-secondary" onclick="closeFormEditDiscount()">Đóng</button>
             </form>
         </div>

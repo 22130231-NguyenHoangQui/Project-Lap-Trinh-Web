@@ -135,22 +135,22 @@
         
         .table th:nth-child(1),
         .table td:nth-child(1) {
-            width: 5%;
+            width: 4%;
         }
         
         .table th:nth-child(2),
         .table td:nth-child(2) {
-            width: 10%;
+            width: 14%;
         }
         
         .table th:nth-child(3),
         .table td:nth-child(3) {
-            width: 15%;
+            width: 18%;
         }
         
         .table th:nth-child(4),
         .table td:nth-child(4) {
-            width: 15%;
+            width: 9%;
         }
         
         .table th:nth-child(5),
@@ -170,17 +170,17 @@
         
         .table th:nth-child(8),
         .table td:nth-child(8) {
-            width: 10%;
+            width: 13%;
         }
         
         .table th:nth-child(9),
         .table td:nth-child(9) {
             width: 10%;
         }
-        
+     
         .table.table1 th:nth-child(1),
         .table.table1 td:nth-child(1) {
-            width: 10%;
+            width: 5%;
         }
         
         .table.table1 th:nth-child(2),
@@ -200,14 +200,17 @@
         
         .table.table1 th:nth-child(5),
         .table.table1 td:nth-child(5) {
-            width: 20%;
+            width: 10%;
         }
         
         .table.table1 th:nth-child(6),
         .table.table1 td:nth-child(6) {
-            width: 20%;
+            width: 15%;
         }
-        
+        .table.table1 th:nth-child(7),
+        .table.table1 td:nth-child(7) {
+            width: 10%;
+        }
         
         
         
@@ -237,11 +240,11 @@
         }
         .table.tableDiscount th:nth-child(2),
         .table.tableDiscount td:nth-child(2) {
-            width: 20%;
+            width: 10%;
         }
         .table.tableDiscount th:nth-child(3),
         .table.tableDiscount td:nth-child(3) {
-            width: 10%;
+            width: 20%;
         }
         .table.tableDiscount th:nth-child(4),
         .table.tableDiscount td:nth-child(4) {
@@ -249,11 +252,11 @@
         }
         .table.tableDiscount th:nth-child(5),
         .table.tableDiscount td:nth-child(5) {
-            width: 10%;
+            width: 15%;
         }
         .table.tableDiscount th:nth-child(6),
         .table.tableDiscount td:nth-child(6) {
-            width: 20%;
+            width: 10%;
         }
 
         
@@ -399,7 +402,7 @@
         }
         
         
-        #editFormProduct,#formProduct,#editFormCate,#addFormCate,#editDiscount {
+        #editFormProduct,#formProduct,#editFormCate,#addFormCate,#editDiscount,#addFormDiscount {
             position: fixed;
             top: 50%;
             left: 50%;

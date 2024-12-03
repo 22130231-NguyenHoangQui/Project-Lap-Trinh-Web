@@ -128,58 +128,53 @@ var htmlContent = `
   <div class="col-md-12">
     <div class="card shadow">
       <div class="card-header bg-primary text-white text-center">
-        <h5>Khách hàng có lượng mua cao nhất</h5>
+        <h5>Top Lượt Xem Gần Đây</h5>
       </div>
       <div class="card-body">
         <!-- Bảng hiển thị khách hàng -->
         <table class="table table-striped table-bordered">
-          <thead>
-            <tr>
-              <th>STT</th>
-              <th>Họ và Tên</th>
-              <th>Email</th>
-              <th>Số điện thoại</th>
-              <th>Lượng mua (sản phẩm)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>Nguyễn Văn A</td>
-              <td>nguyenvana@example.com</td>
-              <td>0901234567</td>
-              <td>50</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Trần Thị B</td>
-              <td>tranthib@example.com</td>
-              <td>0902345678</td>
-              <td>45</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Phan Quang C</td>
-              <td>phanquangc@example.com</td>
-              <td>0903456789</td>
-              <td>40</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>Lê Minh D</td>
-              <td>leminhd@example.com</td>
-              <td>0904567890</td>
-              <td>30</td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td>Vũ Đức E</td>
-              <td>vuduce@example.com</td>
-              <td>0905678901</td>
-              <td>25</td>
-            </tr>
-          </tbody>
-        </table>
+  <thead>
+    <tr>
+      <th>Ngày</th>
+      <th>Mã sản phẩm</th>
+      <th>Tên sản phẩm</th>
+      <th>Lượt xem</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>SP001</td>
+      <td>Bánh sinh nhật A</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>SP002</td>
+      <td>Bánh sinh nhật B</td>
+      <td>45</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>SP003</td>
+      <td>Bánh sinh nhật C</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>SP004</td>
+      <td>Bánh sinh nhật D</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>SP005</td>
+      <td>Bánh sinh nhật E</td>
+      <td>25</td>
+    </tr>
+  </tbody>
+</table>
+
       </div>
     </div>
   </div>
@@ -425,12 +420,13 @@ function displayCustomers(page) {
             <thead>
                 <tr>
                     <th>STT</th>
-                    <th>HỌ TÊN</th>
-                    <th>SĐT</th>
+                    <th>TÊN NGƯỜI DÙNG</th>
                     <th>EMAIL</th>
+                    <th>SĐT</th>
+                    <th>MẬT KHẨU</th>
                     <th>CHỨC VỤ</th>
-                    <th>XÁC THỰC</th>
-                    <th>TRẠNG THÁI</th>
+                    <th>NGÀY TẠO</th>
+                    <th>NGÀY CẬT NHẬT</th>
                     <th>
                         
                     </th>
@@ -443,12 +439,13 @@ function displayCustomers(page) {
         tableHTML += `
             <tr>
                 <td>${customer.id}</td>
-                <td>${customer.name}</td>
-                <td>${customer.phone}</td>
+                <td>${customer.tenNguoiDung}</td>
                 <td>${customer.email}</td>
-                <td>${customer.position}</td>
-                <td>${customer.isVerified}</td>
-                <td id="status-${customer.id}">${customer.status}</td>
+                <td>${customer.soDienThoai}</td>
+                <td>${customer.matKhau}</td>
+                <td>${customer.chucVu}</td>
+                <td>${customer.ngayTao}</td>
+                <td>${customer.ngayCapNhat}</td>
               <td>
                 <button class="icon-button" onclick="openFormCustomerSetting(this)">
                     <i class="fa-solid fa-pen"></i>
@@ -498,7 +495,8 @@ function displayProducts(page) {
                     <th>SẢN PHẨM</th>
                     <th>GIÁ BÁN</th>
                     <th>CHI TIẾT</th>
-                    <th>TRẠNG THÁI</th>
+                    <th>NGÀY TẠO</th>
+                    <th>NGÀY CẬT NHẬT</th>
                     <th></th>
                 </tr>
             </thead>
@@ -516,7 +514,8 @@ function displayProducts(page) {
 
                 <td class="pro">${product.price}</td>
                 <td class="pro">${product.detail}</td>
-                <td  id="status-${product.id}">${product.status}</td>
+                <td class="pro">${product.createdAt}</td>
+                <td class="pro">${product.updatedAt}</td>
                 <td>
 
                 <button class="icon-button" onclick="deleteRow(this)">
@@ -526,10 +525,7 @@ function displayProducts(page) {
 
                  <button class="icon-button" onclick="openEditFormProduct(this)">
                     <i class="fa-solid fa-pen"></i>
-                </button>
-                <button class="icon-button" onclick="toggleStatusProduct(this)">
-                    <i class="fa-solid fa-lock"></i>
-                </button>   
+                </button>  
                 </td>
                 </tr>
         `;
@@ -567,11 +563,11 @@ function displayDiscount(page) {
         <table class="table tableDiscount">
             <thead>
                 <tr>
-                    <th>STT</th>
-                    <th>SẢN PHẨM</th>
+                    <th>MÃ GIẢM GIÁ</th>
                     <th>GIẢM GIÁ</th>
                     <th>CHI TIẾT</th>
-                    <th>TRẠNG THÁI</th>
+                    <th>NGÀY BẮT ĐẦU</th>
+                    <th>SỐ NGÀY KHUYẾN MÃI</th>
                     <th></th>
                 </tr>
             </thead>
@@ -581,14 +577,11 @@ function displayDiscount(page) {
     paginatedDiscounts.forEach(discount => {
         tableHTML += `
             <tr>
-                <td class="dis">${discount.id}</td>
-                <td class="dis">
-                    <img src="${discount.productImage}" alt="Product Image" style="width: 50px; height: 50px; object-fit: cover; margin-right: 10px;">
-                    <span class="product-name">${discount.productName}</span>
-                </td>
-                <td class="dis">${discount.discountPrice}%</td>
+                <td class="dis">${discount.discountCode}</td>
+                <td class="dis">${discount.discountPercentage}%</td>
                 <td class="dis">${discount.detail}</td>
-                <td id="status-${discount.id}">${discount.status}</td>
+                <td class="dis">${discount.startDate}</td>
+                <td class="dis">${discount.promotionDays}</td>                
                 <td>
                     <button class="icon-button" onclick="deleteRowDiscount(this)">
                         <i class="fa-solid fa-trash"></i>
@@ -618,7 +611,7 @@ function displayDiscount(page) {
 
     // Giả sử changeContent() sẽ thay thế nội dung trong trang với bảng và phân trang.
     changeContent('Giảm giá sản phẩm', tableHTML + paginationHTML, [
-        { icon: 'fa-solid fa-gear', action: openEditFormCate }
+        { icon: 'fa-solid fa-gear', action: openFormDiscount }
     ]);
 }
 
@@ -904,29 +897,48 @@ function closeFormEditCate() {
     document.getElementById("overlay").style.display = "none";
 }
 
+
+
+
 /**
  * Quản lý giảm giá
  */
+function openFormDiscount() {
+    const formProduct = document.getElementById('addFormDiscount');
+    const overlay = document.getElementById('overlay');
+
+    formProduct.style.display = 'block'
+    overlay.style.display = 'block'
+
+    overlay.addEventListener('click', closeFormDiscount);
+}
+
+function closeFormDiscount() {
+    const formProduct = document.getElementById('addFormDiscount');
+    formProduct.style.display = 'none';
+    overlay.style.display = 'none';
+}
+
 function openEditDiscountForm(button) {
     const row = button.closest("tr");
     const columns = row.querySelectorAll(".dis");
 
 
-    const name = columns[1].textContent.trim();
-    const price = columns[2].textContent;
-    const detail = columns[3].textContent;
+    const name = columns[0].textContent.trim();
+    const price = columns[1].textContent;
+    const detail = columns[2].textContent;
     const imageElement = columns[1].querySelector("img");
     const imageSrc = imageElement ? imageElement.src : "";
 
 
 
     document.getElementById("editDiscountName").value = name;
-    document.getElementById("editOriginalPrice").value = price;
-    document.getElementById("editDiscountPrice").value = detail;
+    document.getElementById("editDiscountPrice").value = price;
+    document.getElementById("editDetailDiscount").value = detail;
 
 
 
-    document.getElementById("saveButtonDiscount").onclick = function () {
+    document.getElementById("saveButtonDiscount123").onclick = function () {
         console.log(123);
 
         saveChangesDiscount(row);
@@ -952,7 +964,7 @@ function closeFormEditDiscount() {
 function deleteRowDiscount(button) {
     const row = button.closest("tr");
 
-    const confirmDelete = confirm("Bạn có chắc chắn muốn xóa danh mục này không?");
+    const confirmDelete = confirm("Bạn có chắc chắn muốn xóa giảm giá này không?");
     if (confirmDelete) {
         row.remove();
         alert("Danh mục đã được xóa thành công.");
@@ -991,51 +1003,42 @@ const orders = [
 
 const discounts = [
     {
-        id: 1,
-        productName: 'Bánh Sinh Nhật Socola',
-        productImage: 'path_to_image/socola.jpg',
-        originalPrice: 500000,
-        discountPrice: getRandomDiscount(), // Giảm giá ngẫu nhiên từ 0 đến 100
+        discountCode: 'GG001', // Mã giảm giá
+        discountPercentage: getRandomDiscount(), // Giảm giá ngẫu nhiên từ 0 đến 100
         detail: 'Giảm giá cho các đơn hàng từ 2 chiếc trở lên.',
-        status: 'Đang áp dụng'
+        startDate: '2024-12-01', // Ngày bắt đầu
+        promotionDays: 7 // Số ngày khuyến mãi
     },
     {
-        id: 2,
-        productName: 'Bánh Sinh Nhật Dâu Tây',
-        productImage: 'path_to_image/dautay.jpg',
-        originalPrice: 600000,
-        discountPrice: getRandomDiscount(),
+        discountCode: 'GG002',
+        discountPercentage: getRandomDiscount(),
         detail: 'Giảm giá cho các đơn hàng thanh toán qua ví điện tử.',
-        status: 'Đang áp dụng'
+        startDate: '2024-12-05',
+        promotionDays: 10
     },
     {
-        id: 3,
-        productName: 'Bánh Sinh Nhật Trái Cây',
-        productImage: 'path_to_image/traicay.jpg',
-        originalPrice: 550000,
-        discountPrice: getRandomDiscount(),
+        discountCode: 'GG003',
+        discountPercentage: getRandomDiscount(),
         detail: 'Giảm giá cho khách hàng mua bánh sinh nhật trong tuần này.',
-        status: 'Sắp hết hạn'
+        startDate: '2024-12-10',
+        promotionDays: 5
     },
     {
-        id: 4,
-        productName: 'Bánh Sinh Nhật Matcha',
-        productImage: 'path_to_image/matcha.jpg',
-        originalPrice: 650000,
-        discountPrice: getRandomDiscount(),
+        discountCode: 'GG004',
+        discountPercentage: getRandomDiscount(),
         detail: 'Giảm giá cho đơn hàng từ 3 chiếc trở lên.',
-        status: 'Đang áp dụng'
+        startDate: '2024-12-15',
+        promotionDays: 14
     },
     {
-        id: 5,
-        productName: 'Bánh Sinh Nhật Kem',
-        productImage: 'path_to_image/kem.jpg',
-        originalPrice: 450000,
-        discountPrice: getRandomDiscount(),
+        discountCode: 'GG005',
+        discountPercentage: getRandomDiscount(),
         detail: 'Giảm giá cho khách hàng lần đầu mua.',
-        status: 'Đang áp dụng'
+        startDate: '2024-12-20',
+        promotionDays: 3
     }
 ];
+
 
 // Hàm sinh giá trị giảm giá ngẫu nhiên từ 0 đến 100
 function getRandomDiscount() {
@@ -1046,72 +1049,67 @@ function getRandomDiscount() {
 
 const customers = [
     {
-        id: 1,
-        name: "Alice",
-        email: "alice@example.com",
-        phone: "123-456-7890",
-        address: "123 Cherry Lane",
-        position: "Admin",
-        isVerified: true,
-        isActive: true,
-        status: "Active"
+        id: 1, // STT
+        hoTen: "Nguyễn Văn A", // HỌ TÊN
+        email: "nguyenvana@example.com", // EMAIL
+        soDienThoai: "0987654321", // SĐT
+        tenNguoiDung: "nguyenvana", // TÊN NGƯỜI DÙNG
+        matKhau: "*******", // MẬT KHẨU
+        diaChi: "123 Đường Lý Thường Kiệt, Hà Nội", // ĐỊA CHỈ
+        chucVu: "Admin", // CHỨC VỤ
+        ngayTao: "2024-12-01", // NGÀY TẠO
+        ngayCapNhat: "2024-12-02" // NGÀY CẬP NHẬT
     },
     {
-        id: 2,
-        name: "Bob",
-        email: "bob@example.com",
-        phone: "234-567-8901",
-        address: "456 Maple Street",
-        position: "User",
-        isVerified: true,
-        isActive: false,
-        status: "Inactive"
+        id: 2, // STT
+        hoTen: "Trần Thị B", // HỌ TÊN
+        email: "tranthib@example.com", // EMAIL
+        soDienThoai: "0912345678", // SĐT
+        tenNguoiDung: "tranthib", // TÊN NGƯỜI DÙNG
+        matKhau: "*******", // MẬT KHẨU
+        diaChi: "456 Đường Nguyễn Huệ, TP.HCM", // ĐỊA CHỈ
+        chucVu: "Người dùng", // CHỨC VỤ
+        ngayTao: "2024-11-30", // NGÀY TẠO
+        ngayCapNhat: "2024-12-01" // NGÀY CẬT NHẬT
     },
     {
-        id: 3,
-        name: "Charlie",
-        email: "charlie@example.com",
-        phone: "345-678-9012",
-        address: "789 Oak Road",
-        position: "Moderator",
-        isVerified: false,
-        isActive: true,
-        status: "Active"
+        id: 3, 
+        hoTen: "Lê Văn C",
+        email: "levanc@example.com",
+        soDienThoai: "0932123456", // SĐT
+        tenNguoiDung: "levanc", // TÊN NGƯỜI DÙNG
+        matKhau: "*******", // MẬT KHẨU
+        diaChi: "789 Đường Trần Phú, Đà Nẵng", // ĐỊA CHỈ
+        chucVu: "Moderator", // CHỨC VỤ
+        ngayTao: "2024-11-28", // NGÀY TẠO
+        ngayCapNhat: "2024-12-02" // NGÀY CẬP NHẬT
     },
     {
-        id: 4,
-        name: "David",
-        email: "david@example.com",
-        phone: "456-789-0123",
-        address: "101 Pine Avenue",
-        position: "User",
-        isVerified: true,
-        isActive: true,
-        status: "Active"
+        id: 4, // STT
+        hoTen: "Phạm Thị D", // HỌ TÊN
+        email: "phamthid@example.com", // EMAIL
+        soDienThoai: "0909876543", // SĐT
+        tenNguoiDung: "phamthid", // TÊN NGƯỜI DÙNG
+        matKhau: "*******", // MẬT KHẨU
+        diaChi: "101 Đường Võ Văn Kiệt, Cần Thơ", // ĐỊA CHỈ
+        chucVu: "Người dùng", // CHỨC VỤ
+        ngayTao: "2024-11-25", // NGÀY TẠO
+        ngayCapNhat: "2024-11-30" // NGÀY CẬP NHẬT
     },
     {
-        id: 5,
-        name: "Eva",
-        email: "eva@example.com",
-        phone: "567-890-1234",
-        address: "202 Birch Boulevard",
-        position: "Admin",
-        isVerified: true,
-        isActive: false,
-        status: "Inactive"
-    },
-    {
-        id: 6,
-        name: "Frank",
-        email: "frank@example.com",
-        phone: "678-901-2345",
-        address: "303 Cedar Crescent",
-        position: "User",
-        isVerified: false,
-        isActive: true,
-        status: "Active"
+        id: 5, // STT
+        hoTen: "Đặng Văn E", // HỌ TÊN
+        email: "dangvane@example.com", // EMAIL
+        soDienThoai: "0923456789", // SĐT
+        tenNguoiDung: "dangvane", // TÊN NGƯỜI DÙNG
+        matKhau: "*******", // MẬT KHẨU
+        diaChi: "202 Đường Lê Lợi, Huế", // ĐỊA CHỈ
+        chucVu: "Admin", // CHỨC VỤ
+        ngayTao: "2024-11-20", // NGÀY TẠO
+        ngayCapNhat: "2024-12-01" // NGÀY CẬP NHẬT
     }
 ];
+
 
 const products = [
     {
@@ -1121,7 +1119,9 @@ const products = [
         category: "Bánh",
         price: 25,
         detail: "Bánh chocolate ngọt ngào với lớp kem phủ.",
-        status: "Đang bán"
+        status: "Đang bán",
+        createdAt: "2024-12-01",
+        updatedAt: "2024-12-02"
     },
     {
         id: 2,
@@ -1130,7 +1130,9 @@ const products = [
         category: "Bánh",
         price: 20,
         detail: "Bánh bông lan vanilla nhẹ nhàng.",
-        status: "Đang bán"
+        status: "Đang bán",
+        createdAt: "2024-12-01",
+        updatedAt: "2024-12-02"
     },
     {
         id: 3,
@@ -1139,7 +1141,9 @@ const products = [
         category: "Bánh",
         price: 30,
         detail: "Bánh dâu tây tươi ngon với những trái dâu chín.",
-        status: "Đang bán"
+        status: "Đang bán",
+        createdAt: "2024-12-01",
+        updatedAt: "2024-12-02"
     },
     {
         id: 4,
@@ -1148,7 +1152,9 @@ const products = [
         category: "Bánh",
         price: 40,
         detail: "Bánh Red Velvet mềm mịn, phủ kem phô mai.",
-        status: "Đang bán"
+        status: "Đang bán",
+        createdAt: "2024-12-01",
+        updatedAt: "2024-12-02"
     },
     {
         id: 5,
@@ -1157,7 +1163,9 @@ const products = [
         category: "Bánh",
         price: 22,
         detail: "Bánh chanh tươi mát với lớp glaze ngọt ngào.",
-        status: "Đang bán"
+        status: "Đang bán",
+        createdAt: "2024-12-01",
+        updatedAt: "2024-12-02"
     },
     {
         id: 6,
@@ -1166,7 +1174,9 @@ const products = [
         category: "Bánh",
         price: 28,
         detail: "Bánh cà rốt với hạt óc chó và lớp kem phô mai.",
-        status: "Đang bán"
+        status: "Đang bán",
+        createdAt: "2024-12-01",
+        updatedAt: "2024-12-02"
     },
     {
         id: 7,
@@ -1175,7 +1185,9 @@ const products = [
         category: "Bánh",
         price: 22,
         detail: "Bánh chanh tươi mát với lớp glaze ngọt ngào.",
-        status: "Đang bán"
+        status: "Đang bán",
+        createdAt: "2024-12-01",
+        updatedAt: "2024-12-02"
     },
     {
         id: 8,
@@ -1184,7 +1196,9 @@ const products = [
         category: "Bánh",
         price: 22,
         detail: "Bánh chanh tươi mát với lớp glaze ngọt ngào.",
-        status: "Đang bán"
+        status: "Đang bán",
+        createdAt: "2024-12-01",
+        updatedAt: "2024-12-02"
     },
     {
         id: 9,
@@ -1193,7 +1207,9 @@ const products = [
         category: "Bánh",
         price: 22,
         detail: "Bánh chanh tươi mát với lớp glaze ngọt ngào.",
-        status: "Đang bán"
+        status: "Đang bán",
+        createdAt: "2024-12-01",
+        updatedAt: "2024-12-02"
     },
     {
         id: 10,
@@ -1202,9 +1218,12 @@ const products = [
         category: "Bánh",
         price: 22,
         detail: "Bánh chanh tươi mát với lớp glaze ngọt ngào.",
-        status: "Đang bán"
+        status: "Đang bán",
+        createdAt: "2024-12-01",
+        updatedAt: "2024-12-02"
     }
 ];
+
 
 const catalogs = [
     { id: 1, name: "Bánh Sinh Nhật Truyền Thống" },
