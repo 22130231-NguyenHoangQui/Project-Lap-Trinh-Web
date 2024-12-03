@@ -450,8 +450,8 @@ function displayCustomers(page) {
                 <button class="icon-button" onclick="openFormCustomerSetting(this)">
                     <i class="fa-solid fa-pen"></i>
                 </button>
-                <button class="icon-button" onclick="toggleStatus(this)">
-                    <i class="fa-solid fa-lock"></i>
+                <button class="icon-button" onclick="deleteRowCustomer(this)">
+                  <i class="fa-solid fa-trash"></i>
                 </button>
             </td>
 
@@ -688,28 +688,16 @@ function saveChanges(row) {
     closeForm();
 }
 
-function toggleStatus(button) {
-    // Lấy dòng của customer từ button
-    const row = button.closest('tr'); // Tìm đến hàng chứa button
-    const statusCell = row.querySelector('td[id^="status-"]'); // Lấy cột status (dựa trên id)
+function deleteRowCustomer(button) {
+    const row = button.closest("tr");
 
-    // Kiểm tra và thay đổi nội dung status
-    if (statusCell.textContent === "Active") {
-        statusCell.textContent = "Inactive";
-    } else {
-        statusCell.textContent = "Active";
-    }
-
-    // Thay đổi icon trong nút
-    const icon = button.querySelector('i');
-    if (statusCell.textContent === "Active") {
-        icon.classList.remove('fa-lock');
-        icon.classList.add('fa-unlock');
-    } else {
-        icon.classList.remove('fa-unlock');
-        icon.classList.add('fa-lock');
+    const confirmDelete = confirm("Bạn có chắc chắn muốn xóa khách hàng này không?");
+    if (confirmDelete) {
+        row.remove();
+        alert("Khách hàng đã được xóa thành công.");
     }
 }
+
 
 
 // CÁC SỰ KIỆN TRONG QUẢN LÝ SẢN PHẨM
@@ -970,6 +958,8 @@ function deleteRowDiscount(button) {
         alert("Danh mục đã được xóa thành công.");
     }
 }
+
+
 
 /**
  * click ngẫu nhiên vô overlay thì ẩn các form
