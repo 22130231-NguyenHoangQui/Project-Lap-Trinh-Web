@@ -1,0 +1,62 @@
+/* =====================================
+       Setting Styles
+    ===================================== */
+
+    main {
+        display: block;
+        unicode-bidi: isolate;
+        background-color: #ffffff;
+    }
+    
+    .category-page-row {
+        padding-top: 30px;
+    }
+    
+    /* =======================
+            Typography Styles
+            ============= */
+    a {
+        text-decoration: none;
+        color: #334862;
+    }
+    
+    
+    /* =====================================
+               Global Styles
+            ===================================== */
+    
+    div {
+        display: block;
+    }
+    
+    html,
+    body {
+        padding: 0;
+        margin: 0;
+        font-size: 16px;
+        color: black;
+        font-family: sans-serif, Tahoma;
+    }
+  
+    
+    
+    
+    
+    .container {
+        width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    
+    
+    
+    aside {
+        display: block;
+    }
+    
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }

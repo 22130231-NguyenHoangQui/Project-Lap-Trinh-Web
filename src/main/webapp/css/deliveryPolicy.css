@@ -1,0 +1,418 @@
+/* =====================================
+       Setting Styles
+    ===================================== */
+
+main {
+    display: block;
+    unicode-bidi: isolate;
+    background-color: #ffffff;
+}
+
+
+/* =======================
+            Typography Styles
+            ============= */
+a {
+    text-decoration: none;
+    color: #334862;
+}
+
+
+/* =====================================
+               Global Styles
+            ===================================== */
+
+div {
+    display: block;
+}
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+    color: black;
+    font-family: sans-serif, Tahoma;
+}
+
+.container {
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+
+aside {
+    display: block;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* ==================
+        Header
+    ==========*/
+
+.header-wrapper {
+    position: relative;
+    width: 100%;
+    background-position: 50% 0;
+    background-size: cover;
+    transition: background-color .3s, opacity .3s;
+}
+
+.header-top {
+    background-color: #1E90FF !important;
+    min-height: 20px;
+}
+
+.header .flex-row {
+    height: 100%;
+}
+
+.nav {
+    align-items: center;
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+}
+
+.nav li {
+    color: white;
+    padding: 0 0.7em;
+    font-weight: 700;
+    font-size: 0.8em;
+}
+
+/* Social Icons */
+.social-icons {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: black;
+}
+
+.social-icons a {
+    color: inherit;
+    font-size: 1.25em;
+    transition: color 0.3s ease;
+}
+
+.button.icon.circle {
+    padding: 0.5em;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1E90FF;
+    border: none;
+}
+
+.circle i {
+    font-size: 1em;
+}
+
+/* ===========
+    header-center
+    ============== */
+
+.color-header-center {
+    background-color: #ffffff;
+    padding: 0;
+}
+
+.row.row-center {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 5px 0;
+}
+
+
+/* Thiết kế của dropdown tìm kiếm */
+.dropdown-search {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0px;
+    background-color: white;
+    border: 1px solid #ddd;
+    width: 400px;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+/* Hiển thị input khi hover vào icon */
+.position-relative:hover .dropdown-search {
+    display: block;
+}
+
+.row.row-center .col-lg-4 {
+    margin-bottom: auto;
+    margin-top: auto;
+    padding-right: 0;
+}
+
+.d-flex.list-item {
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.d-flex.list-item li {
+    display: flex;
+    flex-grow: 1;
+    color: hsla(0, 0%, 7%, .85);
+    font-weight: 700;
+    font-style: normal;
+    font-family: Lato, sans-serif;
+    font-size: .8em;
+}
+
+.nav.d-flex.list-item li div {
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+}
+
+.nav.d-flex.list-item li div i {
+    width: 5%;
+    text-align: center;
+    font-size: 1.8em;
+    padding: 5px 5px;
+}
+
+.row.row-center .img-logo {
+    display: flex;
+    justify-content: flex-start;
+    margin: 0;
+    padding: 0;
+}
+
+.row.row-center .img-logo img {
+
+    max-height: 60px;
+
+
+}
+
+
+.row.balance-row {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    width: 100%;
+}
+
+.row .bag-shop {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.row .bag-shop .col1.text {
+    display: flex;
+    align-items: center;
+    text-wrap: nowrap;
+    flex-grow: 1;
+    color: hsla(0, 0%, 7%, .85);
+    font-weight: 700;
+    font-style: normal;
+    font-family: Lato, sans-serif;
+    font-size: 1em;
+
+}
+
+.row .bag-shop .col1 {
+    flex: 1;
+    height: 100%;
+
+}
+
+.row .bag-shop .col1 i {
+    display: flex;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.bag-shop .fa-bag-shopping {
+    font-size: 1.5em;
+}
+
+.row .bag-shop .col1 .dropdown button {
+    border-radius: 20px;
+    padding: 5px 15px;
+}
+
+.account-dropdown-menu {
+    min-width: 100%;
+    box-sizing: border-box;
+    position: absolute;
+}
+
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+
+}
+
+.dropdown-menu.menu-danhmuc {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    padding: 10px;
+    list-style: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    min-width: 150px;
+    z-index: 10;
+}
+
+
+.dropdown:hover .dropdown-menu.menu-danhmuc {
+    display: block;
+}
+
+
+
+.dropdown-menu.menu-danhmuc li a {
+    color: #333;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-menu.menu-danhmuc li a:hover {
+    background-color: #f0f0f0;
+}
+
+/* =================
+        Main
+        =============== */
+
+.main {
+    margin-top: 30px;
+}
+
+.boder-bottom-box .py-3 {
+    border: rgb(160, 155, 155) 1px solid;
+}
+/* Highlight khi hover */
+.col-lg-3 .py-3:hover {
+    background-color: #f8f9fa; /* Màu nền khi hover */
+    border-left: 4px solid #1E90FF; /* Đường viền bên trái nổi bật */
+    transition: all 0.3s ease; /* Hiệu ứng mượt */
+}
+
+/* Highlight khi active */
+.col-lg-3 .py-3.active {
+    background-color: #1E90FF; /* Màu nền khi active */
+    color: #ffffff; /* Màu chữ khi active */
+    font-weight: bold; /* Đậm chữ */
+}
+
+/* Link trong mục khi hover */
+.col-lg-3 .py-3 a:hover {
+    color: #1E90FF; /* Đổi màu chữ link */
+    text-decoration: underline; /* Gạch chân link */
+}
+
+
+
+/* setting some */
+h3,
+h4 {
+    font-weight: bold;
+    color: #333;
+}
+
+p {
+    font-weight: normal;
+    color: #555;
+}
+
+a {
+    font-weight: bold;
+    color: #007BFF;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+li {
+    font-weight: normal;
+    color: #666;
+}
+
+.nav-link {
+    font-weight: 600;
+    color: #444;
+}
+
+.nav-link:hover {
+    color: #000;
+}
+.navbar.bg-primary {
+    background-color: #007bff !important; /* Màu nền chính */
+    padding: 10px 0; /* Khoảng cách dọc */
+    border-bottom: 2px solid #0056b3; /* Đường viền dưới */
+}
+
+.navbar .nav-tabs {
+    border-bottom: none; /* Loại bỏ viền mặc định của nav-tabs */
+    justify-content: center; /* Căn giữa danh sách */
+}
+
+.nav-tabs .nav-link {
+    color: #343a40; /* Màu chữ */
+    background-color: #ffffff; /* Màu nền tab */
+    border: 1px solid #dee2e6; /* Đường viền */
+    border-radius: 5px; /* Bo góc */
+    margin: 0 5px; /* Khoảng cách giữa các tab */
+    padding: 10px 15px; /* Khoảng cách bên trong */
+    transition: all 0.3s ease-in-out; /* Hiệu ứng chuyển đổi */
+}
+
+.nav-tabs .nav-link:hover {
+    background-color: #f8f9fa; /* Nền khi hover */
+    color: #0056b3; /* Màu chữ khi hover */
+    border-color: #ced4da; /* Đổi màu viền khi hover */
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #007bff; /* Nền của tab đang được chọn */
+    color: #ffffff; /* Màu chữ khi tab được chọn */
+    border-color: #0056b3; /* Viền của tab đang được chọn */
+}
+.nav a.active li {
+    color: #1E90FF; /* Màu chữ nổi bật */
+    font-weight: bold; /* Tô đậm chữ */
+    border-bottom: 2px solid #1E90FF; /* Gạch chân chỉ mục */
+}
+
+.nav a li:hover {
+    color: #1E90FF; /* Đổi màu khi hover */
+}
