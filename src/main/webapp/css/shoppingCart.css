@@ -1,0 +1,344 @@
+/* =====================================
+       Setting Styles
+    ===================================== */
+
+    main {
+        display: block;
+        unicode-bidi: isolate;
+        background-color: #ffffff;
+    }
+    
+    .category-page-row {
+        padding-top: 30px;
+    }
+    
+    /* =======================
+            Typography Styles
+            ============= */
+    a {
+        text-decoration: none;
+        color: #334862;
+    }
+    
+    
+    /* =====================================
+               Global Styles
+            ===================================== */
+    
+    div {
+        display: block;
+    }
+    
+    html,
+    body {
+        padding: 0;
+        margin: 0;
+        font-size: 16px;
+        color: black;
+        font-family: sans-serif, Tahoma;
+    }
+    
+    .container {
+        width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    
+    
+    
+    aside {
+        display: block;
+    }
+    
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+
+.row .bag-shop .col1 i {
+    display: flex;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.bag-shop .fa-bag-shopping {
+    font-size: 1.5em;
+}
+
+.row .bag-shop .col1 .dropdown button {
+    border-radius: 20px;
+    padding: 5px 15px;
+}
+
+.account-dropdown-menu {
+    min-width: 100%;
+    box-sizing: border-box;
+    position: absolute;
+}
+
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+
+}
+
+.dropdown-menu.menu-danhmuc {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    padding: 10px;
+    list-style: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    min-width: 150px;
+    z-index: 10;
+}
+
+
+.dropdown:hover .dropdown-menu.menu-danhmuc {
+    display: block;
+}
+
+
+
+.dropdown-menu.menu-danhmuc li a {
+    color: #333;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-menu.menu-danhmuc li a:hover {
+    background-color: #f0f0f0;
+}
+
+#cart-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+#cart-container.active {
+    background-color: white; /* Màu nền khi active */
+    border-radius: 5px;
+}
+
+#cart-container.active i {
+    color: #1E90FF; /* Màu icon khi active */
+    transition: color 0.3s ease;
+}
+
+#cart-container.active #cart-button {
+    color: #1E90FF; /* Màu chữ khi active */
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+/* =================
+    is-medium và overlay
+    =========== */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5); /* Màu đen với độ trong suốt */
+        z-index: 999; /* Đảm bảo lớp phủ nằm trên các nội dung khác */
+    }
+    .modal.show {
+        z-index: 1000; /* Đảm bảo modal nằm trên lớp phủ */
+    }
+    
+    .is-medium {
+        font-size: 16px;
+        color: #333;
+        font-weight: 550;
+        text-decoration: none;
+        background-color: #5ea8f3;
+        padding: 10px 10px;
+        }
+    
+    .is-medium .divider {
+        color: white;
+        margin: 0 5px;
+    }
+    
+    .is-medium a {
+        text-decoration: none;
+        color: white;
+    }
+    
+    .is-medium a:hover {
+        text-decoration: underline;
+    }
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* duoi */
+
+
+.cart-item img {
+    max-width: 80px;
+    height: auto;
+    border-radius: 5px; /* Bo góc hình ảnh */
+}
+
+.cart-item td {
+    vertical-align: middle; /* Căn giữa nội dung */
+}
+
+.cart-total {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #d9534f; /* Màu đỏ nổi bật */
+}
+
+.btn-sm {
+    font-size: 0.9rem;
+    padding: 0.3rem 0.6rem;
+}
+
+.btn-custom, .btn-continue {
+    font-size: 1rem;
+    padding: 0.6rem 1.2rem;
+}
+
+@media (max-width: 768px) {
+    .cart-item img {
+        max-width: 60px;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    .cart-total {
+        font-size: 1.5rem;
+    }
+}
+.btn-custom {
+    background-color: #09dd10; /* Green color for the payment button */
+    color: white;
+}
+
+.btn-custom:hover {
+    background-color: #11aa19;
+    color: white; 
+}
+
+/* New style for the "Tiếp tục mua hàng" button */
+.btn-continue {
+    background-color: #0e82f7; /* Sky blue for continue shopping button */
+    color: white;
+}
+
+.btn-continue:hover {
+    background-color: #19538d;
+    color:white;
+}                        
+.d-flex.align-items-center {
+    justify-content: center; /* Căn giữa nội dung bên trong theo chiều ngang */
+    gap: 5px; /* Khoảng cách giữa nút và ô nhập số lượng */
+}
+/* ========================
+   Table Styling
+======================== */
+
+th {
+    text-align: center;
+}
+.table tbody td {
+    padding: 10px; /* Khoảng cách bên trong ô */
+    text-align: center; /* Căn giữa chữ */
+    vertical-align: middle; /* Căn giữa theo chiều dọc */
+    font-size: 0.9rem; /* Kích thước chữ vừa phải */
+    color: black; /* Màu chữ */
+}
+
+.table tbody td:first-child {
+    text-align: left; /* Căn trái cột đầu tiên (sản phẩm) */
+}
+
+.table tbody td:last-child {
+    text-align: center; /* Căn giữa cột thao tác */
+}
+
+/* Style cho nút bấm */
+.table .btn {
+    padding: 5px 10px;
+    font-size: 0.85rem;
+    border-radius: 4px;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.btn-outline-secondary {
+    border-color: #6c757d;
+    color: #6c757d;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: white;
+}
+
+/* Responsive Table */
+@media (max-width: 768px) {
+    .table tbody td {
+        font-size: 0.8rem; /* Giảm kích thước chữ trên màn hình nhỏ */
+        padding: 8px;
+    }
+
+    .table-header th {
+        font-size: 0.8rem; /* Giảm kích thước tiêu đề */
+    }
+}
