@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     path.forEach(function (part, index) {
         urlPath += part + '/';
-        if (index === path.length - 1 && part === 'ProductCatalog.html') {
+        if (index === path.length - 1 && part === 'ProductCatalog.jsp') {
             breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">Danh mục sản phẩm</a>';
         } else {
             breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">' + part.replace(/-/g, ' ') + '</a>';
@@ -32,7 +32,7 @@ document.querySelectorAll('.dropdown-menu a').forEach(function (categoryLink) {
             localStorage.setItem('selectedCategory', categoryData);
 
 
-            window.location.href = 'ProductCatalog.html';
+            window.location.href = 'ProductCatalog.jsp';
         }
     });
 });

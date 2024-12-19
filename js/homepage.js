@@ -47,7 +47,7 @@ document.querySelectorAll('.dropdown-menu a').forEach(function (categoryLink) {
             localStorage.setItem('selectedCategory', categoryData);
 
 
-            window.location.href = 'ProductCatalog.html';
+            window.location.href = 'ProductCatalog.jsp';
         }
     });
 });
