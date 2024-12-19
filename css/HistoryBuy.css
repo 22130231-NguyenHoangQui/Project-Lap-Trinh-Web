@@ -1,0 +1,97 @@
+
+
+
+
+
+
+
+/* duoi or main */
+
+/* Định dạng chung cho các nút */
+.status-buttons .btn {
+    margin-right: 10px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+/* Trạng thái mặc định */
+.status-buttons .btn:not(.active) {
+    background-color: #f8f9fa;
+    color: #343a40;
+    border-color: #ddd;
+}
+
+/* Trạng thái khi được chọn (active) */
+.status-buttons .btn.active {
+    background-color: #007bff; /* Màu xanh của Bootstrap */
+    color: #fff;
+    border-color: #007bff;
+}
+
+/* Hover hiệu ứng cho nút */
+.status-buttons .btn:hover {
+    background-color: #0056b3; /* Màu xanh đậm hơn khi hover */
+    color: #fff;
+    border-color: #0056b3;
+}
+
+/* Định dạng bảng */
+.table thead th {
+    background-color: #f1f1f1;
+    text-align: center;
+}
+
+.table tbody td {
+    vertical-align: middle;
+}
+
+/* Trạng thái từng loại đơn hàng */
+.order-status {
+    font-weight: bold;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.order-status.pending {
+    color: #ffc107; /* Vàng */
+}
+
+.order-status.confirmed {
+    color: #28a745; /* Xanh lá */
+}
+
+.order-status.cancelled {
+    color: #dc3545; /* Đỏ */
+}
+
+/* Chi tiết hóa đơn */
+.details {
+    display: none; /* Ẩn mặc định */
+    margin-top: 10px;
+    background: #f9f9f9;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.details h5 {
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #343a40;
+}
+
+.details p {
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #555;
+}
+
+.details ul {
+    padding-left: 20px;
+    margin: 0;
+}
+
+.details ul li {
+    font-size: 14px;
+    color: #333;
+}
