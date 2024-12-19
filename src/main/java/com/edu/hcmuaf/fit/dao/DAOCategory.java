@@ -1,13 +1,15 @@
 package com.edu.hcmuaf.fit.dao;
 
-import com.edu.hcmuaf.fit.model.Category;
-import com.edu.hcmuaf.fit.util.JDBCUtil;
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import com.edu.hcmuaf.fit.model.Category;
+import com.edu.hcmuaf.fit.util.JDBCUtil;
 
 public class DAOCategory {
     public static ArrayList<Category> listCategory(int offset) {
@@ -42,10 +44,36 @@ public class DAOCategory {
         JDBCUtil.closeConnection(connection);
         return list;
     }
+    public static ArrayList<Category> listCategory() {
+        ArrayList<Category> list = new ArrayList<>();
+        Connection connection = JDBCUtil.getConnection();
+        String sql = "SELECT ca.category_id,ca.name_category FROM Category ca";
+        try {
+            PreparedStatement pre = connection.prepareStatement(sql);
+            ResultSet resultSet = pre.executeQuery();
+            while (resultSet.next()) {
+                Category category = new Category();
+                int idCategory = resultSet.getInt("category_id");
+                String categoryName = resultSet.getString("name_category");
+                category.setName(categoryName);
+                category.setId(idCategory);
+                list.add(category);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        JDBCUtil.closeConnection(connection);
+        return list;
+    }
 
     public static void main(String[] args) {
-        ArrayList<Category> list = listCategory(0);
-        for (Category category : list) {
+//        ArrayList<Category> list = listCategory(0);
+//        for (Category category : list) {
+//            System.out.println(category);
+//        }
+
+        ArrayList<Category> list1 = listCategory();
+        for (Category category : list1) {
             System.out.println(category);
         }
     }

@@ -47,8 +47,22 @@ public class ProductService {
         }
         return result;
     }
-    public static void main(String[] args) {
-        listProductBestSelling(1);
-        System.out.println(listProductBestSelling(1));
+//    lấy sản phẩm ngẫu nhiên cho trang danh mục
+    public static ArrayList<Product> listProductRandom(int offset) {
+        ArrayList<Product> result = DAOProduct.listRandomProduct(offset);
+        ArrayList<ProductImages> listImageOfProduct = null;
+        for (Product p: result) {
+            listImageOfProduct = DAOProduct.listImageOfProduct(p);
+            p.setProductImages(listImageOfProduct);
+        }
+        return result;
     }
+    public static void main(String[] args) {
+//        listProductBestSelling(1);
+//        System.out.println(listProductBestSelling(1));
+
+        System.out.println(listProductRandom(1));
+
+    }
+
 }

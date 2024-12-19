@@ -22,7 +22,11 @@ public class CategoryService  {
         return result;
 
     }
-
+//    load all danh mục
+    public ArrayList<Category> getListCategory() {
+        ArrayList<Category> result = DAOCategory.listCategory();
+        return result;
+    }
     public static void main(String[] args) {
 
     }

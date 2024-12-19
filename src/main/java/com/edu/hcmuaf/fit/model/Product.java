@@ -1,7 +1,14 @@
 package com.edu.hcmuaf.fit.model;
 
+import com.edu.hcmuaf.fit.util.JDBCUtil;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Product {
     private int id;
@@ -14,7 +21,7 @@ public class Product {
     private Date created_at;
     private Date updated_at;
     private ArrayList<ProductImages> productImages;
-
+    private List<Integer> categoryId;
 
     public Product() {
     }
@@ -122,6 +129,36 @@ public class Product {
         this.productImages = productImages;
     }
 
+
+    public List<Integer> getCategoryId() {
+        if(categoryId == null) {
+            categoryId = new ArrayList<>();
+            loadCategoryId();
+
+        }
+        return categoryId;
+    }
+
+    private void loadCategoryId() {
+        String sql ="SELECT ca.category_id \n" +
+                "FROM categoryproduct cp\n" +
+                "JOIN category ca ON cp.category_id = ca.category_id\n" +
+                "WHERE cp.product_id = ?\n" +
+                "LIMIT 1";
+        try (Connection connection = JDBCUtil.getConnection();
+             PreparedStatement pr = connection.prepareStatement(sql)) {
+
+            pr.setInt(1, this.id); // Sử dụng id của sản phẩm hiện tại
+            ResultSet resultSet = pr.executeQuery();
+
+            while (resultSet.next()) {
+                categoryId.add(resultSet.getInt("category_id"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -135,8 +172,7 @@ public class Product {
                 ", created_at=" + created_at +
                 ", updated_at=" + updated_at +
                 ", productImages=" + productImages +
+                ", categoryId=" + categoryId +
                 '}';
     }
-
-
 }

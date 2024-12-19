@@ -128,10 +128,79 @@ public class DAOProduct {
 
     }
 
+//    load sản phẩm theo mã danh mục
+public static ArrayList<Product> listProductByIdCate(int id,int offset) {
+    ArrayList<Product> re = new ArrayList<>();
+    Connection connection = JDBCUtil.getConnection();
+    try {
+        String sql = "SELECT p.product_id,ca.category_id,p.name_product,p.quantity,p.diameter,p.price,p.height,p.description\n" +
+                "FROM product as p\n" +
+                "JOIN categoryproduct capo ON p.product_id = capo.product_id\n" +
+                "JOIN category ca ON capo.category_id = ca.category_id\n" +
+                "WHERE ca.category_id = ?\n" +
+                "LIMIT 6 OFFSET ?";
+        PreparedStatement  pr = connection.prepareStatement(sql);
+        pr.setInt(1, id);
+        pr.setInt(2, offset);
+        ResultSet resultSet = pr.executeQuery();
+        while (resultSet.next()) {
+            int product_id = resultSet.getInt("product_id");
+            int category = resultSet.getInt("category_id");
+            String name = resultSet.getString("name_product");
+            int price = resultSet.getInt("price");
+            Product product = new Product();
+            product.setNameProduct(name);
+            product.setId(product_id);
+            product.setPrice(price);
+            product.getCategoryId();
+            re.add(product);
+        }
+        JDBCUtil.closeConnection(connection);
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
+    }
+    return re;
+
+}
+// load 12 sản phẩm ngẫu nhiên
+public static ArrayList<Product> listRandomProduct(int offset) {
+        ArrayList<Product> re = new ArrayList<>();
+        Connection connection = JDBCUtil.getConnection();
+    try {
+        String sql = "SELECT * FROM Product ORDER BY RAND() LIMIT 12";
+        PreparedStatement pr = connection.prepareStatement(sql);
+        ResultSet resultSet = pr.executeQuery();
+        while (resultSet.next()) {
+            int product_id = resultSet.getInt("product_id");
+            String name = resultSet.getString("name_product");
+            int price = resultSet.getInt("price");
+            Product product = new Product();
+            product.setNameProduct(name);
+            product.setId(product_id);
+            product.setPrice(price);
+            re.add(product);
+
+        }
+
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
+    }
+    JDBCUtil.closeConnection(connection);
+    return re;
+}
     public static void main(String[] args) {
-        Product p = new Product();
-        p.setId(1);
-        System.out.println(listImageOfProduct(p));
+//        Product p = new Product();
+//        p.setId(1);
+//        System.out.println(listImageOfProduct(p));
+
+//        for (Product product : listProductByIdCate(1, 0)) {
+//            System.out.println(product);
+//        }
+
+        for (Product product : listRandomProduct(0)) {
+            System.out.println(product);
+        }
+
 
     }
 }
