@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class DAOProduct {
-//    test
+    //    test
     public static ArrayList<Product> listProduct(int offset) {
         ArrayList<Product> re = new ArrayList<>();
         Connection connection = JDBCUtil.getConnection();
@@ -28,18 +28,18 @@ public class DAOProduct {
                 String height = rs.getString("height");
                 int price = rs.getInt("price");
                 String description = rs.getString("description");
-                Product product = new Product( nameProduct, quantity, diameter, height, price, description);
+                Product product = new Product(nameProduct, quantity, diameter, height, price, description);
                 re.add(product);
             }
             JDBCUtil.closeConnection(connection);
         } catch (SQLException e) {
-           e.printStackTrace();
+            e.printStackTrace();
         }
         return re;
     }
 
-//    lấy ra sản phẩm đang là xu hướng
-    public  static ArrayList<Product> listProductBestSelling(int offset) {
+    //    lấy ra sản phẩm đang là xu hướng
+    public static ArrayList<Product> listProductBestSelling(int offset) {
         ArrayList<Product> re = new ArrayList<>();
         Connection connection = JDBCUtil.getConnection();
         try {
@@ -70,7 +70,7 @@ public class DAOProduct {
         return re;
     }
 
-//   lấy ra sản phẩm bán chạy trong tháng
+    //   lấy ra sản phẩm bán chạy trong tháng
     public static ArrayList<Product> listProductBessInMonth(int offset) {
         ArrayList<Product> re = new ArrayList<>();
         Connection connection = JDBCUtil.getConnection();
@@ -104,15 +104,13 @@ public class DAOProduct {
     }
 
 
-
-
-//  lấy danh sách hình ảnh của 1 sản phẩm
+    //  lấy danh sách hình ảnh của 1 sản phẩm
     public static ArrayList<ProductImages> listImageOfProduct(Product p) {
         ArrayList<ProductImages> re = new ArrayList<>();
         Connection connection = JDBCUtil.getConnection();
         try {
             String sql = "Select pi.image_url " + "from productimages pi " + "where pi.product_id = ?";
-            PreparedStatement  pr = connection.prepareStatement(sql);
+            PreparedStatement pr = connection.prepareStatement(sql);
             pr.setInt(1, p.getId());
             ResultSet resultSet = pr.executeQuery();
             while (resultSet.next()) {
@@ -128,66 +126,107 @@ public class DAOProduct {
 
     }
 
-//    load sản phẩm theo mã danh mục
-public static ArrayList<Product> listProductByIdCate(int id,int offset) {
-    ArrayList<Product> re = new ArrayList<>();
-    Connection connection = JDBCUtil.getConnection();
-    try {
-        String sql = "SELECT p.product_id,ca.category_id,p.name_product,p.quantity,p.diameter,p.price,p.height,p.description\n" +
-                "FROM product as p\n" +
-                "JOIN categoryproduct capo ON p.product_id = capo.product_id\n" +
-                "JOIN category ca ON capo.category_id = ca.category_id\n" +
-                "WHERE ca.category_id = ?\n" +
-                "LIMIT 6 OFFSET ?";
-        PreparedStatement  pr = connection.prepareStatement(sql);
-        pr.setInt(1, id);
-        pr.setInt(2, offset);
-        ResultSet resultSet = pr.executeQuery();
-        while (resultSet.next()) {
-            int product_id = resultSet.getInt("product_id");
-            int category = resultSet.getInt("category_id");
-            String name = resultSet.getString("name_product");
-            int price = resultSet.getInt("price");
-            Product product = new Product();
-            product.setNameProduct(name);
-            product.setId(product_id);
-            product.setPrice(price);
-            product.getCategoryId();
-            re.add(product);
-        }
-        JDBCUtil.closeConnection(connection);
-    } catch (SQLException e) {
-        throw new RuntimeException(e);
-    }
-    return re;
-
-}
-// load 12 sản phẩm ngẫu nhiên
-public static ArrayList<Product> listRandomProduct(int offset) {
+    //    load sản phẩm theo mã danh mục
+    public static ArrayList<Product> listProductByIdCate(int id, int offset) {
         ArrayList<Product> re = new ArrayList<>();
         Connection connection = JDBCUtil.getConnection();
-    try {
-        String sql = "SELECT * FROM Product ORDER BY RAND() LIMIT 12";
-        PreparedStatement pr = connection.prepareStatement(sql);
-        ResultSet resultSet = pr.executeQuery();
-        while (resultSet.next()) {
-            int product_id = resultSet.getInt("product_id");
-            String name = resultSet.getString("name_product");
-            int price = resultSet.getInt("price");
-            Product product = new Product();
-            product.setNameProduct(name);
-            product.setId(product_id);
-            product.setPrice(price);
-            re.add(product);
-
+        try {
+            String sql = "SELECT p.product_id,ca.category_id,p.name_product,p.quantity,p.diameter,p.price,p.height,p.description\n" +
+                    "FROM product as p\n" +
+                    "JOIN categoryproduct capo ON p.product_id = capo.product_id\n" +
+                    "JOIN category ca ON capo.category_id = ca.category_id\n" +
+                    "WHERE ca.category_id = ?\n" +
+                    "LIMIT 6 OFFSET ?";
+            PreparedStatement pr = connection.prepareStatement(sql);
+            pr.setInt(1, id);
+            pr.setInt(2, offset);
+            ResultSet resultSet = pr.executeQuery();
+            while (resultSet.next()) {
+                int product_id = resultSet.getInt("product_id");
+                int category = resultSet.getInt("category_id");
+                String name = resultSet.getString("name_product");
+                int price = resultSet.getInt("price");
+                Product product = new Product();
+                product.setNameProduct(name);
+                product.setId(product_id);
+                product.setPrice(price);
+                product.getCategoryId();
+                re.add(product);
+            }
+            JDBCUtil.closeConnection(connection);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
+        return re;
 
-    } catch (SQLException e) {
-        throw new RuntimeException(e);
     }
-    JDBCUtil.closeConnection(connection);
-    return re;
-}
+
+    // load 12 sản phẩm ngẫu nhiên
+    public static ArrayList<Product> listRandomProduct(int offset) {
+        ArrayList<Product> re = new ArrayList<>();
+        Connection connection = JDBCUtil.getConnection();
+        try {
+            String sql = "SELECT * FROM Product ORDER BY RAND() LIMIT 12";
+            PreparedStatement pr = connection.prepareStatement(sql);
+            ResultSet resultSet = pr.executeQuery();
+            while (resultSet.next()) {
+                int product_id = resultSet.getInt("product_id");
+                String name = resultSet.getString("name_product");
+                int price = resultSet.getInt("price");
+                Product product = new Product();
+                product.setNameProduct(name);
+                product.setId(product_id);
+                product.setPrice(price);
+                re.add(product);
+
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        JDBCUtil.closeConnection(connection);
+        return re;
+    }
+
+    //  danh sách sản phẩm tìm kiểm bởi tên
+    public static ArrayList<Product> listProductByName(String nameProduct) {
+        nameProduct = nameProduct.trim();
+        ArrayList<Product> re = new ArrayList<>();
+        Connection connection = JDBCUtil.getConnection();
+        String[] tuKhoa = nameProduct.split("\\s+");
+        StringBuilder sqlbuilder = new StringBuilder("SELECT p.product_id, p.name_product, p.price, p.quantity, p.description, pi.image_url\n" +
+                "FROM Product p\n" +
+                "JOIN ProductImages pi ON p.product_id = pi.product_id\n" +
+                "WHERE");
+        for (int i = 0; i < tuKhoa.length; i++) {
+            sqlbuilder.append(" p.name_product COLLATE utf8mb4_general_ci LIKE ?");
+            if (i < tuKhoa.length - 1) {
+                sqlbuilder.append(" AND");
+            }
+        }
+        try {
+            PreparedStatement pr = connection.prepareStatement(sqlbuilder.toString());
+            for (int i = 0; i < tuKhoa.length; i++) {
+                pr.setString(i + 1, "%" + tuKhoa[i] + "%");
+            }
+            ResultSet resultSet = pr.executeQuery();
+            while (resultSet.next()) {
+                int product_id = resultSet.getInt("product_id");
+                String name = resultSet.getString("name_product");
+                int price = resultSet.getInt("price");
+                Product product = new Product();
+                product.setNameProduct(name);
+                product.setId(product_id);
+                product.setPrice(price);
+                re.add(product);
+            }
+            JDBCUtil.closeConnection(connection);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return re;
+    }
+
     public static void main(String[] args) {
 //        Product p = new Product();
 //        p.setId(1);
