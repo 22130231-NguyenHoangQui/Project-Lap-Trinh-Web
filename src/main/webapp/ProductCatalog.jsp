@@ -13,6 +13,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
           integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+          integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+            integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/settingAll.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/fotter.css">
@@ -36,28 +42,28 @@
                 <div id="shop-sidebar" class="sidebar-inner">
                     <aside class="widget widget_aws_widget">
                         <div>
-                            <form>
+                            <form id="search-form">
                                 <div class="search-input-container">
                                     <input type="search" name="s" id="search-input" class="aws-search-field"
                                            placeholder="Tìm kiếm sản phẩm" autocomplete="off"
-                                           style="width: 100%; padding-right: 10px;">
+                                           style="width: 100%; padding-right: 10px;" onkeyup="searchProduct()">
                                     <input type="hidden" name="post_type" value="product">
                                     <input type="hidden" name="type_aws" value="true">
                                     <div class="aws-loader"></div>
                                 </div>
                                 <div class="aws-search-btn">
-                                        <span class="aws-search-btn_icon" aria-label="Tìm kiếm">
-                                            <svg focusable="false" xmlns="http://www.w3.org/2000/svg"
-                                                 viewBox="0 0 24 24" width="24">
-                                                <path
-                                                        d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
-                                                </path>
-                                            </svg>
-                                        </span>
+            <span class="aws-search-btn_icon" aria-label="Tìm kiếm">
+                <svg focusable="false" xmlns="http://www.w3.org/2000/svg"
+                     viewBox="0 0 24 24" width="24">
+                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+            </span>
                                 </div>
                             </form>
                         </div>
-                    </aside>
+
+
+                     </aside>
 
                     <aside id="woocommerce_price_filter-15" class="widget woocommerce widget_price_filter">
                         <span class="widget-title shop-sidebar">Lọc theo giá</span>
@@ -80,7 +86,7 @@
                         </form>
 
                     </aside>
-                    <c:forEach var="listOk" items="${}"></c:forEach>
+<%--                    <c:forEach var="listOk" items="${}"></c:forEach>--%>
                     <aside id="custom_html-5" class="widget_text widget widget_custom_html">
                         <div class="textwidget custom-html-widget">
                             <p><a href="" style="text-decoration: none; color: inherit; font-weight: bold;">Bánh Kem
@@ -103,7 +109,8 @@
                         <ul class="product-categories">
                             <c:forEach var="listCate" items="${listCate}">
 
-                                <li class="cat-item" data-category="banh_cac_ngay_le"><a href="#">${listCate.name}</a>
+                                <li class="cat-item" data-category="banh_cac_ngay_le">
+                                    <a href="#" onclick="loadProductByIdCate(${listCate.id})">${listCate.name}</a>
                                 </li>
 
                             </c:forEach>
@@ -116,7 +123,46 @@
             </div>
             <div class="col large-9">
                 <div class="shop-container">
-                    <div class="products row  row-small large-columns-4 medium-columns-3 small-columns padding-p">
+                    <div class="products row  row-small large-columns-4 medium-columns-3 small-columns padding-p"
+                         id="content">
+                        <c:forEach var="product_list" items="${listProductRandom}">
+                            <div class="col">
+                                <div class="col-inner">
+                                    <div class="product-small box">
+                                        <div class="box-image">
+                                            <a href="#" class="product-link" >
+<%--                                                <img width="247" height="296" src="${product_list.image}" alt="${product_list.name}">--%>
+                                            </a>
+                                        </div>
+                                        <div class="box-text text-center">
+                                            <div class="title-wrapper">
+                                                <p>
+                                                    <a href="#" onclick="saveProductData('${productData}')">${product_list.id} - ${product_list.nameProduct}</a>
+                                                </p>
+                                            </div>
+                                            <div class="price-wrapper">
+                    <span class="price">
+                        <span class="woocommerce-Price-amount amount">
+                            <bdi style="font-weight: bold;">${product_list.price}</bdi>
+                        </span>
+                    </span>
+                                            </div>
+                                            <div class="add-to-cart-button">
+                                                <a href="#" onclick="saveProductData('${productData}')">THÊM VÀO GIỎ</a>
+                                            </div>
+                                            <div class="product-description" style="display:none;">
+                                                <span class="description-id">Mã: <span class="sku">${product_list.id}</span></span>
+<%--                                                <span class="description-content">Mô tả: <br>${product_list.description}</span>--%>
+                                            </div>
+                                            <div class="size-wrapper" style="display:none;">
+<%--                                                <p ><strong>Đường kính:</strong> ${product_list.diameter}</p> <!-- Hiển thị đường kính -->--%>
+<%--                                                <p><strong>Chiều cao:</strong> ${product_list.height}</p> <!-- Hiển thị chiều cao -->--%>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
                     </div>
 
 
@@ -180,11 +226,48 @@
     </div>
 </footer>
 
-<script src="js/productcatalog.js"></script>
+<%--<script src="js/productcatalog.js"></script>--%>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+<script>
+    function loadProductByIdCate(idCate) {
+        $.ajax({
+            url: "LoadProductByIdCate",
+            method: "GET",
+            data: {
+                cid: idCate
+            },
+            success: function (data) {
+                var row = document.getElementById("content");
+                row.innerHTML = data;
+            },
 
+
+        });
+
+    }
+    function searchProduct() {
+        const searchQuery = document.getElementById('search-input').value.trim(); // Lấy giá trị từ ô tìm kiếm và loại bỏ khoảng trắng đầu/cuối
+        if (searchQuery.length >= 1) {  // Chỉ tìm kiếm khi người dùng gõ ít nhất 3 ký tự
+            $.ajax({
+                url: "LoadProductByNameServlet",  // Địa chỉ của servlet xử lý tìm kiếm
+                method: "GET",
+                data: { name: searchQuery },  // Gửi tên sản phẩm để tìm kiếm
+                success: function(response) {
+                    // Cập nhật danh sách sản phẩm trong trang mà không cần tải lại toàn bộ
+                    const productContainer = document.getElementById("content");
+                    productContainer.innerHTML = response;
+                },
+                error: function() {
+                    console.error('Có lỗi xảy ra khi tìm kiếm.');
+                }
+            });
+        }
+    }
+
+
+</script>
 
 </body>
 

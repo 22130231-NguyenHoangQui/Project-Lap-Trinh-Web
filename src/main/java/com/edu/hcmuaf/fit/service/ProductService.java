@@ -57,6 +57,26 @@ public class ProductService {
         }
         return result;
     }
+    public static ArrayList<Product> listProductByIdCate(int id,int offset) {
+        ArrayList<Product> listProduct = DAOProduct.listProductByIdCate(id,offset);
+        ArrayList<ProductImages> listImageOfProduct = null;
+        for (Product p: listProduct) {
+            listImageOfProduct = DAOProduct.listImageOfProduct(p);
+            p.setProductImages(listImageOfProduct);
+
+        }
+        return listProduct;
+    }
+//    lấy ra sản phẩm tìm kiếm theo tên
+    public static  ArrayList<Product> listProductByName(String name) {
+        ArrayList<Product> listProduct = DAOProduct.listProductByName(name);
+        ArrayList<ProductImages> listImageOfProduct = null;
+        for (Product p: listProduct) {
+            listImageOfProduct = DAOProduct.listImageOfProduct(p);
+            p.setProductImages(listImageOfProduct);
+        }
+    return listProduct;
+    }
     public static void main(String[] args) {
 //        listProductBestSelling(1);
 //        System.out.println(listProductBestSelling(1));
