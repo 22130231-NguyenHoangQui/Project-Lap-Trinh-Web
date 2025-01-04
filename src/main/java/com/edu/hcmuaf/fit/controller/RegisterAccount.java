@@ -31,7 +31,7 @@ public class RegisterAccount extends HttpServlet {
         String gender = request.getParameter("gender");
         String birthDay = request.getParameter("birthDay");
         String address = request.getParameter("address");
-        String addressReceive = request.getParameter("addressRecei");
+        String addressReceive = request.getParameter("addressReceive");
         request.setAttribute("userName", userName);
         request.setAttribute("password", password);
         request.setAttribute("name", name);
@@ -57,7 +57,7 @@ public class RegisterAccount extends HttpServlet {
                 LocalDateTime timeCode = LocalDateTime.now();
                 VerifyAccount verifyAccount = new VerifyAccount(accountAferRegis.getId(), verifyCode, timeCode, false);
                 if (AccountService.getInstance().insertVerify(verifyAccount) > 0) {
-                    Email.sendEmail(accountAferRegis.getEmail(), "Xác thực tài khoản", "Mã xác thực tài khoản HomeDecor của bạn là: " + verifyCode);
+                    Email.sendEmail(accountAferRegis.getEmail(), "Xác thực tài khoản", "Mã xác thực tài khoản IT Cake của bạn là: " + verifyCode);
                     request.setAttribute("email", accountAferRegis.getEmail());
                 }
             }
@@ -67,7 +67,7 @@ public class RegisterAccount extends HttpServlet {
             if(err.length() == 0) {
                 url = "VerifyAccount.jsp";
             }else {
-                url = "SignUp.jsp";
+                url = "signUp.jsp";
             }
             request.getRequestDispatcher(url).forward(request,response);
         } catch (ServletException e) {

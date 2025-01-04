@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../css/deliveryPolicy.css">
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/fotter.css">
+    <link rel="stylesheet" href="css/deliveryPolicy.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/fotter.css">
 </head>
 
 <body>
@@ -25,10 +25,10 @@
             <div class="d-flex justify-content-center my-4">
                 <ul class="nav nav-tabs" id="navbarNav" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="about-tab" href="../introWebsite.jsp" role="tab">Giới thiệu</a>
+                        <a class="nav-link" id="about-tab" href="introWebsite.jsp" role="tab">Giới thiệu</a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link active" id="policy-tab" href="../pages/deliveryPolicy.html" role="tab">Chính sách</a>
+                        <a class="nav-link active" id="policy-tab" href="deliveryPolicy.jsp" role="tab">Chính sách</a>
                     </li>
                     
                 </ul>
