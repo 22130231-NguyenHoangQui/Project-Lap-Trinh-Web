@@ -212,7 +212,7 @@
             <h6>CHÍNH SÁCH</h6>
             <div class="is-divider"></div>
             <ul class="ft-policy">
-                <li><a href="pages/deliveryPolicy.html">Chính sách đổi, trả,hoàn tiền</a></li>
+                <li><a href="deliveryPolicy.jsp">Chính sách đổi, trả,hoàn tiền</a></li>
                 <li><a href="/pages/chinh-sach-giao-dich-thanh-toan">Chính sách bảo mật</a></li>
                 <li><a href="/pages/chinh-sach-doi-tra">Hướng dẫn thanh toán</a></li>
             </ul>
