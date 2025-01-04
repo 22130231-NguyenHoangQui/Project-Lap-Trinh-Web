@@ -58,6 +58,6 @@ public class SignInAccount extends HttpServlet {
             }
         }
         request.setAttribute("err", err);
-        request.getRequestDispatcher("SignIn.jsp").forward(request, response);
+        request.getRequestDispatcher("signIn.jsp").forward(request, response);
     }
 }

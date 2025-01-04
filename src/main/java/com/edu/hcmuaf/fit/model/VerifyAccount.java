@@ -1,5 +1,5 @@
 package com.edu.hcmuaf.fit.model;
-import java.sql.Date;
+
 import java.time.LocalDateTime;
 
 public class VerifyAccount {
