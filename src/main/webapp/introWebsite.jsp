@@ -1,4 +1,6 @@
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -27,7 +29,7 @@
                         <a class="nav-link active" id="about-tab" data-bs-toggle="tab" href="#about" role="tab">Giới thiệu</a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="policy-tab" href="deliveryPolicy.jsp" role="tab">Chính sách </a>
+                        <a class="nav-link" id="policy-tab" href="projectWeb_war//deliveryPolicy" role="tab">Chính sách </a>
                     </li>
                    
                 </ul>
@@ -113,7 +115,7 @@
                     <h6>CHÍNH SÁCH</h6>
                     <div class="is-divider"></div>
                     <ul class="ft-policy">
-                        <li><a href="deliveryPolicy.jsp">Chính sách đổi, trả,hoàn tiền</a></li>
+                        <li><a href="<%=url%>/deliveryPolicy.jsp">Chính sách đổi, trả,hoàn tiền</a></li>
                         <li><a href="/pages/chinh-sach-giao-dich-thanh-toan">Chính sách bảo mật</a></li>
                         <li><a href="/pages/chinh-sach-doi-tra">Hướng dẫn thanh toán</a></li>
                     </ul>
