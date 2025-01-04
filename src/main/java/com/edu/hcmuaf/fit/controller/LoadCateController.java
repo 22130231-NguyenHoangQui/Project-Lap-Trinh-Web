@@ -3,8 +3,6 @@ package com.edu.hcmuaf.fit.controller;
 import java.io.*;
 import java.util.ArrayList;
 
-import com.edu.hcmuaf.fit.dao.DAOCategory;
-import com.edu.hcmuaf.fit.dao.DAOProduct;
 import com.edu.hcmuaf.fit.model.Category;
 import com.edu.hcmuaf.fit.model.Product;
 import com.edu.hcmuaf.fit.service.CategoryService;

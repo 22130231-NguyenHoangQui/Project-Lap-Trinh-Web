@@ -2,6 +2,7 @@ package com.edu.hcmuaf.fit.dao;
 
 import com.edu.hcmuaf.fit.model.Product;
 import com.edu.hcmuaf.fit.model.ProductImages;
+import com.edu.hcmuaf.fit.service.ProductService;
 import com.edu.hcmuaf.fit.util.JDBCUtil;
 
 import java.sql.Connection;
@@ -9,7 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class DAOProduct {
     //    test
@@ -172,7 +172,7 @@ public class DAOProduct {
             while (resultSet.next()) {
                 int product_id = resultSet.getInt("product_id");
                 String name = resultSet.getString("name_product");
-                int price = resultSet.getInt("price");
+                double price = resultSet.getDouble("price");
                 Product product = new Product();
                 product.setNameProduct(name);
                 product.setId(product_id);
@@ -239,6 +239,13 @@ public class DAOProduct {
         for (Product product : listRandomProduct(0)) {
             System.out.println(product);
         }
+
+//        LoadProductByName loadProductByName = new LoadProductByName();
+//        String name = "product";
+//        ArrayList<Product> listProductByName = ProductService.getInstance().listProductByName(name);
+//        for (Product product : listProductByName) {
+//            System.out.println(product);
+//        }
 
 
     }
