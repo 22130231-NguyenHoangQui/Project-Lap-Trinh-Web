@@ -14,7 +14,6 @@ import jakarta.servlet.annotation.*;
 @WebServlet(name = "CateControllerServlet", value = "/CateController-servlet")
 public class CateController extends HttpServlet {
      public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("html/text; charset= UTF-8");
 //        load danh mục bán chạy nhất
