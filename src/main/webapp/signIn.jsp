@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <main">
+    <main>
         <div class="container container1">
             <a href="homepage.jsp" class="close-btn" title="Quay lại trang chủ">
                 <i class="bi bi-x-circle-fill"></i>

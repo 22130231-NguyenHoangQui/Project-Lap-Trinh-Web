@@ -1,8 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<html lang="en"><!DOCTYPE html>
-<html lang="vi">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,49 +18,8 @@
 </head>
 
 <body  >
-<header >
-    <div class="header-wrapper">
-        <div class="header-top">
-            <div class="container d-flex justify-content-between align-items-center" style="padding: 0;">
-                <div class="d-flex flex-col flex-left">
-                    <ul class="nav nav-left nav-small">
-
-                        <li class="html li-first delivery-info">Đặt bánh lấy ngay tại Thành phố Hồ Chí Minh</li>
-                        <li class="html li-first">Hệ thống bánh sinh nhật chính hãng</li>
-                        <li class="html li-first">Hotline: 01234576789</li>
-                    </ul>
-                </div>
-                <div class="flex-col hide-for-medium flex-right">
-                    <ul class="nav top-bar-nav nav-right nav-small  nav-divided">
-                        <li class="html header-social-icons ">
-                            <div class="social-icons follow-icons">
-                                <a href="" class="button icon circle">
-                                    <i class="fa-brands fa-facebook" style=" margin-right: auto;"></i>
-                                </a>
-                                <a href="" class="button icon circle">
-
-                                    <i class="fa-brands fa-instagram"></i>
-                                </a>
-                                <a href="" class="button icon circle">
-
-                                    <i class="fa-regular fa-envelope"></i>
-                                </a>
-                                <a href="" class="button icon circle">
-
-                                    <i class="fa-solid fa-phone"></i>
-                                </a>
-
-                                <a href="" class="button icon circle">
-
-                                    <i class="fa-brands fa-pinterest"></i>
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+<header>
+    <jsp:include page="./header.jsp"></jsp:include>
 </header>
 <main style="padding: 110px;">
     <div class="container">
