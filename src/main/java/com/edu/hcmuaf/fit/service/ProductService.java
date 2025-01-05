@@ -77,6 +77,17 @@ public class ProductService {
         }
     return listProduct;
     }
+//    cat nhat san pham theo gia
+public static ArrayList<Product> getProductsByRange(int minPrice, int maxPrice, int offset) {
+    ArrayList<Product> listProduct = DAOProduct.getProductsByPriceRange(minPrice, maxPrice, offset);
+    ArrayList<ProductImages> listImageOfProduct = null;
+    for (Product p : listProduct) {
+        listImageOfProduct = DAOProduct.listImageOfProduct(p);
+        p.setProductImages(listImageOfProduct);
+    }
+    return listProduct;
+}
+
     public static void main(String[] args) {
         ArrayList<Product> listProduct = ProductService.getInstance().listProductRandom(0);
         Product highestPricedProduct = null;

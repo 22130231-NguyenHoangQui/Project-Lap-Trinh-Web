@@ -2,7 +2,6 @@ package com.edu.hcmuaf.fit.dao;
 
 import com.edu.hcmuaf.fit.model.Product;
 import com.edu.hcmuaf.fit.model.ProductImages;
-import com.edu.hcmuaf.fit.service.ProductService;
 import com.edu.hcmuaf.fit.util.JDBCUtil;
 
 import java.sql.Connection;
@@ -226,6 +225,34 @@ public class DAOProduct {
         }
         return re;
     }
+    public static ArrayList<Product> getProductsByPriceRange(int minPrice, int maxPrice, int offset) {
+        ArrayList<Product> re = new ArrayList<>();
+        Connection connection = JDBCUtil.getConnection();
+        String sql = "SELECT p.product_id,p.name_product, p.price, p.quantity, p.description, pi.image_url\n" +
+                "FROM Product p\n" +
+                "JOIN ProductImages pi ON p.product_id = pi.product_id\n" +
+                "WHERE p.price BETWEEN ? AND ? LIMIT 12 OFFSET ?";
+        try {
+            PreparedStatement pr = connection.prepareStatement(sql);
+            pr.setInt(1, minPrice);
+            pr.setInt(2, maxPrice);
+            ResultSet resultSet = pr.executeQuery();
+            while (resultSet.next()) {
+                int product_id = resultSet.getInt("product_id");
+                String name = resultSet.getString("name_product");
+                double price = resultSet.getDouble("price");
+                Product product = new Product();
+                product.setNameProduct(name);
+                product.setId(product_id);
+                product.setPrice(price);
+                re.add(product);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return re;
+    }
 
     public static void main(String[] args) {
 //        Product p = new Product();
@@ -236,9 +263,13 @@ public class DAOProduct {
 //            System.out.println(product);
 //        }
 
-        for (Product product : listRandomProduct(0)) {
-            System.out.println(product);
-        }
+//        for (Product product : listRandomProduct(0)) {
+//            System.out.println(product);
+//        }
+
+//        for (Product product : getProductsByPriceRange(0, 10000)) {
+//            System.out.println(product);
+//        }
 
 //        LoadProductByName loadProductByName = new LoadProductByName();
 //        String name = "product";

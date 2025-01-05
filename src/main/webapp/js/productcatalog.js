@@ -99,16 +99,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const fromLabel = document.querySelector('.price_label .from');
     const toLabel = document.querySelector('.price_label .to');
 
-    const minValue = parseFloat('<%= request.getAttribute("lowestPrice") %>');
-    console.log(minValue);
+    const minValue = '${lowestPrice}';
+    const maxValue = '${highestPrice}';
+    const step = 100;
 
-    const maxValue = parseFloat('<%= request.getAttribute("highestPrice") %>');
-    console.log(maxValue);
-
-    const step = 10000;
 
     let leftValue = minValue;
     let rightValue = maxValue;
+    console.log(leftValue);
+    console.log(rightValue);
 
     function updateSlider() {
         const rangeWidth = document.querySelector('.price_slider').offsetWidth;
@@ -171,6 +170,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     updateSlider();
 });
+
+
 /**
  * hàm mã hóa để loại bỏ ký tự đồng thời bảo mật
  *  tạo sản phẩm tương ứng với product tương ứng của danh mục đã click ( hàm hổ trợ cho hàm hiện thị sản phẩm ở dưới)

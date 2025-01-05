@@ -79,28 +79,7 @@ public class LoadProduct extends HttpServlet {
 
         ArrayList<Product> listProduct = ProductService.getInstance().listProductRandom(0);
 
-        // Tìm sản phẩm có giá cao nhất và thấp nhất
-        Product highestPricedProduct = null;
-        Product lowestPricedProduct = null;
 
-        for (Product p : listProduct) {
-            if (highestPricedProduct == null || p.getPrice() > highestPricedProduct.getPrice()) {
-                highestPricedProduct = p;
-            }
-            if (lowestPricedProduct == null || p.getPrice() < lowestPricedProduct.getPrice()) {
-                lowestPricedProduct = p;
-
-            }
-
-        }
-        for (Product p : listProduct) {
-            System.out.println("Product: " + p.getNameProduct() + " Price: " + p.getPrice());
-        }
-
-
-        // Đặt các giá trị min và max vào request
-        request.setAttribute("lowestPrice", lowestPricedProduct.getPrice());
-        request.setAttribute("highestPrice", highestPricedProduct.getPrice());
         request.setAttribute("listProduct", listProduct);
 
         // Chuyển tiếp đến JSP
