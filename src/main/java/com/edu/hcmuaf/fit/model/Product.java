@@ -16,7 +16,7 @@ public class Product {
     private int quantity;
     private String diameter;
     private String height;
-    private int price;
+    private double price;
     private String description;
     private Date created_at;
     private Date updated_at;
@@ -89,11 +89,11 @@ public class Product {
         this.height = height;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

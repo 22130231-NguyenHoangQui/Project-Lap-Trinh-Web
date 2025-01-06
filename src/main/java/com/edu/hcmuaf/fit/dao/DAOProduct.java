@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class DAOProduct {
     //    test
@@ -172,7 +171,7 @@ public class DAOProduct {
             while (resultSet.next()) {
                 int product_id = resultSet.getInt("product_id");
                 String name = resultSet.getString("name_product");
-                int price = resultSet.getInt("price");
+                double price = resultSet.getDouble("price");
                 Product product = new Product();
                 product.setNameProduct(name);
                 product.setId(product_id);
@@ -226,6 +225,34 @@ public class DAOProduct {
         }
         return re;
     }
+    public static ArrayList<Product> getProductsByPriceRange(int minPrice, int maxPrice, int offset) {
+        ArrayList<Product> re = new ArrayList<>();
+        Connection connection = JDBCUtil.getConnection();
+        String sql = "SELECT p.product_id,p.name_product, p.price, p.quantity, p.description, pi.image_url\n" +
+                "FROM Product p\n" +
+                "JOIN ProductImages pi ON p.product_id = pi.product_id\n" +
+                "WHERE p.price BETWEEN ? AND ? LIMIT 12 OFFSET ?";
+        try {
+            PreparedStatement pr = connection.prepareStatement(sql);
+            pr.setInt(1, minPrice);
+            pr.setInt(2, maxPrice);
+            ResultSet resultSet = pr.executeQuery();
+            while (resultSet.next()) {
+                int product_id = resultSet.getInt("product_id");
+                String name = resultSet.getString("name_product");
+                double price = resultSet.getDouble("price");
+                Product product = new Product();
+                product.setNameProduct(name);
+                product.setId(product_id);
+                product.setPrice(price);
+                re.add(product);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return re;
+    }
 
     public static void main(String[] args) {
 //        Product p = new Product();
@@ -236,9 +263,20 @@ public class DAOProduct {
 //            System.out.println(product);
 //        }
 
-        for (Product product : listRandomProduct(0)) {
-            System.out.println(product);
-        }
+//        for (Product product : listRandomProduct(0)) {
+//            System.out.println(product);
+//        }
+
+//        for (Product product : getProductsByPriceRange(0, 10000)) {
+//            System.out.println(product);
+//        }
+
+//        LoadProductByName loadProductByName = new LoadProductByName();
+//        String name = "product";
+//        ArrayList<Product> listProductByName = ProductService.getInstance().listProductByName(name);
+//        for (Product product : listProductByName) {
+//            System.out.println(product);
+//        }
 
 
     }
