@@ -57,7 +57,7 @@ public class ChangePassword extends HttpServlet{
             err="Mật khẩu hiện tại không chính xác!";
             req.setAttribute("errPass",err);
         }
-        req.getRequestDispatcher("ChangePassword.jsp").forward(req,resp);
+        req.getRequestDispatcher("changePassword.jsp").forward(req,resp);
 
     }
 }
