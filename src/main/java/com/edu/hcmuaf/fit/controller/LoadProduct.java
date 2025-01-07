@@ -78,12 +78,13 @@ public class LoadProduct extends HttpServlet {
         response.setContentType("text/html");
 
         ArrayList<Product> listProduct = ProductService.getInstance().listProductRandom(0);
+        PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
+        NumberFormat nF = NumberFormat.getCurrencyInstance();
+        String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
 
 
-        request.setAttribute("listProduct", listProduct);
 
-        // Chuyển tiếp đến JSP
-        request.getRequestDispatcher("ProductCatalog.jsp").forward(request, response);
     }
 
     public void destroy() {

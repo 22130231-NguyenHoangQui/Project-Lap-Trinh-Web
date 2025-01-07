@@ -255,7 +255,6 @@ public class DAOProduct {
     }
 
     public static void main(String[] args) {
-//        Product p = new Product();
 //        p.setId(1);
 //        System.out.println(listImageOfProduct(p));
 
@@ -263,10 +262,12 @@ public class DAOProduct {
 //            System.out.println(product);
 //        }
 
-//        for (Product product : listRandomProduct(0)) {
-//            System.out.println(product);
-//        }
+            Product product = new Product();
+            product.setId(1);  // Giả sử sản phẩm có ID là 1
 
+        ArrayList<ProductImages> images = listImageOfProduct(product);
+            // Gọi phương thức listImageOfProduct
+            System.out.println(product.getProductImages().get(0).getUrl());
 //        for (Product product : getProductsByPriceRange(0, 10000)) {
 //            System.out.println(product);
 //        }
