@@ -11,10 +11,10 @@
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/settingAll.css">
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/fotter.css">
-    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="css/settingAll.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/fotter.css">
+    <link rel="stylesheet" href="css/admin.css">
 
 
 </head>
@@ -70,7 +70,7 @@
                     <div class="col-sm-1 col-md-1 col-lg-1 img-logo"
                         style="display: block; width: 10%; padding-left: 10px;">
                         <a href="../pages/HomePage.html">
-                            <img src="../image/imghomepage/logo/logo1.jpg" alt="" class="img-logo-detail">
+                            <img src="image/imghomepage/logo/logo1.jpg" alt="" class="img-logo-detail">
 
                         </a>
                     </div>
@@ -80,11 +80,11 @@
 
 
 
-                            <a href="../homepage.jsp">
+                            <a href="homepage.jsp">
                                 <li>Trang chủ</li>
                             </a>
                             <div class="dropdown" style=" display:flex; align-items: center;  height: 100%; ">
-                                <a href="../ProductCatalog.jsp" data-id="2">
+                                <a href="ProductCatalog.jsp" data-id="2">
                                     <li>Danh mục</li>
 
                                 </a>
@@ -115,7 +115,7 @@
 
                                 </ul>
                             </div>
-                            <a href="../introWebsite.jsp">
+                            <a href="introWebsite.jsp">
                                 <li>Giới thiệu</li>
                             </a>
 
@@ -602,7 +602,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js"
         integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp"
         crossorigin="anonymous"></script>
-    <script src="../js/admin.js"></script>
+    <script src="js/admin.js"></script>
 
 </body>
 

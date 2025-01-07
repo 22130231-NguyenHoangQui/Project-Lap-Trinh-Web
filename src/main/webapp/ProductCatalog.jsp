@@ -1,8 +1,9 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.edu.hcmuaf.fit.model.Product" %>
+<%@ page import="java.text.NumberFormat" %>
+<%@ page import="com.edu.hcmuaf.fit.model.Category" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,6 +30,10 @@
 </head>
 
 <body>
+<%
+    String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+            + request.getContextPath();
+%>
 <header>
     <jsp:include page="header.jsp"></jsp:include>
 </header>
@@ -37,8 +42,9 @@
 </div>
 <%
     ArrayList<Product> listProduct = (ArrayList<Product>) request.getAttribute("listProductByName");
-    System.out.println("Lowest Price: " + request.getAttribute("lowestPrice"));
-    System.out.println("Highest Price: " + request.getAttribute("highestPrice"));
+    ArrayList<Product> listProduct1;
+    NumberFormat nf = NumberFormat.getCurrencyInstance();
+
 %>
 
 
@@ -77,7 +83,7 @@
                     <aside id="woocommerce_price_filter-15" class="widget woocommerce widget_price_filter">
                         <span class="widget-title shop-sidebar">Lọc theo giá</span>
                         <div class="is-divider small"></div>
-                        <form >
+                        <form>
                             <div class="price_slider_wrapper">
                                 <div class="price_slider ">
                                     <div class="price_slider_range"></div>
@@ -87,7 +93,7 @@
                                 <div class="price_slider_amount" data-step="10">
                                     <button type="submit" class="button button-loc">Lọc</button>
                                     <div class="price_label">
-                                        Giá <span class="from">100000.00</span> — <span class="to">10000000381.00</span>
+                                        Giá <span class="from">10000</span> — <span class="to">10000000</span>
                                     </div>
                                     <div class="clear"></div>
                                 </div>
@@ -116,13 +122,15 @@
 
 
                         <ul class="product-categories">
-                            <c:forEach var="listCate" items="${listCate}">
+                            <%
+                                ArrayList<Category> listCate = (ArrayList<Category>) request.getAttribute("listCate");
+                                for (Category listCate1 : listCate) {
+                            %>
+                            <li class="cat-item" data-category="banh_cac_ngay_le">
+                                <a href="#" onclick="loadProductByIdCate(${listCate1.id})">${listCate1.name}</a>
+                            </li>
 
-                                <li class="cat-item" data-category="banh_cac_ngay_le">
-                                    <a href="#" onclick="loadProductByIdCate(${listCate.id})">${listCate.name}</a>
-                                </li>
-
-                            </c:forEach>
+                            <% } %>
 
                         </ul>
 
@@ -134,55 +142,54 @@
                 <div class="shop-container">
                     <div class="products row  row-small large-columns-4 medium-columns-3 small-columns padding-p"
                          id="content">
-                            <%ArrayList<Product> product_list1  = (ArrayList<Product>) request.getAttribute("listProductRandom");
-                            if(!product_list1.isEmpty() || product_list1 != null) {
-                                for (Product product_list : product_list1) {
-                            %>
-                            <div class="col">
-                                <div class="col-inner">
-                                    <div class="product-small box">
-                                        <div class="box-image">
-                                            <a href="#" class="product-link">
-                            <img width="247" height="296" src="<%=product_list.getProductImages().get(0).getImageId()%>" alt="<%=product_list.getNameProduct()%>">
-                                            </a>
+                        <%
+                            ArrayList<Product> listProductRandom = (ArrayList<Product>) request.getAttribute("listProductRandom");
+                            for (Product product_list : listProductRandom) {
+                        %>
+                        <div class="col">
+                            <div class="col-inner">
+                                <div class="product-small box">
+                                    <div class="box-image">
+                                        <a href="#" class="product-link">
+                                            <img width="247" height="296" src="<%=url%>\Product\<%=(product_list.getProductImages().get(0).getUrl())%>" alt="...">
+                                        </a>
+                                    </div>
+                                    <div class="box-text text-center">
+                                        <div class="title-wrapper">
+                                            <p>
+                                                <a href="#"
+                                                   onclick="saveProductData('<%= product_list.getId() %>')">
+
+                                                    <%= product_list.getId() %> - <%= product_list.getNameProduct() %>
+
+                                                </a>
+                                            </p>
                                         </div>
-                                        <div class="box-text text-center">
-                                            <div class="title-wrapper">
-                                                <p>
-                                                    <a href="#"
-                                                       onclick="saveProductData('${productData}')"><%=product_list.getId()%>
-                                                        - <%=product_list.getNameProduct()%></a>
-                                                </p>
-                                            </div>
-                                            <div class="price-wrapper">
+                                        <div class="price-wrapper">
                     <span class="price">
                         <span class="woocommerce-Price-amount amount">
-                            <bdi style="font-weight: bold;"><%=product_list.getPrice()%></bdi>
+                            <bdi style="font-weight: bold;"><%=nf.format( product_list.getPrice()) %></bdi>
                         </span>
                     </span>
-                                            </div>
-                                            <div class="add-to-cart-button">
-                                                <a href="#" onclick="saveProductData('${productData}')">THÊM VÀO GIỎ</a>
-                                            </div>
-                                            <div class="product-description" style="display:none;">
+                                        </div>
+                                        <div class="add-to-cart-button">
+                                            <a href="#" onclick="saveProductData('<%= product_list.getId() %>')">THÊM VÀO GIỎ</a>
+                                        </div>
+                                        <div class="product-description" style="display:none;">
                                                 <span class="description-id">Mã: <span
-                                                        class="sku"><%=product_list.getId()%></span></span>
-                                                    <%--                                                <span class="description-content">Mô tả: <br>${product_list.description}</span>--%>
-                                            </div>
-                                            <div class="size-wrapper" style="display:none;">
-                                                    <%--                                                <p ><strong>Đường kính:</strong> ${product_list.diameter}</p> <!-- Hiển thị đường kính -->--%>
-                                                    <%--                                                <p><strong>Chiều cao:</strong> ${product_list.height}</p> <!-- Hiển thị chiều cao -->--%>
-                                            </div>
+                                                        class="sku"><%= product_list.getId() %></span></span>
+                                            <%--                                                <span class="description-content">Mô tả: <br>${product_list.description}</span>--%>
+                                        </div>
+                                        <div class="size-wrapper" style="display:none;">
+                                            <%--                                                <p ><strong>Đường kính:</strong> ${product_list.diameter}</p> <!-- Hiển thị đường kính -->--%>
+                                            <%--                                                <p><strong>Chiều cao:</strong> ${product_list.height}</p> <!-- Hiển thị chiều cao -->--%>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <%
-                                    }
-                                }
-                            %>
-
-                            </div>
+                        </div>
+                        <% } %>
+                    </div>
 
 
                 </div>
@@ -277,8 +284,9 @@
         maxPrice = parseFloat(maxPrice);
 
         // Lọc lại sản phẩm trong content
-        var products = document.querySelectorAll('.product-small'); // Lấy tất cả sản phẩm
-        products.forEach(function(product) {
+        var products = document.querySelectorAll('.product-small');
+        console.log(products)
+        products.forEach(function (product) {
             var priceText = product.querySelector('.price bdi').innerText.replace(/[^0-9.-]+/g, ""); // Lấy giá của sản phẩm
             var price = parseFloat(priceText);
 
@@ -300,23 +308,18 @@
         const minValue = Math.round(parseFloat('${lowestPrice}'));
         const maxValue = Math.round(parseFloat('${highestPrice}'));
         const step = 10000;
-
+        console.log(minValue);
+        console.log(maxValue);
         let leftValue = minValue;
         let rightValue = maxValue;
 
 
         function updateSlider() {
-            console.log('leftValue:', leftValue);
-            console.log('rightValue:', rightValue);
-            console.log('minValue:', minValue);
-            console.log('maxValue:', maxValue);
+
 
             const rangeWidth = document.querySelector('.price_slider').offsetWidth;
             const leftPercent = ((leftValue - minValue) / (maxValue - minValue)) * 100;
             const rightPercent = ((rightValue - minValue) / (maxValue - minValue)) * 100;
-            console.log('rangeWidth' ,rangeWidth);
-            console.log('leftPercent:', leftPercent); // Log trực tiếp giá trị
-            console.log('rightPercent:', rightPercent);
 
 
             if (priceRange) {
@@ -326,7 +329,6 @@
             }
             leftHandle.style.left = leftPercent + '%';
             rightHandle.style.left = 'calc(' + rightPercent + '% - 20px)';
-
 
 
             fromLabel.textContent = formatCurrency(leftValue);

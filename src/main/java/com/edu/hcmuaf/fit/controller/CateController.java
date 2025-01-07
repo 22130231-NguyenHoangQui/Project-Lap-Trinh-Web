@@ -16,6 +16,7 @@ public class CateController extends HttpServlet {
      public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("html/text; charset= UTF-8");
+
 //        load danh mục bán chạy nhất
         ArrayList<Category> listCateOk = CategoryService.getInstance().getListCategory(0);
         request.setAttribute("listCateOk", listCateOk);
@@ -27,24 +28,27 @@ public class CateController extends HttpServlet {
         request.setAttribute("listProductRandom", listProduct);
 
          // Tìm sản phẩm có giá cao nhất và thấp nhất
-         Product highestPricedProduct = null;
-         Product lowestPricedProduct = null;
+//         Product highestPricedProduct = null;
+//         Product lowestPricedProduct = null;
+//
+//         for (Product p : listProduct) {
+//             if (highestPricedProduct == null || p.getPrice() > highestPricedProduct.getPrice()) {
+//                 highestPricedProduct = p;
+//             }
+//             if (lowestPricedProduct == null || p.getPrice() < lowestPricedProduct.getPrice()) {
+//                 lowestPricedProduct = p;
+//
+//             }
+//
+//         }
+//         int highestPrice = (int) Math.round(highestPricedProduct.getPrice());
+//         int lowestPrice = (int) Math.round(lowestPricedProduct.getPrice());
 
-         for (Product p : listProduct) {
-             if (highestPricedProduct == null || p.getPrice() > highestPricedProduct.getPrice()) {
-                 highestPricedProduct = p;
-             }
-             if (lowestPricedProduct == null || p.getPrice() < lowestPricedProduct.getPrice()) {
-                 lowestPricedProduct = p;
-
-             }
-
-         }
-         int highestPrice = (int) Math.round(highestPricedProduct.getPrice());
-         int lowestPrice = (int) Math.round(lowestPricedProduct.getPrice());
-
-         request.setAttribute("lowestPrice", lowestPrice);
-         request.setAttribute("highestPrice", highestPrice);
+//         String highestPrice = highestPricedProduct != null ? highestPricedProduct.getFormattedPrice() : "N/A";
+//         String lowestPrice = lowestPricedProduct != null ? lowestPricedProduct.getFormattedPrice() : "N/A";
+//
+//         request.setAttribute("lowestPrice", lowestPrice);
+//         request.setAttribute("highestPrice", highestPrice);
         try {
             request.getRequestDispatcher("ProductCatalog.jsp").forward(request, response);
         } catch (ServletException e) {

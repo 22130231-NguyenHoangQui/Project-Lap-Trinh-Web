@@ -3,10 +3,16 @@ package com.edu.hcmuaf.fit.model;
 public class ProductImages {
     private int id;
     private int productId;
-    private String imageId;
+    private String url;
 
-    public ProductImages(String imageId) {
-        this.imageId = imageId;
+    public ProductImages(int id, int productId, String url) {
+        this.id = id;
+        this.productId = productId;
+        this.url = url;
+    }
+
+    public ProductImages(String url) {
+        this.url = url;
     }
 
     public int getId() {
@@ -25,12 +31,12 @@ public class ProductImages {
         this.productId = productId;
     }
 
-    public String getImageId() {
-        return imageId;
+    public String getUrl() {
+        return url;
     }
 
-    public void setImageId(String imageId) {
-        this.imageId = imageId;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     @Override
@@ -38,7 +44,7 @@ public class ProductImages {
         return "ProductImages{" +
                 "id=" + id +
                 ", productId=" + productId +
-                ", imageId='" + imageId + '\'' +
+                ", url='" + url + '\'' +
                 '}';
     }
 }
