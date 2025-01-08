@@ -17,85 +17,65 @@
     <link rel="stylesheet" href="../css/authentic.css">
 </head>
 
-<body  >
+<body>
 <header>
     <jsp:include page="./header.jsp"></jsp:include>
 </header>
 <main style="padding: 110px;">
-    <div class="container">
-        <div class="verification-box">
-            <a href="../homepage.jsp" class="skip-button">Bỏ qua</a>
-            <div class="icon icon1">
-                <i class="fas fa-envelope"></i>
+    <section class="signup mt-5">
+        <%
+            String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+            String email = (String) request.getAttribute("email");
+            String err = (String) request.getAttribute("errCode");
+            email = (email == null) ? " " : email;
+            err = (err == null) ? " " : err;
+        %>
+        <div class="contain">
+            <div class="signup-content">
+                <form id="verify-form" class="signup-form" action="<%=url%>/verifyAccount" method="post" onsubmit="return verifyAccount()">
+                    <div class="text-end pe-4">
+                        <% Object obj = session.getAttribute("account"); %>
+                        <a class="text-decoration-none" href="<%=url%>/<%=(obj==null)?"SignIn.jsp":"homePage"%>">Bỏ qua</a>
+                    </div>
+                    <img src="images/verify.jpg" alt="" width="400px">
+                    <h5>Xác thực tài khoản của bạn</h5>
+                    <div class="verify">
+                        <p class="text-group" style="margin-bottom: 0">Chúng tôi đã gửi mã xác thực đến <span class="text-primary" id="email"><%=email%></span></p>
+                        <input type="text" name="email" value="<%=email%>" class="d-none">
+                        <p class="">Vui lòng nhập mã để xác thực tài khoản của bạn</p>
+                        <p class="mb-0">Mã xác thực chỉ có hiệu lực trong vòng 10 phút</p>
+                        <div class="form-group text-center">
+                            <span class="text-danger" id="errVerify"><%=err%></span>
+                            <input type="text" class="form-input" placeholder="Nhập mã xác thực ở đây" name="verify" id="verify"/>
+                        </div>
+                        <p class="text-group"><a href="<%=url%>/reVerifyCode?email=<%=email%>">Nhấn vào đây</a> để nhận lại mã xác thực</p>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" id="confirm">XÁC NHẬN</button>
+                    </div>
+                </form>
             </div>
-            <h2>Xác thực tài khoản của bạn</h2>
-            <p>Vui lòng kiểm tra email của bạn để lấy mã xác thực và nhập mã đó để xác thực tài khoản.</p>
-            <form action="#" method="POST">
-                <input type="text" placeholder="Nhập mã xác thực" required>
-                <button type="button" class="confirm-button"
-                        onclick="window.location.href='successfulAuthentic.html'">Xác Nhận</button>
-            </form>
         </div>
-    </div>
+    </section>
 </main>
 
-<footer >
-    <div class="footer-top">
-        <div class="ft-uniform">
-            <h6>GIỚI THIỆU</h6>
-            <div class="is-divider"></div>
-            <div class="ft-introduce">
-                <p><a href="../pages/home.html" title="Đi tới Trang Chủ">IT Cake</a> – Bánh sinh nhật đậm chất riêng
-                    của bạn, chúng tôi tự hào mang đến những chiếc bánh sinh
-                    nhật tươi ngon, thiết kế độc đáo và sáng tạo theo yêu cầu. Hãy để IT Cake cùng bạn tạo nên những
-                    khoảnh khắc ngọt ngào và đáng nhớ nhất.</p>
-                <div class="ft-img">
-                    <a href="//theme.hstatic.net/1000313040/1000406925/14/hg_img1.png?v=2177"
-                       data-fancybox="home-gallery-images" data-caption=""><img
-                            src="//theme.hstatic.net/1000313040/1000406925/14/hg_img_thumb1.png?v=2177" alt=""></a>
-                </div>
-            </div>
-        </div>
-        <div class="ft-uniform">
-            <h6>LIÊN HỆ</h6>
-            <div class="is-divider"></div>
-            <div class="ft-contact">
-                <div class="ft-contact-address">
-                    <i class="bi bi-geo-alt-fill" aria-hidden="true"></i> Đại Học Nông Lâm TP.Hồ Chí Minh, Phường
-                    Linh
-                    Trung, Q.Thủ Đức, TP.Hồ Chí Minh
-                </div>
-                <div class="ft-contact-tel">
-                    <i class="bi bi-telephone-fill" aria-hidden="true"></i><a href="tel:#"> 0123 456 789</a>
-                </div>
-                <div class="ft-contact-email">
-                    <i class="bi bi-envelope-fill" aria-hidden="true"></i><a href="#"> itcake@gmail.com</a>
-                </div>
-                <div class="ft-contact-facebook">
-                    <i class="bi bi-facebook" aria-hidden="true"></i><a href="#"> www.facebook-itcake.com</a>
-                </div>
-            </div>
-        </div>
-        <div class="ft-uniform">
-            <h6>CHÍNH SÁCH</h6>
-            <div class="is-divider"></div>
-            <ul class="ft-policy">
-                <li><a href="../pages/deliveryPolicy.html">Chính sách đổi, trả,hoàn tiền</a></li>
-                <li><a href="/pages/chinh-sach-giao-dich-thanh-toan">Chính sách bảo mật</a></li>
-                <li><a href="/pages/chinh-sach-doi-tra">Hướng dẫn thanh toán</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <div class="ft-copyright">
-            Copyrights © 2024 by <a target="_blank" href="../homepage.jsp" title="Đi tới Trang Chủ">IT Cake</a>.
-            <!--blank chuyển trang ở tab mới-->
-        </div>
-    </div>
+<footer>
+    <jsp:include page="./Footer.jsp"></jsp:include>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+<script>
+    function verifyAccount() {
+        var verifyVal = document.getElementById("verify");
+        var error = document.getElementById("errVerify");
+        var flag = true;
+        if (verifyVal.value == "") {
+            flag = false;
+            error.innerHTML = '(*)Vui lòng nhập mã xác thực!';
+        }
+        return flag;
+    }
+</script>
 </body>
-
 </html>
