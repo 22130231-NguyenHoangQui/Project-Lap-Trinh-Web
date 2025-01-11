@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,166 +11,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="css/settingAll.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/fotter.css">
     <link rel="stylesheet" href="css/admin.css">
 
+    <style>
+        .d-none {
+            display: none;
+        }
 
+
+    </style>
 </head>
 
 <body>
     <header>
-        <div class="header-wrapper">
-            <div class="header-top">
-                <div class="container d-flex justify-content-between align-items-center">
-                    <div class="d-flex flex-col flex-left">
-                        <ul class="nav nav-left nav-small">
-
-                            <li class="html li-first delivery-info">Đặt bánh lấy ngay tại Thành phố Hồ Chí Minh</li>
-                            <li class="html li-first">Hệ thống bánh sinh nhật chính hãng</li>
-                            <li class="html li-first">Hotline: 01234576789</li>
-                        </ul>
-                    </div>
-                    <div class="flex-col hide-for-medium flex-right">
-                        <ul class="nav top-bar-nav nav-right nav-small  nav-divided">
-                            <li class="html header-social-icons ">
-                                <div class="social-icons follow-icons">
-                                    <a href="" class="button icon circle">
-                                        <i class="fa-brands fa-facebook" style=" margin-right: auto;"></i>
-                                    </a>
-                                    <a href="" class="button icon circle">
-
-                                        <i class="fa-brands fa-instagram"></i>
-                                    </a>
-                                    <a href="" class="button icon circle">
-
-                                        <i class="fa-regular fa-envelope"></i>
-                                    </a>
-                                    <a href="" class="button icon circle">
-
-                                        <i class="fa-solid fa-phone"></i>
-                                    </a>
-
-                                    <a href="" class="button icon circle">
-
-                                        <i class="fa-brands fa-pinterest"></i>
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="header-center color-header-center ">
-            <div class="container d-flex" style="width: 100%;">
-                <div class="row row-center d-flex justify-content-between  align-items-center">
-                    <div class="col-sm-1 col-md-1 col-lg-1 img-logo"
-                        style="display: block; width: 10%; padding-left: 10px;">
-                        <a href="../pages/HomePage.html">
-                            <img src="image/imghomepage/logo/logo1.jpg" alt="" class="img-logo-detail">
-
-                        </a>
-                    </div>
-                    <div class=" col-sm-4 col-md-8 col-lg-11 d-flex justify-content-between align-items-center "
-                        style="width: 87%; height: 100%;">
-                        <ul class=" nav d-flex  list-item" style="margin-left: 10px; width: 25%;">
-
-
-
-                            <a href="homepage.jsp">
-                                <li>Trang chủ</li>
-                            </a>
-                            <div class="dropdown" style=" display:flex; align-items: center;  height: 100%; ">
-                                <a href="ProductCatalog.jsp" data-id="2">
-                                    <li>Danh mục</li>
-
-                                </a>
-                                <ul class="dropdown-menu menu-danhmuc">
-                                    <p
-                                        style="text-wrap: nowrap; padding: 0 10px; font-weight: bold; background-color: white;">
-                                        Danh mục bánh sinh nhật</p>
-                                    <li><a href="#" class="product-link" data-category="banh_an_nhe">Bánh Ăn
-                                            Nhẹ</a></li>
-                                    <li><a href="#" data-category="banh_cac_ngay_le">Bánh Các Ngày Lễ</a></li>
-                                    <li><a href="#" data-category="banh_chai_ruou">Bánh Chai Rượu Và Ly
-                                            Bia Sang Trọng</a></li>
-                                    <li><a href="#" class="product-link" data-category="banh_chu_nhat">Bánh Chủ
-                                            Nhật</a>
-                                    </li>
-                                    <li><a href="#" data-category="banh_cong_chua">Bánh Công Chúa</a>
-                                    </li>
-                                    <li><a href="#" data-category="banh_giang_sinh">Bánh Giáng Sinh
-                                            (Noel)</a></li>
-                                    <li><a href="#" data-category="banh_hoa_qua_tuoi">Bánh Hoa Quả Tươi
-                                            Theo Mùa</a></li>
-                                    <li><a href="#" data-category="banh_khung_long">Bánh Khủng Long</a>
-                                    </li>
-                                    <li><a href="#" data-category="banh_ki_niem_ngay">Bánh Kỉ niệm ngày
-                                            cưới</a></li>
-                                    <li><a href="#" data-category="banh_lich">Bánh Lịch</a></li>
-                                    <li><a href="#" data-category="banh_mousse">Bánh Mousse</a></li>
-
-                                </ul>
-                            </div>
-                            <a href="introWebsite.jsp">
-                                <li>Giới thiệu</li>
-                            </a>
-
-                        </ul>
-                        <div style="position: relative; width: 45%; margin-right: 20px;">
-                            <input type="search" id="keyword" class="form-control autocomplete-field js-ls"
-                                placeholder="Tìm kiếm bánh sinh nhật,..." autocomplete="off"
-                                style="width: 100%; padding-right: 40px; padding-left: 10px; font-size: 16px; height: 33px;">
-
-                            <i class="fa-solid fa-magnifying-glass"
-                                style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: gray; font-size: 16px; cursor: pointer;"></i>
-                        </div>
-
-
-
-
-
-
-
-                        <div class="d-flex">
-                            <div class="row balance-row">
-                                <div class="bag-shop">
-                                    <div class="col1 d-flex justify-content-between" style="gap: 10px;">
-                                        <i class="fa-solid fa-bag-shopping"></i>
-                                        <button id="cart-button" class="col1 text"
-                                            style="background: none; border: none; cursor: pointer;">
-                                            GIỎ HÀNG
-                                        </button>
-
-                                    </div>
-
-                                    <div class="col1">
-                                        <div class="dropdown">
-                                            <button class="btn btn-secondary dropdown-toggle" type="button"
-                                                id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Tài Khoản
-                                            </button>
-                                            <ul class="dropdown-menu account-dropdown-menu"
-                                                aria-labelledby="dropdownMenuButton">
-                                                <li><a class="dropdown-item" href="SignIn.html">Đăng Nhập</a></li>
-                                                <li><a class="dropdown-item" href="SignUp.html">Đăng Ký</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
+        <jsp:include page="header.jsp"></jsp:include>
     </header>
     <div class="is-medium">
         <div class="container"></div>
@@ -177,12 +38,12 @@
     <main>
         <div class="row" style="margin-top: 30px; ">
             <div class="col-lg-2  boder-left">
-                <div class="d-flex align-items-center gap-1" style="margin-top: 30px;">
+                <div class="d-flex align-items-center gap-1" style="margin-top: 30px;" id="cate">
                     <i class="fa-solid fa-bars"></i>
                     <h4 style="margin: 0;">Danh mục quản lý</h4>
 
                 </div>
-                <ul class="nav nav-pills d-flex flex-column  my-3 gap-2">
+                <ul class="nav nav-pills d-flex flex-column  my-3 gap-2" id="typeManage">
                     <li class="nav-item side-bar">
 
                         <a href="#" class="nav-link " id="dashboardLink">
@@ -191,31 +52,31 @@
                         </a>
                     </li>
                     <li class="nav-item side-bar">
-                        <a href="#" class="nav-link " id="customersLink">
+                        <a href="#" class="nav-link " class="list-group-item list-group-item-action">
                             <i class="bi bi-person-circle me-2"></i>
-                            Quản lý tài khoản
+    Quản lý tài khoản
                         </a>
                     </li>
                     <li class="nav-item side-bar">
-                        <a href="#" class="nav-link " id="productsLink">
+                        <a href="#" class="nav-link " >
                             <i class="bi bi-grid me-2"></i>
                             Quản lý sản phẩm
                         </a>
                     </li>
                     <li class="nav-item side-bar">
-                        <a href="#" class="nav-link " id="catalogsLink">
+                        <a href="#" class="nav-link ">
                             <i class="bi bi-grid me-2"></i>
                             Quản lý danh mục
                         </a>
                     </li>
                     <li class="nav-item side-bar">
-                        <a href="#" class="nav-link " id="ordersLink">
+                        <a href="#" class="nav-link " >
                             <i class="bi bi-table me-2"></i>
                             Quản lý hóa đơn
                         </a>
                     </li>
                     <li class="nav-item side-bar">
-                        <a href="#" class="nav-link " id="discountLink">
+                        <a href="#" class="nav-link ">
                             <i class="bi bi-table me-2"></i>
                             Quản lý giảm giá
                         </a>
@@ -225,375 +86,171 @@
             </div>
             <div class="container col-md-9 ms-sm-auto col-lg-10 px-md-4 boder-right" style="width: max-content;">
                 <div class="container   d-flex justify-content-between align-items-center  border-bottom mt-3" style="width: max-width;">
-                    <h1 class="h2  mb-0" id="contentTitle">Tổng Quan</h1>
-                    <div class="btn-toolbar mb-2 mb-md-0">
-                        <div class=" me-2" style="padding-right: 30px;">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
 
-
-                        </div>
-
-                    </div>
                 </div>
 
-                <div class="contentDate container" id="contentDiv" style="display: none;">
+<%--                <div class="contentDate container" id="contentDiv" style="display: none;">--%>
 
                 </div>
                 <div class="container" >
-                    <div id="content" class="mt-5"></div>
-                  <div id="myChart"></div>
+                    <div id="content" class="mt-5">
+
+                        <div class="container mt-5" style="width: auto;" id="mngDas">
+                            <div class="row text-center mb-4">
+                                <div class="col-md-3">
+                                    <div class="card shadow-sm">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Đơn hàng hôm nay</h5>
+                                            <p id="orders-today" class="card-text text-primary fs-4">0</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card shadow-sm">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Doanh thu hôm nay</h5>
+                                            <p id="revenue-today" class="card-text text-success fs-4">0 VND</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card shadow-sm">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Sản phẩm bán được</h5>
+                                            <p id="products-sold" class="card-text text-info fs-4">0</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card shadow-sm">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Tổng doanh thu tháng</h5>
+                                            <p id="monthly-revenue" class="card-text text-warning fs-4">0 VND</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card shadow">
+                                        <div class="card-header bg-primary text-white text-center">
+                                            <h5>Top Lượt Xem Gần Đây</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="table table-striped table-bordered">
+                                                <thead>
+                                                <tr>
+                                                    <th>Ngày</th>
+                                                    <th>Mã sản phẩm</th>
+                                                    <th>Tên sản phẩm</th>
+                                                    <th>Lượt xem</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>SP001</td>
+                                                    <td>Bánh sinh nhật A</td>
+                                                    <td>50</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>SP002</td>
+                                                    <td>Bánh sinh nhật B</td>
+                                                    <td>45</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td>SP003</td>
+                                                    <td>Bánh sinh nhật C</td>
+                                                    <td>40</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>4</td>
+                                                    <td>SP004</td>
+                                                    <td>Bánh sinh nhật D</td>
+                                                    <td>30</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>5</td>
+                                                    <td>SP005</td>
+                                                    <td>Bánh sinh nhật E</td>
+                                                    <td>25</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="mngAccount" class="d-none" style="margin: 0">
+                            <div class="col-lg-6">
+                                <h5 >Quản lý tài khoản</h5>
+                            </div>
+                            <div class="col-lg-6 text-end">
+<%--                                <%if(account.getRole() == 0) {%>--%>
+                                <button class="btn btn-sm btn-outline-secondary" id ="btnAddAccount" data-bs-toggle="modal" data-bs-target="#addAccount" >
+                                    <i class="fa-solid fa-gear" aria-hidden="true" title="Thêm tài khoản"></i>
+                                </button>
+<%--                                <%}%>--%>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>TÊN NGƯỜI DÙNG</th>
+                                    <th>EMAIL</th>
+                                    <th>SĐT</th>
+                                    <th>MẬT KHẨU</th>
+                                    <th>CHỨC VỤ</th>
+                                    <th>NGÀY TẠO</th>
+                                    <th>NGÀY CẬT NHẬT</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <!-- Dữ liệu bảng sẽ được thêm vào đây -->
+                                <tr>
+                                    <td>1</td>
+                                    <td>Nguyễn Văn A</td>
+                                    <td>nguyenvana@example.com</td>
+                                    <td>0901234567</td>
+                                    <td>password123</td>
+                                    <td>Admin</td>
+                                    <td>01/01/2020</td>
+                                    <td>01/01/2022</td>
+                                    <td>
+                                        <%--                                      <button class="icon-button" onclick="openFormCustomerSetting(this)">--%>
+                                        <%--                                          <i class="fa-solid fa-pen"></i>--%>
+                                        <%--                                      </button>--%>
+                                        <%--                                      <button class="icon-button" onclick="deleteRowCustomer(this)">--%>
+                                        <%--                                          <i class="fa-solid fa-trash"></i>--%>
+                                        <%--                                      </button>--%>
+                                    </td>
+                                </tr>
+                                <!-- Các dòng khác cũng tương tự -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+<%--                  <div id="myChart">--%>
+<%--                    --%>
+
+
+<%--                  </div>--%>
                 </div>
             </div>
         </div>
     </main>
 
+
     <!-- overlay mờ khi hiện form  -->
     <div id="overlay" class="overlay"></div>
 
-    <!-- form thêm người dùng  -->
-    <div id="formContainer" class="create-user12 user" style="display: none; ">
-        <button onclick="closeFormAddCustomer()"
-            style="position: absolute; top: 10px; right: 10px; background: transparent; border: none; font-size: 18px; cursor: pointer;">&times;</button>
-
-        <h2 style="text-align: center;">Thêm Người Dùng</h2>
-
-        <form class="d-flex form-user" style="flex-direction: column;" id="addUserForm">
-            <div class="form-group mt-3">
-                <label for="username" class="required">ID Người dùng</label>
-                <input type="text" id="idnguoidung" name="username" placeholder="Nhập ID Người dùng" required>
-            </div>
-            <div class="form-group">
-                <label for="username" class="required">Tên Đăng Nhập</label>
-                <input type="text" id="username" name="username" placeholder="Nhập tên đăng nhập" required>
-            </div>
-
-            <div class="form-group">
-
-                <label for="password" class="required">Mật Khẩu</label>
-                <input type="password" id="password1" name="password" placeholder="Nhập mật khẩu" required>
-            </div>
-
-            <div class="form-group ">
-
-                <label for="confirmPassword" class="required">Nhập Email</label>
-                <input type="password" id="emailNguoiDung" name="confirmPassword" placeholder="Nhập Email"
-                    required>
-            </div>
-            <div class="form-group">
-
-                <label for="confirmPassword" class="required">Nhập Số Điện Thoại</label>
-                <input type="password" id="sdtNguoiDung" name="confirmPassword" placeholder="Nhập Số Điện Thoại"
-                    required>
-            </div>
-            <div class="form-group">
-                <label for="role" class="required">Chọn Vai Trò</label>
-                <select id="role" name="role" class="form-control" required>
-                    <option value="" disabled selected>-- Chọn vai trò --</option>
-                    <option value="user">USER</option>
-                    <option value="admin">ADMIN</option>
-                </select>
-            </div>
-            
-
-          
-
-            <!-- Nút Lưu -->
-            <div style="text-align: center; margin-top: 20px;">
-                <button type="submit" id="saveButton123" class="btn btn-primary">Lưu</button>
-            </div>
-        </form>
-    </div>
-
-
-    <!-- form ẩn khi click thêm người dùng -->
-    <div id="editFormContainer" class=" create-user12 user" style="display: none;">
-        <button onclick="closeForm()"
-        style="position: absolute; top: 10px; right: 10px; background: transparent; border: none; font-size: 18px; cursor: pointer;">&times;</button>
-
-        <h2>Thay Đổi Thông Tin</h2>
-        <div id="verification"></div>
-        <form id="editForm">
-            <div class="form-group">
-                <label for="fname" class="required">Tên Đăng Nhập</label>
-                <input type="text" id="fname" name="ho_ten" placeholder="Nhập tên đăng nhập" required>
-            </div>
-            <div class="form-group">
-                <label for="email" class="required">Email</label>
-                <input type="email" id="email" name="email" placeholder="Nhập email" required>
-            </div>
-            <div class="form-group">
-                <label for="sdt" class="required">Số điện thoại</label>
-                <input type="text" id="sdt" name="so_dien_thoai" placeholder="Nhập số điện thoại" required>
-            </div>
-
-          
-            <div class="form-group">
-                <label for="password" class="required">Mật khẩu</label>
-                <input type="password" id="password" name="password" placeholder="Nhập password" required>
-            </div>
-            <div class="form-group">
-                <label class="lgender">Chức vụ</label>
-                <div class="gender-container">
-                    <label><input type="radio" name="gender2" value="Nhân viên" checked> Nhân viên</label>
-                    <label><input type="radio" name="gender" value="Admin"> Admin</label>
-                    <label><input type="radio" name="gender" value="Khách"> Khách</label>
-                </div>
-            </div>
-
-            <button id="saveButton" type="button" onclick="closeFormSetting">LƯU</button>
-        </form>
-    </div>
-
-    <!-- form ẩn khi click để thay đổi sản phẩm -->
-    <!-- Form để thêm/chỉnh sửa sản phẩm -->
-    <!--  -->
-    <div id="formProduct" class="product addproduct" style="display: none; margin-top: 60px;">
-        <!-- Nút đóng form -->
-        <button onclick="closeFormAddProduct()"
-            style="position: absolute; top: 10px; right: 10px; background: transparent; border: none; font-size: 18px; cursor: pointer;">&times;</button>
-
-        <!-- Tiêu đề -->
-        <h2 class="text-center">Thêm sản phẩm</h2>
-
-        <!-- Form chỉnh sửa sản phẩm -->
-        <form id="editFormProduct123" class="row g-3" style="height: auto;">
-            <!-- Tên sản phẩm -->
-            <div class="form-group">
-                <label for="editProductName123" class="form-label">Tên sản phẩm</label>
-                <input type="text" class="form-control" id="editProductName123" name="productName"
-                    placeholder="Nhập tên sản phẩm" required>
-            </div>
-
-            <div class="form-group">
-
-                <label for="editPrice123" class="form-label">Giá bán</label>
-                <input type="number" class="form-control" id="editPrice123" name="price" placeholder="Nhập giá bán"
-                    required>
-            </div>
-
-            <div class="form-group">
-
-                <label for="editCategory1" class="form-label">Thể loại</label>
-                <input type="text" class="form-control" id="editCategory1" name="category" placeholder="Nhập thể loại"
-                    required>
-            </div>
-
-            <div class="form-group">
-
-                <label for="editHeight123" class="form-label">Chiều cao (cm)</label>
-                <input type="number" class="form-control" id="editHeight123" name="height" placeholder="Nhập chiều cao"
-                    required>
-            </div>
-            <div class="form-group">
-
-                <label for="editDiameter123" class="form-label">Đường kính (cm)</label>
-                <input type="number" class="form-control" id="editDiameter123" name="diameter"
-                    placeholder="Nhập đường kính" required>
-            </div>
-
-            <div class="form-group ">
-
-                <label for="editDetail11" class="form-label" style="padding-bottom: 30px;">Mô tả sản phẩm</label>
-                <textarea class="form-control" id="editDetail11" name="detail" placeholder="Nhập mô tả sản phẩm"
-                    rows="2" required></textarea>
-            </div>
-
-            <!-- Hình ảnh -->
-            <div class="form-group">
-                <label class="form-label">Hình ảnh hiện tại:</label>
-                <div class="d-flex align-items-center">
-                    <img id="editImagePreview" src="" alt="Preview" class="img-thumbnail me-2"
-                        style="width: 100px; height: 100px; object-fit: cover;">
-                    <img id="editImagePreview1" src="" alt="Preview" class="img-thumbnail"
-                        style="width: 100px; height: 100px; object-fit: cover;">
-                    <button type="button" class="btn btn-danger ms-3" onclick="removeCurrentImages()">Xóa hình
-                        ảnh</button>
-                </div>
-            </div>
-
-            <div class="form-group">
-
-                <label for="editImage123" class="form-label">Thay đổi hình ảnh</label>
-                <input type="file" class="form-control" id="editImage123" name="image" accept="image/*">
-            </div>
-
-            <div class="form-group justify-content-between">
-
-                <button type="button" class="btn btn-secondary me-2" onclick="closeFormAddProduct()">Hủy</button>
-                <button type="submit" class="btn btn-primary" onclick="saveProduct()">Lưu</button>
-            </div>
-        </form>
-    </div>
-
-    <!-- form  khi click để thay đổi sản phẩm -->
-    <div id="editFormProduct" class="product addproduct" style="display: none;">
-        <h2>Chỉnh sửa sản phẩm</h2>
-        <div id="verification"></div>
-        <form id="editForm1">
-            <div class="form-group">
-                <label for="editProductName" class="required">Tên sản phẩm</label>
-                <input type="text" id="editProductName" name="productName" placeholder="Nhập tên sản phẩm" required>
-            </div>
-
-            <div class="form-group">
-                <label for="editPrice" class="required">Giá bán</label>
-                <input type="number" id="editPrice" name="price" placeholder="Nhập giá bán" required>
-            </div>
-
-            <div class="form-group">
-                <label for="editCategory" class="required">Thể loại</label>
-                <input type="text" id="editCategory" name="category" placeholder="Nhập thể loại" required>
-            </div>
-
-            <div class="form-group">
-                <label for="editHeight" class="required">Chiều cao (cm)</label>
-                <input type="number" id="editHeight" name="height" placeholder="Nhập chiều cao" required>
-            </div>
-
-            <div class="form-group">
-                <label for="editDiameter" class="required">Đường kính (cm)</label>
-                <input type="number" id="editDiameter" name="diameter" placeholder="Nhập đường kính" required>
-            </div>
-
-            <div class="form-group">
-                <label for="editDetail" class="required">Mô tả sản phẩm</label>
-                <textarea id="editDetail" name="detail" placeholder="Nhập mô tả sản phẩm" required
-                    style="width: 100%;"></textarea>
-            </div>
-
-            <!-- Hình ảnh -->
-            <div class="form-group">
-                <label for="editImage" class="required">Hình ảnh hiện tại:</label>
-                <img id="editImagePreview" src="" alt="Preview" style="width: 100px; height: 100px; object-fit: cover;">
-                <img id="editImagePreview1" src="" alt="Preview"
-                    style="width: 100px; height: 100px; object-fit: cover; margin-left: 10px;">
-
-            </div>
-
-            <div class="form-group">
-                <label for="editImage" class="required">Thay đổi hình ảnh:</label>
-                <input type="file" id="editImage" name="image" accept="image/*">
-            </div>
-
-
-            <!-- Nút hành động -->
-            <button id="saveButton1" type="button" class="btn btn-primary" onclick="saveChanges()">LƯU</button>
-        </form>
-    </div>
-
-
-    <!-- form để thêm danh mục  -->
-    <div id="addFormCate" class="container py-4 px-4 border " style="display: none; max-width: 500px; margin: auto;">
-        <h2 class="text-center mb-4">Thêm danh mục</h2>
-
-        <div id="verification" class="alert alert-warning d-none"></div>
-
-        <form id="editFormCateBaby">
-            <div class="mb-3">
-                <label for="editCateName" class="form-label required">Tên danh mục</label>
-                <input type="text" id="editCateName" name="productName1" class="form-control"
-                    placeholder="Nhập tên danh mục" required>
-            </div>
-
-            <div class="d-flex justify-content-end">
-                <button type="button" class="btn btn-secondary me-2" onclick="closeFormCate()">Hủy</button>
-                <button type="submit" class="btn btn-primary" id="saveButtonCate">Thêm</button>
-            </div>
-        </form>
-    </div>
-    <div id="editFormCate" class="container py-4 px-4 border " style="display: none; max-width: 500px; margin: auto;">
-        <h2 class="text-center mb-4">Chỉnh sửa danh mục</h2>
-
-        <div id="verification" class="alert alert-warning d-none"></div>
-
-        <form id="editFormCateBaby1">
-            <div class="mb-3">
-                <label for="editCateName" class="form-label required">Tên danh mục</label>
-                <input type="text" id="editCateName1" name="productName1" class="form-control"
-                    placeholder="Nhập tên danh mục" required>
-            </div>
-
-            <div class="d-flex justify-content-end">
-                <button type="button" class="btn btn-secondary me-2" onclick="closeFormEditCate()">Hủy</button>
-                <button type="button" class="btn btn-primary" id="saveButtonCate1" onclick="saveChangesCate()">Thêm</button>
-            </div>
-        </form>
-    </div>
-
-    <!-- form để chỉnh sửa và thêm giảm giá -->
-    <div id="addFormDiscount" class="container py-4 px-4 border" style="display: none; max-width: 500px; margin: auto;">
-        <h2 class="text-center mb-4">Thêm giảm giá</h2>
-    
-        <div id="verification" class="alert alert-warning d-none"></div>
-    
-        <form id="editFormDiscount">
-            <div class="mb-3">
-                <label for="discountCode" class="form-label required">Mã giảm giá</label>
-                <input type="text" id="discountCode" name="discountCode" class="form-control" placeholder="Nhập mã giảm giá" required>
-            </div>
-    
-            <div class="mb-3">
-                <label for="discountPercentage" class="form-label required">Giảm giá (%)</label>
-                <input type="number" id="discountPercentage" name="discountPercentage" class="form-control" placeholder="Nhập tỷ lệ giảm giá" min="0" max="100" required>
-            </div>
-    
-            <div class="mb-3">
-                <label for="discountDetail" class="form-label required">Chi tiết</label>
-                <input type="text" id="discountDetail" name="discountDetail" class="form-control" placeholder="Nhập chi tiết giảm giá" required>
-            </div>
-    
-            <div class="mb-3">
-                <label for="startDate" class="form-label required">Ngày bắt đầu</label>
-                <input type="date" id="startDate" name="startDate" class="form-control" required>
-            </div>
-    
-            <div class="mb-3">
-                <label for="promotionDays" class="form-label required">Số ngày khuyến mãi</label>
-                <input type="number" id="promotionDays" name="promotionDays" class="form-control" placeholder="Nhập số ngày khuyến mãi" min="1" required>
-            </div>
-    
-            <div class="d-flex justify-content-end">
-                <button type="button" class="btn btn-secondary me-2" onclick="closeFormDiscount()">Hủy</button>
-                <button type="submit" class="btn btn-primary" id="saveButtonDiscount">Thêm</button>
-            </div>
-        </form>
-    </div>
-    
-
-
-
-
-    <div id="editDiscount" class="container py-4 px-4 border" style="display: none; max-width: 500px; margin: auto;">
-        <div class="modal-content">
-            <h4>Chỉnh sửa giảm giá</h4>
-            <form id="editDiscountForm">
-                <div class="mb-3">
-                    <label for="editCateName1" class="form-label">Mã Giảm Giá</label>
-                    <input type="text" class="form-control" id="editDiscountName" placeholder="Nhập Mã Giảm Giá">
-                </div>
-        
-                <div class="mb-3">
-                    <label for="editDiscountPrice" class="form-label">Giá giảm</label>
-                    <input type="number" class="form-control" id="editDiscountPrice" placeholder="Nhập giá giảm">
-                </div>
-                <div class="mb-3">
-                    <label for="editDetail" class="form-label">Chi tiết giảm giá</label>
-                    <input type="text" class="form-control" id="editDetailDiscount" placeholder="Nhập chi tiết giảm giá">
-                </div>
-                <div class="mb-3">
-                    <label for="startDate" class="form-label required">Ngày bắt đầu</label>
-                    <input type="date" id="startDateEdit" name="startDate" class="form-control" required>
-                </div>
-                <div class="mb-3">
-                    <label for="editDetail" class="form-label">Số ngày khuyến mãi</label>
-                    <input type="text" class="form-control" id="editDetailDiscount123" placeholder="Nhập số ngày khuyến mãi">
-                </div>
-                <button type="button" id="saveButtonDiscount123" class="btn btn-primary">Lưu thay đổi</button>
-                <button type="button" class="btn btn-secondary" onclick="closeFormEditDiscount()">Đóng</button>
-            </form>
-        </div>
-    </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -602,7 +259,65 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js"
         integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp"
         crossorigin="anonymous"></script>
-    <script src="js/admin.js"></script>
+<%--    <script src="js/admin.js"></script>--%>
+    <script>
+        $(document).ready(function () {
+            $('#cate').click(function () {
+                var typeManage = $('#typeManage');
+                if (typeManage.css("display") === "none") {
+                    typeManage.css("display", "block");
+                } else {
+                    typeManage.css("display", "none");
+                }
+            });
+
+            // Chọn danh mục quản lý
+            $('#typeManage li a ').click(function () {
+                console.log(123)
+                var selectedType = $(this).text().trim();
+                console.log("selectedType:", selectedType);
+                if (selectedType === "Quản lý tài khoản") {
+                    $('#mngAccount').removeClass('d-none');
+                    $('#mngDas').addClass('d-none');
+
+                    // $('#mngProduct').addClass('d-none');
+                    // $('#mngInvoice').addClass('d-none');
+                    // $('#mngCate').addClass('d-none');
+                    // $('#mngSup').addClass('d-none');
+                }
+                           // else if (selectedType === "Quản lý sản phẩm") {
+                    // $('#mngAccount').addClass('d-none');
+                    // $('#mngInvoice').addClass('d-none');
+                    // $('#mngProduct').removeClass('d-none');
+                    // $('#mngCate').addClass('d-none');
+                    // $('#mngSup').addClass('d-none');
+                // }else if (selectedType === "Quản lý hóa đơn") {
+                //     $('#mngProduct').addClass('d-none');
+                //     $('#mngAccount').addClass('d-none');
+                //     $('#mngInvoice').removeClass('d-none');
+                //     $('#mngCate').addClass('d-none');
+                //     $('#mngSup').addClass('d-none');
+                // }else if (selectedType === "Quản lý danh mục") {
+                //     $('#mngProduct').addClass('d-none');
+                //     $('#mngAccount').addClass('d-none');
+                //     $('#mngInvoice').addClass('d-none');
+                //     $('#mngCate').removeClass('d-none');
+                //     $('#mngSup').addClass('d-none');
+                // }
+                // else if (selectedType === "Quản lý nhà cung cấp") {
+                //     $('#mngProduct').addClass('d-none');
+                //     $('#mngAccount').addClass('d-none');
+                //     $('#mngInvoice').addClass('d-none');
+                //     $('#mngCate').addClass('d-none');
+                //     $('#mngSup').removeClass('d-none');
+                // }
+            })
+            // $(".owl-carousel").owlCarousel();
+
+        });
+
+    </script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
 </body>
 

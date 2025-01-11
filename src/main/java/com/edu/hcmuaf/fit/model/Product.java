@@ -23,7 +23,7 @@ public class Product {
     private Date created_at;
     private Date updated_at;
     private ArrayList<ProductImages> productImages;
-    private List<Integer> categoryId;
+
 
     public Product() {
     }
@@ -132,14 +132,7 @@ public class Product {
     }
 
 
-    public List<Integer> getCategoryId() {
-        if (categoryId == null) {
-            categoryId = new ArrayList<>();
-            loadCategoryId();
 
-        }
-        return categoryId;
-    }
 
     private void loadCategoryId() {
         String sql = "SELECT ca.category_id \n" +
@@ -154,7 +147,7 @@ public class Product {
             ResultSet resultSet = pr.executeQuery();
 
             while (resultSet.next()) {
-                categoryId.add(resultSet.getInt("category_id"));
+//                categoryId.add(resultSet.getInt("category_id"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -179,7 +172,6 @@ public class Product {
                 ", created_at=" + created_at +
                 ", updated_at=" + updated_at +
                 ", productImages=" + productImages +
-                ", categoryId=" + categoryId +
                 '}';
     }
 
