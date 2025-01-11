@@ -1,0 +1,938 @@
+/* =====================================
+       Setting Styles
+    ===================================== */
+
+    main {
+        display: block;
+        unicode-bidi: isolate;
+        background-color: #ffffff;
+    }
+    
+    .category-page-row {
+        padding-top: 30px;
+    }
+    
+    /* =======================
+            Typography Styles
+            ============= */
+    a {
+        text-decoration: none;
+        color: #334862;
+    }
+    
+    
+    /* =====================================
+               Global Styles
+            ===================================== */
+    
+    div {
+        display: block;
+    }
+    
+    html,
+    body {
+        padding: 0;
+        margin: 0;
+        font-size: 16px;
+        color: black;
+        font-family: sans-serif, Tahoma;
+    }
+    
+    .container {
+        width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    
+    
+    
+    aside {
+        display: block;
+    }
+    
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+
+/* ==================
+    Header
+==========*/
+.header-wrapper {
+    position: relative;
+    width: 100%;
+    background-position: 50% 0;
+    background-size: cover;
+    transition: background-color .3s, opacity .3s;
+}
+
+.header-top {
+    background-color: #1E90FF !important;
+    min-height: 20px;
+}
+
+.header .flex-row {
+    height: 100%;
+}
+
+.nav {
+    align-items: center;
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+}
+
+.nav li {
+    color: white;
+    padding: 0 0.7em;
+    font-weight: 700;
+    font-size: 0.8em;
+}
+
+/* Social Icons */
+.social-icons {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: black;
+}
+
+.social-icons a {
+    color: inherit;
+    font-size: 1.25em;
+    transition: color 0.3s ease;
+}
+
+.button.icon.circle {
+    padding: 0.5em;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+}
+
+.circle i {
+    font-size: 1em;
+}
+
+/* ===========
+header-center
+============== */
+
+.color-header-center {
+    background-color: #ffffff;
+    padding: 0;
+}
+
+.row.row-center {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 5px 0;
+}
+
+
+/* Thiết kế của dropdown tìm kiếm */
+.dropdown-search {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0px;
+    background-color: white;
+    border: 1px solid #ddd;
+    width: 400px;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+/* Hiển thị input khi hover vào icon */
+.position-relative:hover .dropdown-search {
+    display: block;
+}
+
+.row.row-center .col-lg-4 {
+    margin-bottom: auto;
+    margin-top: auto;
+    padding-right: 0;
+}
+
+.d-flex.list-item {
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.d-flex.list-item li {
+    display: flex;
+    flex-grow: 1;
+    color: hsla(0, 0%, 7%, .85);
+    font-weight: 700;
+    font-style: normal;
+    font-family: Lato, sans-serif;
+    font-size: .8em;
+}
+
+.nav.d-flex.list-item li div {
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+}
+
+.nav.d-flex.list-item li div i {
+    width: 5%;
+    text-align: center;
+    font-size: 1.8em;
+    padding: 5px 5px;
+}
+
+.row.row-center .img-logo {
+    display: flex;
+    justify-content: flex-start;
+    margin: 0;
+    padding: 0;
+}
+
+.row.row-center .img-logo img {
+
+    max-height: 60px;
+
+
+}
+
+
+.row.balance-row {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    width: 100%;
+}
+
+.row .bag-shop {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.row .bag-shop .col1.text {
+    display: flex;
+    align-items: center;
+    text-wrap: nowrap;
+    flex-grow: 1;
+    color: hsla(0, 0%, 7%, .85);
+    font-weight: 700;
+    font-style: normal;
+    font-family: Lato, sans-serif;
+    font-size: 1em;
+
+}
+
+.row .bag-shop .col1 {
+    flex: 1;
+    height: 100%;
+
+}
+
+.row .bag-shop .col1 i {
+    display: flex;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.bag-shop .fa-bag-shopping {
+    font-size: 1.5em;
+}
+
+.row .bag-shop .col1 .dropdown button {
+    border-radius: 20px;
+    padding: 5px 15px;
+}
+
+.account-dropdown-menu {
+    min-width: 100%;
+    box-sizing: border-box;
+    position: absolute;
+}
+
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+
+}
+
+.dropdown-menu.menu-danhmuc {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    padding: 10px;
+    list-style: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    min-width: 150px;
+    z-index: 10;
+}
+
+
+.dropdown:hover .dropdown-menu.menu-danhmuc {
+    display: block;
+}
+
+
+
+.dropdown-menu.menu-danhmuc li a {
+    color: #333;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-menu.menu-danhmuc li a:hover {
+    background-color: #f0f0f0;
+}
+
+#cart-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
+
+
+
+
+
+/* =================
+    is-medium và overlay
+    =========== */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5); /* Màu đen với độ trong suốt */
+        z-index: 999; /* Đảm bảo lớp phủ nằm trên các nội dung khác */
+    }
+    .modal.show {
+        z-index: 1000; /* Đảm bảo modal nằm trên lớp phủ */
+    }
+    
+    .is-medium {
+        font-size: 16px;
+        color: white;
+        font-weight: 550;
+        text-decoration: none;
+        background-color: #5ea8f3;
+        padding: 10px 10px;
+        }
+    
+    .is-medium .divider {
+        color: white;
+        margin: 0 5px;
+    }
+    
+    .is-medium a {
+        text-decoration: none;
+        color: white;
+    }
+    
+    .is-medium a:hover {
+        text-decoration: underline;
+    }
+    
+
+
+
+
+/*Main*/
+.main {
+    padding: 0;
+    max-width: 1200px;
+}
+
+.product-main {
+    padding: 30px 0;
+}
+
+
+.price-wrapper .product-page-price {
+    display: block;
+    font-size: 1.5em;
+    font-weight: bolder;
+    margin: .5em 0;
+    line-height: 1;
+
+}
+
+/* .pr-image img {
+    max-width: 90%;
+} */
+
+.pr-contai-image {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.pr-contai-image .pr-image {
+    margin: 0;
+    display: block;
+    position: relative;
+    scrollbar-width: none;
+}
+
+
+
+
+.product-page-price .price-amount {
+    color: #111;
+    font-weight: 700;
+    white-space: nowrap;
+    padding: 10px;
+}
+
+.variations {
+    position: relative;
+    border-color: #ececec;
+    border-spacing: 0;
+    margin-bottom: 1em;
+    width: 100%;
+}
+
+.variations .label {
+    padding-right: 20px;
+}
+
+.variations .value {
+    width: 100%;
+}
+
+.variations td,
+.variations th {
+    border: 0;
+    letter-spacing: normal;
+    padding: .2em 0;
+    text-transform: none;
+    vertical-align: middle;
+}
+
+.variations th {
+    letter-spacing: .05em;
+    line-height: 1.05;
+}
+
+.variations td {
+    color: #666;
+}
+
+.variations label {
+    white-space: nowrap;
+    color: #222;
+}
+
+td:last-child,
+th:last-child {
+    padding-right: 0;
+}
+
+.variations .value select:hover {
+    box-shadow: inset 0 -1.8em 1em 0 transparent;
+}
+
+
+.variations td select {
+    margin: .5em 0;
+    text-transform: none;
+    font: inherit;
+    box-shadow: inset 0 -1.4em 1em 0 rgba(0, 0, 0, .02);
+    background-size: auto 16px;
+    border-radius: 0;
+    display: block;
+    padding-right: 1.4em;
+    border: 1px solid #ddd;
+    color: #666;
+    padding: 5px;
+}
+
+.single-variation .add-quantity {
+    padding: .5em 0;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.single-variation .price-contai,
+.product-description {
+    border-top: 1px dashed #ddd;
+    padding: 7.5px 0;
+}
+
+.single-variation .price {
+    font-size: 1.5em;
+    font-weight: bolder;
+    margin: .5em 0;
+    line-height: 1;
+    color: #111;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.add-quantity .btn-quatity {
+    margin-bottom: 1em;
+    display: inline-flex;
+    margin-right: 1em;
+    opacity: 1;
+    vertical-align: top;
+    white-space: nowrap;
+}
+
+
+
+.btn-quatity .is-form,
+input[type=button].is-form {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    color: #666;
+    font-weight: 400;
+    overflow: hidden;
+    position: relative;
+    text-shadow: 1px 1px 1px #fff;
+    text-transform: none;
+    width: 25px;
+}
+
+.btn-quatity .input-reduce {
+    border-bottom-right-radius: 0;
+    border-right: 0;
+    border-top-right-radius: 0;
+}
+.input-qt {
+    width: 50px; /* Đặt chiều rộng cố định cho ô nhập liệu */
+    text-align: center; /* Căn giữa văn bản trong ô nhập liệu */
+    font-size: 16px;
+}
+
+.btn-quatity .input-increase {
+    border-bottom-left-radius: 0;
+    border-left: 0;
+    border-top-left-radius: 0;
+}
+
+.btn-quatity input[type=number] {
+    border-radius: 0;
+    font-size: 1em;
+    max-width: 2.5em;
+    text-align: center;
+    width: 2.5em;
+    color: #666;
+    border: 1px solid #ddd;
+}
+
+.btn-add-contai {
+    display: inline-flex;
+    gap: 20px;
+}
+
+.btn-add-contai .btn-add,
+.form-submit input[type=submit] {
+    background-color: #1E90FF;
+    font-size: 1em;
+    margin-right: 0;
+    margin-bottom: 1em;
+    margin-top: 0;
+    border-color: #1E90FF;
+    color: #fff;
+    border-radius: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: bolder;
+    letter-spacing: .03em;
+    line-height: 2.4em;
+    max-width: 100%;
+    min-height: 2.5em;
+    padding: 0 1.2em;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    text-rendering: optimizeLegibility;
+    text-shadow: none;
+    text-transform: uppercase;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.btn-add-contai .payment a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.product-description {
+    font-size: 16px;
+    margin-bottom: 1em;
+    color: #777;
+}
+
+.product-description .description-content {
+    display: block;
+    padding: 5px 0;
+}
+
+.panels {
+    padding: 30px 0;
+    display: flex;
+    flex-flow: row wrap;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+.panels p {
+    margin-top: 0;
+    margin-bottom: 1.3em;
+}
+
+.col-inner {
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    width: 100%;
+}
+
+.comment-respond {
+    border: 2px solid #1E90FF;
+    padding: 30px;
+}
+
+.woocommerce-noreviews {
+    color: #777;
+}
+
+.comment-reply-title .small {
+    display: inline-block;
+    font-size: 80%;
+}
+
+.comment-form {
+    margin-bottom: 1.3em;
+}
+
+.comment-form label {
+    color: #555;
+    display: block;
+    font-size: .9em;
+    font-weight: 700;
+    margin-bottom: .4em;
+}
+
+.comment-form p {
+    margin-bottom: .5em;
+}
+
+.main p {
+    margin-top: 0;
+}
+
+.stars.stars a {
+    color: #999;
+    display: inline-block;
+    font-family: fl-icons;
+    font-size: 16px;
+    overflow: hidden;
+    touch-action: manipulation;
+    text-decoration: none;
+}
+
+.stars.stars a span {
+    color: transparent;
+}
+
+.comment-form span {
+    color: red;
+}
+
+.comment-form-comment textarea,
+.comment-form-author input[type=text] {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 0;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+    box-sizing: border-box;
+    color: #333;
+    font-size: .97em;
+    height: 2.507em;
+    max-width: 100%;
+    padding: 0 .75em;
+    vertical-align: middle;
+    width: 100%;
+    overflow: auto;
+}
+
+.comment-form-comment textarea {
+    min-height: 120px;
+    padding-top: .7em;
+}
+
+.comment-form-cookies-consent input[type=checkbox]+label {
+    display: inline;
+}
+
+.comment-form-cookies-consent input[type=checkbox] {
+    display: inline;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.comment-form-cookies-consent [type=checkbox] {
+    box-sizing: border-box;
+    padding: 0;
+}
+
+.form-submit input[type=submit]:hover {
+    box-shadow: inset 0 0 0 100px rgba(0, 0, 0, .2);
+    color: #fff;
+    opacity: 1;
+    outline: none;
+}
+
+
+h1 {
+    font-size: 1.7em;
+}
+
+h3 {
+    font-size: 1.25em;
+}
+
+h1,
+h3 {
+    color: #555;
+    margin-bottom: .5em;
+    margin-top: 0;
+    text-rendering: optimizeSpeed;
+    width: 100%;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.is-divider {
+    background-color: rgba(0, 0, 0, .1);
+    display: block;
+    height: 4px;
+    margin: 1em 0;
+    max-width: 30px;
+    width: 100%;
+}
+.pr-contai-image {
+    position: relative;
+    width: 100%; /* Đảm bảo chiều rộng chiếm toàn khung */
+    height: 100%;
+    overflow: hidden; /* Đảm bảo phần ảnh vượt quá container sẽ bị ẩn */
+}
+
+
+.pr-image img {
+    height: 100%;
+    width: auto; /* Đảm bảo ảnh giữ tỷ lệ đúng */
+    object-fit: cover; /* Đảm bảo ảnh lấp đầy khung nhưng không bị méo */
+    object-position: center; /* Căn giữa ảnh nếu bị crop */
+    image-rendering: crisp-edges; /* Giữ hình ảnh rõ nét */
+    image-rendering: -webkit-optimize-contrast;
+}
+
+
+.pr-contai-image .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    align-items: center;
+    justify-content: center;
+}
+
+.pr-contai-image .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #fff;
+    font-size: 70px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.pr-contai-image .modal-content {
+    width: 45%;
+    min-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.3s;
+    /* Hiệu ứng fade-in */
+}
+
+/* Hiệu ứng fade-in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+
+
+
+
+
+
+
+/*Footer*/
+
+.footer {
+    padding: 0;
+    margin: 0;
+    max-width: 1200px;
+    font-size: 14px;
+}
+
+.footer-top {
+    display: flex;
+    justify-content: center;
+    text-align: left;
+    border-top: 1px solid rgba(0, 0, 0, .05);
+    background-color: #777;
+    color: #f1f1f1;
+    padding: 0 85px
+}
+
+.footer-bottom {
+    border: 1px solid rgba(13, 13, 13, 0.05);
+}
+
+.ft-uniform {
+    flex: 1;
+    padding: 15px;
+}
+
+.ft-policy {
+    padding: 0;
+}
+
+.ft-introduce img {
+    display: inline-block;
+    height: auto;
+    max-width: 30%;
+    min-width: 50px;
+    vertical-align: middle;
+}
+
+.footer h6 {
+    text-align: left;
+}
+
+.ft-policy li {
+    list-style: none;
+}
+
+.ft-policy li+li {
+    border-top: 2px solid hsla(0, 0%, 100%, .08);
+}
+
+.footer-top .is-divider {
+    background-color: hsla(0, 0%, 100%, .3);
+    height: 2px;
+    width: 100%;
+    max-width: 30px;
+    display: block;
+    margin: 10px 0;
+
+}
+
+.footer-top a:hover,
+.footer-bottom a:hover {
+    color: lightgray;
+}
+
+.footer-top a,
+.footer-top a:visited {
+    color: #f1f1f1;
+    text-decoration: none;
+}
+
+.footer-bottom a,
+.footer-bottom a:visited {
+    color: black;
+    text-decoration: none;
+}
+
+
+
+/* mota danh gia */
+.nav.nav-mtdg {
+    list-style: none;
+    padding: 0;
+    border-bottom: 2px solid #ddd;
+}
+
+.nav.nav-mtdg li {
+    margin-right: 20px;
+}
+
+.nav.nav-mtdg a {
+    text-decoration: none;
+    padding: 10px 15px;
+    display: inline-block;
+    color: #555;
+    font-weight: bold;
+}
+
+.nav.nav-mtdg a.active {
+    color: white;
+    background-color: #007bff;
+    border-radius: 5px;
+}
+
+.content {
+    display: none;
+    margin-top: 20px;
+}
+
+.content.active {
+    display: block;
+}
