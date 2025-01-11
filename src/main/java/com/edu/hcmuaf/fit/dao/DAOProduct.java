@@ -149,7 +149,7 @@ public class DAOProduct {
                 product.setNameProduct(name);
                 product.setId(product_id);
                 product.setPrice(price);
-                product.getCategoryId();
+//                product.getCategoryId();
                 re.add(product);
             }
             JDBCUtil.closeConnection(connection);
