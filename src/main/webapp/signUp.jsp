@@ -1,4 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,116 +16,96 @@
 
 <body>
 
-    <main>
-        <div class="container container1 ">
-            <a href="homepage.jsp" class="close-btn" title="Quay lại trang chủ">
-                <i class="bi bi-x-circle-fill"></i>
-            </a>
-            <h2>Đăng Kí</h2>
-            <form id="signup-form">
-                <div class="info-login">
-                    <span class="info">Thông Tin Đăng Nhập</span>
-                    <div class="form-group form1">
-                        <label for="username" class="required">Tên đăng nhập</label>
-                        <div class="wrapper">
-                            <input type="text" id="username" name="username" placeholder="Nhập tên đăng nhập" required>
-                            <span id="errUser"></span>
-                        </div>
+<section class="signup mt-5">
+    <div class="contain">
+        <div class="signup-content">
+            <%
+                String userName = (String) request.getAttribute("userName");
+                String password = (String) request.getAttribute("password");
+                String name = (String) request.getAttribute("name");
+                String phoneNumber = (String) request.getAttribute("phoneNumber");
+                String email = (String) request.getAttribute("email");
+                String gender = (String) request.getAttribute("gender");
+                String birthDay = (String) request.getAttribute("birthDay");
+                String address = (String) request.getAttribute("address");
+                String addressReceive = (String) request.getAttribute("addressReceive");
+                userName = (userName == null)? "": userName;
+                password = (password == null)? "": password;
+                name = (name == null)? "": name;
+                phoneNumber = (phoneNumber == null)? "": phoneNumber;
+                email = (email == null)? "": email;
+                gender = (gender == null)? "": gender;
+                birthDay = (birthDay == null)? "": birthDay;
+                address = (address == null)? "": address;
+                addressReceive = (addressReceive == null)? "": addressReceive;
+                String errUserName = (String)request.getAttribute("errUserName");
+                String errEmail = (String)request.getAttribute("errEmail");
+                errUserName =(errUserName == null)?"":errUserName;
+                errEmail =(errEmail == null)?"":errEmail;
+            %>
+            <form  id="signup-form" class="signup-form" action="registerAccount" method="POST">
+                <h5>ĐĂNG KÍ</h5>
+                <div class="form-SignUp">
+                    <div class="title fw-bold">THÔNG TIN ĐĂNG NHẬP</div>
+                    <div class="form-group">
+                        <label>Tên đăng nhập<span class="text-danger">*</span></label><span class="text-danger" id="errUser"><%=errUserName%></span>
+                        <input type="text" class="form-input" placeholder="Nhập tên đăng nhập" name="userName" id="userName" value ="<%=userName%>"/>
                     </div>
-
-                    <div class="form-group form1 login">
-                        <label for="password" class="required">Mật khẩu</label>
-                        <div class="wrapper">
-                            <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" required>
-                            <span id="errPW"></span>
-                        </div>
+                    <div class="form-group">
+                        <label>Mật khẩu<span class="text-danger">*</span></label><span class="text-danger" id="errPW"></span>
+                        <input type="password" class="form-input" placeholder="Nhập mật khẩu" name="password" id="password" value ="<%=password%>"/>
                     </div>
-
-                    <div class="form-group form1">
-                        <label for="confirm-password" class="required">Nhập lại mật khẩu</label>
-                        <div class="wrapper">
-                            <input type="password" id="confirm-password" name="confirm_password"
-                                placeholder="Nhập lại mật khẩu" required>
-                            <span id="errRePW"></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="info-customer">
-                    <span class="info">Thông Tin Khách Hàng</span>
-                    <div class="form-group form1">
-                        <label for="fname" class="required">Họ và tên</label>
-                        <div class="wrapper">
-                            <input type="text" id="fname" name="ho_ten" placeholder="Nhập họ và tên" required>
-                            <span id="errName"></span>
-                        </div>
-                    </div>
-
-                    <div class="form-group form1">
-                        <label for="sdt" class="required">Số điện thoại</label>
-                        <div class="wrapper">
-                            <input type="text" id="sdt" name="so_dien_thoai" placeholder="Nhập số điện thoại" required>
-                            <span id="errTell"></span>
-                        </div>
-                    </div>
-
-                    <div class="form-group form1">
-                        <label for="email" class="required">Email</label>
-                        <div class="wrapper">
-                            <input type="email" id="email" name="email" placeholder="Nhập Email" required>
-                            <span id="errEmail"></span>
-                        </div>
-                    </div>
-
-                    <div class="form-group form1">
-                        <label class="lgender">Giới tính</label>
-                        <div class="wrapper-gender">
-                            <label><input type="radio" name="gender" checked> Nam</label>
-                            <label><input type="radio" name="gender"> Nữ</label>
-                            <label><input type="radio" name="gender"> Khác</label>
-                        </div>
-                    </div>
-
-                    <div class="form-group form1">
-                        <label for="date" class="required">Ngày sinh</label>
-                        <div class="wrapper">
-                            <input type="date" id="date" name="ngay_sinh" required>
-                            <span id="errDate"></span>
-                        </div>
-                    </div>
-
-                    <div class="form-group form1">
-                        <label for="address" class="required">Địa chỉ</label>
-                        <div class="wrapper">
-                            <input type="text" id="address" name="dia_chi" placeholder="Nhập địa chỉ" required>
-                            <span id="errAd"></span>
-                        </div>
-                    </div>
-
-                    <div class="form-group form1">
-                        <label for="receive" class="required">Địa chỉ nhận hàng</label>
-                        <div class="wrapper">
-                            <input type="text" id="receive" name="dia_chi_nhan_hang"
-                                placeholder="Nhập địa chỉ nhận hàng" required>
-                            <span id="errAdRecei"></span>
-                        </div>
+                    <div class="form-group">
+                        <label for="rePassword">Nhập lại mật khẩu<span class="text-danger">*</span></label><span class="text-danger" id="errRePW"></span>
+                        <input type="password" class="form-input" placeholder="Nhập lại mật khẩu" name="rePassword" id="rePassword" value ="<%=password%>"/>
                     </div>
                 </div>
+                <div class="form-info">
+                    <div class="title fw-bold">THÔNG TIN KHÁCH HÀNG</div>
+                    <div class="form-group">
+                        <label>Họ Tên<span class="text-danger">*</span></label><span class="text-danger" id="errName"></span>
+                        <input type="text" class="form-input" placeholder="Nhập họ và tên" name="name" id="name" value ="<%=name%>"/>
+                    </div>
 
-                <div class="form-terms">
-                    <input id="acp" type="checkbox" id="terms" name="terms" required>
-                    <div class="wrapper">
-                        <label for="terms">Bạn đồng ý với các điều khoản của chúng tôi</label>
-                        <span id="errAcp"></span>
+                    <div class="form-group">
+                        <label for="phoneNumber">Số điện thoại<span class="text-danger">*</span></label><span class="text-danger" id="errTell"></span>
+                        <input type="text" class="form-input" placeholder="Nhập số điện thoại" name="phoneNumber" id="phoneNumber" inputmode="numeric" value ="<%=phoneNumber%>"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Email<span class="text-danger">*</span></label><span class="text-danger" id="errEmail"><%=errEmail%></span>
+                        <input type="text" class="form-input" placeholder="Nhập Email" name="email" id="email" value ="<%=email%>"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Giới tính<span class="text-danger">*</span></label>
+                        <div id="gender">
+                            <label for="male">Nam</label><input type="radio" id="male" name="gender" value="Nam" class="gender" checked >
+                            <label for="female">Nữ</label> <input type="radio" id="female" name="gender" value="Nữ" class="gender" <%= (gender.equals("Nữ")) ? "checked" : "" %>>
+                            <label for="other">Khác</label> <input type="radio" id="other" name="gender" value="Khác" class="gender" <%= (gender.equals("Khác")) ? "checked" : "" %>>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Ngày sinh<span class="text-danger">*</span></label><span class="text-danger" id="errDate"></span>
+                        <input type="date" class="form-input" name="birthDay" id="birthDay" value ="<%=birthDay%>"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="address" >Địa chỉ<span class="text-danger">*</span></label><span class="text-danger" id="errAd"></span>
+                        <input type="text" class="form-input" placeholder="Nhập địa chỉ của bạn" name="address" id="address" value ="<%=address%>"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="addressRecei" >Địa chỉ nhận hàng<span class="text-danger">*</span></label><span class="text-danger" id="errAdRecei"></span>
+                        <input type="text" class="form-input" placeholder="Nhập địa chỉ của bạn" name="addressRecei" id="addressRecei" value ="<%=addressReceive%>"/>
+                    </div>
+                    <div class="checkbox">
+                        <input type="checkbox" name="acp" id="acp" onclick="showBtnResgis()"><label for="acp" class="ps-2 text-color">Bạn đồng ý với các điều khoản của HomeDecor<span class="text-danger">*</span></label>
                     </div>
                 </div>
-
-                <button class="button-real" type="submit">Xác Nhận</button>
+                <div class="button-real" >
+                    <button type="submit"  id="confirm" style="display: none">XÁC NHẬN</button>
+                </div>
             </form>
         </div>
-    </main>
-
-
+    </div>
+</section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
