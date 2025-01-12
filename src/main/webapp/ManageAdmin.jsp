@@ -34,6 +34,7 @@
 <body>
 <header>
     <jsp:include page="header.jsp"></jsp:include>
+    <% String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath(); %>
 </header>
 <div class="is-medium">
     <div class="container"></div>
@@ -93,8 +94,7 @@
             </ul>
         </div>
         <div class="container col-md-9 ms-sm-auto col-lg-10 px-md-4 boder-right" style="width: max-content;">
-            <div class="container   d-flex justify-content-between align-items-center  border-bottom mt-3"
-                 style="width: max-width;">
+            <div class="container   d-flex justify-content-between align-items-center  border-bottom mt-3" style="width: max-width;">
 
             </div>
 

@@ -2,18 +2,30 @@
          pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng kí</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/settingAll.css">
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+            crossorigin="anonymous">
+    <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"></script>
+    <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
+            integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+          integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<%--    <link rel="stylesheet" href="css/style.css">--%>
     <link rel="stylesheet" href="css/signUp.css">
 </head>
-
 <body>
 
 <section class="signup mt-5">
@@ -96,20 +108,16 @@
                         <input type="text" class="form-input" placeholder="Nhập địa chỉ của bạn" name="addressRecei" id="addressRecei" value ="<%=addressReceive%>"/>
                     </div>
                     <div class="checkbox">
-                        <input type="checkbox" name="acp" id="acp" onclick="showBtnResgis()"><label for="acp" class="ps-2 text-color">Bạn đồng ý với các điều khoản của HomeDecor<span class="text-danger">*</span></label>
+                        <input type="checkbox" name="acp" id="acp" onclick="showBtnResgis()"><label for="acp" class="ps-2 text-color">Bạn đồng ý với các điều khoản của ITCAKE<span class="text-danger">*</span></label>
                     </div>
                 </div>
-                <div class="button-real" >
-                    <button type="submit"  id="confirm" style="display: none">XÁC NHẬN</button>
+                <div class="form-group" >
+                    <button type="submit" id="confirm" >XÁC NHẬN</button>
                 </div>
             </form>
         </div>
     </div>
 </section>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-    <script src="js/signUp.js"></script>
+<script src="js/signUp.js"></script>
 </body>
-
 </html>

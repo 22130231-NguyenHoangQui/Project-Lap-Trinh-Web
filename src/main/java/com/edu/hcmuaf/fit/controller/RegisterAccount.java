@@ -1,4 +1,5 @@
 package com.edu.hcmuaf.fit.controller;
+
 import com.edu.hcmuaf.fit.model.Account;
 import com.edu.hcmuaf.fit.model.VerifyAccount;
 import com.edu.hcmuaf.fit.service.AccountService;
@@ -11,17 +12,19 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDateTime;
 
-
-@WebServlet(name = "registerAccount", value = "/registerAccount")
+@WebServlet(name = "RegisterAccount", value = "/registerAccount")
 public class RegisterAccount extends HttpServlet {
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("html/text; charset= UTF-8");
+
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
         String passwordEncrypt = Encrypt.toSHA1(password);
@@ -32,6 +35,7 @@ public class RegisterAccount extends HttpServlet {
         String birthDay = request.getParameter("birthDay");
         String address = request.getParameter("address");
         String addressReceive = request.getParameter("addressReceive");
+
         request.setAttribute("userName", userName);
         request.setAttribute("password", password);
         request.setAttribute("name", name);
@@ -41,15 +45,24 @@ public class RegisterAccount extends HttpServlet {
         request.setAttribute("birthDay", birthDay);
         request.setAttribute("address", address);
         request.setAttribute("addressReceive", addressReceive);
+
         String err = "";
-        if(AccountService.getInstance().checkExistUserName(userName)) {
+        Date birthDate = null;
+        try {
+            birthDate = Date.valueOf(birthDay);
+        } catch (IllegalArgumentException e) {
+            err = "Ngày sinh không hợp lệ!";
+            request.setAttribute("errBirthDay", err);
+        }
+
+        if (err.isEmpty() && AccountService.getInstance().checkExistUserName(userName)) {
             err = "Tên tài khoản đã tồn tại!";
-            request.setAttribute("errUserName",err );
-        }else if(AccountService.getInstance().checkExistEmail(email)) {
+            request.setAttribute("errUserName", err);
+        } else if (err.isEmpty() && AccountService.getInstance().checkExistEmail(email)) {
             err = "Email đã tồn tại!";
             request.setAttribute("errEmail", err);
-        }else {
-            Account account = new Account(name, userName, passwordEncrypt, email, phoneNumber, gender, Date.valueOf(birthDay), address, addressReceive);
+        } else if (err.isEmpty()) {
+            Account account = new Account(name, userName, passwordEncrypt, email, phoneNumber, gender, birthDate, address, addressReceive);
             if (AccountService.getInstance().registerAccount(account) > 0) {
                 Account accountAferRegis = AccountService.getInstance().selectAccountByUserName(account.getUserName());
                 String verifyCodeString = NumberRandom.getSoNgauNhien();
@@ -62,21 +75,17 @@ public class RegisterAccount extends HttpServlet {
                 }
             }
         }
+
         try {
-            String url = "";
-            if(err.length() == 0) {
-                url = "VerifyAccount.jsp";
-            }else {
-                url = "signUp.jsp";
-            }
-            request.getRequestDispatcher(url).forward(request,response);
+            String url = err.isEmpty() ? "VerifyAccount.jsp" : "signUp.jsp";
+            request.getRequestDispatcher(url).forward(request, response);
         } catch (ServletException e) {
             throw new RuntimeException(e);
         }
     }
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
 }
-
