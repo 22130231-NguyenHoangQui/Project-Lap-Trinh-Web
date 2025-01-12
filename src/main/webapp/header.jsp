@@ -1,9 +1,23 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.edu.hcmuaf.fit.model.Category" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.edu.hcmuaf.fit.model.Account" %>
+<%--<%@ page import="com.edu.hcmuaf.fit.model.Cart" %>--%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
 <html>
 <head>
     <title>Header</title>
 </head>
 <body>
+<%--<%--%>
+<%  String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath(); %>
+<%--    Cart cart = (Cart) session.getAttribute("Cart");--%>
+<%--    int qtt = (cart != null) ? cart.list().size() : 0;--%>
+<%--    String quantityItem = qtt + "";--%>
+<%--    if (qtt > 99) quantityItem = "99+";--%>
+<%--%>--%>
+<% Object obj = session.getAttribute("account");
+    Account account = null;%>
 <header>
     <div class="header-wrapper">
         <div class="header-top">
@@ -52,8 +66,8 @@
             <div class="row row-center d-flex justify-content-between  align-items-center">
                 <div class="col-sm-1 col-md-1 col-lg-1 img-logo"
                      style="display: block; width: 10%; padding-left: 10px;">
-                    <a href="../pages/HomePage.html">
-                        <img src="../image/imghomepage/logo/logo1.jpg" alt="" class="img-logo-detail">
+                    <a href="./homepage.jsp">
+                        <img src="./image/imghomepage/logo/logo1.jpg" alt="" class="img-logo-detail">
 
                     </a>
                 </div>
@@ -63,11 +77,11 @@
 
 
 
-                        <a href="../pages/homepage.html" class="active">
+                        <a href=<%=url%>/homepage>
                             <li>Trang chủ</li>
                         </a>
                         <div class="dropdown  " style=" display:flex; align-items: center;  height: 100%; " >
-                            <a href="../pages/ProductCatalog.html" data-id="2">
+                            <a href="<%=url%>/CateController-servlet" data-id="2">
                                 <li>Danh mục</li>
 
                             </a>
@@ -98,7 +112,7 @@
 
                             </ul>
                         </div>
-                        <a href="../pages/introWebsite.html">
+                        <a href="./introWebsite.jsp">
                             <li>Giới thiệu</li>
                         </a>
 
@@ -111,12 +125,6 @@
                         <i class="fa-solid fa-magnifying-glass"
                            style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: gray; font-size: 16px; cursor: pointer;"></i>
                     </div>
-
-
-
-
-
-
 
                     <div class="d-flex">
                         <div class="row balance-row">
@@ -138,8 +146,42 @@
                                         </button>
                                         <ul class="dropdown-menu account-dropdown-menu"
                                             aria-labelledby="dropdownMenuButton">
-                                            <li><a class="dropdown-item" href="SignIn.html">Đăng Nhập</a></li>
-                                            <li><a class="dropdown-item" href="SignUp.html">Đăng Ký</a></li>
+                                            <%
+                                                if (obj == null) {
+                                            %>
+                                            <li><a class="dropdown-item" href="<%=url%>/signIn.jsp">Đăng nhập</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="<%=url%>/signUp.jsp">Đăng kí</a></li>
+                                            <%
+                                            } else {
+                                                account = (Account) obj;
+                                                if ((account != null) && (account.getRole() == 0 )) {
+                                            %>
+                                            <li class="dropdown-item">Xin chào: <span class="fw-bold name"><%=account.getName()%></span></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="<%=url%>/manage">Quản lý</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="<%=url%>/changeInformation.jsp">Thay đổi thông tin</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="<%=url%>/changePassword">Đổi mật khẩu</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="<%=url%>/signOut">Đăng xuất</a></li>
+                                            <%
+                                            } else {
+                                            %>
+                                            <li class="dropdown-item">Xin chào: <span class="fw-bold name"><%=account.getName()%></span></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="<%=url%>/history">Lịch sử mua hàng</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="<%=url%>/changeInformation.jsp">Thay đổi thông tin</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="<%=url%>/changePassword.jsp">Đổi mật khẩu</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="<%=url%>/signOut">Đăng xuất</a></li>
+                                            <%
+                                                    }
+                                                }
+                                            %>
                                         </ul>
                                     </div>
                                 </div>
@@ -156,4 +198,32 @@
 </header>
 
 </body>
+<script>
+    $(document).ready(function(){
+        var placeholderText = "Tìm kiếm sản phẩm theo tên";
+        var inputElement = $(".search");
+        var currentIndex = 0;
+
+        function updatePlaceholder() {
+            var currentText = placeholderText.substring(0, currentIndex);
+            inputElement.attr("placeholder", currentText);
+            currentIndex = (currentIndex + 1) % (placeholderText.length + 1);
+        }
+
+        // set interval để lặp lại sau mỗi 100ms
+        var intervalId = setInterval(updatePlaceholder, 100);
+
+        // stop hành động lặp khi ấn vào
+        inputElement.focus(function(){
+            clearInterval(intervalId);
+            inputElement.attr("placeholder", placeholderText);
+        });
+
+        // restart lại hành động lặp khi không ấn vào nữa
+        inputElement.blur(function(){
+            currentIndex = 0;
+            intervalId = setInterval(updatePlaceholder, 100);
+        });
+    });
+</script>
 </html>

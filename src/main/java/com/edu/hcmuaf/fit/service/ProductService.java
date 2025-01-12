@@ -24,7 +24,7 @@ public class ProductService {
         ArrayList<Product> listProduct = DAOProduct.listProduct(offset);
         ArrayList<ProductImages> listImageOfProduct = null;
         for(Product p:listProduct) {
-            listImageOfProduct = DAOProduct.listImageOfProduct(p);
+            listImageOfProduct = DAOProduct.listImageOfProduct(p.getId());
             p.setProductImages(listImageOfProduct);
         }
         return listProduct;
@@ -34,7 +34,7 @@ public class ProductService {
         ArrayList<Product> listProduct = DAOProduct.listProductBestSelling(offset);
         ArrayList<ProductImages> listImageOfProduct = null;
         for(Product p:listProduct) {
-            listImageOfProduct = DAOProduct.listImageOfProduct(p);
+            listImageOfProduct = DAOProduct.listImageOfProduct(p.getId());
             p.setProductImages(listImageOfProduct);
 
         }
@@ -45,7 +45,7 @@ public class ProductService {
         ArrayList<Product> result = DAOProduct.listProductBessInMonth(offset);
         ArrayList<ProductImages> listImageOfProduct = null;
         for (Product p: result) {
-            listImageOfProduct = DAOProduct.listImageOfProduct(p);
+            listImageOfProduct = DAOProduct.listImageOfProduct(p.getId());
             p.setProductImages(listImageOfProduct);
         }
         return result;
@@ -55,7 +55,7 @@ public class ProductService {
         ArrayList<Product> result = DAOProduct.listRandomProduct(offset);
         ArrayList<ProductImages> listImageOfProduct = null;
         for (Product p: result) {
-            listImageOfProduct = DAOProduct.listImageOfProduct(p);
+            listImageOfProduct = DAOProduct.listImageOfProduct(p.getId());
             p.setProductImages(listImageOfProduct);
         }
         return result;
@@ -64,7 +64,7 @@ public class ProductService {
         ArrayList<Product> listProduct = DAOProduct.listProductByIdCate(id,offset);
         ArrayList<ProductImages> listImageOfProduct = null;
         for (Product p: listProduct) {
-            listImageOfProduct = DAOProduct.listImageOfProduct(p);
+            listImageOfProduct = DAOProduct.listImageOfProduct(p.getId());
             p.setProductImages(listImageOfProduct);
 
         }
@@ -75,7 +75,7 @@ public class ProductService {
         ArrayList<Product> listProduct = DAOProduct.listProductByName(name);
         ArrayList<ProductImages> listImageOfProduct = null;
         for (Product p: listProduct) {
-            listImageOfProduct = DAOProduct.listImageOfProduct(p);
+            listImageOfProduct = DAOProduct.listImageOfProduct(p.getId());
             p.setProductImages(listImageOfProduct);
         }
     return listProduct;

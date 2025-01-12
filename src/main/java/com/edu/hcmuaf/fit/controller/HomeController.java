@@ -25,11 +25,11 @@ public class HomeController extends HttpServlet {
 //        ArrayList<Product> listSixProduct = ProductService.getInstance().listSixProduct(1);
 //        request.setAttribute("listP", listSixProduct);
 //        load sản phẩm đang là xu hướng
-        ArrayList<Product> listProductBestSelling = ProductService.getInstance().listProductBestSelling(1);
-        request.setAttribute("listProductBestSelling", listProductBestSelling);
-//        load sản phẩm đang bán chạy trong tháng
-        ArrayList<Product> listProductMonth = ProductService.getInstance().listProductBestSellingInMonth(1);
-        request.setAttribute("listProductMonth", listProductMonth);
+//        ArrayList<Product> listProductBestSelling = ProductService.getInstance().listProductBestSelling(1);
+//        request.setAttribute("listProductBestSelling", listProductBestSelling);
+//       load sản phẩm đang bán chạy trong tháng
+//        ArrayList<Product> listProductMonth = ProductService.getInstance().listProductBestSellingInMonth(1);
+//        request.setAttribute("listProductMonth", listProductMonth);
         try {
             request.getRequestDispatcher("homepage.jsp").forward(request, response);
         } catch (ServletException e) {
