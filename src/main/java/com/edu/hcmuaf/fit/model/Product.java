@@ -21,8 +21,10 @@ public class Product {
     private Date created_at;
     private Date updated_at;
     private ArrayList<ProductImages> productImages;
+    private ArrayList<SizePrice> sizePrices;
+    private boolean status;
 
-    public Product(int id, int idCate, String nameProduct, int quantity, String description, Date created_at, Date updated_at, ArrayList<ProductImages> productImages) {
+    public Product(int id, int idCate, String nameProduct, int quantity, String description, Date created_at, Date updated_at, ArrayList<ProductImages> productImages, ArrayList<SizePrice> sizePrices, boolean status) {
         this.id = id;
         this.idCate = idCate;
         this.nameProduct = nameProduct;
@@ -31,9 +33,58 @@ public class Product {
         this.created_at = created_at;
         this.updated_at = updated_at;
         this.productImages = productImages;
+        this.sizePrices = sizePrices;
+        this.status = status;
+    }
+
+    public Product(int id, int idCate, String nameProduct, int quantity, String description,boolean status) {
+        this.id = id;
+        this.idCate = idCate;
+        this.nameProduct = nameProduct;
+        this.quantity = quantity;
+        this.description = description;
+        this.status = status;
+    }
+
+    public Product(int id, String nameProduct, int quantity, String description) {
+        this.id = id;
+        this.nameProduct = nameProduct;
+        this.quantity = quantity;
+        this.description = description;
+    }
+
+    public Product(String nameProduct, int quantity, String description) {
+        this.nameProduct = nameProduct;
+        this.quantity = quantity;
+        this.description = description;
+    }
+
+    public Product(int idCate, String nameProduct, int quantity, String description, boolean status) {
+        this.idCate = idCate;
+        this.nameProduct = nameProduct;
+        this.quantity = quantity;
+        this.description = description;
+        this.status = status;
     }
 
     public Product() {
+
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", idCate=" + idCate +
+                ", nameProduct='" + nameProduct + '\'' +
+                ", quantity=" + quantity +
+                ", description='" + description + '\'' +
+                ", created_at=" + created_at +
+                ", updated_at=" + updated_at +
+                ", productImages=" + productImages +
+                ", sizePrices=" + sizePrices +
+                ", status=" + status +
+                '}';
     }
 
     public int getId() {
@@ -100,17 +151,19 @@ public class Product {
         this.productImages = productImages;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", idCate=" + idCate +
-                ", nameProduct='" + nameProduct + '\'' +
-                ", quantity=" + quantity +
-                ", description='" + description + '\'' +
-                ", created_at=" + created_at +
-                ", updated_at=" + updated_at +
-                ", productImages=" + productImages +
-                '}';
+    public ArrayList<SizePrice> getSizePrices() {
+        return sizePrices;
+    }
+
+    public void setSizePrices(ArrayList<SizePrice> sizePrices) {
+        this.sizePrices = sizePrices;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

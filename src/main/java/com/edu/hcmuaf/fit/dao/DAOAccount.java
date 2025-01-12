@@ -107,7 +107,7 @@ public class DAOAccount {
     public static int insertVerify(VerifyAccount v) {
         int re = 0;
         Connection connection = JDBCUtil.getConnection();
-        String sql = "insert into verify_account(idAccount, verifyCode,timeCode, stateVerify) values(?,?,?,?)";
+        String sql = "insert into verifyaccount(idAccount, verifyCode,timeCode, stateVerify) values(?,?,?,?)";
         try {
             PreparedStatement pr = connection.prepareStatement(sql);
             pr.setInt(1, v.getIdAccount());
@@ -227,7 +227,7 @@ public class DAOAccount {
     public static int updateVerify(int newCode,LocalDateTime timeNew, int idAccount) {
         int re = 0;
         Connection connection = JDBCUtil.getConnection();
-        String sql ="update verify_account set verifyCode =?, timeCode =? where idAccount =?";
+        String sql ="update verifyaccount set verifyCode =?, timeCode =? where idAccount =?";
         try {
             PreparedStatement pr = connection.prepareStatement(sql);
             pr.setInt(1, newCode);

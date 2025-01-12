@@ -57,4 +57,15 @@ public class SizePrice {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "SizePrice{" +
+                "id=" + id +
+                ", idProduct=" + idProduct +
+                ", diameter='" + diameter + '\'' +
+                ", height='" + height + '\'' +
+                ", price=" + price +
+                '}';
+    }
 }

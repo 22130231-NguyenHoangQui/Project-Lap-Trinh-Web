@@ -30,4 +30,8 @@ public class CategoryService  {
     public static void main(String[] args) {
 
     }
+
+    public Category getCategoryById(int idCate) {
+        return null;
+    }
 }

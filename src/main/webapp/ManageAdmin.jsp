@@ -466,359 +466,458 @@
                         </div>
                     </div>
 
-<%--QUẢN LÝ SẢN PHẨM--%>
+                    <%--QUẢN LÝ SẢN PHẨM--%>
                     <div class="container mt-5 d-none" style="width: auto;" id="mngProduct">
                         <!-- Modal Bootstrap -->
-                        <div class="col-lg-6">
-                            <h5>Quản lý sản phẩm</h5>
-                        </div>
-                        <div class="col-lg-6 text-end display">
-                            <%--                                <%if(account.getRole() == 0) {%>--%>
-                            <!-- Nút mở modal -->
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                    data-bs-target="#addProductModal">
-                                Thêm sản phẩm
-                            </button>
-                            <%--                                <%}%>--%>
-                        </div>
+                        <div class="container   d-flex justify-content-between align-items-center  border-bottom mt-3"
+                        <h5>Quản lý sản phẩm</h5>
+
+                        <%--                                <%if(account.getRole() == 0) {%>--%>
+                        <!-- Nút mở modal -->
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                data-bs-target="#addProductModal">
+                            Thêm sản phẩm
+                        </button>
+                        <%--                                <%}%>--%>
+                    </div>
 
 
-                        <table class="table table1">
-                            <thead>
-                            <tr>
-                                <th>STT</th>
-                                <th>SẢN PHẨM</th>
-                                <th>GIÁ BÁN</th>
-                                <th>CHI TIẾT</th>
-                                <th>NGÀY TẠO</th>
-                                <th>NGÀY CẬT NHẬT</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody >
-<h1>123</h1>
+                    <table class="table table1">
+                        <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>SẢN PHẨM</th>
+                            <th>GIÁ BÁN</th>
+                            <th>CHI TIẾT</th>
+                            <th>NGÀY TẠO</th>
+                            <th>NGÀY CẬT NHẬT</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody id="innerProduct">
 
                         <%
                             ArrayList<Product> listAllProduct = (ArrayList<Product>) request.getAttribute("listAllProduct");
-                            int sttP =1;
-                            if (!listAllProduct.isEmpty()|| listAllProduct != null ) {
-                                for(Product p : listAllProduct) {
-                                    System.out.println(p);
+                            int sttP = 1;
+                            if (!listAllProduct.isEmpty() || listAllProduct != null) {
+                                for (Product p : listAllProduct) {
+//                                    System.out.println(p);
                         %>
 
-                            <tr>
-                                <td class="pro"><%=sttP%></td>
-                                <td class="pro">
-                                    <img src="<%=url%>/Products/<%=(p.getProductImages().isEmpty())?"":p.getProductImages().get(0).getUrl()%>" alt="Product Image"
-                                         style="width: 50px; height: 50px; object-fit: cover; margin-right: 10px;">
-                                    <span class="product-name"><%=p.getNameProduct()%></span>
-                                </td>
-                                <td class="pro">100.000đ</td>
-                                <td class="pro"><%=p.getQuantity()%></td>
-                                <td class="pro"><%=p.getCreated_at()%></td>
-                                <td class="pro"><%=p.getUpdated_at()%></td>
-                                <td>
-<%--                                    <button class="icon-button" onclick="deleteRow(this)">--%>
-<%--                                        <i class="fa-solid fa-trash"></i>--%>
-<%--                                    </button>--%>
-<%--                                    <button class="icon-button" onclick="openEditFormProduct(this)">--%>
-<%--                                        <i class="fa-solid fa-pen"></i>--%>
-<%--                                    </button>--%>
-                                </td>
-                            </tr>
+                        <tr>
+                            <input type="hidden" class ="idProduct" value="<%=p.getId()%>">
+                            <td class="pro"><%=sttP%>
+                            </td>
+                            <td class="pro">
+                                <img src="<%=url%>/Products/<%=(p.getProductImages().isEmpty())?"":p.getProductImages().get(0).getUrl()%>"
+                                     alt="Product Image"
+                                     style="width: 50px; height: 50px; object-fit: cover; margin-right: 10px;">
+                                <span class="product-name"><%=p.getNameProduct()%></span>
+                            </td>
+                            <td class="pro">
+                                <%= (p.getSizePrices() != null && !p.getSizePrices().isEmpty()) ? p.getSizePrices().get(0).getPrice() : "Không có giá" %>
+                            </td>
 
-                        <%sttP++;
-                                }}%>
+                            <td class="pro"><%=p.getQuantity()%>
+                            </td>
+                            <td class="pro"><%=p.getCreated_at()%>
+                            </td>
+                            <td class="pro"><%=p.getUpdated_at()%>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProductModal" onclick="innerEditProduct('<%=p.getId()%>')">
+                                    <i class="fa-solid fa-pen"></i> Sửa
+                                </button>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                    <i class="fa-solid fa-trash"></i> Xóa
+                                </button>
 
-                            <!-- Các sản phẩm tiếp theo -->
-                            </tbody>
-                        </table>
+                            </td>
+                        </tr>
 
-                        <nav>
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item active">
-                                    <a class="page-link" href="#" onclick="changePageProducts(1)">1</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" onclick="changePageProducts(2)">2</a>
-                                </li>
-                                <!-- Các trang tiếp theo -->
-                            </ul>
-                        </nav>
-                    </div>
-                    <!-- Modal Bootstrap -->
-                    <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel"
-                         aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <!-- Header -->
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="addProductModalLabel">Thêm sản phẩm</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                </div>
-                                <!-- Body -->
-                                <div class="modal-body">
-                                    <!-- Form chỉnh sửa sản phẩm -->
-                                    <form method="post" id="add-product" enctype="multipart/form-data">
+                        <%
+                                    sttP++;
+                                }
+                            }
+                        %>
+
+                        <!-- Các sản phẩm tiếp theo -->
+                        </tbody>
+                    </table>
+
+                    <nav>
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item active">
+                                <a class="page-link" href="#" onclick="changePageProducts(1)">1</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" onclick="changePageProducts(2)">2</a>
+                            </li>
+                            <!-- Các trang tiếp theo -->
+                        </ul>
+                    </nav>
+                </div>
+                <!-- Modal Bootstrap -->
+                <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <!-- Header -->
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="addProductModalLabel">Thêm sản phẩm</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <!-- Body -->
+                            <div class="modal-body">
+                                <!-- Form chỉnh sửa sản phẩm -->
+                                <form method="post" id="add-product" enctype="multipart/form-data">
                                     <!-- Tên sản phẩm -->
-                                        <div class="form-group">
-                                            <label class="form-label">Tên sản phẩm</label>
-                                            <input type="text" class="form-control" id="nameProduct"
-                                                   name="nameProduct"
-                                                   placeholder="Nhập tên sản phẩm"  required>
+                                    <div class="form-group">
+                                        <label class="form-label">Tên sản phẩm</label>
+                                        <input type="text" class="form-control" id="nameProduct"
+                                               name="nameProduct"
+                                               placeholder="Nhập tên sản phẩm" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Giá bán</label>
+                                        <input type="number" class="form-control" id="priceProductAdd"
+                                               name="priceProductAdd"
+                                               placeholder="Nhập giá bán"
+                                               required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Thể loại</label>
+                                        <select class="form-controll" name="editCate" id="editCate">
+                                            <option value="Bánh sinh nhật">Bánh sinh nhật</option>
+                                            <option value="Bánh sinh nhật ngày lễ">Bánh sinh nhật ngày lễ</option>
+                                            <option value="Bánh sinh nhật bạn trai">Bánh sinh nhật bạn trai</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Chiều cao (cm)</label>
+                                        <input type="number" class="form-control" id="height" name="height"
+                                               placeholder="Nhập chiều cao"
+                                               required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Đường kính (cm)</label>
+                                        <input type="number" class="form-control" id="diameter"
+                                               name="diameter"
+                                               placeholder="Nhập đường kính" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="editDetail11" class="form-label">Mô tả sản phẩm</label>
+                                        <textarea class="form-control" id="editDetail11" name="detail"
+                                                  placeholder="Nhập mô tả sản phẩm"
+                                                  rows="2" required></textarea>
+                                    </div>
+
+                                    <!-- Hình ảnh -->
+
+
+                                    <div class="form-group">
+                                        <label class="form-label">Hình ảnh hiện tại:</label>
+                                        <div class="d-flex align-items-center">
+                                            <!-- Hình ảnh hiển thị -->
+                                            <img id="editImagePreview" src="" alt="Preview"
+                                                 class="img-thumbnail me-2"
+                                                 style="width: 100px; height: 100px; object-fit: cover;">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="editImage123" class="form-label">Hình ảnh mới:</label>
+                                        <!-- Input để chọn file -->
+                                        <input type="file" class="form-control" id="editImage123" name="image"
+                                               accept="image/*" onchange="updateImagePreview(this)">
+                                    </div>
+
+
+                                    <div class="form-group justify-content-between">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            Hủy
+                                        </button>
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProductModal">
+                                            <i class="fa-solid fa-pen"></i> Sửa
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deleteModalLabel">Xác nhận xóa</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Bạn có chắc chắn muốn xóa mục này không?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                <button type="button" class="btn btn-danger" onclick="confirmDelete()">Xóa</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editProductModalLabel">Chỉnh sửa sản phẩm</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                    <form id="edit-Product" action="" method="post">
+                                        <div class="form-group mb-3">
+                                            <label  class="required">Tên sản phẩm</label>
+                                            <input type="text" class="form-control" id="nameProductEdit" name="nameProductEdit" placeholder="Nhập tên sản phẩm" required>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label  class="required">Giá bán</label>
+                                            <input type="number" class="form-control" id="priceProductEdit" name="priceProductEdit" placeholder="Nhập giá bán" required>
                                         </div>
 
                                         <div class="form-group">
-                                            <label  class="form-label">Giá bán</label>
-                                            <input type="number" class="form-control" id="priceProductAdd" name="priceProductAdd"
-                                                   placeholder="Nhập giá bán"
-                                                   required>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label  class="form-label">Thể loại</label>
-                                            <select class="form-controll" name="Cate" id="idCate">
+                                            <label class="form-label">Thể loại</label>
+                                            <select class="form-control" name="idCate" id="idCate">
                                                 <option value="Bánh sinh nhật">Bánh sinh nhật</option>
                                                 <option value="Bánh sinh nhật ngày lễ">Bánh sinh nhật ngày lễ</option>
                                                 <option value="Bánh sinh nhật bạn trai">Bánh sinh nhật bạn trai</option>
                                             </select>
                                         </div>
 
-                                        <div class="form-group">
-                                            <label  class="form-label">Chiều cao (cm)</label>
-                                            <input type="number" class="form-control" id="height" name="height"
-                                                   placeholder="Nhập chiều cao"
-                                                   required>
+                                        <div class="form-group mb-3">
+                                            <label class="required">Chiều cao (cm)</label>
+                                            <input type="number" class="form-control" id="heightEdit" name="heightEdit" placeholder="Nhập chiều cao" required>
                                         </div>
 
-                                        <div class="form-group">
-                                            <label  class="form-label">Đường kính (cm)</label>
-                                            <input type="number" class="form-control" id="diameter"
-                                                   name="diameter"
-                                                   placeholder="Nhập đường kính" required>
+                                        <div class="form-group mb-3">
+                                            <label  class="required">Đường kính (cm)</label>
+                                            <input type="number" class="form-control" id="diameterEdit" name="diameterEdit" placeholder="Nhập đường kính" required>
                                         </div>
-
-                                        <div class="form-group">
-                                            <label for="editDetail11" class="form-label">Mô tả sản phẩm</label>
-                                            <textarea class="form-control" id="editDetail11" name="detail"
-                                                      placeholder="Nhập mô tả sản phẩm"
-                                                      rows="2" required></textarea>
+                                        <div class="form-group mb-3">
+                                            <label  class="required">Số lượng (cm)</label>
+                                            <input type="number" class="form-control" id="quantityEdit" name="quantityEdit" placeholder="Nhập số lượng" required>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label  class="required">Mô tả sản phẩm</label>
+                                            <textarea class="form-control" id="desEdit" name="desEdit" placeholder="Nhập mô tả sản phẩm" required></textarea>
                                         </div>
 
                                         <!-- Hình ảnh -->
-
-
-                                        <div class="form-group">
-                                            <label class="form-label">Hình ảnh hiện tại:</label>
-                                            <div class="d-flex align-items-center">
-                                                <!-- Hình ảnh hiển thị -->
-                                                <img id="editImagePreview" src="" alt="Preview"
-                                                     class="img-thumbnail me-2"
-                                                     style="width: 100px; height: 100px; object-fit: cover;">
+                                        <div class="form-group mb-3">
+                                            <label class="required">Hình ảnh hiện tại:</label>
+                                            <div>
+                                                <img id="editImagePreview1" src="" alt="Preview" class="img-thumbnail" style="width: 100px; height: 100px; object-fit: cover; margin-left: 10px;">
                                             </div>
                                         </div>
 
-                                        <div class="form-group">
-                                            <label for="editImage123" class="form-label">Hình ảnh mới:</label>
-                                            <!-- Input để chọn file -->
-                                            <input type="file" class="form-control" id="editImage123" name="image"
+                                        <div class="form-group mb-3">
+                                            <label for="editImage" class="required">Thay đổi hình ảnh:</label>
+                                            <input type="file" class="form-control" id="editImage" name="image"
                                                    accept="image/*" onchange="updateImagePreview(this)">
                                         </div>
 
-
-                                        <div class="form-group justify-content-between">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                                Hủy
-                                            </button>
-                                            <button type="button" class="btn btn-primary" onclick="addProduct()">Lưu
-                                            </button>
+                                        <!-- Nút hành động -->
+                                        <div class="d-flex justify-content-end">
+                                            <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Hủy</button>
+                                            <button id="saveButton1" type="button" class="btn btn-primary" onclick="editProduct()">LƯU</button>
                                         </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="container mt-5 d-none" style="width: auto;" id="mngCate">
+                    <table class="table table2">
+                        <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>ID</th>
+                            <th>TÊN</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="cate1">1</td>
+                            <td class="cate1">101</td>
+                            <td class="cate1">Danh mục 1</td>
+                            <td>
+                                <button class="icon-button" onclick="deleteRowCate(this)">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                                <button class="icon-button" onclick="openEditFormCate(this)">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="cate1">2</td>
+                            <td class="cate1">102</td>
+                            <td class="cate1">Danh mục 2</td>
+                            <td>
+                                <button class="icon-button" onclick="deleteRowCate(this)">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                                <button class="icon-button" onclick="openEditFormCate(this)">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <!-- Các danh mục tiếp theo -->
+                        </tbody>
+                    </table>
 
-
-                    <div class="container mt-5 d-none" style="width: auto;" id="mngCate">
-                        <table class="table table2">
-                            <thead>
-                            <tr>
-                                <th>STT</th>
-                                <th>ID</th>
-                                <th>TÊN</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td class="cate1">1</td>
-                                <td class="cate1">101</td>
-                                <td class="cate1">Danh mục 1</td>
-                                <td>
-                                    <button class="icon-button" onclick="deleteRowCate(this)">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </button>
-                                    <button class="icon-button" onclick="openEditFormCate(this)">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="cate1">2</td>
-                                <td class="cate1">102</td>
-                                <td class="cate1">Danh mục 2</td>
-                                <td>
-                                    <button class="icon-button" onclick="deleteRowCate(this)">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </button>
-                                    <button class="icon-button" onclick="openEditFormCate(this)">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <!-- Các danh mục tiếp theo -->
-                            </tbody>
-                        </table>
-
-                        <nav>
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item active">
-                                    <a class="page-link" href="#" onclick="changePage(1)">1</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" onclick="changePage(2)">2</a>
-                                </li>
-                                <!-- Các trang tiếp theo -->
-                            </ul>
-                        </nav>
-
-                    </div>
-                    <div class="container mt-5 d-none" style="width: auto;" id="mngInvoice">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Order Name</th>
-                                <th>Customer</th>
-                                <th>Order Date</th>
-                                <th>Price</th>
-                                <th>Status</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Order 1</td>
-                                <td>Customer A</td>
-                                <td>2025-01-01</td>
-                                <td>$100</td>
-                                <td>Completed</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Order 2</td>
-                                <td>Customer B</td>
-                                <td>2025-01-02</td>
-                                <td>$200</td>
-                                <td>Pending</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Order 3</td>
-                                <td>Customer C</td>
-                                <td>2025-01-03</td>
-                                <td>$150</td>
-                                <td>Shipped</td>
-                            </tr>
-                            <!-- Các đơn hàng khác -->
-                            </tbody>
-                        </table>
-
-                        <nav>
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item active">
-                                    <a class="page-link" href="#" onclick="changePage(1)">1</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" onclick="changePage(2)">2</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" onclick="changePage(3)">3</a>
-                                </li>
-                                <!-- Các trang khác -->
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="container mt-5 d-none" style="width: auto;" id="mngDiscount">
-                        <table class="table tableDiscount">
-                            <thead>
-                            <tr>
-                                <th>MÃ GIẢM GIÁ</th>
-                                <th>GIẢM GIÁ</th>
-                                <th>CHI TIẾT</th>
-                                <th>NGÀY BẮT ĐẦU</th>
-                                <th>SỐ NGÀY KHUYẾN MÃI</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td class="dis">DISCOUNT1</td>
-                                <td class="dis">10%</td>
-                                <td class="dis">Áp dụng cho tất cả sản phẩm</td>
-                                <td class="dis">2025-01-01</td>
-                                <td class="dis">7</td>
-                                <td>
-                                    <button class="icon-button" onclick="deleteRowDiscount(this)">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </button>
-                                    <button class="icon-button" onclick="openEditDiscountForm(this)">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="dis">DISCOUNT2</td>
-                                <td class="dis">20%</td>
-                                <td class="dis">Dành cho khách hàng VIP</td>
-                                <td class="dis">2025-02-01</td>
-                                <td class="dis">14</td>
-                                <td>
-                                    <button class="icon-button" onclick="deleteRowDiscount(this)">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </button>
-                                    <button class="icon-button" onclick="openEditDiscountForm(this)">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <!-- Các giảm giá khác -->
-                            </tbody>
-                        </table>
-
-                        <nav>
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item active">
-                                    <a class="page-link" href="#" onclick="changePageDiscounts(1)">1</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" onclick="changePageDiscounts(2)">2</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" onclick="changePageDiscounts(3)">3</a>
-                                </li>
-                                <!-- Các trang khác -->
-                            </ul>
-                        </nav>
-                    </div>
-
+                    <nav>
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item active">
+                                <a class="page-link" href="#" onclick="changePage(1)">1</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" onclick="changePage(2)">2</a>
+                            </li>
+                            <!-- Các trang tiếp theo -->
+                        </ul>
+                    </nav>
 
                 </div>
+                <div class="container mt-5 d-none" style="width: auto;" id="mngInvoice">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Order Name</th>
+                            <th>Customer</th>
+                            <th>Order Date</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Order 1</td>
+                            <td>Customer A</td>
+                            <td>2025-01-01</td>
+                            <td>$100</td>
+                            <td>Completed</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Order 2</td>
+                            <td>Customer B</td>
+                            <td>2025-01-02</td>
+                            <td>$200</td>
+                            <td>Pending</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Order 3</td>
+                            <td>Customer C</td>
+                            <td>2025-01-03</td>
+                            <td>$150</td>
+                            <td>Shipped</td>
+                        </tr>
+                        <!-- Các đơn hàng khác -->
+                        </tbody>
+                    </table>
+
+                    <nav>
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item active">
+                                <a class="page-link" href="#" onclick="changePage(1)">1</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" onclick="changePage(2)">2</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" onclick="changePage(3)">3</a>
+                            </li>
+                            <!-- Các trang khác -->
+                        </ul>
+                    </nav>
+                </div>
+                <div class="container mt-5 d-none" style="width: auto;" id="mngDiscount">
+                    <table class="table tableDiscount">
+                        <thead>
+                        <tr>
+                            <th>MÃ GIẢM GIÁ</th>
+                            <th>GIẢM GIÁ</th>
+                            <th>CHI TIẾT</th>
+                            <th>NGÀY BẮT ĐẦU</th>
+                            <th>SỐ NGÀY KHUYẾN MÃI</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="dis">DISCOUNT1</td>
+                            <td class="dis">10%</td>
+                            <td class="dis">Áp dụng cho tất cả sản phẩm</td>
+                            <td class="dis">2025-01-01</td>
+                            <td class="dis">7</td>
+                            <td>
+                                <button class="icon-button" onclick="deleteRowDiscount(this)">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                                <button class="icon-button" onclick="openEditDiscountForm(this)">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="dis">DISCOUNT2</td>
+                            <td class="dis">20%</td>
+                            <td class="dis">Dành cho khách hàng VIP</td>
+                            <td class="dis">2025-02-01</td>
+                            <td class="dis">14</td>
+                            <td>
+                                <button class="icon-button" onclick="deleteRowDiscount(this)">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                                <button class="icon-button" onclick="openEditDiscountForm(this)">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <!-- Các giảm giá khác -->
+                        </tbody>
+                    </table>
+
+                    <nav>
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item active">
+                                <a class="page-link" href="#" onclick="changePageDiscounts(1)">1</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" onclick="changePageDiscounts(2)">2</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" onclick="changePageDiscounts(3)">3</a>
+                            </li>
+                            <!-- Các trang khác -->
+                        </ul>
+                    </nav>
+                </div>
+
 
             </div>
+
         </div>
+    </div>
     </div>
 </main>
 
@@ -1189,6 +1288,7 @@
             });
         }
     }
+
     function addProduct() {
         var flag = true;
 
@@ -1377,6 +1477,245 @@
             previewImage.src = '';
         }
     }
+
+    var id ="";
+    function editProduct() {
+        var flag = true;
+        var nameP = document.getElementById("nameProductEdit");
+        var price = document.getElementById("priceProductEdit");
+        var price = price.value.replace(/[^\d]/g, '');
+        var des = document.getElementById("desEdit");
+        var diameter = document.getElementById("diameterEdit");
+        var height = document.getElementById("heightEdit");
+        var cate = document.getElementById("idCate");
+        var quantity = document.getElementById("quantityEdit");
+        var priceReg = /^\d+$/;
+        var errNameP = document.getElementById("errNamePEdit");
+        var errImpPriceAdd = document.getElementById("errImpPriceEdit");
+        var errPriceAdd = document.getElementById("errPriceEdit");
+        var errDes = document.getElementById("errDesEdit");
+        var errImg1 = document.getElementById("errImg1Edit");
+
+
+        // if (nameP.value === "") {
+        //     errNameP.innerHTML = 'Vui lòng nhập tên sản phẩm';
+        //     flag = false;
+        // } else {
+        //     errNameP.innerHTML = '';
+        // }
+        // //giá nhập
+        // if (priceImp === "") {
+        //     errImpPriceAdd.innerHTML = 'Vui lòng nhập giá sản phẩm!';
+        //     flag = false;
+        // } else if (!priceImp.match(priceReg)) {
+        //     errImpPriceAdd.innerHTML = 'Giá tiền không hợp lệ!';
+        //     flag = false;
+        // } else {
+        //     errImpPriceAdd.innerHTML = '';
+        // }
+        // //giá bán
+        // if (price === "") {
+        //     errPriceAdd.innerHTML = 'Vui lòng nhập giá bán!';
+        //     flag = false;
+        // } else if (!price.match(priceReg)) {
+        //     errPriceAdd.innerHTML = 'Giá tiền không hợp lệ!';
+        //     flag = false;
+        // } else {
+        //     errPriceAdd.innerHTML = '';
+        // }
+        // //mô tả
+        // if (des.value === "") {
+        //     errDes.innerHTML = 'Vui lòng nhập mô tả sản phẩm!';
+        //     flag = false;
+        // } else {
+        //     errDes.innerHTML = ''
+        // }
+        // //length
+        // if (length.value === "") {
+        //     length.style.borderColor = 'red';
+        //     flag = false;
+        // } else {
+        //     length.style.borderColor = '#dee2e6';
+        // }
+        // //width
+        // if (width.value === "") {
+        //     width.style.borderColor = 'red';
+        //     flag = false;
+        // } else {
+        //     width.style.borderColor = '#dee2e6';
+        // }
+        // //height
+        // if (height.value === "") {
+        //     height.style.borderColor = 'red';
+        //     flag = false;
+        // } else {
+        //     height.style.borderColor = '#dee2e6';
+        // }
+        // //material
+        // if (material.value === "") {
+        //     material.style.borderColor = 'red';
+        //     flag = false;
+        // } else {
+        //     material.style.borderColor = '#dee2e6';
+        // }
+        // //color
+        // if (color.value === "") {
+        //     color.style.borderColor = 'red';
+        //     flag = false;
+        // } else {
+        //     color.style.borderColor = '#dee2e6';
+        // }
+        // //amount
+        // if (quantity.value === "") {
+        //     quantity.style.borderColor = 'red';
+        //     flag = false;
+        // } else {
+        //     quantity.style.borderColor = '#dee2e6';
+        // }
+        if(flag) {
+            var formData = new FormData();
+            var fileInputs = document.getElementsByName('imageEdit');
+            for (var i = 0; i < fileInputs.length; i++) {
+                var fileInput = fileInputs[i];
+                formData.append('image', fileInput.files[0]);
+            }
+            var imgAvai = document.getElementsByName("imageAvai");
+            for (var i = 0; i < imgAvai.length; i++) {
+                formData.append('imageAvai', imgAvai[i].value);
+            }
+            formData.append('nameProductEdit', nameP.value);
+            formData.append('priceProductEdit', price);
+            formData.append('idCate', cate.value);
+            formData.append('diameterEdit', diameter.value);
+            formData.append('heightEdit', height.value);
+            formData.append('quantityEdit', quantity.value);
+            formData.append('desEdit', des.value);
+            formData.append("id", id);
+
+            $.ajax({
+                url: 'editProduct',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(data) {
+                    var jsonData = JSON.parse(data);
+                    var htmlData = jsonData.htmlData;
+                    var res = jsonData.res;
+                    alert(res);
+                    var row = document.getElementById("innerProduct");
+                    row.innerHTML = "";
+                    for (var i = 0; i < htmlData.length; i++) {
+                        var p = htmlData[i];
+                        row.innerHTML += "  <tr  data-bs-toggle =\"modal\" data-bs-target=\"#detailProduct\" onclick=\"detailProduct('"+p.idProduct+"')\">\n" +
+                            "<input type=\"hidden\" className =\"idProduct\" value=\""+p.idProduct+"\">"+
+                            "                                <td class=\"w40\">"+(i+1)+"</td>\n" +
+                            "                                <td class=\"w260\">\n" +
+                            "                                    <div class=\"item d-flex justify-content-center\">\n" +
+                            "                                        <div class=\"item_img\">\n" +
+                            "                                            <img src=\""+p.imageUrl+"\"\n" +
+                            "                                                 class=\"card-img-top img_p_cart\" alt=\"...\"/>\n" +
+                            "                                        </div>\n" +
+                            "<span class=\"item_text\">" + p.name + "</span>\n" +
+                            "                                    </div>\n" +
+                            "                                </td>\n" +
+                            "                                <td>"+p.price+"</td>\n" +
+                            "                                <td>"+p.color+"</td>\n" +
+                            "                                <td>"+p.quantity+"\n" +
+                            "                                <td>"+p.status+"</td>\n" +
+                            "                                <td>\n" +
+                            "                                    <div class=\"d-flex justify-content-center\">\n" +
+                            "                                        <button class=\"delete btnAdd bgcolor bd-full\" title=\"Xóa\" aria-hidden=\"true\" onclick=\"deleteProduct('"+p.idProduct+"')\" data-bs-toggle=\"modal\" data-bs-target=\"\"><i class=\"fa fa-trash-o text-color\"></i></button>"+
+                            "                                        <button class=\"editProduct btnAdd bgcolor bd-full mx-1\" data-bs-toggle=\"modal\" data-bs-target=\"#editProduct\" onclick=\"innerEditProduct('"+p.idProduct+"')\"><i class=\"fa fa-pencil text-color\" title=\"Chỉnh sửa\" aria-hidden=\"true\"></i></button>\n" +
+                            "                                        <button class=\"hideProduct btnAdd bgcolor bd-full\" title=\"Ẩn/hiện sản phẩm\" aria-hidden=\"true\" onclick=\"hideProduct('"+p.idProduct+"')\" data-bs-toggle=\"modal\" data-bs-target=\"\"><i class=\"fa fa-lock text-color\"></i></button>"+
+                            "                                    </div>\n" +
+                            "                                </td>\n" +
+                            "                            </tr>";
+                    }
+                },
+                error: function(error) {
+                    console.error("Xảy ra lỗi:", error);
+                }
+            });
+        }
+    }
+    // Ví dụ: Gọi hàm này khi một dòng sản phẩm được nhấp vào
+    function innerEditProduct(productId) {
+        id = productId;
+        $.ajax({
+            type: "GET",
+            url: "loadDetailProduct",
+            data: {
+                idProduct: productId
+            },
+            success: function (data) {
+                var p = data.product;
+                //Cập nhật các phần tử HTML với chi tiết sản phẩm
+                $("#nameProductEdit").val(p.name);
+                $("#priceImpProductEdit").val(p.priceImport);
+                $("#priceProductEdit").val(p.price);
+                $("#lengthEdit").val(p.length);
+                $("#widthEdit").val(p.width);
+                $("#heightEdit").val(p.height);
+                $("#materialEdit").val(p.material);
+                $("#cateTypeEdit").val(p.typeCate)
+                $("#colorEdit").val(p.color);
+                $("#quantityEdit").val(p.quantityAvailable);
+                $("#desEdit").val(p.description);
+                var container = document.getElementById('imageEdit');
+                container.innerHTML = "";
+                for (var img of p.imageDetail) {
+                    var newInput = document.createElement('div');
+                    newInput.className = 'mb-3 d-flex align-items-center';
+                    newInput.innerHTML = `<img src="Products/${img.url}"" class="card-img-top img_p_cart me-2" alt="..."/> <input type="text" class="form-control " name="imageAvai" value="Products/${img.url}" style ="height:40px"> <button type="button" class="btnAdd bgcolor bd-full ms-2  remove" style ="height:40px" onclick="removeInputEdit(this)"><i class="fa fa-minus-circle text-color" aria-hidden="true" title="Xóa hình ảnh"></i></button>`;
+                    container.appendChild(newInput);
+                }
+            },
+            error: function () {
+                console.error("Không thể tải chi tiết sản phẩm");
+            }
+        });
+    };
+
+    // Ví dụ: Gọi hàm này khi một dòng sản phẩm được nhấp vào
+    function detailProduct(productId) {
+        $.ajax({
+            type: "GET",
+            url: "loadDetailProduct",
+            data: {
+                idProduct: productId
+            },
+            success: function (data) {
+                var p = data.product;
+                //Cập nhật các phần tử HTML với chi tiết sản phẩm
+                $("#idProductdetail").val(p.idProduct);
+                $("#nameProductdetail").val(p.name);
+                // $("#priceImpProductdetail").val(p.priceImport);
+                $("#priceProductDetail").val(p.price);
+                $("#lengthdetail").val(p.length);
+                $("#widthdetail").val(p.width);
+                $("#heightdetail").val(p.height);
+                // $("#materialdetail").val(p.material);
+                // $("#cateTypedetail").val(p.typeCate)
+                // $("#colordetail").val(p.color);
+                $("#quantitydetail").val(p.quantity);
+                $("#desdetail").val(p.description);
+                // cập nhật ảnh chính
+                $('#img_center').attr('src',p.imageCenter);
+                $('.owl-carousel').owlCarousel('destroy'); // Khởi tạo lại Owl Carousel
+                // Cập nhật carousel ảnh chi tiết
+                $(".owl-carousel").empty();
+                for (var img of p.imageDetail) {
+                    $(".owl-carousel").append(`<div class="pe-2"><img src="Products/${img.url}" alt="" class="img_p_detail" onmouseover="changeImg('Products/${img.url}')"></div>`);
+                }
+                $('.owl-carousel').owlCarousel()
+                $('.owl-carousel').removeClass("owl-hidden");
+            },
+            error: function () {
+                console.error("Không thể tải chi tiết sản phẩm");
+            }
+        });
+    };
 
 
 </script>

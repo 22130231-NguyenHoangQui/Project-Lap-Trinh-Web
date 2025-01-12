@@ -2,13 +2,12 @@ package com.edu.hcmuaf.fit.dao;
 
 import com.edu.hcmuaf.fit.model.Product;
 import com.edu.hcmuaf.fit.model.ProductImages;
+import com.edu.hcmuaf.fit.model.SizePrice;
 import com.edu.hcmuaf.fit.util.JDBCUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DAOProduct {
     //    test
@@ -108,14 +107,44 @@ public class DAOProduct {
         ArrayList<ProductImages> re = new ArrayList<>();
         Connection connection = JDBCUtil.getConnection();
         try {
-            String sql = "Select pi.imageUrl " + "from productimages pi " + "where pi.id = ?";
+            String sql = "Select id, imageUrl, productId from productimages  where productId = ?";
             PreparedStatement pr = connection.prepareStatement(sql);
             pr.setInt(1, p.getId());
             ResultSet resultSet = pr.executeQuery();
             while (resultSet.next()) {
-                String url = resultSet.getString("imageUrl");
-                ProductImages img = new ProductImages(url);
+//                int id = resultSet.getInt("id");
+                String urlImage = resultSet.getString("imageUrl");
+                int idProduct = resultSet.getInt("productId");
+
+                ProductImages img = new ProductImages(urlImage, idProduct);
+
                 re.add(img);
+            }
+            JDBCUtil.closeConnection(connection);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return re;
+
+    }
+
+    public static ArrayList<SizePrice> listPriceOfProduct(int idP) {
+        ArrayList<SizePrice> re = new ArrayList<>();
+        Connection connection = JDBCUtil.getConnection();
+        try {
+            String sql = "Select id, diameter, price, height, productId from productsizes  where productId = ?";
+            PreparedStatement pr = connection.prepareStatement(sql);
+            pr.setInt(1, idP);
+            ResultSet resultSet = pr.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String diameter = resultSet.getString("diameter");
+                double price = resultSet.getDouble("price");
+                String height = resultSet.getString("height");
+                int idProduct = resultSet.getInt("productId");
+
+                SizePrice sp = new SizePrice(id, idProduct, diameter, height, price);
+                re.add(sp);
             }
             JDBCUtil.closeConnection(connection);
         } catch (SQLException e) {
@@ -165,7 +194,7 @@ public class DAOProduct {
         ArrayList<Product> re = new ArrayList<>();
         Connection connection = JDBCUtil.getConnection();
         try {
-            String sql = "SELECT * FROM Products WHERE id = 138 ORDER BY RAND() LIMIT 1";
+            String sql = "SELECT * FROM Products  ORDER BY RAND() LIMIT 100";
             PreparedStatement pr = connection.prepareStatement(sql);
             ResultSet resultSet = pr.executeQuery();
             while (resultSet.next()) {
@@ -255,6 +284,7 @@ public class DAOProduct {
         }
         return re;
     }
+
     public static int insertProduct(Product p) {
         int re = 0;
         Connection connection = JDBCUtil.getConnection();
@@ -281,14 +311,15 @@ public class DAOProduct {
                 "values(?,?)";
         try {
             PreparedStatement pr = connection.prepareStatement(sql);
-            pr.setInt(1,id);
-            pr.setString(2,url);
+            pr.setInt(1, id);
+            pr.setString(2, url);
             re = pr.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return re;
     }
+
     public static int insertPriceProduct(int productId, String diameter, String height, int price) {
         int re = 0;
         Connection connection = JDBCUtil.getConnection();
@@ -333,31 +364,167 @@ public class DAOProduct {
         return latestProduct;
     }
 
-    public static void main(String[] args) {
-//        p.setId(1);
-//        System.out.println(listImageOfProduct(p));
+    public static ArrayList<ProductImages> getImagesByProductId(int productId) {
+        ArrayList<ProductImages> re = new ArrayList<>();
+        Connection connection = JDBCUtil.getConnection();
+        String sql = "SELECT * FROM ProductImages WHERE id = ?";
+        try {
+            PreparedStatement pre = connection.prepareStatement(sql);
+            pre.setInt(1, productId);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                //                int id = resultSet.getInt("id");
+                String urlImage = rs.getString("imageUrl");
+                int idProduct = rs.getInt("productId");
 
-//        for (Product product : listProductByIdCate(1, 0)) {
-//            System.out.println(product);
-//        }
+                ProductImages img = new ProductImages(urlImage, idProduct);
 
-            Product product = new Product();
-            product.setId(1);  // Giả sử sản phẩm có ID là 1
+                re.add(img);
+            }
+            JDBCUtil.closeConnection(connection);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return re;
+    }
 
-        ArrayList<ProductImages> images = listImageOfProduct(product);
-            // Gọi phương thức listImageOfProduct
-            System.out.println(product.getProductImages().get(0).getUrl());
-//        for (Product product : getProductsByPriceRange(0, 10000)) {
-//            System.out.println(product);
-//        }
+    public static synchronized int updateProduct(Product p) throws SQLException {
+        int re = 0;
+        Connection connection = JDBCUtil.getConnection();
+        try {
+            PreparedStatement s = connection.prepareStatement("select id from products where id =?");
+            s.setInt(1, p.getId());
+            ResultSet resultSet = s.executeQuery();
+            if (resultSet.next()) {
+                s = connection.prepareStatement("UPDATE products SET " +
+                        "productName = ?, " +
+                        "quantity = ?, " +
+                        "description = ?, " +
+                        "updatedAt = NOW() " +
+                        "WHERE id = ?");
+                s.setString(1, p.getNameProduct());
+                s.setInt(2, p.getQuantity());
+                s.setString(3, p.getDescription());
+                s.setInt(4, p.getId());
+                re = s.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        JDBCUtil.closeConnection(connection);
+        return re;
+    }
 
-//        LoadProductByName loadProductByName = new LoadProductByName();
-//        String name = "product";
-//        ArrayList<Product> listProductByName = ProductService.getInstance().listProductByName(name);
-//        for (Product product : listProductByName) {
-//            System.out.println(product);
-//        }
+    public static int delImgOfProduct(int id, String urlImage) throws SQLException {
+        int re = 0;
+        Connection connection = JDBCUtil.getConnection();
+        Statement s = connection.createStatement();
+        synchronized (s) {
+            try {
+                ResultSet resultSet = s.executeQuery("select id from productsimages where id=" + id);
+                if (resultSet.next()) {
+                    re = s.executeUpdate("DELETE FROM productsimages WHERE imageUrl = '" + urlImage + "'");
 
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            JDBCUtil.closeConnection(connection);
+        }
+        return re;
+    }
 
+    public static ArrayList<SizePrice> getPriceByIdP(int id) {
+        ArrayList<SizePrice> re = new ArrayList<>();
+        Connection connection = JDBCUtil.getConnection();
+        String sql = "SELECT * FROM ProductSizes WHERE productId =  ?";
+        try {
+            PreparedStatement pr = connection.prepareStatement(sql);
+            pr.setInt(1, id);
+            ResultSet rs = pr.executeQuery();
+            while (rs.next()) {
+                double price = rs.getDouble("price");
+                String diameter = rs.getString("diameter");
+                String height = rs.getString("height");
+                int idProduct = rs.getInt("productId");
+                SizePrice sizePrice = new SizePrice();
+                sizePrice.setIdProduct(idProduct);
+                sizePrice.setDiameter(diameter);
+                sizePrice.setHeight(height);
+                sizePrice.setPrice(price);
+                re.add(sizePrice);
+            }
+            JDBCUtil.closeConnection(connection);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return re;
+    }
+
+    public static int insertSizePrice(SizePrice sizePrice) {
+        String sql = "INSERT INTO productsizes (diameter, height, price, productId) VALUES (?, ?, ?, ?)";
+        try (Connection conn = JDBCUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, sizePrice.getDiameter());
+            stmt.setString(2, sizePrice.getHeight());
+            stmt.setDouble(3, sizePrice.getPrice());
+            stmt.setInt(4, sizePrice.getIdProduct());
+            return stmt.executeUpdate(); // Trả về số hàng bị ảnh hưởng
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0; // Trả về 0 nếu xảy ra lỗi
+    }
+
+    public static int updateSizePrice(SizePrice sizePrice) {
+        String sql = "UPDATE productsizes SET price = ? WHERE diameter = ? AND height = ? AND productId = ?";
+        try (Connection conn = JDBCUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setDouble(1, sizePrice.getPrice());
+            stmt.setString(2, sizePrice.getDiameter());
+            stmt.setString(3, sizePrice.getHeight());
+            stmt.setInt(4, sizePrice.getIdProduct());
+            return stmt.executeUpdate(); // Trả về số hàng bị ảnh hưởng
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0; // Trả về 0 nếu xảy ra lỗi
+    }
+
+    public static int deleteSizePrice(SizePrice sizePrice) {
+        String sql = "DELETE FROM productsizes WHERE diameter = ? AND height = ? AND productId = ?";
+        try (Connection conn = JDBCUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, sizePrice.getDiameter());
+            stmt.setString(2, sizePrice.getHeight());
+            stmt.setInt(3, sizePrice.getIdProduct());
+            return stmt.executeUpdate(); // Trả về số hàng bị ảnh hưởng
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0; // Trả về 0 nếu xảy ra lỗi
+    }
+
+    public static Product getProductById(int id) {
+        Product re = null;
+        String sql = "SELECT * FROM products WHERE id= ?";
+        try (Connection conn = JDBCUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            ResultSet resultSet = stmt.executeQuery();
+            while (resultSet.next()) {
+                int idProduct = resultSet.getInt("id");
+                int idCate = resultSet.getInt("idCate");
+                String name = resultSet.getString("name");
+                String description = resultSet.getString("description");
+                int quantity = resultSet.getInt("quantity");
+                boolean status = resultSet.getBoolean("status");
+                re = new Product(idProduct, idCate, name, quantity, description, status);
+            }
+            JDBCUtil.closeConnection(conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return re;
     }
 }
