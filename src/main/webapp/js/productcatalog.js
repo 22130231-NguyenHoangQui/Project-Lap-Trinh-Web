@@ -257,19 +257,19 @@ document.addEventListener('DOMContentLoaded', function () {
 /**
  * lưu data vô để hiện thị chi tiết sản phẩm tương ứng
  */
-// function saveProductData(encodedProduct) {
-//     // Giải mã và parse JSON từ chuỗi mã hóa
-//     const product = JSON.parse(decodeURIComponent(encodedProduct));
-//
-//     // Lưu dữ liệu vào Local Storage
-//     localStorage.setItem('selectedProduct', JSON.stringify(product));
-//
-//     // In ra console để kiểm tra
-//     console.log("Sản phẩm được lưu:", product);
-//
-//     // Chuyển hướng sang trang chi tiết sản phẩm
-//     window.location.href = 'detailProduct.html';
-// }
+function saveProductData(encodedProduct) {
+    // Giải mã và parse JSON từ chuỗi mã hóa
+    const product = JSON.parse(decodeURIComponent(encodedProduct));
+
+    // Lưu dữ liệu vào Local Storage
+    localStorage.setItem('selectedProduct', JSON.stringify(product));
+
+    // In ra console để kiểm tra
+    console.log("Sản phẩm được lưu:", product);
+
+    // Chuyển hướng sang trang chi tiết sản phẩm
+    window.location.href = 'detailProduct.jsp';
+}
 
 const imagesByCategory = {
     '2':[ { image: '../image/imghomepage/product/product_danhmuc/7.webp', id: 'TRMS4', name: 'Tiramisu Dâu Tây', price: '120,000₫', link: '#' ,

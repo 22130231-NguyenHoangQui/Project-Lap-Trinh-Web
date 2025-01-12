@@ -52,7 +52,7 @@ public class SignInAccount extends HttpServlet {
                         account.setVerifyAccount(vrf);
                         HttpSession session = request.getSession();
                         session.setAttribute("account", account);
-                        response.sendRedirect("homepage");
+                        response.sendRedirect("homepage.jsp");
                         return;
                     }
                 } else {
