@@ -52,8 +52,8 @@
             <div class="row row-center d-flex justify-content-between  align-items-center">
                 <div class="col-sm-1 col-md-1 col-lg-1 img-logo"
                      style="display: block; width: 10%; padding-left: 10px;">
-                    <a href="../pages/HomePage.html">
-                        <img src="../image/imghomepage/logo/logo1.jpg" alt="" class="img-logo-detail">
+                    <a href="./homepage.jsp">
+                        <img src="./image/imghomepage/logo/logo1.jpg" alt="" class="img-logo-detail">
 
                     </a>
                 </div>
@@ -63,7 +63,7 @@
 
 
 
-                        <a href="../pages/homepage.html" class="active">
+                        <a href="./homepage.jsp" class="active">
                             <li>Trang chủ</li>
                         </a>
                         <div class="dropdown  " style=" display:flex; align-items: center;  height: 100%; " >

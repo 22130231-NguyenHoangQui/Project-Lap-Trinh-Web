@@ -51,9 +51,9 @@ public class Verify extends HttpServlet {
             account.setVerifyAccount(verifyAccount);
             if(obj != null) {
                 session.setAttribute("account", account);
-                url ="homePage";
+                url ="homepage";
             }else{
-                url = "SignIn.jsp";
+                url = "signIn.jsp";
             }
         }
         if(err.length() > 0) {

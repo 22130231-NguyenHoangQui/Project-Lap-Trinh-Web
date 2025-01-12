@@ -1,20 +1,21 @@
 package com.edu.hcmuaf.fit.controller;
 
 import com.edu.hcmuaf.fit.model.Account;
-import com.edu.hcmuaf.fit.service.AccountService;
 import com.edu.hcmuaf.fit.model.VerifyAccount;
+import com.edu.hcmuaf.fit.service.AccountService;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-
 import java.io.IOException;
 import java.sql.Date;
 
 @WebServlet(name = "changeInfo", value = "/changeInfo")
 public class ChangeInfo extends HttpServlet {
+
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
@@ -61,7 +62,7 @@ public class ChangeInfo extends HttpServlet {
             }
         }
         request.setAttribute("res", res);
-        request.getRequestDispatcher("ChangeInformation.jsp").forward(request, response);
+        request.getRequestDispatcher("changeInformation.jsp").forward(request, response);
     }
 }
 
