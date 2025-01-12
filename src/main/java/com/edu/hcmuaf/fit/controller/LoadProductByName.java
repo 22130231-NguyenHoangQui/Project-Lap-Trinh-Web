@@ -44,7 +44,7 @@ public class LoadProductByName extends HttpServlet {
                     "                <div class=\"price-wrapper\">\n" +
                     "                    <span class=\"price\">\n" +
                     "                        <span class=\"woocommerce-Price-amount amount\">\n" +
-                    "                            <bdi style=\"font-weight: bold;\">" + nf.format(product.getPrice()) + "</bdi>\n" +
+//                    "                            <bdi style=\"font-weight: bold;\">" + nf.format(product) + "</bdi>\n" +
                     "                        </span>\n" +
                     "                    </span>\n" +
                     "                </div>\n" +
@@ -56,8 +56,8 @@ public class LoadProductByName extends HttpServlet {
                     "                    <span class=\"description-content\">Mô tả: <br>" + product.getDescription() + "</span>\n" +
                     "                </div>\n" +
                     "                 <div class=\"size-wrapper\" style=\"display:none;\">\n" +
-                    "                    <p ><strong>Đường kính:</strong> " + product.getDiameter() + "</p>\n" +
-                    "                    <p><strong>Chiều cao:</strong> " + product.getHeight() + "</p>\n" +
+//                    "                    <p ><strong>Đường kính:</strong> " + product.getDiameter() + "</p>\n" +
+//                    "                    <p><strong>Chiều cao:</strong> " + product.getHeight() + "</p>\n" +
                     "                </div>\n" +
                     "            </div>\n" +
                     "        </div>\n" +

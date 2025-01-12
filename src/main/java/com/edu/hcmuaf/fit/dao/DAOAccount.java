@@ -318,7 +318,7 @@ public class DAOAccount {
     public static ArrayList<Account> listAllAccount() {
         ArrayList<Account> list = new ArrayList<>();
         Connection connection = JDBCUtil.getConnection();
-        String sql = "select id, userName, password, name, gender, phoneNumber, birthDay, address, addressReceive, email, role, status " +
+        String sql = "select id, username, password, name, gender, phoneNumber, birthDay, address, addressReceive, email, role, status " +
                 "from accounts ";
         try {
             PreparedStatement pr = connection.prepareStatement(sql);
@@ -326,7 +326,7 @@ public class DAOAccount {
             while(resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
-                String usName = resultSet.getString("userName");
+                String usName = resultSet.getString("username");
                 String pw = resultSet.getString("password");
                 String gender = resultSet.getString("gender");
                 String phoneNumber = resultSet.getString("phoneNumber");
@@ -423,4 +423,12 @@ public class DAOAccount {
         JDBCUtil.closeConnection(connection);
         return re;
     }
+
+    public static void main(String[] args) {
+            String username = "admin";
+        System.out.println(checkExistUserName(username));
+
+
+    }
 }
+

@@ -14,41 +14,26 @@ import java.util.Locale;
 
 public class Product {
     private int id;
+    private int idCate;
     private String nameProduct;
     private int quantity;
-    private String diameter;
-    private String height;
-    private double price;
     private String description;
     private Date created_at;
     private Date updated_at;
     private ArrayList<ProductImages> productImages;
 
-
-    public Product() {
-    }
-
-
-    public Product(String nameProduct, int quantity, String diameter, String height, int price, String description) {
-        this.nameProduct = nameProduct;
-        this.quantity = quantity;
-        this.diameter = diameter;
-        this.height = height;
-        this.price = price;
-        this.description = description;
-    }
-
-    public Product(int id, String nameProduct, int quantity, String diameter, String height, int price, String description, Date created_at, Date updated_at, ArrayList<ProductImages> productImages) {
+    public Product(int id, int idCate, String nameProduct, int quantity, String description, Date created_at, Date updated_at, ArrayList<ProductImages> productImages) {
         this.id = id;
+        this.idCate = idCate;
         this.nameProduct = nameProduct;
         this.quantity = quantity;
-        this.diameter = diameter;
-        this.height = height;
-        this.price = price;
         this.description = description;
         this.created_at = created_at;
         this.updated_at = updated_at;
         this.productImages = productImages;
+    }
+
+    public Product() {
     }
 
     public int getId() {
@@ -57,6 +42,14 @@ public class Product {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getIdCate() {
+        return idCate;
+    }
+
+    public void setIdCate(int idCate) {
+        this.idCate = idCate;
     }
 
     public String getNameProduct() {
@@ -73,30 +66,6 @@ public class Product {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    public String getDiameter() {
-        return diameter;
-    }
-
-    public void setDiameter(String diameter) {
-        this.diameter = diameter;
-    }
-
-    public String getHeight() {
-        return height;
-    }
-
-    public void setHeight(String height) {
-        this.height = height;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     public String getDescription() {
@@ -131,54 +100,17 @@ public class Product {
         this.productImages = productImages;
     }
 
-
-
-
-    private void loadCategoryId() {
-        String sql = "SELECT ca.category_id \n" +
-                "FROM categoryproduct cp\n" +
-                "JOIN category ca ON cp.category_id = ca.category_id\n" +
-                "WHERE cp.product_id = ?\n" +
-                "LIMIT 1";
-        try (Connection connection = JDBCUtil.getConnection();
-             PreparedStatement pr = connection.prepareStatement(sql)) {
-
-            pr.setInt(1, this.id); // Sử dụng id của sản phẩm hiện tại
-            ResultSet resultSet = pr.executeQuery();
-
-            while (resultSet.next()) {
-//                categoryId.add(resultSet.getInt("category_id"));
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public String getFormattedPrice() {
-        NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
-        return format.format(this.price);
-    }
-
     @Override
     public String toString() {
         return "Product{" +
                 "id=" + id +
+                ", idCate=" + idCate +
                 ", nameProduct='" + nameProduct + '\'' +
                 ", quantity=" + quantity +
-                ", diameter='" + diameter + '\'' +
-                ", height='" + height + '\'' +
-                ", price=" + price +
                 ", description='" + description + '\'' +
                 ", created_at=" + created_at +
                 ", updated_at=" + updated_at +
                 ", productImages=" + productImages +
                 '}';
-    }
-
-    public static void main(String[] args) {
-        Product p = new Product();
-        p.setPrice(5000000.0);
-
-        System.out.println(p.getFormattedPrice());
     }
 }

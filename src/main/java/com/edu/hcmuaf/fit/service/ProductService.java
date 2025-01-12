@@ -87,6 +87,18 @@ public static ArrayList<Product> getProductsByRange(int minPrice, int maxPrice, 
     }
     return listProduct;
 }
+public int insertProduct(Product product) {
+        return DAOProduct.insertProduct(product);
+}
+public int insertImageOfProduct(int id,String url) {
+    return DAOProduct.insertImageProduct(id,url);
+}
+public int insertPriceProduct(int productId, String diameter, String height, int price) {
+    return DAOProduct.insertPriceProduct(productId,diameter,height,price);
+}
+public static Product latestProduct() {
+        return DAOProduct.latestProduct();
+}
 
     public static void main(String[] args) {
         ArrayList<Product> listProduct = ProductService.getInstance().listProductRandom(0);
