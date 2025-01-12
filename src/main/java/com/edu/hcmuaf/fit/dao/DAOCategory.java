@@ -18,7 +18,6 @@ public class DAOCategory {
         ArrayList<Category> list = new ArrayList<>();
         Connection connection = JDBCUtil.getConnection();
         String sql = "SELECT c.categoryName AS category_name, c.imageUrl AS category_img, SUM(orr.quantity) AS total_quantity_sold " +
-        String sql = "SELECT c.categoryName AS category_name, c.imageUrl AS category_img, SUM(orr.quantity) AS total_quantity_sold " +
                 "FROM OrderDetails orr " +
                 "JOIN Products pro ON orr.orderId = pro.id " +  // sửa Id thành id
                 "JOIN Categories c ON c.id = pro.id " + // sửa ct.id thành c.id

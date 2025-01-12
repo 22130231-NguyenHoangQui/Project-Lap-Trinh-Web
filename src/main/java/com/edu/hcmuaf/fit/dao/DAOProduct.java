@@ -2,6 +2,7 @@ package com.edu.hcmuaf.fit.dao;
 
 import com.edu.hcmuaf.fit.model.Product;
 import com.edu.hcmuaf.fit.model.ProductImages;
+import com.edu.hcmuaf.fit.model.ProductSizes;
 import com.edu.hcmuaf.fit.model.SizePrice;
 import com.edu.hcmuaf.fit.util.JDBCUtil;
 
@@ -222,9 +223,8 @@ public class DAOProduct {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return re;
+        return products;
     }
-
 
     public static ArrayList<Product> getProductsByPriceRange(int minPrice, int maxPrice, int offset) {
         ArrayList<Product> re = new ArrayList<>();
@@ -294,7 +294,7 @@ public class DAOProduct {
         String sql = "INSERT INTO ProductSizes (productId, diameter, height, price) " +
                 "VALUES (?, ?, ?, ?)";
         try {
-            String sql = "SELECT * FROM productsizes WHERE productId = ?";
+//            String sql = "SELECT * FROM productsizes WHERE productId = ?";
             PreparedStatement pr = connection.prepareStatement(sql);
             pr.setInt(1, productId);
             pr.setString(2, diameter);
@@ -317,13 +317,37 @@ public class DAOProduct {
         try {
             PreparedStatement pr = connection.prepareStatement(sql);
             ResultSet rs = pr.executeQuery();
+            if (rs.next()) {
+                latestProduct = new Product();
+                latestProduct.setId(rs.getInt("id"));
+                latestProduct.setNameProduct(rs.getString("productName"));
+                latestProduct.setQuantity(rs.getInt("quantity"));
+                latestProduct.setDescription(rs.getString("description"));
+                latestProduct.setCreated_at(rs.getTimestamp("createdAt"));
+                latestProduct.setUpdated_at(rs.getTimestamp("updatedAt"));
+                latestProduct.setIdCate(rs.getInt("categoryId"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return latestProduct;
+    }
+
+    // Lấy danh sách sizes của sản phẩm
+    public static ArrayList<ProductSizes> listSizeOfProduct(int productId) {
+        ArrayList<ProductSizes> productSizes = new ArrayList<>();
+        Connection connection = JDBCUtil.getConnection();
+        try {
+            String sql = "SELECT * FROM productsizes WHERE product_id = ?";
+            PreparedStatement pr = connection.prepareStatement(sql);
+            pr.setInt(1, productId);
+            ResultSet rs = pr.executeQuery();
             while (rs.next()) {
                 String diameter = rs.getString("diameter");
                 String hight = rs.getString("hight");
                 int price = rs.getInt("price");
                 productSizes.add(new ProductSizes(diameter, hight, price));
             }
-            JDBCUtil.closeConnection(connection);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

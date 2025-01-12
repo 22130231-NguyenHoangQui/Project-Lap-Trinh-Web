@@ -17,8 +17,8 @@ public class Product {
     public String nameProduct;
     private int quantity;
     private String description;
-    private Date created_at;
-    private Date updated_at;
+    private Date createdAt;
+    private Date updatedAt;
     private ArrayList<ProductImages> productImages;
     private ArrayList<ProductSizes> productSizes;
     private int categoryId;
@@ -35,17 +35,14 @@ public class Product {
 
     public Product(int id, String nameProduct, int quantity, ArrayList<ProductSizes> productSizes, String description, Date createdAt, Date updated_at, ArrayList<ProductImages> productImages) {
         this.id = id;
-        this.idCate = idCate;
+        this.categoryId = categoryId;
         this.nameProduct = nameProduct;
         this.quantity = quantity;
         this.description = description;
-        this.created_at = created_at;
-        this.updated_at = updated_at;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
         this.productImages = productImages;
-        this.sizePrices = sizePrices;
-    }
-
-    public Product() {
+        this.productSizes = productSizes;
     }
 
     public int getId() {
@@ -57,11 +54,11 @@ public class Product {
     }
 
     public int getIdCate() {
-        return idCate;
+        return categoryId;
     }
 
     public void setIdCate(int idCate) {
-        this.idCate = idCate;
+        this.categoryId = idCate;
     }
 
     public String getNameProduct() {
@@ -97,19 +94,19 @@ public class Product {
     }
 
     public Date getCreated_at() {
-        return created_at;
+        return createdAt;
     }
 
-    public void setCreated_at(Date created_at) {
-        this.created_at = created_at;
+    public void setCreated_at(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     public Date getUpdated_at() {
-        return updated_at;
+        return updatedAt;
     }
 
     public void setUpdated_at(Date updated_at) {
-        this.updated_at = updated_at;
+        this.updatedAt = updatedAt;
     }
 
     public ArrayList<ProductImages> getProductImages() {
