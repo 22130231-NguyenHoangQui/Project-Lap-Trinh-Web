@@ -70,7 +70,7 @@ public class AddProduct extends HttpServlet {
         }
 
         // Lấy danh sách sản phẩm và trả về JSON
-        ArrayList<Product> listProduct = ProductService.getInstance().listSixProduct(0);
+        ArrayList<Product> listProduct = ProductService.getInstance().listAllProduct(0);
         JSONObject jsonResponse = new JSONObject();
         JSONArray htmlDataArray = new JSONArray();
         NumberFormat nF = NumberFormat.getCurrencyInstance();

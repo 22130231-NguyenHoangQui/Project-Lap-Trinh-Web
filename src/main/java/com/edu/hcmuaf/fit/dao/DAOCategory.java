@@ -48,7 +48,7 @@ public class DAOCategory {
     public static ArrayList<Category> listCategory() {
         ArrayList<Category> list = new ArrayList<>();
         Connection connection = JDBCUtil.getConnection();
-        String sql = "SELECT ca.id, ca.Name FROM Category ca";  // sửa category_id thành id và name_category thành Name
+        String sql = "SELECT ca.id, ca.Name, ca.categoryName FROM categories ca";  // sửa category_id thành id và name_category thành Name
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
             ResultSet resultSet = pre.executeQuery();
@@ -72,5 +72,85 @@ public class DAOCategory {
         for (Category category : list1) {
             System.out.println(category);
         }
+    }
+
+    public static Category getCategoryById(int id) {
+        Category category = null;
+        Connection connection = JDBCUtil.getConnection();
+        String sql = "Select id, name from categories where id =?";
+        try {
+            PreparedStatement pr = connection.prepareStatement(sql);
+            pr.setInt(1, id);
+            ResultSet resultSet = pr.executeQuery();
+            while (resultSet.next()) {
+                int idCate = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                category = new Category(id, name);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return category;
+    }
+
+    public static int delCategory(int id) {
+        int re = 0;
+        Connection connection = JDBCUtil.getConnection();
+        try {
+            PreparedStatement s = connection.prepareStatement("select id from categories where id =?");
+            s.setInt(1, id);
+            ResultSet resultSet = s.executeQuery();
+            if (resultSet.next()) {
+                s = connection.prepareStatement("delete from suppliers where idCate =?");
+                s.setInt(1, id);
+                s.executeUpdate();
+                s = connection.prepareStatement("delete from products where idCate =?");
+                s.setInt(1, id);
+                s.executeUpdate();
+                s = connection.prepareStatement("delete from categories where id =?");
+                s.setInt(1, id);
+                re = s.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        JDBCUtil.closeConnection(connection);
+        return re;
+    }
+
+    public static synchronized int updateCategory(Category c) {
+        int re = 0;
+        Connection connection = JDBCUtil.getConnection();
+        try {
+            PreparedStatement s = connection.prepareStatement("select id from categories where id =?");
+            s.setInt(1, c.getId());
+            ResultSet resultSet = s.executeQuery();
+            if (resultSet.next()) {
+                s = connection.prepareStatement("UPDATE categories SET " + "name = ? " + "WHERE id =?");
+                s.setString(1, c.getName());
+                s.setInt(2, c.getId());
+                re = s.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        JDBCUtil.closeConnection(connection);
+        return re;
+
+    }
+
+    public static int insertCategory(Category c) {
+        int re = 0;
+        Connection connection = JDBCUtil.getConnection();
+        String sql = "insert into categories(name) " +
+                "values(?)";
+        try {
+            PreparedStatement pr = connection.prepareStatement(sql);
+            pr.setString(1, c.getName());
+            re = pr.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return re;
     }
 }

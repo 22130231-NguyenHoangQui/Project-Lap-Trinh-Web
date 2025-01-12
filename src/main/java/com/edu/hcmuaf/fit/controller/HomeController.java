@@ -21,8 +21,8 @@ public class HomeController extends HttpServlet {
         ArrayList<Category> listCategory = CategoryService.getInstance().getListCategory(1);
         request.setAttribute("listCategory", listCategory);
 
-        //load 6 sản phẩm
-        ArrayList<Product> listSixProduct = ProductService.getInstance().listSixProduct(1);
+
+        ArrayList<Product> listSixProduct = ProductService.getInstance().listAllProduct(0);
         request.setAttribute("listP", listSixProduct);
 //        load sản phẩm đang là xu hướng
 //        ArrayList<Product> listProductBestSelling = ProductService.getInstance().listProductBestSelling(1);

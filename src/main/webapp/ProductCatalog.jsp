@@ -35,7 +35,7 @@
             + request.getContextPath();
 %>
 <header>
-    <jsp:include page="header.jsp"></jsp:include>
+    <jsp:include page="Products/header.jsp"></jsp:include>
 </header>
 <div class="is-medium">
     <div class="container"></div>

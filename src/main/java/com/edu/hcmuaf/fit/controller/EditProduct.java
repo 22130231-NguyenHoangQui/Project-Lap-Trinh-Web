@@ -47,9 +47,7 @@ public class EditProduct extends HttpServlet {
         int quantity = Integer.parseInt(request.getParameter("quantityEdit"));
         String des = request.getParameter("desEdit");
         String[] imgs = request.getParameterValues("imageAvai");
-        String[] diameters = request.getParameterValues("diameters");
-        String[] heights = request.getParameterValues("heights");
-        String[] prices = request.getParameterValues("price");
+
         if (imgs != null) {
             for (int i = 0; i < imgs.length; i++) {
                 imgs[i] = imgs[i].substring(9);
@@ -85,54 +83,54 @@ public class EditProduct extends HttpServlet {
                 ArrayList<SizePrice> priceList = ProductService.getInstance().getPriceByIdP(id);
 
                 // Lấy danh sách kích thước và giá từ request
-                if (diameters != null && heights != null && prices != null
-                        && diameters.length == heights.length && heights.length == prices.length) {
-
-                    // Tạo danh sách size-price mới
-                    List<SizePrice> updatedPriceList = new ArrayList<>();
-                    for (int i = 0; i < diameters.length; i++) {
-                        SizePrice sizePrice = new SizePrice();
-                        sizePrice.setDiameter(diameters[i].trim());
-                        sizePrice.setHeight(heights[i].trim());
-                        sizePrice.setPrice(Integer.parseInt(prices[i].trim())); // Parse giá sang số nguyên
-                        sizePrice.setIdProduct(id); // Gắn productId làm khóa ngoại
-                        updatedPriceList.add(sizePrice);
-                    }
-
-                    // Xác định và xóa size-price không còn tồn tại
-                    List<SizePrice> sizesToRemove = new ArrayList<>(priceList);
-                    sizesToRemove.removeAll(updatedPriceList);
-                    for (SizePrice sizeToRemove : sizesToRemove) {
-                        if (ProductService.getInstance().deleteSizePrice(sizeToRemove) <= 0) {
-                            res = "Đã xảy ra lỗi khi xóa size-price!";
-                        }
-                    }
-
-                    // Thêm mới hoặc cập nhật size-price
-                    for (SizePrice updatedPrice : updatedPriceList) {
-                        boolean isExisting = false;
-                        for (SizePrice oldPrice : priceList) {
-                            if (oldPrice.getDiameter().equals(updatedPrice.getDiameter()) &&
-                                    oldPrice.getHeight().equals(updatedPrice.getHeight())) {
-                                // Nếu tồn tại, cập nhật giá
-                                oldPrice.setPrice(updatedPrice.getPrice());
-                                if (ProductService.getInstance().updateSizePrice(oldPrice) <= 0) {
-                                    res = "Đã xảy ra lỗi khi cập nhật size-price!";
-                                }
-                                isExisting = true;
-                                break;
-                            }
-                        }
-                        // Nếu không tồn tại, thêm mới
-                        if (!isExisting) {
-                            if (ProductService.getInstance().insertSizePrice(updatedPrice) <= 0) {
-                                res = "Đã xảy ra lỗi khi thêm size-price!";
-                            }
-                        }
-                    }
-                } else {
-                    res = "Dữ liệu size hoặc price không hợp lệ!";
-                }
+//                if (diameter != null && height != null && price != null
+//                        && diameter.length == heights.length && heights.length == prices.length) {
+//
+//                    // Tạo danh sách size-price mới
+//                    List<SizePrice> updatedPriceList = new ArrayList<>();
+//                    for (int i = 0; i < diameters.length; i++) {
+//                        SizePrice sizePrice = new SizePrice();
+//                        sizePrice.setDiameter(diameters[i].trim());
+//                        sizePrice.setHeight(heights[i].trim());
+//                        sizePrice.setPrice(Integer.parseInt(prices[i].trim())); // Parse giá sang số nguyên
+//                        sizePrice.setIdProduct(id); // Gắn productId làm khóa ngoại
+//                        updatedPriceList.add(sizePrice);
+//                    }
+//
+//                    // Xác định và xóa size-price không còn tồn tại
+//                    List<SizePrice> sizesToRemove = new ArrayList<>(priceList);
+//                    sizesToRemove.removeAll(updatedPriceList);
+//                    for (SizePrice sizeToRemove : sizesToRemove) {
+//                        if (ProductService.getInstance().deleteSizePrice(sizeToRemove) <= 0) {
+//                            res = "Đã xảy ra lỗi khi xóa size-price!";
+//                        }
+//                    }
+//
+//                    // Thêm mới hoặc cập nhật size-price
+//                    for (SizePrice updatedPrice : updatedPriceList) {
+//                        boolean isExisting = false;
+//                        for (SizePrice oldPrice : priceList) {
+//                            if (oldPrice.getDiameter().equals(updatedPrice.getDiameter()) &&
+//                                    oldPrice.getHeight().equals(updatedPrice.getHeight())) {
+//                                // Nếu tồn tại, cập nhật giá
+//                                oldPrice.setPrice(updatedPrice.getPrice());
+//                                if (ProductService.getInstance().updateSizePrice(oldPrice) <= 0) {
+//                                    res = "Đã xảy ra lỗi khi cập nhật size-price!";
+//                                }
+//                                isExisting = true;
+//                                break;
+//                            }
+//                        }
+//                        // Nếu không tồn tại, thêm mới
+//                        if (!isExisting) {
+//                            if (ProductService.getInstance().insertSizePrice(updatedPrice) <= 0) {
+//                                res = "Đã xảy ra lỗi khi thêm size-price!";
+//                            }
+//                        }
+//                    }
+//                } else {
+//                    res = "Dữ liệu size hoặc price không hợp lệ!";
+//                }
             } else {
                 res = "Đã xảy ra lỗi!";
             }
@@ -154,7 +152,7 @@ public class EditProduct extends HttpServlet {
         } catch (SQLException e) {
             res = "Đã xảy ra lỗi!";
         }
-        ArrayList<Product> listProduct = ProductService.getInstance().listSixProduct(0);
+        ArrayList<Product> listProduct = ProductService.getInstance().listAllProduct(0);
         JSONObject jsonResponse = new JSONObject();
         JSONArray htmlDataArray = new JSONArray();
         NumberFormat nF = NumberFormat.getCurrencyInstance();

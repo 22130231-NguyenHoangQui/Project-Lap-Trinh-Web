@@ -17,7 +17,7 @@
 </head>
 <body>
     <header>
-        <jsp:include page="./header.jsp"></jsp:include>
+        <jsp:include page="Products/header.jsp"></jsp:include>
     </header>
 
     <!-- Thanh điều hướng -->

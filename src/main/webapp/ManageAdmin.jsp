@@ -2,6 +2,7 @@
 <%@ page import="com.edu.hcmuaf.fit.model.Account" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="com.edu.hcmuaf.fit.model.Product" %>
+<%@ page import="com.edu.hcmuaf.fit.model.Category" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +41,7 @@
     NumberFormat nF = NumberFormat.getCurrencyInstance();
 %>
 <header>
-    <jsp:include page="header.jsp"></jsp:include>
+    <jsp:include page="Products/header.jsp"></jsp:include>
 </header>
 <div class="is-medium">
     <div class="container"></div>
@@ -469,7 +470,7 @@
                     <%--QUẢN LÝ SẢN PHẨM--%>
                     <div class="container mt-5 d-none" style="width: auto;" id="mngProduct">
                         <!-- Modal Bootstrap -->
-                        <div class="container   d-flex justify-content-between align-items-center  border-bottom mt-3"
+                        <div class="container   d-flex justify-content-between align-items-center  border-bottom mt-3">
                         <h5>Quản lý sản phẩm</h5>
 
                         <%--                                <%if(account.getRole() == 0) {%>--%>
@@ -505,7 +506,7 @@
                         %>
 
                         <tr>
-                            <input type="hidden" class ="idProduct" value="<%=p.getId()%>">
+                            <input type="hidden" class="idProduct" value="<%=p.getId()%>">
                             <td class="pro"><%=sttP%>
                             </td>
                             <td class="pro">
@@ -525,10 +526,12 @@
                             <td class="pro"><%=p.getUpdated_at()%>
                             </td>
                             <td>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProductModal" onclick="innerEditProduct('<%=p.getId()%>')">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#editProductModal" onclick="innerEditProduct('<%=p.getId()%>')">
                                     <i class="fa-solid fa-pen"></i> Sửa
                                 </button>
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                        data-bs-target="#deleteModal" onclick="deleteProduct('<%=p.getId()%>')">
                                     <i class="fa-solid fa-trash"></i> Xóa
                                 </button>
 
@@ -545,17 +548,6 @@
                         </tbody>
                     </table>
 
-                    <nav>
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item active">
-                                <a class="page-link" href="#" onclick="changePageProducts(1)">1</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" onclick="changePageProducts(2)">2</a>
-                            </li>
-                            <!-- Các trang tiếp theo -->
-                        </ul>
-                    </nav>
                 </div>
                 <!-- Modal Bootstrap -->
                 <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel"
@@ -643,7 +635,8 @@
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                             Hủy
                                         </button>
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProductModal">
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#editProductModal">
                                             <i class="fa-solid fa-pen"></i> Sửa
                                         </button>
                                     </div>
@@ -652,12 +645,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
+                     aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="deleteModalLabel">Xác nhận xóa</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 Bạn có chắc chắn muốn xóa mục này không?
@@ -669,88 +664,130 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+                <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel"
+                     aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="editProductModalLabel">Chỉnh sửa sản phẩm</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                    <form id="edit-Product" action="" method="post">
-                                        <div class="form-group mb-3">
-                                            <label  class="required">Tên sản phẩm</label>
-                                            <input type="text" class="form-control" id="nameProductEdit" name="nameProductEdit" placeholder="Nhập tên sản phẩm" required>
-                                        </div>
+                                <form id="edit-Product" action="" method="post">
+                                    <div class="form-group mb-3">
+                                        <label class="required">Tên sản phẩm</label>
+                                        <input type="text" class="form-control" id="nameProductEdit"
+                                               name="nameProductEdit" placeholder="Nhập tên sản phẩm" required>
+                                    </div>
 
-                                        <div class="form-group mb-3">
-                                            <label  class="required">Giá bán</label>
-                                            <input type="number" class="form-control" id="priceProductEdit" name="priceProductEdit" placeholder="Nhập giá bán" required>
-                                        </div>
+                                    <div class="form-group mb-3">
+                                        <label class="required">Giá bán</label>
+                                        <input type="number" class="form-control" id="priceProductEdit"
+                                               name="priceProductEdit" placeholder="Nhập giá bán" required>
+                                    </div>
 
-                                        <div class="form-group">
-                                            <label class="form-label">Thể loại</label>
-                                            <select class="form-control" name="idCate" id="idCate">
-                                                <option value="Bánh sinh nhật">Bánh sinh nhật</option>
-                                                <option value="Bánh sinh nhật ngày lễ">Bánh sinh nhật ngày lễ</option>
-                                                <option value="Bánh sinh nhật bạn trai">Bánh sinh nhật bạn trai</option>
-                                            </select>
-                                        </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Thể loại</label>
+                                        <select class="form-control" name="idCate" id="idCate">
+                                            <option value="Bánh sinh nhật">Bánh sinh nhật</option>
+                                            <option value="Bánh sinh nhật ngày lễ">Bánh sinh nhật ngày lễ</option>
+                                            <option value="Bánh sinh nhật bạn trai">Bánh sinh nhật bạn trai</option>
+                                        </select>
+                                    </div>
 
-                                        <div class="form-group mb-3">
-                                            <label class="required">Chiều cao (cm)</label>
-                                            <input type="number" class="form-control" id="heightEdit" name="heightEdit" placeholder="Nhập chiều cao" required>
-                                        </div>
+                                    <!-- Chọn chiều cao cố định -->
+                                    <div class="form-group mb-3">
+                                        <label class="required">Chiều cao (cm)</label>
+                                        <select class="form-control" id="heightEdit" name="heightEdit" required>
+                                            <option value="10">10 cm</option>
+                                            <option value="15">15 cm</option>
+                                            <option value="20">20 cm</option>
+                                            <option value="25">25 cm</option>
+                                        </select>
+                                    </div>
 
-                                        <div class="form-group mb-3">
-                                            <label  class="required">Đường kính (cm)</label>
-                                            <input type="number" class="form-control" id="diameterEdit" name="diameterEdit" placeholder="Nhập đường kính" required>
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label  class="required">Số lượng (cm)</label>
-                                            <input type="number" class="form-control" id="quantityEdit" name="quantityEdit" placeholder="Nhập số lượng" required>
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label  class="required">Mô tả sản phẩm</label>
-                                            <textarea class="form-control" id="desEdit" name="desEdit" placeholder="Nhập mô tả sản phẩm" required></textarea>
-                                        </div>
+                                    <!-- Chọn đường kính cố định -->
+                                    <div class="form-group mb-3">
+                                        <label class="required">Đường kính (cm)</label>
+                                        <select class="form-control" id="diameterEdit" name="diameterEdit" required>
+                                            <option value="15">15 cm</option>
+                                            <option value="20">20 cm</option>
+                                            <option value="25">25 cm</option>
+                                            <option value="30">30 cm</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="required">Số lượng</label>
+                                        <input type="number" class="form-control" id="quantityEdit" name="quantityEdit"
+                                               placeholder="Nhập số lượng" required>
+                                    </div>
 
-                                        <!-- Hình ảnh -->
-                                        <div class="form-group mb-3">
-                                            <label class="required">Hình ảnh hiện tại:</label>
-                                            <div>
-                                                <img id="editImagePreview1" src="" alt="Preview" class="img-thumbnail" style="width: 100px; height: 100px; object-fit: cover; margin-left: 10px;">
-                                            </div>
+                                    <!-- Mô tả sản phẩm -->
+                                    <div class="form-group mb-3">
+                                        <label class="required">Mô tả sản phẩm</label>
+                                        <textarea class="form-control" id="desEdit" name="desEdit"
+                                                  placeholder="Nhập mô tả sản phẩm" required></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Hình ảnh hiện tại:</label>
+                                        <div class="d-flex align-items-center">
+                                            <!-- Hình ảnh hiển thị -->
+                                            <img id="editImagePreview1" src="" alt="Preview"
+                                                 class="img-thumbnail me-2" name="imageAvai"
+                                                 style="width: 100px; height: 100px; object-fit: cover;">
                                         </div>
+                                    </div>
 
-                                        <div class="form-group mb-3">
-                                            <label for="editImage" class="required">Thay đổi hình ảnh:</label>
-                                            <input type="file" class="form-control" id="editImage" name="image"
-                                                   accept="image/*" onchange="updateImagePreview(this)">
-                                        </div>
+                                    <div class="form-group">
+                                        <label for="editImage123" class="form-label">Hình ảnh mới:</label>
+                                        <!-- Input để chọn file -->
+                                        <input type="file" class="form-control" id="editImage" name="image"
+                                               accept="image/*" onchange="updateImagePreview1(this)">
+                                    </div>
 
-                                        <!-- Nút hành động -->
-                                        <div class="d-flex justify-content-end">
-                                            <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Hủy</button>
-                                            <button id="saveButton1" type="button" class="btn btn-primary" onclick="editProduct()">LƯU</button>
-                                        </div>
-                                    </form>
-                                </div>
+                                    <!-- Nút hành động -->
+                                    <div class="d-flex justify-content-end">
+                                        <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">
+                                            Hủy
+                                        </button>
+                                        <button id="saveButton1" type="button" class="btn btn-primary"
+                                                onclick="editProduct()">LƯU
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="container mt-5 d-none" style="width: auto;" id="mngCate">
+                    <div class="container   d-flex justify-content-between align-items-center  border-bottom mt-3">
+                        <h5>Quản lý danh mục</h5>
+
+                        <%--                                <%if(account.getRole() == 0) {%>--%>
+                        <!-- Nút mở modal -->
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                data-bs-target="#addCate">
+                            Thêm danh mục
+                        </button>
+                        <%--                                <%}%>--%>
+                    </div>
+
                     <table class="table table2">
                         <thead>
                         <tr>
                             <th>STT</th>
                             <th>ID</th>
                             <th>TÊN</th>
-                            <th></th>
+                            <th>HÌNH ẢNH</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="innerCate">
+                        <%
+//                            ArrayList<Category> listCate = request.getAttribute();
+                            int sttC =1;
+                        %>
                         <tr>
                             <td class="cate1">1</td>
                             <td class="cate1">101</td>
@@ -794,6 +831,31 @@
                     </nav>
 
                 </div>
+                    <div class="modal fade" id="addCate" tabindex="-1" aria-labelledby="addCateLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="addCateLabel">Thêm Danh Mục</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Form thêm danh mục -->
+                                    <form id="addCateForm">
+                                        <div class="mb-3">
+                                            <label class="form-label">Tên Danh Mục</label>
+                                            <input type="text" class="form-control" name="nameCateAdd" id="nameCateAdd" placeholder="Nhập tên danh mục">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="imageCateAdd" class="form-label">Chọn Ảnh</label>
+                                            <input type="file" class="form-control" id="imageCateAdd" accept="image/*">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Thêm</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 <div class="container mt-5 d-none" style="width: auto;" id="mngInvoice">
                     <table class="table">
                         <thead>
@@ -851,6 +913,17 @@
                     </nav>
                 </div>
                 <div class="container mt-5 d-none" style="width: auto;" id="mngDiscount">
+                    <div class="container   d-flex justify-content-between align-items-center  border-bottom mt-3">
+                    <h5>Quản lý giảm giá</h5>
+
+                    <%--                                <%if(account.getRole() == 0) {%>--%>
+                    <!-- Nút mở modal -->
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                            data-bs-target="#addCate">
+                        Thêm giảm giá
+                    </button>
+                    <%--                                <%}%>--%>
+                </div>
                     <table class="table tableDiscount">
                         <thead>
                         <tr>
@@ -1478,7 +1551,28 @@
         }
     }
 
-    var id ="";
+    function updateImagePreview1(input) {
+        // Lấy thẻ <img> hiển thị hình ảnh
+        const previewImage = document.getElementById('editImagePreview1');
+
+        // Kiểm tra xem người dùng đã chọn tệp chưa
+        if (input.files && input.files[0]) {
+            const file = input.files[0];
+            const reader = new FileReader();
+
+            // Khi đọc file hoàn tất, cập nhật src của <img>
+            reader.onload = function (e) {
+                previewImage.src = e.target.result;
+            };
+
+            // Đọc file dưới dạng Data URL (Base64)
+            reader.readAsDataURL(file);
+        } else {
+            // Nếu không có tệp, đặt lại src của <img>
+            previewImage.src = '';
+        }
+    }
+
     function editProduct() {
         var flag = true;
         var nameP = document.getElementById("nameProductEdit");
@@ -1572,9 +1666,9 @@
         // } else {
         //     quantity.style.borderColor = '#dee2e6';
         // }
-        if(flag) {
+        if (flag) {
             var formData = new FormData();
-            var fileInputs = document.getElementsByName('imageEdit');
+            var fileInputs = document.getElementsByName('image');
             for (var i = 0; i < fileInputs.length; i++) {
                 var fileInput = fileInputs[i];
                 formData.append('image', fileInput.files[0]);
@@ -1598,7 +1692,7 @@
                 data: formData,
                 contentType: false,
                 processData: false,
-                success: function(data) {
+                success: function (data) {
                     var jsonData = JSON.parse(data);
                     var htmlData = jsonData.htmlData;
                     var res = jsonData.res;
@@ -1607,38 +1701,39 @@
                     row.innerHTML = "";
                     for (var i = 0; i < htmlData.length; i++) {
                         var p = htmlData[i];
-                        row.innerHTML += "  <tr  data-bs-toggle =\"modal\" data-bs-target=\"#detailProduct\" onclick=\"detailProduct('"+p.idProduct+"')\">\n" +
-                            "<input type=\"hidden\" className =\"idProduct\" value=\""+p.idProduct+"\">"+
-                            "                                <td class=\"w40\">"+(i+1)+"</td>\n" +
+                        row.innerHTML += "  <tr  data-bs-toggle =\"modal\" data-bs-target=\"#detailProduct\" onclick=\"detailProduct('" + p.idProduct + "')\">\n" +
+                            "<input type=\"hidden\" className =\"idProduct\" value=\"" + p.idProduct + "\">" +
+                            "                                <td class=\"w40\">" + (i + 1) + "</td>\n" +
                             "                                <td class=\"w260\">\n" +
                             "                                    <div class=\"item d-flex justify-content-center\">\n" +
                             "                                        <div class=\"item_img\">\n" +
-                            "                                            <img src=\""+p.imageUrl+"\"\n" +
+                            "                                            <img src=\"" + p.imageUrl + "\"\n" +
                             "                                                 class=\"card-img-top img_p_cart\" alt=\"...\"/>\n" +
                             "                                        </div>\n" +
                             "<span class=\"item_text\">" + p.name + "</span>\n" +
                             "                                    </div>\n" +
                             "                                </td>\n" +
-                            "                                <td>"+p.price+"</td>\n" +
-                            "                                <td>"+p.color+"</td>\n" +
-                            "                                <td>"+p.quantity+"\n" +
-                            "                                <td>"+p.status+"</td>\n" +
+                            "                                <td>" + p.price + "</td>\n" +
+                            "                                <td>" + p.color + "</td>\n" +
+                            "                                <td>" + p.quantity + "\n" +
+                            "                                <td>" + p.status + "</td>\n" +
                             "                                <td>\n" +
                             "                                    <div class=\"d-flex justify-content-center\">\n" +
-                            "                                        <button class=\"delete btnAdd bgcolor bd-full\" title=\"Xóa\" aria-hidden=\"true\" onclick=\"deleteProduct('"+p.idProduct+"')\" data-bs-toggle=\"modal\" data-bs-target=\"\"><i class=\"fa fa-trash-o text-color\"></i></button>"+
-                            "                                        <button class=\"editProduct btnAdd bgcolor bd-full mx-1\" data-bs-toggle=\"modal\" data-bs-target=\"#editProduct\" onclick=\"innerEditProduct('"+p.idProduct+"')\"><i class=\"fa fa-pencil text-color\" title=\"Chỉnh sửa\" aria-hidden=\"true\"></i></button>\n" +
-                            "                                        <button class=\"hideProduct btnAdd bgcolor bd-full\" title=\"Ẩn/hiện sản phẩm\" aria-hidden=\"true\" onclick=\"hideProduct('"+p.idProduct+"')\" data-bs-toggle=\"modal\" data-bs-target=\"\"><i class=\"fa fa-lock text-color\"></i></button>"+
+                            "                                        <button class=\"delete btnAdd bgcolor bd-full\" title=\"Xóa\" aria-hidden=\"true\" onclick=\"deleteProduct('" + p.idProduct + "')\" data-bs-toggle=\"modal\" data-bs-target=\"\"><i class=\"fa fa-trash-o text-color\"></i></button>" +
+                            "                                        <button class=\"editProduct btnAdd bgcolor bd-full mx-1\" data-bs-toggle=\"modal\" data-bs-target=\"#editProduct\" onclick=\"innerEditProduct('" + p.idProduct + "')\"><i class=\"fa fa-pencil text-color\" title=\"Chỉnh sửa\" aria-hidden=\"true\"></i></button>\n" +
+                            "                                        <button class=\"hideProduct btnAdd bgcolor bd-full\" title=\"Ẩn/hiện sản phẩm\" aria-hidden=\"true\" onclick=\"hideProduct('" + p.idProduct + "')\" data-bs-toggle=\"modal\" data-bs-target=\"\"><i class=\"fa fa-lock text-color\"></i></button>" +
                             "                                    </div>\n" +
                             "                                </td>\n" +
                             "                            </tr>";
                     }
                 },
-                error: function(error) {
+                error: function (error) {
                     console.error("Xảy ra lỗi:", error);
                 }
             });
         }
     }
+
     // Ví dụ: Gọi hàm này khi một dòng sản phẩm được nhấp vào
     function innerEditProduct(productId) {
         id = productId;
@@ -1701,7 +1796,7 @@
                 $("#quantitydetail").val(p.quantity);
                 $("#desdetail").val(p.description);
                 // cập nhật ảnh chính
-                $('#img_center').attr('src',p.imageCenter);
+                $('#img_center').attr('src', p.imageCenter);
                 $('.owl-carousel').owlCarousel('destroy'); // Khởi tạo lại Owl Carousel
                 // Cập nhật carousel ảnh chi tiết
                 $(".owl-carousel").empty();
@@ -1716,8 +1811,184 @@
             }
         });
     };
+    var id = "";
+
+    function deleteProduct(productId) {
+        id = productId;
+    }
+
+    // Xác nhận với người dùng
+    function confirmDelete(productId) {
 
 
+        $.ajax({
+                type: "POST",
+                url: "delProduct",
+                data: {id: id},
+                success: function (data) {
+                    var jsonData = JSON.parse(data);
+                    var htmlData = jsonData.htmlData;
+                    var res = jsonData.res;
+
+                    alert(res); // Thông báo kết quả xóa sản phẩm
+
+                    // Lấy phần tử tbody với id="innerProduct"
+                    var row = document.getElementById("innerProduct");
+                    row.innerHTML = ""; // Xóa tất cả nội dung cũ
+
+                    // Thêm lại các dòng sản phẩm mới vào bảng
+                    for (var i = 0; i < htmlData.length; i++) {
+                        var p = htmlData[i];
+                        row.innerHTML += "<tr>" +
+                            "<input type='hidden' class='idProduct' value='" + p.idProduct + "'>" +
+                            "<td class='pro'>" + (i + 1) + "</td>" +
+                            "<td class='pro'>" +
+                            "<img src='" + p.imageUrl + "' alt='Product Image' style='width: 50px; height: 50px; object-fit: cover; margin-right: 10px;'>" +
+                            "<span class='product-name'>" + p.name + "</span>" +
+                            "</td>" +
+                            "<td class='pro'>" + p.price + "</td>" +
+                            "<td class='pro'>" + p.quantity + "</td>" +
+                            "<td class='pro'>" + p.created_at + "</td>" +
+                            "<td class='pro'>" + p.updated_at + "</td>" +
+                            "<td>" +
+                            "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#editProductModal' onclick='innerEditProduct(\"" + p.idProduct + "\")'>" +
+                            "<i class='fa-solid fa-pen'></i> Sửa" +
+                            "</button>" +
+                            "<button type='button' class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#deleteModal' onclick='deleteProduct(\"" + p.idProduct + "\")'>" +
+                            "<i class='fa-solid fa-trash'></i> Xóa" +
+                            "</button>" +
+                            "</td>" +
+                            "</tr>";
+                    }
+                }
+            }
+        );
+
+    }
+
+</script>
+<script>
+    function addCate() {
+        var flag = true;
+        var nameInput = document.getElementById("nameCateAdd");
+        var imageInput = document.getElementById("imageCateAdd");
+        var error = document.getElementById("errNameCateAdd");
+
+        // Kiểm tra trường tên danh mục
+        if (nameInput.value === "") {
+            error.innerHTML = 'Vui lòng nhập danh mục mới!';
+            flag = false;
+        } else {
+            error.innerHTML = '';
+        }
+
+        // Kiểm tra ảnh
+        if (imageInput.files.length === 0) {
+            error.innerHTML = 'Vui lòng chọn ảnh!';
+            flag = false;
+        }
+
+        if (flag) {
+            var name = nameInput.value;
+            var formData = new FormData();
+            formData.append("nameCateAdd", name);
+            formData.append("imageCateAdd", imageInput.files[0]); // Thêm ảnh vào formData
+
+            // Gửi yêu cầu AJAX
+            $.ajax({
+                url: 'addCategory',
+                type: 'POST',
+                data: formData,
+                processData: false, // Để tránh jQuery xử lý dữ liệu
+                contentType: false, // Để không gửi Content-Type
+                success: function (data) {
+                    try {
+                        var jsonData = JSON.parse(data);
+                        var res = jsonData.res;
+                        var htmlData = jsonData.htmlData;
+                        alert(res);
+                        var row = document.getElementById("innerCategory");
+                        row.innerHTML = "";
+                        for (var i = 0; i < htmlData.length; i++) {
+                            var c = htmlData[i];
+                            row.innerHTML += "<tr data-category-id='" + c.id + "'>" +
+                                "<input type='hidden' class='id' value='" + c.id + "'>" +
+                                "<td>" + (i + 1) + "</td>" +
+                                "<td>" + c.id + "</td>" +
+                                "<td>" + c.name + "</td>" +
+                                "<td>" +
+                                "<img src='" + c.imageUrl + "' alt='Image' style='width: 50px; height: 50px; object-fit: cover;'>" + // Hiển thị ảnh
+                                "<div class='d-flex w-100 justify-content-center'>" +
+                                "<button class='delete btnAdd bgcolor bd-full me-1' title='Xóa' aria-hidden='true' onclick='deleteCategory(\"" + c.id + "\")' data-bs-toggle='modal' data-bs-target=''><i class='fa fa-trash-o text-color'></i></button>" +
+                                "<button class='editCate btnAdd bgcolor bd-full' title='Chỉnh sửa danh mục' aria-hidden='true' data-bs-toggle='modal' data-bs-target='#editCate' onclick='innerEditCategory(\"" + c.id + "\")'><i class='fa fa-pencil text-color'></i></button>" +
+                                "</div>" +
+                                "</td>" +
+                                "</tr>";
+                        }
+                    } catch (e) {
+                        console.error("Xảy ra lỗi khi xử lý phản hồi JSON:", e);
+                    }
+                },
+                error: function (error) {
+                    console.error("Xảy ra lỗi:", error);
+                }
+            });
+        }
+        return false;
+    }
+
+    function deleteCategory(categoryId) {
+        var confirmation = confirm("Bạn có chắc muốn xóa ?");
+        if (confirmation) {
+            $.ajax({
+                type: "POST",
+                url: "delCategory",
+                data: { id: categoryId },
+                success: function(data) {
+                    var jsonData = JSON.parse(data);
+                    var htmlData = jsonData.htmlData;
+                    var res = jsonData.res;
+                    alert(res);
+                    var row = document.getElementById("innerCategory");
+                    row.innerHTML = "";
+                    for (var i = 0; i < htmlData.length; i++) {
+                        var c = htmlData[i];
+                        row.innerHTML += "<tr>" +
+                            "<input type='hidden' class='id' value='" + c.id + "'>" +
+                            "<td>" + (i + 1) + "</td>" +
+                            "<td>" + c.id + "</td>" +
+                            "<td>" + c.name + "</td>" +
+                            "<td>" +
+                            "<div class='d-flex w-100 justify-content-center'>" +
+                            "<button class='delete btnAdd bgcolor bd-full me-1' title='Xóa' aria-hidden='true' onclick='deleteCategory(\"" + c.id + "\")' data-bs-toggle='modal' data-bs-target=''><i class='fa fa-trash-o text-color'></i></button>" +
+                            "<button class='editCate btnAdd bgcolor bd-full' title='Chỉnh sửa danh mục' aria-hidden='true' data-bs-toggle='modal' data-bs-target='#editCate' onclick='innerEditCategory(\"" + c.id + "\")'><i class='fa fa-pencil text-color'></i></button>" +
+                            "</div>" +
+                            "</td>" +
+                            "</tr>";
+                    }
+                },
+            });
+        }
+    }
+    function innerEditCategory(cateId) {
+        categoryId = cateId;
+        $.ajax({
+            type: "GET",
+            url: "loadDetailCategory",
+            data: {
+                id: cateId
+            },
+            success: function (data) {
+                var c = data.category;
+                $("#nameCateEdit").val(c.name);
+            },
+            error: function () {
+                console.error("Không thể tải chi tiết sản phẩm");
+            }
+        });
+    }
+    var categoryId = "";
+    function editCate() {
 </script>
 </body>
 

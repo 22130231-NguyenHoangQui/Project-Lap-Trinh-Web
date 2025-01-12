@@ -15,6 +15,11 @@ public class Category {
     public Category() {
     }
 
+    public Category(int id, String name) {
+
+    }
+
+
     public int getId() {
         return id;
     }

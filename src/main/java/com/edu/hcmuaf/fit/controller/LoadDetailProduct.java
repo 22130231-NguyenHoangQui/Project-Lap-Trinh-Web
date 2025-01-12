@@ -22,8 +22,7 @@ public class LoadDetailProduct extends HttpServlet {
         String id = request.getParameter("idProduct");
         String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
         NumberFormat nF = NumberFormat.getCurrencyInstance();
-        Product p =
-                ProductService.getInstance().getProductById(Integer.parseInt(id));
+        Product p = ProductService.getInstance().getProductById(Integer.parseInt(id));
         Category category = CategoryService.getInstance().getCategoryById(p.getIdCate());
         JSONObject jsonRes = new JSONObject();
         JSONObject productJSON = new JSONObject();

@@ -3,6 +3,7 @@ package com.edu.hcmuaf.fit.service;
 import com.edu.hcmuaf.fit.dao.DAOCategory;
 import com.edu.hcmuaf.fit.model.Category;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CategoryService  {
@@ -27,11 +28,20 @@ public class CategoryService  {
         ArrayList<Category> result = DAOCategory.listCategory();
         return result;
     }
-    public static void main(String[] args) {
-
+    public ArrayList<Category> listCategory() {
+        return DAOCategory.listCategory();
     }
-
-    public Category getCategoryById(int idCate) {
-        return null;
+    public Category getCategoryById(int id) {
+        return DAOCategory.getCategoryById(id);
+    }
+    //Thêm danh mục
+    public int insertCategory(Category c){ return  DAOCategory.insertCategory(c);}
+    //Xoá danh mục
+    public  int delCategory(int id) {
+        return  DAOCategory.delCategory(id);
+    }
+    // Chỉnh sửa cập nhật danh mục
+    public int updateCategory(Category c) throws SQLException {
+        return DAOCategory.updateCategory(c);
     }
 }

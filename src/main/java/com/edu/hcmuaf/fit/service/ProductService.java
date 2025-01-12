@@ -22,7 +22,7 @@ public class ProductService {
         return instance;
     }
 
-    public static ArrayList<Product> listSixProduct(int offset) {
+    public static ArrayList<Product> listAllProduct(int offset) {
         ArrayList<Product> listProduct = DAOProduct.listProduct(offset);
         ArrayList<ProductImages> listImageOfProduct = null;
         for (Product p : listProduct) {
@@ -127,7 +127,7 @@ public class ProductService {
         return DAOProduct.updateProduct(p);
     }
 
-    public static int deleteImgProduct(int id,String url) throws SQLException {
+    public static int deleteImgProduct(int id, String url) throws SQLException {
         return DAOProduct.delImgOfProduct(id, url);
     }
 
@@ -168,8 +168,14 @@ public class ProductService {
     }
 
     public static Product getProductById(int id) {
-        return DAOProduct.getProductById(id);
+        Product product = DAOProduct.getProductById(id);
+        ArrayList<ProductImages> listImageOfProduct = DAOProduct.listImageOfProduct(product);
+        product.setProductImages(listImageOfProduct);
+        return product;
     }
 
 
+    public int delProduct(int id) {
+        return DAOProduct.delProduct(id);
+    }
 }
