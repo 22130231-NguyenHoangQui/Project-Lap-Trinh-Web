@@ -2,17 +2,18 @@ package com.edu.hcmuaf.fit.model;
 
 public class ProductImages {
     private int id;
-    private int productId;
     private String url;
+    private int productId;
 
-    public ProductImages(int id, int productId, String url) {
+    public ProductImages(int id, String url, int productId) {
         this.id = id;
-        this.productId = productId;
         this.url = url;
+        this.productId = productId;
     }
 
-    public ProductImages(String url) {
+    public ProductImages(String url, int productId) {
         this.url = url;
+        this.productId = productId;
     }
 
     public int getId() {

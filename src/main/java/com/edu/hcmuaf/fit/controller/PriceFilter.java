@@ -34,7 +34,7 @@ public class PriceFilter extends HttpServlet {
             productJson.put("id", p.getId());
 //            productJson.put("idCate",p.getCategoryId());
             productJson.put("imageUrl",url + "\\Products\\" + ((p.getProductImages().isEmpty())?"":p.getProductImages().get(0).getUrl()));
-            productJson.put("price",p.getPrice());
+//            productJson.put("price",p.getPrice());
             productJson.put("name",p.getNameProduct());
             htmlDataArray.put(productJson);
         }

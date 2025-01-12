@@ -19,7 +19,7 @@
     <header>
         <jsp:include page="./header.jsp"></jsp:include>
     </header>
-
+    <%  String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath(); %>
     <!-- Thanh điều hướng -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
@@ -29,7 +29,7 @@
                         <a class="nav-link active" id="about-tab" data-bs-toggle="tab" href="#about" role="tab">Giới thiệu</a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="policy-tab" href="/deliveryPolicy" role="tab">Chính sách </a>
+                        <a class="nav-link" id="policy-tab" href="<%=url%>/deliveryPolicy" role="tab">Chính sách </a>
                     </li>
                    
                 </ul>
