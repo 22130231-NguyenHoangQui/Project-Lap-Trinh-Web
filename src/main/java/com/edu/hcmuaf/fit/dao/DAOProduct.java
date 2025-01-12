@@ -108,7 +108,7 @@ public class DAOProduct {
         ArrayList<ProductImages> re = new ArrayList<>();
         Connection connection = JDBCUtil.getConnection();
         try {
-            String sql = "Select pi.image_url " + "from productimages pi " + "where pi.product_id = ?";
+            String sql = "Select pi.imageUrl " + "from productimages pi " + "where pi.productId = ?";
             PreparedStatement pr = connection.prepareStatement(sql);
             pr.setInt(1, p.getId());
             ResultSet resultSet = pr.executeQuery();
@@ -195,24 +195,11 @@ public static ArrayList<Product> listProductByIdCate(int categoryId, int offset)
                     String name = rs.getString("name_product");
                     int quantity = rs.getInt("quantity");
                     String description = rs.getString("description");
-
-                    // Lấy thông tin từ bảng productsizes
-                    String diameter = rs.getString("diameter");
-                    String height = rs.getString("height");
-                    int price = rs.getInt("price");
-
                     Product product = new Product();
                     product.setId(productId);
                     product.setNameProduct(name);
                     product.setQuantity(quantity);
                     product.setDescription(description);
-
-                    // Kiểm tra nếu có giá trị diameter, height, price để tạo đối tượng ProductSizes
-                    if (diameter != null || height != null || price > 0) {
-                        ProductSizes size = new ProductSizes(diameter, height, price);
-                        product.getSizes().add(size); // Thêm đối tượng size vào danh sách productSizes
-                    }
-
                     products.add(product); // Thêm sản phẩm vào danh sách
                 }
             }
@@ -228,7 +215,7 @@ public static ArrayList<Product> listProductByIdCate(int categoryId, int offset)
         ArrayList<ProductSizes> productSizes = new ArrayList<>();
         Connection connection = JDBCUtil.getConnection();
         try {
-            String sql = "SELECT * FROM productsizes WHERE product_id = ?";
+            String sql = "SELECT * FROM productsizes WHERE productId = ?";
             PreparedStatement pr = connection.prepareStatement(sql);
             pr.setInt(1, productId);
             ResultSet rs = pr.executeQuery();
@@ -246,6 +233,115 @@ public static ArrayList<Product> listProductByIdCate(int categoryId, int offset)
         return productSizes;
     }
 
+    // Lấy danh sách image của sản phẩm theo Id
+    public static ArrayList<ProductImages> getImagesByProductId(int productId) {
+        ArrayList<ProductImages> re = new ArrayList<>();
+        Connection connection = JDBCUtil.getConnection();
+        String sql = "SELECT * FROM ProductImages WHERE productId = ?";
+        try {
+            PreparedStatement pre = connection.prepareStatement(sql);
+            pre.setInt(1,productId);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                //                int id = resultSet.getInt("id");
+                String urlImage = rs.getString("imageUrl");
+                int idProduct = rs.getInt("productId");
+
+                ProductImages img = new ProductImages(urlImage,idProduct);
+
+                re.add(img);
+            }
+            JDBCUtil.closeConnection(connection);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return re;
+    }
+
+    //  danh sách sản phẩm tìm kiểm bởi tên
+    public static ArrayList<Product> listProductByName(String nameProduct) {
+        nameProduct = nameProduct.trim();
+        ArrayList<Product> re = new ArrayList<>();
+        Connection connection = JDBCUtil.getConnection();
+        String[] tuKhoa = nameProduct.split("\\s+");
+        StringBuilder sqlbuilder = new StringBuilder("SELECT p.product_id, p.name_product, p.price, p.quantity, p.description, pi.image_url\n" +
+                "FROM Product p\n" +
+                "JOIN ProductImages pi ON p.product_id = pi.product_id\n" +
+                "WHERE");
+        for (int i = 0; i < tuKhoa.length; i++) {
+            sqlbuilder.append(" p.name_product COLLATE utf8mb4_general_ci LIKE ?");
+            if (i < tuKhoa.length - 1) {
+                sqlbuilder.append(" AND");
+            }
+        }
+        try {
+            PreparedStatement pr = connection.prepareStatement(sqlbuilder.toString());
+            for (int i = 0; i < tuKhoa.length; i++) {
+                pr.setString(i + 1, "%" + tuKhoa[i] + "%");
+            }
+            ResultSet resultSet = pr.executeQuery();
+            while (resultSet.next()) {
+                int product_id = resultSet.getInt("product_id");
+                String name = resultSet.getString("name_product");
+                int price = resultSet.getInt("price");
+                Product product = new Product();
+                product.setNameProduct(name);
+                product.setId(product_id);
+//                product.setPrice(price);
+                re.add(product);
+            }
+            JDBCUtil.closeConnection(connection);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return re;
+    }
+
+    // Lấy thông tin chi tiết của sản phẩm theo ID
+    public static Product getDetailProductById(int productId) {
+        Product product = null;
+        Connection connection = JDBCUtil.getConnection();
+        try {
+            // Truy vấn thông tin sản phẩm
+            String sql = """
+            SELECT p.id, p.productName, p.quantity, p.description, 
+                   pi.imageUrl, ps.diameter, ps.height, ps.price
+            FROM products p
+            LEFT JOIN productimages pi ON p.id = pi.productId
+            LEFT JOIN productsizes ps ON p.id = ps.productId
+            WHERE p.id = ?""";
+            PreparedStatement pr = connection.prepareStatement(sql);
+            pr.setInt(1, productId);
+            ResultSet rs = pr.executeQuery();
+
+            // Lấy thông tin sản phẩm từ kết quả truy vấn
+            if (rs.next()) {
+                String nameProduct = rs.getString("productName");
+                int quantity = rs.getInt("quantity");
+                String description = rs.getString("description");
+
+                // Tạo đối tượng Product
+                product = new Product();
+                product.setId(productId);
+                product.setNameProduct(nameProduct);
+                product.setQuantity(quantity);
+                product.setDescription(description);
+
+                // Lấy các hình ảnh của sản phẩm
+                ArrayList<ProductImages> images = getImagesByProductId(productId);
+                product.setProductImages(images);
+
+                // Lấy các kích thước của sản phẩm (nếu có)
+                ArrayList<ProductSizes> sizes = listSizeOfProduct(productId);
+                product.setSizes(sizes);
+            }
+            JDBCUtil.closeConnection(connection);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return product;
+    }
+
     public static void main(String[] args) {
 //        p.setId(1);
 //        System.out.println(listImageOfProduct(p));
@@ -254,12 +350,13 @@ public static ArrayList<Product> listProductByIdCate(int categoryId, int offset)
 //            System.out.println(product);
 //        }
 
-            Product product = new Product();
-            product.setId(1);  // Giả sử sản phẩm có ID là 1
-
-        ArrayList<ProductImages> images = listImageOfProduct(product);
-            // Gọi phương thức listImageOfProduct
-            System.out.println(product.getProductImages().get(0).getUrl());
+//
+//            Product product = new Product();
+//            product.setId(1);  // Giả sử sản phẩm có ID là 1
+//
+//        ArrayList<ProductImages> images = listImageOfProduct(product);
+//            // Gọi phương thức listImageOfProduct
+//            System.out.println(product.getProductImages().get(0).getUrl());
 //        for (Product product : getProductsByPriceRange(0, 10000)) {
 //            System.out.println(product);
 //        }
@@ -271,6 +368,21 @@ public static ArrayList<Product> listProductByIdCate(int categoryId, int offset)
 //            System.out.println(product);
 //        }
 
+        // ID sản phẩm cần kiểm tra
+        int productId = 14;
 
+        // Gọi phương thức để lấy chi tiết sản phẩm
+        Product product1 = getDetailProductById(productId);
+
+        if (product1 != null) {
+            System.out.println("Thông tin sản phẩm:");
+            System.out.println("ID: " + product1.getId());
+            System.out.println("Tên: " + product1.getNameProduct());
+            System.out.println("Giá: " + product1.getPrice());
+            System.out.println("url: " + product1.getAllProductImages());
+            System.out.println("Mô tả: " + product1.getDescription());
+        } else {
+            System.out.println("Không tìm thấy sản phẩm với ID: " + productId);
+        }
     }
 }

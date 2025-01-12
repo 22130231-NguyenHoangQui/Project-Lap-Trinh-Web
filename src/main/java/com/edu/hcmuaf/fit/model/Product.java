@@ -14,15 +14,14 @@ import java.util.Locale;
 
 public class Product {
     private int id;
-    private String nameProduct;
+    public String nameProduct;
     private int quantity;
     private String description;
     private Date createdAt;
     private Date updatedAt;
     private ArrayList<ProductImages> productImages;
     private ArrayList<ProductSizes> productSizes;
-
-
+    private int categoryId;
     public Product() {
     }
 
@@ -77,11 +76,11 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public List<ProductSizes> getSizes() {
+    public ArrayList<ProductSizes> getSizes() {
         return productSizes;
     }
 
-    public void setSizes(List<ProductSizes> sizes) {
+    public void setSizes(ArrayList<ProductSizes> sizes) {
         this.productSizes = productSizes;
     }
 
@@ -117,8 +116,13 @@ public class Product {
         this.productImages = productImages;
     }
 
+    public int getCategoryId() {
+        return categoryId;
+    }
 
-
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
 
     private void loadCategoryId() {
         String sql = "SELECT ca.category_id \n" +
@@ -140,9 +144,64 @@ public class Product {
         }
     }
 
-    public String getFormattedPrice() {
-        NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
-        return format.format(this.price);
+//    public String getFormattedPrice() {
+//        NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+//        return format.format(this.price);
+//    }
+
+    public double getPrice() {
+        if (productSizes != null && !productSizes.isEmpty()) {
+            return productSizes.get(0).getPrice(); // Lấy giá của kích cỡ đầu tiên
+        }
+        return 0;
+    }
+
+    public ArrayList<String> getAllProductImages() {
+        ArrayList<String> imageUrls = new ArrayList<>();
+
+        if (this.productImages != null) {
+            for (ProductImages productImage : this.productImages) {
+                imageUrls.add(productImage.getUrl());
+            }
+        }
+
+        return imageUrls;
+    }
+
+    public double getMinPrice() {
+        double minPrice = Double.MAX_VALUE; // Khởi tạo giá trị tối đa
+
+        if (productSizes != null && !productSizes.isEmpty()) {
+            for (ProductSizes size : productSizes) {
+                double price = size.getPrice();
+                if (price < minPrice) {
+                    minPrice = price;
+                }
+            }
+        }
+
+        return minPrice;
+    }
+
+    public double getMaxPrice() {
+        double maxPrice = Double.MIN_VALUE; // Khởi tạo giá trị tối thiểu
+
+        if (productSizes != null && !productSizes.isEmpty()) {
+            for (ProductSizes size : productSizes) {
+                double price = size.getPrice();
+                if (price > maxPrice) {
+                    maxPrice = price;
+                }
+            }
+        }
+
+        return maxPrice;
+    }
+
+    public String getFormattedPrice(double price) {
+        NumberFormat format = NumberFormat.getNumberInstance(new Locale("vi", "VN"));
+        format.setGroupingUsed(true); // Kích hoạt phân cách hàng nghìn
+        return format.format(price); // Trả về giá đã định dạng
     }
 
     @Override
@@ -164,8 +223,8 @@ public class Product {
 
     public static void main(String[] args) {
         Product p = new Product();
-        p.setPrice(5000000.0);
-
-        System.out.println(p.getFormattedPrice());
+//        p.setPrice(5000000.0);
+//
+//        System.out.println(p.getFormattedPrice());
     }
 }

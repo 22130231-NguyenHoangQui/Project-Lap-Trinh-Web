@@ -11,6 +11,10 @@ public class ProductImages {
         this.url = url;
     }
 
+    public ProductImages( String url, int productId) {
+        this.url = url;
+        this.productId = productId;
+    }
     public ProductImages(String url) {
         this.url = url;
     }

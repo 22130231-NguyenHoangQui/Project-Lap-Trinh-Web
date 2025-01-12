@@ -14,32 +14,39 @@ import jakarta.servlet.annotation.*;
 public class PriceFilter extends HttpServlet {
     private String message;
 
-
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("html/text; charset= UTF-8");
-
-        String priceMin = request.getParameter("priceMin");
-        String priceMax = request.getParameter("priceMax");
-        int priceMinInt = Integer.parseInt(priceMin);
-        int priceMaxInt = Integer.parseInt(priceMax);
-        PrintWriter out = response.getWriter();
-        String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
-        ArrayList<Product> listProduct = ProductService.getProductsByRange(priceMinInt,priceMaxInt,0);
-        JSONObject jsonRespon = new JSONObject();
-        JSONArray   htmlDataArray = new JSONArray();
-        for(Product p : listProduct) {
-            JSONObject productJson = new JSONObject();
-            productJson.put("id", p.getId());
-//            productJson.put("idCate",p.getCategoryId());
-            productJson.put("imageUrl",url + "\\Products\\" + ((p.getProductImages().isEmpty())?"":p.getProductImages().get(0).getUrl()));
-            productJson.put("price",p.getPrice());
-            productJson.put("name",p.getNameProduct());
-            htmlDataArray.put(productJson);
-        }
-        jsonRespon.put("data", htmlDataArray);
-        jsonRespon.put("url", url);
-        out.println(jsonRespon.toString());
-    }
+//    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+//        request.setCharacterEncoding("UTF-8");
+//        response.setCharacterEncoding("UTF-8");
+//        response.setContentType("html/text; charset= UTF-8");
+//
+//        String priceMin = request.getParameter("priceMin");
+//        String priceMax = request.getParameter("priceMax");
+//        int priceMinInt = Integer.parseInt(priceMin);
+//        int priceMaxInt = Integer.parseInt(priceMax);
+//        PrintWriter out = response.getWriter();
+//        String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+//        ArrayList<Product> listProduct = ProductService.getProductsByRange(priceMinInt, priceMaxInt, 0);
+//        JSONObject jsonRespon = new JSONObject();
+//        JSONArray htmlDataArray = new JSONArray();
+//
+//        for (Product p : listProduct) {
+//            JSONObject productJson = new JSONObject();
+//            productJson.put("id", p.getId());
+//            // Lấy hình ảnh sản phẩm
+//            productJson.put("imageUrl", url + "\\Products\\" + ((p.getProductImages().isEmpty()) ? "" : p.getProductImages().get(0).getUrl()));
+//
+//            // Lấy giá sản phẩm (giá của kích cỡ đầu tiên)
+//            int price = 0;
+//            if (p.getSizes() != null && !p.getSizes().isEmpty()) {
+//                price = p.getSizes().get(0).getPrice();  // Giá của kích cỡ đầu tiên
+//            }
+//            productJson.put("price", price);
+//
+//            productJson.put("name", p.getNameProduct());
+//            htmlDataArray.put(productJson);
+//        }
+//        jsonRespon.put("data", htmlDataArray);
+//        jsonRespon.put("url", url);
+//        out.println(jsonRespon.toString());
+//    }
 }

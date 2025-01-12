@@ -1,5 +1,8 @@
 package com.edu.hcmuaf.fit.model;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class ProductSizes {
     private int id;
     private String diameter;

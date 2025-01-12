@@ -1,7 +1,5 @@
 package com.edu.hcmuaf.fit.dao;
 
-
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,15 +10,16 @@ import com.edu.hcmuaf.fit.model.Category;
 import com.edu.hcmuaf.fit.util.JDBCUtil;
 
 public class DAOCategory {
+
+    // Sửa câu lệnh SQL trong phương thức listCategory(int offset)
     public static ArrayList<Category> listCategory(int offset) {
         ArrayList<Category> list = new ArrayList<>();
         Connection connection = JDBCUtil.getConnection();
-        String sql = "SELECT c.name_category AS category_name, c.imageUrl AS category_img, SUM(orr.quantity) AS total_quantity_sold " +
+        String sql = "SELECT c.categoryName AS category_name, c.imageUrl AS category_img, SUM(orr.quantity) AS total_quantity_sold " +
                 "FROM OrderDetails orr " +
-                "JOIN Product pro ON orr.product_id = pro.product_id " +
-                "JOIN CategoryProduct ct ON pro.product_id = ct.product_id " +
-                "JOIN Category c ON ct.category_id = c.category_id " +
-                "GROUP BY c.name_category, c.imageUrl " +
+                "JOIN Products pro ON orr.orderId = pro.id " +  // sửa Id thành id
+                "JOIN Categories c ON c.id = pro.id " + // sửa ct.id thành c.id
+                "GROUP BY c.categoryName, c.imageUrl " +
                 "ORDER BY total_quantity_sold DESC " +
                 "LIMIT 6;";
         try {
@@ -44,17 +43,19 @@ public class DAOCategory {
         JDBCUtil.closeConnection(connection);
         return list;
     }
+
+    // Sửa câu lệnh SQL trong phương thức listCategory()
     public static ArrayList<Category> listCategory() {
         ArrayList<Category> list = new ArrayList<>();
         Connection connection = JDBCUtil.getConnection();
-        String sql = "SELECT ca.category_id,ca.name_category FROM Category ca";
+        String sql = "SELECT ca.id, ca.categoryName FROM Categories ca";  // sửa category_id thành id và name_category thành Name
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
             ResultSet resultSet = pre.executeQuery();
             while (resultSet.next()) {
                 Category category = new Category();
-                int idCategory = resultSet.getInt("category_id");
-                String categoryName = resultSet.getString("name_category");
+                int idCategory = resultSet.getInt("id");  // sửa category_id thành id
+                String categoryName = resultSet.getString("categoryName");  // sửa name_category thành Name
                 category.setName(categoryName);
                 category.setId(idCategory);
                 list.add(category);
@@ -67,11 +68,6 @@ public class DAOCategory {
     }
 
     public static void main(String[] args) {
-//        ArrayList<Category> list = listCategory(0);
-//        for (Category category : list) {
-//            System.out.println(category);
-//        }
-
         ArrayList<Category> list1 = listCategory();
         for (Category category : list1) {
             System.out.println(category);
