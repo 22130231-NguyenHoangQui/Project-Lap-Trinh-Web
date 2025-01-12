@@ -39,7 +39,7 @@
                 <input class="form-pass" id="idFormPass" name="idFormPass" type="password" placeholder="Mật khẩu" value ="<%=password%>">
             </div>
             <div class="form-group-p" id="idFPass">
-                <p id="idMK"><a href="<%=url%>/ForgetPW.jsp">Quên mật khẩu?</a></p>
+                <p id="idMK"><a href="<%=url%>/forgotPassword.jsp">Quên mật khẩu?</a></p>
             </div>
             <div>
                 <button type="submit" class="button-submit" id="submitDangNhap">ĐĂNG NHẬP</button>
