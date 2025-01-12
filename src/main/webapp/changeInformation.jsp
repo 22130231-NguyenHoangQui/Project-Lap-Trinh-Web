@@ -31,7 +31,7 @@
         if(object != null)
             account = (Account) object;
         if(account == null){
-    %> <p  style="text-align: center; margin-top: 15px"><a href="SignIn.jsp" >Bạn chưa đăng nhập</a></p>
+    %> <p  style="text-align: center; margin-top: 15px"><a href="<%=url%>/signInAccount" >Bạn chưa đăng nhập</a></p>
     <%}else{%>
     <%
         String name = account.getName();
