@@ -62,25 +62,25 @@ public class ForgetPassword extends HttpServlet {
         if(username==null){
             err = "Vui lòng nhập tên tài khoản!";
             request.setAttribute("errUserName", err);
-            url = "/forgetPassword.jsp";
+            url = "/forgotPassword.jsp";
             request.getRequestDispatcher(url).forward(request, response);
         }
         if(email==null){
             err = "Vui lòng nhập Email!";
             request.setAttribute("errEmail", err);
-            url = "/ForgetPW.jsp";
+            url = "/forgotPassword.jsp";
             request.getRequestDispatcher(url).forward(request, response);
         }
         if (!AccountService.getInstance().checkExistUserName(username)) {
             err = "Tên tài khoản không tồn tại!";
             request.setAttribute("errUserName", err);
-            url = "/ForgetPW.jsp";
+            url = "/forgotPassword.jsp";
             request.getRequestDispatcher(url).forward(request, response);
         }
         else if (!AccountService.getInstance().selectAccountByUserName(username).getEmail().equals(email)) {
             err = "Email không chính xác!";
             request.setAttribute("errEmail", err);
-            url = "/ForgetPW.jsp";
+            url = "/forgotPassword.jsp";
             request.getRequestDispatcher(url).forward(request, response);
         } else {
             Account account = AccountService.getInstance().selectAccountByUserName(username);
@@ -89,7 +89,7 @@ public class ForgetPassword extends HttpServlet {
             if (AccountService.updatePassword(pwEncrypt, account.getId()) > 0) {
                 Email.sendEmail(account.getEmail(), "Mật khẩu mới của bạn", "Thông tin đăng nhập IT Cake:"+"<br>" + "-Tên đăng nhập: " + username + "<br>" + "-Mật khẩu mới: " + newpassword);
                 request.setAttribute("done","oke");
-                url = "/forgetPassword.jsp";
+                url = "/forgotPassword.jsp";
                 request.getRequestDispatcher(url).forward(request, response);
             }
         }
