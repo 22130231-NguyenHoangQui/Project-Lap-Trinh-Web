@@ -19,100 +19,194 @@
 </head>
 
 <body class="body-a">
+<%
+    String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+            + request.getContextPath();
+%>
 <main style="display: flex; justify-content: center;">
-    <%
-        Account account = (Account) session.getAttribute("account");
-        if (account == null) {
-            response.sendRedirect("login.jsp"); // Redirect to login if account not found
-            return;
-        }
-
-        String name = account.getName();
-        String phoneNumber = account.getPhoneNumber();
-        String email = account.getEmail();
-        String gender = account.getGender();
-        Date birthDay = account.getBirthDay();
-        String address = account.getAddress();
-        String addressReceive = account.getAddressReceive();
-        String res = (String) request.getAttribute("res");
-        res = (res == null) ? "" : res;
-    %>
-
-    <div class="container container1">
-        <a href="homepage.jsp" class="close-btn" title="Quay lại trang chủ">
-            <i class="bi bi-x-circle-fill"></i>
-        </a>
-
-        <h2 class="h2-change">Thay Đổi Thông Tin</h2>
-        <p class="text-center w-100 mb-0 <%=(res.equals("Cập nhật thành công!")) ? "text-success" : "text-danger"%>" id="res"><%=res%></p>
-        <div id="verification"></div>
-        <form id="changeInfoForm" action="ChangeInformationServlet" method="post">
-            <div class="form-group form1">
-                <label for="fname" class="required">Họ và tên</label>
-                <div>
-                    <input type="text" id="fname" name="ho_ten" placeholder="Nhập họ và tên" value="<%=name%>" required>
-                    <span class="error-message" id="error-fname"></span>
-                </div>
-            </div>
-
-            <div class="form-group form1">
-                <label for="sdt" class="required">Số điện thoại</label>
-                <div>
-                    <input type="text" id="sdt" name="so_dien_thoai" placeholder="Nhập số điện thoại" value="<%=phoneNumber%>" required>
-                    <span class="error-message" id="error-sdt"></span>
-                </div>
-            </div>
-
-            <div class="form-group form1">
-                <label for="email" class="required">Email</label>
-                <div>
-                    <input type="email" id="email" name="email" placeholder="Nhập email" value="<%=email%>" required>
-                    <span class="error-message" id="error-email"></span>
-                </div>
-            </div>
-
-            <div class="form-group form1">
-                <label class="gender">Giới tính</label>
-                <div class="gender-container">
-                    <label><input type="radio" name="gender" value="Nam" <%="Nam".equals(gender) ? "checked" : ""%>> Nam</label>
-                    <label><input type="radio" name="gender" value="Nữ" <%="Nữ".equals(gender) ? "checked" : ""%>> Nữ</label>
-                    <label><input type="radio" name="gender" value="Khác" <%="Khác".equals(gender) ? "checked" : ""%>> Khác</label>
-                </div>
-            </div>
-
-            <div class="form-group form1">
-                <label for="date" class="required">Ngày sinh</label>
-                <div>
-                    <input type="date" id="date" name="ngay_sinh" value="<%=birthDay != null ? new java.text.SimpleDateFormat("yyyy-MM-dd").format(birthDay) : ""%>" required>
-                    <span class="error-message" id="error-date"></span>
-                </div>
-            </div>
-
-            <div class="form-group form1">
-                <label for="address" class="required">Địa chỉ</label>
-                <div>
-                    <input type="text" id="address" name="dia_chi" placeholder="Nhập địa chỉ" value="<%=address%>" required>
-                    <span class="error-message" id="error-address"></span>
-                </div>
-            </div>
-
-            <div class="form-group form1">
-                <label for="receive" class="required">Địa chỉ nhận hàng</label>
-                <div>
-                    <input type="text" id="receive" name="dia_chi_nhan_hang" placeholder="Nhập địa chỉ nhận hàng"
-                           value="<%=addressReceive%>" required>
-                    <span class="error-message" id="error-receive"></span>
-                </div>
-            </div>
-
-            <button class="button1" type="submit">LƯU</button>
+    <div class="changeInF">
+        <%
+            Object object = session.getAttribute("account");
+            Account account = null;
+            if(object != null)
+                account = (Account) object;
+            if(account == null){
+        %>
+        <p style="text-align: center; margin-top: 15px"><a href="SignIn.jsp">Bạn chưa đăng nhập</a></p>
+        <%} else {%>
+        <%
+            String name = account.getName();
+            String phoneNumber = account.getPhoneNumber();
+            String email = account.getEmail();
+            String gender = account.getGender();
+            Date birthDay = account.getBirthDay();
+            String address = account.getAddress();
+            String addressReceive = account.getAddressReceive();
+            String res = (String) request.getAttribute("res");
+            res = (res == null) ? "" : res;
+        %>
+        <form id="changeNam" onsubmit="return check()" action="changeInfo" method="post">
+            <table>
+                <thead>
+                <tr>
+                    <td colspan="4">
+                        <h5 class="pt-3 pb-1">THAY ĐỔI THÔNG TIN</h5>
+                        <p class="text-center w-100 mb-0 <%=(res.equals("Cập nhật thành công!")) ? "text-success" : "text-danger"%>" id="res"><%=res%></p>
+                    </td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td colspan="2">
+                        <%
+                            if (account.getVerifyAccount().isStateVerify()) {%>
+                        <label class="w-100">Tài khoản đã xác thực <i class="fa fa-check-circle text-success" aria-hidden="true"></i></label>
+                        <%} else {%>
+                        <label class="w-100">Tài khoản của bạn chưa xác thực, <a href="<%=url%>/reVerifyCode">xác thực ngay</a></label>
+                        <%}%>
+                    </td>
+                </tr>
+                <tr id="changeName">
+                    <td>
+                        <label>Họ và tên <span class="text-danger">*</span></label>
+                    </td>
+                    <td class="w-50">
+                        <div id="InName">
+                            <input id="HienThiTen" name="TenHT" type="text" value="<%= name %>">
+                        </div>
+                    </td>
+                </tr>
+                <tr id="changeSDT">
+                    <td>
+                        <label>Số điện thoại <span class="text-danger">*</span></label>
+                    </td>
+                    <td>
+                        <div id="InSDT">
+                            <input id="HienThiSDT" name="SDTHT" type="text" value="<%= phoneNumber %>">
+                        </div>
+                    </td>
+                </tr>
+                <tr id="changegGmail">
+                    <td>
+                        <label>Email <span class="text-danger">*</span></label>
+                    </td>
+                    <td>
+                        <div id="InGmail">
+                            <input id="HienThiGmail" name="GmailHT" type="text" value="<%= email %>">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Giới tính <span class="text-danger">*</span></label>
+                    </td>
+                    <td>
+                        <div class="gender">
+                            <label class="ms-0" for="male">Nam</label><input class="ms-2 me-3" type="radio" id="male" name="gender" value="Nam" <%= gender.equals("Nam") ? "checked" : "" %>>
+                            <label for="female">Nữ</label><input class="ms-2 me-3" type="radio" id="female" name="gender" value="Nữ" <%= gender.equals("Nữ") ? "checked" : "" %>>
+                            <label for="other">Khác</label><input class="ms-2 me-3" type="radio" id="other" name="gender" value="Khác" <%= gender.equals("Khác") ? "checked" : "" %>>
+                        </div>
+                    </td>
+                </tr>
+                <tr id="changeNgaySinh">
+                    <td>
+                        <label>Ngày sinh <span class="text-danger">*</span></label>
+                    </td>
+                    <td>
+                        <div id="InNS">
+                            <input id="HienThiNS" name="HienThiNS" type="date" value="<%= birthDay != null ? new java.text.SimpleDateFormat("yyyy-MM-dd").format(birthDay) : "" %>">
+                        </div>
+                    </td>
+                </tr>
+                <tr id="changeDC">
+                    <td>
+                        <label>Địa chỉ <span class="text-danger">*</span></label>
+                    </td>
+                    <td>
+                        <div id="InDiaChi">
+                            <input id="HienThiDC" name="DCHT" type="text" value="<%= address %>">
+                        </div>
+                    </td>
+                </tr>
+                <tr id="changeDCReceive">
+                    <td>
+                        <label>Địa chỉ nhận hàng <span class="text-danger">*</span></label>
+                    </td>
+                    <td>
+                        <div id="InDiaChiReceive">
+                            <input id="HienThiDCReice" name="DCNHHT" type="text" value="<%= addressReceive %>">
+                        </div>
+                    </td>
+                </tr>
+                <tr id="SubmitSB">
+                    <td colspan="2">
+                        <div><button id="submit" name="SB" onclick="my_function()" style="color: white">LƯU</button></div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </form>
+        <%}%>
     </div>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 <script src="js/changeInformation.js"></script>
+<script>
+    $(document).ready(function () {
+        var res = $('#res');
+        if (res.text() === "Cập nhật thành công!") {
+            res.addClass("text-success");
+        } else {
+            res.addClass("text-danger");
+        }
+    });
+    function check() {
+        var flag = true;
+        var tenElement = document.getElementById("HienThiTen");
+        var gmailElement = document.getElementById("HienThiGmail");
+        var sdtElement = document.getElementById("HienThiSDT");
+        var dcElement = document.getElementById("HienThiDC");
+        var nsElement = document.getElementById("HienThiNS");
+        var error = document.getElementById("res");
+
+        var gmailReg = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        var phoneReg = /^\d{10}/;
+        if(tenElement.value == "") {
+            error.innerHTML = "Vui lòng nhập họ và tên!";
+            flag = false;
+        }else if(gmailElement.value == "") {
+            error.innerHTML = "Vui lòng nhập Email!";
+            flag = false;
+        }else if(!gmailElement.value.match(gmailReg)) {
+            error.innerHTML = "Email không hợp lệ!";
+            flag = false;
+        }else if(sdtElement.value == "") {
+            error.innerHTML = "Vui lòng nhập số điện thoại!";
+            flag = false;
+        }else if(!sdtElement.value.match(phoneReg)) {
+            error.innerHTML = "Số điện thoại không hợp lệ!";
+            flag = false;
+        }
+        else if(dcElement.value == "") {
+            error.innerHTML = "Vui lòng nhập địa chỉ!";
+            flag = false;
+        }else if(nsElement.value == "") {
+            error.innerHTML = "Vui lòng chọn ngày sinh!";
+            flag = false;
+        }
+        console.log(sdtElement.value);
+        return flag;
+    }
+</script>
+<script>
+    if($('#res').text() === "Cập nhật thành công!") {
+        setTimeout(function () {
+            window.location.href = 'homePage';
+        }, 2000);
+    }
+</script>
 </body>
 
 </html>

@@ -61,7 +61,7 @@ public class ChangeInfo extends HttpServlet {
             }
         }
         request.setAttribute("res", res);
-        request.getRequestDispatcher("ChangeInfor.jsp").forward(request, response);
+        request.getRequestDispatcher("ChangeInformation.jsp").forward(request, response);
     }
 }
 

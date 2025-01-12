@@ -6,20 +6,32 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class Product {
     private int id;
     private String nameProduct;
     private int quantity;
+<<<<<<< HEAD
+=======
+    private String diameter;
+    private String height;
+    private double price;
+>>>>>>> 6181b2c9d6d968f986c0cbcfdb23836ece1daac3
     private String description;
     private Date createdAt;
     private Date updatedAt;
     private ArrayList<ProductImages> productImages;
+<<<<<<< HEAD
     private ArrayList<ProductSizes> productSizes;
     private List<Integer> categoryId;
+=======
+
+>>>>>>> 6181b2c9d6d968f986c0cbcfdb23836ece1daac3
 
     public Product() {
     }
@@ -79,8 +91,29 @@ public class Product {
         return productSizes;
     }
 
+<<<<<<< HEAD
     public void setSizes(List<ProductSizes> sizes) {
         this.productSizes = productSizes;
+=======
+    public void setDiameter(String diameter) {
+        this.diameter = diameter;
+    }
+
+    public String getHeight() {
+        return height;
+    }
+
+    public void setHeight(String height) {
+        this.height = height;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+>>>>>>> 6181b2c9d6d968f986c0cbcfdb23836ece1daac3
     }
 
     public String getDescription() {
@@ -116,17 +149,10 @@ public class Product {
     }
 
 
-    public List<Integer> getCategoryId() {
-        if(categoryId == null) {
-            categoryId = new ArrayList<>();
-            loadCategoryId();
 
-        }
-        return categoryId;
-    }
 
     private void loadCategoryId() {
-        String sql ="SELECT ca.category_id \n" +
+        String sql = "SELECT ca.category_id \n" +
                 "FROM categoryproduct cp\n" +
                 "JOIN category ca ON cp.category_id = ca.category_id\n" +
                 "WHERE cp.product_id = ?\n" +
@@ -138,15 +164,21 @@ public class Product {
             ResultSet resultSet = pr.executeQuery();
 
             while (resultSet.next()) {
-                categoryId.add(resultSet.getInt("category_id"));
+//                categoryId.add(resultSet.getInt("category_id"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
+    public String getFormattedPrice() {
+        NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+        return format.format(this.price);
+    }
+
     @Override
     public String toString() {
+<<<<<<< HEAD
         StringBuilder sb = new StringBuilder();
         sb.append("Product {")
                 .append("id=").append(id)
@@ -160,5 +192,26 @@ public class Product {
                 .append(", sizes=").append(productSizes != null ? productSizes.toString() : "[]")
                 .append('}');
         return sb.toString();
+=======
+        return "Product{" +
+                "id=" + id +
+                ", nameProduct='" + nameProduct + '\'' +
+                ", quantity=" + quantity +
+                ", diameter='" + diameter + '\'' +
+                ", height='" + height + '\'' +
+                ", price=" + price +
+                ", description='" + description + '\'' +
+                ", created_at=" + created_at +
+                ", updated_at=" + updated_at +
+                ", productImages=" + productImages +
+                '}';
+>>>>>>> 6181b2c9d6d968f986c0cbcfdb23836ece1daac3
+    }
+
+    public static void main(String[] args) {
+        Product p = new Product();
+        p.setPrice(5000000.0);
+
+        System.out.println(p.getFormattedPrice());
     }
 }
