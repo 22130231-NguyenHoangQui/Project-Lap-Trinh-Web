@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     path.forEach(function (part, index) {
         urlPath += part + '/';
-        if (index === path.length - 1 && part === 'ManageAdmin.html') {
+        if (index === path.length - 1 && part === 'ManageAdmin.jsp') {
             breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">Quản Lý</a>';
         } else {
             breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">' + part.replace(/-/g, ' ') + '</a>';

@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
             breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">Danh mục sản phẩm</a>';
         } else {
             breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">' + part.replace(/-/g, ' ') + '</a>';
-        }    
+        }
     });
 
     isMediumDiv.innerHTML = breadcrumbHtml;
@@ -22,55 +22,55 @@ document.addEventListener("DOMContentLoaded", function () {
 /**
  * hàm fix cho vấn đề danh mục bị lỗi
  */
-document.querySelectorAll('.dropdown-menu a').forEach(function (categoryLink) {
-    categoryLink.addEventListener('click', function (event) {
-        if (categoryLink.getAttribute('href') !== 'SignIn.html' && categoryLink.getAttribute('href') !== 'SignUp.html') {
-
-
-            const categoryData = categoryLink.getAttribute('data-category');
-
-            localStorage.setItem('selectedCategory', categoryData);
-
-
-            window.location.href = 'ProductCatalog.jsp';
-        }
-    });
-});
+// document.querySelectorAll('.dropdown-menu a').forEach(function (categoryLink) {
+//     categoryLink.addEventListener('click', function (event) {
+//         if (categoryLink.getAttribute('href') !== 'SignIn.html' && categoryLink.getAttribute('href') !== 'SignUp.html') {
+//
+//
+//             const categoryData = categoryLink.getAttribute('data-category');
+//
+//             localStorage.setItem('selectedCategory', categoryData);
+//
+//
+//             window.location.href = 'ProductCatalog.jsp';
+//         }
+//     });
+// });
 
 /**
- * 
+ *
  */
-document.querySelectorAll('.product-categories li').forEach(function (categoryItem) {
-    categoryItem.addEventListener('click', function (event) {
-        event.preventDefault(); 
-        const categoryData = categoryItem.getAttribute('data-category');
-        localStorage.setItem('selectedCategory', categoryData);
-        loadProducts(categoryData);
-    });
-});
+// document.querySelectorAll('.product-categories li').forEach(function (categoryItem) {
+//     categoryItem.addEventListener('click', function (event) {
+//         event.preventDefault();
+//         const categoryData = categoryItem.getAttribute('data-category');
+//         localStorage.setItem('selectedCategory', categoryData);
+//         loadProducts(categoryData);
+//     });
+// });
 
 
 
 
 // Function to load products based on the selected category
-function loadProducts(category) {
-    const imageList = imagesByCategory[category] || [];
-    const productContainer = document.querySelector('.products.row.row-small');
-    productContainer.innerHTML = '';  // Clear previous products
-    imageList.forEach((product) => {
-        productContainer.innerHTML += createProductHTML(product);
-    });
-    // Mark the active category
-    const categoryItems = document.querySelectorAll('.product-categories li');
-    categoryItems.forEach((item) => {
-        const link = item.querySelector('a');
-        if (link && link.textContent.trim() === getCategoryName(category)) {
-            item.classList.add('active');
-        } else {
-            item.classList.remove('active');
-        }
-    });
-}
+// function loadProducts(category) {
+//     const imageList = imagesByCategory[category] || [];
+//     const productContainer = document.querySelector('.products.row.row-small');
+//     productContainer.innerHTML = '';  // Clear previous products
+//     imageList.forEach((product) => {
+//         productContainer.innerHTML += createProductHTML(product);
+//     });
+//     // Mark the active category
+//     const categoryItems = document.querySelectorAll('.product-categories li');
+//     categoryItems.forEach((item) => {
+//         const link = item.querySelector('a');
+//         if (link && link.textContent.trim() === getCategoryName(category)) {
+//             item.classList.add('active');
+//         } else {
+//             item.classList.remove('active');
+//         }
+//     });
+// }
 
 /**
  * hàm lấy tên ra để cho hover  
@@ -99,12 +99,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const fromLabel = document.querySelector('.price_label .from');
     const toLabel = document.querySelector('.price_label .to');
 
-    const minValue = 0;
-    const maxValue = 1350000;
-    const step = 10000;
+    const minValue = '${lowestPrice}';
+    const maxValue = '${highestPrice}';
+    const step = 100;
+
 
     let leftValue = minValue;
     let rightValue = maxValue;
+    console.log(leftValue);
+    console.log(rightValue);
 
     function updateSlider() {
         const rangeWidth = document.querySelector('.price_slider').offsetWidth;
@@ -167,83 +170,85 @@ document.addEventListener('DOMContentLoaded', function () {
 
     updateSlider();
 });
+
+
 /**
  * hàm mã hóa để loại bỏ ký tự đồng thời bảo mật
  *  tạo sản phẩm tương ứng với product tương ứng của danh mục đã click ( hàm hổ trợ cho hàm hiện thị sản phẩm ở dưới)
  */
-function createProductHTML(product) {
-    const productData = encodeURIComponent(JSON.stringify(product));
-    return `
-<div class="col">
-    <div class="col-inner">
-        <div class="product-small box">
-            <div class="box-image">
-                <a href="#" class="product-link" onclick="saveProductData('${productData}')">
-                    <img width="247" height="296" src="${product.image}" alt="${product.name}">
-                </a>
-            </div>
-            <div class="box-text text-center">
-                <div class="title-wrapper">
-                    <p>
-                        <a href="#" onclick="saveProductData('${productData}')">${product.id} - ${product.name}</a>
-                    </p>
-                </div>
-                <div class="price-wrapper">
-                    <span class="price">
-                        <span class="woocommerce-Price-amount amount">
-                            <bdi style="font-weight: bold;">${product.price}</bdi>
-                        </span>
-                    </span>
-                </div>
-                <div class="add-to-cart-button">
-                    <a href="#" onclick="saveProductData('${productData}')">THÊM VÀO GIỎ</a>
-                </div>
-                <div class="product-description" style="display:none;">
-                    <span class="description-id">Mã: <span class="sku">${product.id}</span></span>
-                    <span class="description-content">Mô tả: <br>${product.description}</span>
-                </div>
-                 <div class="size-wrapper" style="display:none;">
-                    <p ><strong>Đường kính:</strong> ${product.diameter}</p> <!-- Hiển thị đường kính -->
-                    <p><strong>Chiều cao:</strong> ${product.height}</p> <!-- Hiển thị chiều cao -->
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-`;
-}
+// function createProductHTML(product) {
+//     const productData = encodeURIComponent(JSON.stringify(product));
+//     return `
+// <div class="col">
+//     <div class="col-inner">
+//         <div class="product-small box">
+//             <div class="box-image">
+//                 <a href="#" class="product-link" onclick="saveProductData('${productData}')">
+//                     <img width="247" height="296" src="${product.image}" alt="${product.name}">
+//                 </a>
+//             </div>
+//             <div class="box-text text-center">
+//                 <div class="title-wrapper">
+//                     <p>
+//                         <a href="#" onclick="saveProductData('${productData}')">${product.id} - ${product.name}</a>
+//                     </p>
+//                 </div>
+//                 <div class="price-wrapper">
+//                     <span class="price">
+//                         <span class="woocommerce-Price-amount amount">
+//                             <bdi style="font-weight: bold;">${product.price}</bdi>
+//                         </span>
+//                     </span>
+//                 </div>
+//                 <div class="add-to-cart-button">
+//                     <a href="#" onclick="saveProductData('${productData}')">THÊM VÀO GIỎ</a>
+//                 </div>
+//                 <div class="product-description" style="display:none;">
+//                     <span class="description-id">Mã: <span class="sku">${product.id}</span></span>
+//                     <span class="description-content">Mô tả: <br>${product.description}</span>
+//                 </div>
+//                  <div class="size-wrapper" style="display:none;">
+//                     <p ><strong>Đường kính:</strong> ${product.diameter}</p> <!-- Hiển thị đường kính -->
+//                     <p><strong>Chiều cao:</strong> ${product.height}</p> <!-- Hiển thị chiều cao -->
+//                 </div>
+//             </div>
+//         </div>
+//     </div>
+// </div>
+// `;
+// }
 
 
 /**
  * hàm hiện thị sản phẩm tương ứng và mặc định khi vào trang
  */
-document.addEventListener('DOMContentLoaded', function () {
-    const selectedCategory = localStorage.getItem('selectedCategory') || 'banh_an_nhe';
-    const selectedOtherData = localStorage.getItem('selectedOtherData') || [];
-
-    const imageList = imagesByCategory[selectedCategory] || [];
-    const productContainer = document.querySelector('.products.row.row-small');
-
-    productContainer.innerHTML = '';
-
-    imageList.forEach((product) => {
-        productContainer.innerHTML += createProductHTML(product);
-    });
-
-    const categoryItems = document.querySelectorAll('.product-categories li');
-    categoryItems.forEach((item) => {
-        const link = item.querySelector('a');
-        if (link && link.textContent.trim() === getCategoryName(selectedCategory)) {
-            item.classList.add('active');
-        } else {
-            item.classList.remove('active');
-        }
-    });    
-
-    localStorage.removeItem('selectedCategory');
-    localStorage.removeItem('selectedOtherData');
-});
-
+// document.addEventListener('DOMContentLoaded', function () {
+//     const selectedCategory = localStorage.getItem('selectedCategory') || 'banh_an_nhe';
+//     const selectedOtherData = localStorage.getItem('selectedOtherData') || [];
+//
+//     const imageList = imagesByCategory[selectedCategory] || [];
+//     const productContainer = document.querySelector('.products.row.row-small');
+//
+//     productContainer.innerHTML = '';
+//
+//     imageList.forEach((product) => {
+//         productContainer.innerHTML += createProductHTML(product);
+//     });
+//
+//     const categoryItems = document.querySelectorAll('.product-categories li');
+//     categoryItems.forEach((item) => {
+//         const link = item.querySelector('a');
+//         if (link && link.textContent.trim() === getCategoryName(selectedCategory)) {
+//             item.classList.add('active');
+//         } else {
+//             item.classList.remove('active');
+//         }
+//     });
+//
+//     localStorage.removeItem('selectedCategory');
+//     localStorage.removeItem('selectedOtherData');
+// });
+//
 
 
 

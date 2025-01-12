@@ -1,5 +1,5 @@
 package com.edu.hcmuaf.fit.controller;
-import com.edu.hcmuaf.fit.dao.DAOAccount;
+
 import com.edu.hcmuaf.fit.model.Account;
 import com.edu.hcmuaf.fit.model.VerifyAccount;
 import com.edu.hcmuaf.fit.service.AccountService;
@@ -10,14 +10,18 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 
 @WebServlet(name = "signInAccount", value = "/signInAccount")
 public class SignInAccount extends HttpServlet {
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("signIn.jsp").forward(request, response);
     }
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
@@ -26,7 +30,8 @@ public class SignInAccount extends HttpServlet {
         String userName = request.getParameter("idFormInput");
         String password = request.getParameter("idFormPass");
         String err = "";
-        //Kiểm tra điều kiện ở phía server
+
+        // Kiểm tra điều kiện ở phía server
         if ((userName == null || userName.trim().isEmpty()) && (password == null || password.trim().isEmpty())) {
             err = "Bạn chưa nhập tên đăng nhập hoặc mật khẩu!";
         } else if (userName == null || userName.trim().isEmpty()) {
@@ -39,10 +44,10 @@ public class SignInAccount extends HttpServlet {
             if (AccountService.getInstance().checkExistUserName(userName)) {
                 String encryptPass = Encrypt.toSHA1(password);
                 Account account = AccountService.getInstance().getAccount(userName, encryptPass);
-                if(account != null){
-                    if(!account.isStatus()){
+                if (account != null) {
+                    if (!account.isStatus()) {
                         err = "Tài khoản của bạn đã bị cấm!";
-                    }else {
+                    } else {
                         VerifyAccount vrf = AccountService.getInstance().getVrfOfAccount(account.getId());
                         account.setVerifyAccount(vrf);
                         HttpSession session = request.getSession();
@@ -58,6 +63,6 @@ public class SignInAccount extends HttpServlet {
             }
         }
         request.setAttribute("err", err);
-        request.getRequestDispatcher("SignIn.jsp").forward(request, response);
+        request.getRequestDispatcher("signIn.jsp").forward(request, response);
     }
 }

@@ -10,10 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class DAOProduct {
-//    test
+    //    test
     public static ArrayList<Product> listProduct(int offset) {
         ArrayList<Product> re = new ArrayList<>();
         Connection connection = JDBCUtil.getConnection();
@@ -33,13 +32,13 @@ public class DAOProduct {
             }
             JDBCUtil.closeConnection(connection);
         } catch (SQLException e) {
-           e.printStackTrace();
+            e.printStackTrace();
         }
         return re;
     }
 
-//    lấy ra sản phẩm đang là xu hướng
-    public  static ArrayList<Product> listProductBestSelling(int offset) {
+    //    lấy ra sản phẩm đang là xu hướng
+    public static ArrayList<Product> listProductBestSelling(int offset) {
         ArrayList<Product> re = new ArrayList<>();
         Connection connection = JDBCUtil.getConnection();
         try {
@@ -70,7 +69,7 @@ public class DAOProduct {
         return re;
     }
 
-//   lấy ra sản phẩm bán chạy trong tháng
+    //   lấy ra sản phẩm bán chạy trong tháng
     public static ArrayList<Product> listProductBessInMonth(int offset) {
         ArrayList<Product> re = new ArrayList<>();
         Connection connection = JDBCUtil.getConnection();
@@ -104,15 +103,13 @@ public class DAOProduct {
     }
 
 
-
-
-//  lấy danh sách hình ảnh của 1 sản phẩm
+    //  lấy danh sách hình ảnh của 1 sản phẩm
     public static ArrayList<ProductImages> listImageOfProduct(Product p) {
         ArrayList<ProductImages> re = new ArrayList<>();
         Connection connection = JDBCUtil.getConnection();
         try {
             String sql = "Select pi.image_url " + "from productimages pi " + "where pi.product_id = ?";
-            PreparedStatement  pr = connection.prepareStatement(sql);
+            PreparedStatement pr = connection.prepareStatement(sql);
             pr.setInt(1, p.getId());
             ResultSet resultSet = pr.executeQuery();
             while (resultSet.next()) {
@@ -250,7 +247,6 @@ public static ArrayList<Product> listProductByIdCate(int categoryId, int offset)
     }
 
     public static void main(String[] args) {
-//        Product p = new Product();
 //        p.setId(1);
 //        System.out.println(listImageOfProduct(p));
 
@@ -258,9 +254,22 @@ public static ArrayList<Product> listProductByIdCate(int categoryId, int offset)
 //            System.out.println(product);
 //        }
 
-        for (Product product : listRandomProduct(0)) {
-            System.out.println(product);
-        }
+            Product product = new Product();
+            product.setId(1);  // Giả sử sản phẩm có ID là 1
+
+        ArrayList<ProductImages> images = listImageOfProduct(product);
+            // Gọi phương thức listImageOfProduct
+            System.out.println(product.getProductImages().get(0).getUrl());
+//        for (Product product : getProductsByPriceRange(0, 10000)) {
+//            System.out.println(product);
+//        }
+
+//        LoadProductByName loadProductByName = new LoadProductByName();
+//        String name = "product";
+//        ArrayList<Product> listProductByName = ProductService.getInstance().listProductByName(name);
+//        for (Product product : listProductByName) {
+//            System.out.println(product);
+//        }
 
 
     }

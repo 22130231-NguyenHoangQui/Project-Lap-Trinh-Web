@@ -8,7 +8,7 @@ public class SignOutAccount extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.invalidate();
-        response.sendRedirect("SignIn.jsp");
+//        response.sendRedirect("signIn.jsp");
     }
 }
 

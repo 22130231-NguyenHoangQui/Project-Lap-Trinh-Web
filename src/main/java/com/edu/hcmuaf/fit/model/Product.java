@@ -6,9 +6,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class Product {
     private int id;
@@ -19,7 +21,7 @@ public class Product {
     private Date updatedAt;
     private ArrayList<ProductImages> productImages;
     private ArrayList<ProductSizes> productSizes;
-    private List<Integer> categoryId;
+
 
     public Product() {
     }
@@ -116,17 +118,10 @@ public class Product {
     }
 
 
-    public List<Integer> getCategoryId() {
-        if(categoryId == null) {
-            categoryId = new ArrayList<>();
-            loadCategoryId();
 
-        }
-        return categoryId;
-    }
 
     private void loadCategoryId() {
-        String sql ="SELECT ca.category_id \n" +
+        String sql = "SELECT ca.category_id \n" +
                 "FROM categoryproduct cp\n" +
                 "JOIN category ca ON cp.category_id = ca.category_id\n" +
                 "WHERE cp.product_id = ?\n" +
@@ -138,11 +133,16 @@ public class Product {
             ResultSet resultSet = pr.executeQuery();
 
             while (resultSet.next()) {
-                categoryId.add(resultSet.getInt("category_id"));
+//                categoryId.add(resultSet.getInt("category_id"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public String getFormattedPrice() {
+        NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+        return format.format(this.price);
     }
 
     @Override
@@ -160,5 +160,12 @@ public class Product {
                 .append(", sizes=").append(productSizes != null ? productSizes.toString() : "[]")
                 .append('}');
         return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        Product p = new Product();
+        p.setPrice(5000000.0);
+
+        System.out.println(p.getFormattedPrice());
     }
 }

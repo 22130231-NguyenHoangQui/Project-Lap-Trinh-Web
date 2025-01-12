@@ -1,7 +1,6 @@
 package com.edu.hcmuaf.fit.model;
 
 import java.sql.Date;
-
 public class Account {
     private int id;
     private String name;
@@ -15,6 +14,8 @@ public class Account {
     private String addressReceive;
     private int role;
     private boolean status;
+    private java.util.Date created_at;
+    private java.util.Date updated_at;
     private VerifyAccount verifyAccount;
 
     public Account(Account a) {
@@ -204,6 +205,23 @@ public class Account {
     public void setVerifyAccount(VerifyAccount verifyAccount) {
         this.verifyAccount = verifyAccount;
     }
+
+    public java.util.Date getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(java.util.Date created_at) {
+        this.created_at = created_at;
+    }
+
+    public java.util.Date getUpdated_at() {
+        return updated_at;
+    }
+
+    public void setUpdated_at(java.util.Date updated_at) {
+        this.updated_at = updated_at;
+    }
+
     @Override
     public String toString() {
         return "Account{" +
