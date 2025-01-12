@@ -5,18 +5,28 @@ import java.util.Locale;
 
 public class ProductSizes {
     private int id;
+    private int idProduct;
     private String diameter;
     private String height;
-    private int price;
+    private double price;
 
-    public ProductSizes(int id, String diameter, String height, int price) {
+
+    public ProductSizes(int id, int idProduct, String diameter, String height, double price) {
+        this.id = id;
+        this.idProduct = idProduct;
+        this.diameter = diameter;
+        this.height = height;
+        this.price = price;
+    }
+
+    public ProductSizes(int id, String diameter, String height, double price) {
         this.id = id;
         this.diameter = diameter;
         this.height = height;
         this.price = price;
     }
 
-    public ProductSizes(String diameter, String height, int price) {
+    public ProductSizes(String diameter, String height, double price) {
         this.diameter = diameter;
         this.height = height;
         this.price = price;
@@ -46,7 +56,7 @@ public class ProductSizes {
         this.height = height;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 

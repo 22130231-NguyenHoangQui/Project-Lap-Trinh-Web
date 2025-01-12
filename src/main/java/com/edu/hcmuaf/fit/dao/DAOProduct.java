@@ -3,7 +3,6 @@ package com.edu.hcmuaf.fit.dao;
 import com.edu.hcmuaf.fit.model.Product;
 import com.edu.hcmuaf.fit.model.ProductImages;
 import com.edu.hcmuaf.fit.model.ProductSizes;
-import com.edu.hcmuaf.fit.model.SizePrice;
 import com.edu.hcmuaf.fit.util.JDBCUtil;
 
 import java.sql.Connection;
@@ -130,8 +129,8 @@ public class DAOProduct {
         return re;
 
     }
-    public static ArrayList<SizePrice> listPriceOfProduct(int idP) {
-        ArrayList<SizePrice> re = new ArrayList<>();
+    public static ArrayList<ProductSizes> listPriceOfProduct(int idP) {
+        ArrayList<ProductSizes> re = new ArrayList<>();
         Connection connection = JDBCUtil.getConnection();
         try {
             String sql = "Select id, diameter, price, height, productId from productsizes  where productId = ?";
@@ -145,7 +144,7 @@ public class DAOProduct {
                 String height = resultSet.getString("height");
                 int idProduct = resultSet.getInt("productId");
 
-                SizePrice sp = new SizePrice(id,idProduct,diameter,height,price);
+                ProductSizes sp = new ProductSizes(id,idProduct,diameter,height,price);
                 re.add(sp);
             }
             JDBCUtil.closeConnection(connection);

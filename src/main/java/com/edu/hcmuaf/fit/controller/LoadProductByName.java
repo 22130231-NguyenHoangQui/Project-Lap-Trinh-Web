@@ -50,7 +50,7 @@ public class LoadProductByName extends HttpServlet {
 
                 // Lặp qua từng kích cỡ và hiển thị giá và thông tin kích cỡ
                 for (ProductSizes size : productSizes) {
-                    int price = size.getPrice();  // Lấy giá của từng kích cỡ
+                    double price = size.getPrice();  // Lấy giá của từng kích cỡ
                     out.println("                        <span class=\"woocommerce-Price-amount amount\">\n" +
                             "                            <bdi style=\"font-weight: bold;\">" + nf.format(price) + "</bdi>\n" +
                             "                        </span>\n");

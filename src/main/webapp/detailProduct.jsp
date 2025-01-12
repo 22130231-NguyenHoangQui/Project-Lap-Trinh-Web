@@ -145,7 +145,7 @@
                             <div class="price-wrapper">
                                 <p class="product-page-price ">
                                     <span class="price-amount"><bdi>${product.getFormattedPrice(product.minPrice)}<span
-                                            class="price-symbol">₫</span><bdi>${product.getFormattedPrice(product.maxPrice)}<span
+                                            class="price-symbol">₫</span>-<bdi>${product.getFormattedPrice(product.maxPrice)}<span
                                             class="price-symbol">₫</span></bdi></span>
                                 </p>
                             </div>
