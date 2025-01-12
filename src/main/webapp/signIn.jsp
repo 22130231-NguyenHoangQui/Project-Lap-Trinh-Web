@@ -25,7 +25,7 @@
 %>
 <main>
     <div class="container container1">
-        <a href="<%=url%>/homepage.jsp" class="close-btn" title="Quay lại trang chủ">
+        <a href="<%=url%>/homepage" class="close-btn" title="Quay lại trang chủ">
             <i class="bi bi-x-circle-fill"></i>
         </a>
         <img src="image/imghomepage/logo/logo1.jpg" class="img-logo1" alt="logo-page">
@@ -38,14 +38,14 @@
             <div class="form-group-p">
                 <input class="form-pass" id="idFormPass" name="idFormPass" type="password" placeholder="Mật khẩu" value ="<%=password%>">
             </div>
-            <div class="form-group-p" id="idFPass">
-                <p id="idMK"><a href="<%=url%>/forgotPassword.jsp">Quên mật khẩu?</a></p>
-            </div>
             <div>
                 <button type="submit" class="button-submit" id="submitDangNhap">ĐĂNG NHẬP</button>
             </div>
+            <div class="form-group-p" id="idFPass">
+                <p id="idMK"><a href="<%=url%>/forgetPassword">Quên mật khẩu?</a></p>
+            </div>
             <div class="form-group-p" id="idDK">
-                <p>Bạn chưa có tài khoản?<a href="<%=url%>/signUp.jsp"> Đăng ký</a></p>
+                <p>Bạn chưa có tài khoản?<a href="<%=url%>/registerAccount"> Đăng ký</a></p>
             </div>
         </form>
     </div>

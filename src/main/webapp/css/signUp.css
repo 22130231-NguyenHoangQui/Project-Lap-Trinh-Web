@@ -5,6 +5,7 @@
 }
 
 .contain {
+    position: relative;
     box-sizing: border-box;
     box-shadow: 0 3px 10px 0 rgba(0, 0, 0, .14);
     width: 400px;
@@ -76,16 +77,16 @@ h5 {
 .checkbox a{
     margin-left: 5px;
     text-decoration-line: none;
-    color:#F68E2E;
+    color:#3a97e9;
     font-size: 0.75rem;
 }
 .checkbox input{
-    background-color: #F68E2E;
+    background-color: #3a97e9;
     padding:10px;
 }
 button {
     margin-bottom: 10px;
-    background: #F68E2E;
+    background: #3a97e9;
     color: white;
     padding:10px;
     padding-right: 16px;
@@ -113,7 +114,7 @@ header h4{
 }
 .verify a{
     text-decoration-line: none;
-    color:#F68E2E;
+    color:#3a97e9;
 }
 .verify p{
     text-align: center;
@@ -124,7 +125,7 @@ header h4{
 :root {
     --font_size_all: 1rem;
     --font_weight_all: 500;
-    --color_backgroud: #f68e2e;
+    --color_backgroud: #3a97e9;
     --font_family: "Poppins", sans-serif;
     --color: #212529;
     --line_height: 1.2rem;
@@ -142,11 +143,11 @@ html {
     height: 100%;
 }
 body {
-    background-color: rgba(245, 245, 245, 1);
     min-height: 100%;
     display: flex;
     flex-direction: column;
     padding: 0 !important;
+    background-color: #a9cff0;
 }
 header {
     height: 124.03px;
@@ -246,7 +247,7 @@ footer {
     transition: 0.2s;
 }
 .card:hover  {
-    border: 1px solid #f68e2e;
+    border: 1px solid #3a97e9;
     transform: scale(1.02);
     transition: 0.3s;
 }
@@ -361,8 +362,19 @@ th, td {
     min-width: 110px !important;
 }
 
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    color: #494545;
+    text-decoration: none;
+    z-index: 1; /* Ensure it is above other elements */
+}
 
-
+.close-btn:hover {
+    color: #111;
+}
 
 
 

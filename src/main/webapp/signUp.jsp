@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="css/signUp.css">
 </head>
 <body>
+<% String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath(); %>
 
 <section class="signup mt-5">
     <div class="contain">
@@ -56,6 +57,9 @@
                 errEmail =(errEmail == null)?"":errEmail;
             %>
             <form  id="signup-form" class="signup-form" action="registerAccount" method="POST">
+                <a href="<%=url%>/signInAccount" class="close-btn" title="Quay lại đăng nhập">
+                    <i class="fa fa-times-circle"></i>
+                </a>
                 <h5>ĐĂNG KÍ</h5>
                 <div class="form-SignUp">
                     <div class="title fw-bold">THÔNG TIN ĐĂNG NHẬP</div>

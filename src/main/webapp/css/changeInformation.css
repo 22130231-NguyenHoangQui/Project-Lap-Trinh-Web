@@ -81,3 +81,7 @@ table > tbody > tr:hover {
     text-align: start;
     color: #ff0000;
 }
+body {
+    font-family: Tahoma, sans-serif;
+    background-color: #ddf1f4 !important;
+}
