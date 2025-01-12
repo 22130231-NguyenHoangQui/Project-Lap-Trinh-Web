@@ -47,7 +47,7 @@ public class SignInAccount extends HttpServlet {
                         account.setVerifyAccount(vrf);
                         HttpSession session = request.getSession();
                         session.setAttribute("account", account);
-                        response.sendRedirect("homePage");
+                        response.sendRedirect("homepage.jsp");
                         return;
                     }
                 } else {

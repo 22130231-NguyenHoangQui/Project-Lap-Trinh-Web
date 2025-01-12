@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   path.forEach(function (part, index) {
     urlPath += part + '/';
-    if (index === path.length - 1 && part === 'detailProduct.html') {
+    if (index === path.length - 1 && part === 'detailProduct.jsp') {
       breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + productSlug + '">' + 'Danh Mục Sản Phẩm / ' + productTitle + '</a>';
     } else {
       breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">' + part.replace(/-/g, ' ') + '</a>';

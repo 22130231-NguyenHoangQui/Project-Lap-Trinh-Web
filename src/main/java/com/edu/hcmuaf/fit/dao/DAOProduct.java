@@ -2,6 +2,7 @@ package com.edu.hcmuaf.fit.dao;
 
 import com.edu.hcmuaf.fit.model.Product;
 import com.edu.hcmuaf.fit.model.ProductImages;
+import com.edu.hcmuaf.fit.model.ProductSizes;
 import com.edu.hcmuaf.fit.util.JDBCUtil;
 
 import java.sql.Connection;
@@ -22,13 +23,12 @@ public class DAOProduct {
             pr.setInt(1, offset);
             ResultSet rs = pr.executeQuery();
             while (rs.next()) {
+                int id = rs.getInt("product_id");
                 String nameProduct = rs.getString("name_product");
                 int quantity = rs.getInt("quantity");
-                String diameter = rs.getString("diameter");
-                String height = rs.getString("height");
-                int price = rs.getInt("price");
                 String description = rs.getString("description");
-                Product product = new Product( nameProduct, quantity, diameter, height, price, description);
+                ArrayList<ProductSizes> productSizes = listSizeOfProduct(id);
+                Product product = new Product(id, nameProduct, quantity, description, productSizes);
                 re.add(product);
             }
             JDBCUtil.closeConnection(connection);
@@ -129,65 +129,126 @@ public class DAOProduct {
     }
 
 //    load sản phẩm theo mã danh mục
-public static ArrayList<Product> listProductByIdCate(int id,int offset) {
-    ArrayList<Product> re = new ArrayList<>();
-    Connection connection = JDBCUtil.getConnection();
-    try {
-        String sql = "SELECT p.product_id,ca.category_id,p.name_product,p.quantity,p.diameter,p.price,p.height,p.description\n" +
-                "FROM product as p\n" +
-                "JOIN categoryproduct capo ON p.product_id = capo.product_id\n" +
-                "JOIN category ca ON capo.category_id = ca.category_id\n" +
-                "WHERE ca.category_id = ?\n" +
-                "LIMIT 6 OFFSET ?";
-        PreparedStatement  pr = connection.prepareStatement(sql);
-        pr.setInt(1, id);
+public static ArrayList<Product> listProductByIdCate(int categoryId, int offset) {
+    ArrayList<Product> products = new ArrayList<>();
+    String sql = """
+            SELECT p.product_id, ca.category_id, p.name_product, p.quantity, p.description,
+                   ps.diameter, ps.height, ps.price
+            FROM product p
+            JOIN categoryproduct capo ON p.product_id = capo.product_id
+            JOIN category ca ON capo.category_id = ca.category_id
+            LEFT JOIN productsizes ps ON p.product_id = ps.product_id
+            WHERE ca.category_id = ?
+            LIMIT 6 OFFSET ?""";
+
+    try (Connection connection = JDBCUtil.getConnection();
+         PreparedStatement pr = connection.prepareStatement(sql)) {
+        pr.setInt(1, categoryId);
         pr.setInt(2, offset);
-        ResultSet resultSet = pr.executeQuery();
-        while (resultSet.next()) {
-            int product_id = resultSet.getInt("product_id");
-            int category = resultSet.getInt("category_id");
-            String name = resultSet.getString("name_product");
-            int price = resultSet.getInt("price");
-            Product product = new Product();
-            product.setNameProduct(name);
-            product.setId(product_id);
-            product.setPrice(price);
-            product.getCategoryId();
-            re.add(product);
-        }
-        JDBCUtil.closeConnection(connection);
-    } catch (SQLException e) {
-        throw new RuntimeException(e);
-    }
-    return re;
 
+        try (ResultSet rs = pr.executeQuery()) {
+            while (rs.next()) {
+                int productId = rs.getInt("product_id");
+                String name = rs.getString("name_product");
+                int quantity = rs.getInt("quantity");
+                String description = rs.getString("description");
+
+                String diameter = rs.getString("diameter");
+                String height = rs.getString("height");
+                int price = rs.getInt("price");
+
+                Product product = new Product();
+                product.setId(productId);
+                product.setNameProduct(name);
+                product.setQuantity(quantity);
+                product.setDescription(description);
+
+                if (diameter != null || height != null || price > 0) {
+                    ProductSizes size = new ProductSizes(diameter, height, price);
+                    product.getSizes().add(size);
+                }
+
+                products.add(product);
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return products;
 }
-// load 12 sản phẩm ngẫu nhiên
-public static ArrayList<Product> listRandomProduct(int offset) {
-        ArrayList<Product> re = new ArrayList<>();
+
+    // load 12 sản phẩm ngẫu nhiên
+    public static ArrayList<Product> listRandomProduct(int offset) {
+        ArrayList<Product> products = new ArrayList<>();
+        String sql = """
+            SELECT p.product_id, p.name_product, p.quantity, p.description,
+                   ps.diameter, ps.height, ps.price
+            FROM product p
+            LEFT JOIN productsizes ps ON p.product_id = ps.product_id
+            ORDER BY RAND()
+            LIMIT 12 OFFSET ?""";
+
+        try (Connection connection = JDBCUtil.getConnection();
+             PreparedStatement pr = connection.prepareStatement(sql)) {
+            pr.setInt(1, offset); // Sử dụng offset để phân trang
+
+            try (ResultSet rs = pr.executeQuery()) {
+                while (rs.next()) {
+                    int productId = rs.getInt("product_id");
+                    String name = rs.getString("name_product");
+                    int quantity = rs.getInt("quantity");
+                    String description = rs.getString("description");
+
+                    // Lấy thông tin từ bảng productsizes
+                    String diameter = rs.getString("diameter");
+                    String height = rs.getString("height");
+                    int price = rs.getInt("price");
+
+                    Product product = new Product();
+                    product.setId(productId);
+                    product.setNameProduct(name);
+                    product.setQuantity(quantity);
+                    product.setDescription(description);
+
+                    // Kiểm tra nếu có giá trị diameter, height, price để tạo đối tượng ProductSizes
+                    if (diameter != null || height != null || price > 0) {
+                        ProductSizes size = new ProductSizes(diameter, height, price);
+                        product.getSizes().add(size); // Thêm đối tượng size vào danh sách productSizes
+                    }
+
+                    products.add(product); // Thêm sản phẩm vào danh sách
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return products;
+    }
+
+
+    // Lấy danh sách sizes của sản phẩm
+    public static ArrayList<ProductSizes> listSizeOfProduct(int productId) {
+        ArrayList<ProductSizes> productSizes = new ArrayList<>();
         Connection connection = JDBCUtil.getConnection();
-    try {
-        String sql = "SELECT * FROM Product ORDER BY RAND() LIMIT 12";
-        PreparedStatement pr = connection.prepareStatement(sql);
-        ResultSet resultSet = pr.executeQuery();
-        while (resultSet.next()) {
-            int product_id = resultSet.getInt("product_id");
-            String name = resultSet.getString("name_product");
-            int price = resultSet.getInt("price");
-            Product product = new Product();
-            product.setNameProduct(name);
-            product.setId(product_id);
-            product.setPrice(price);
-            re.add(product);
-
+        try {
+            String sql = "SELECT * FROM productsizes WHERE product_id = ?";
+            PreparedStatement pr = connection.prepareStatement(sql);
+            pr.setInt(1, productId);
+            ResultSet rs = pr.executeQuery();
+            while (rs.next()) {
+                String diameter = rs.getString("diameter");
+                String hight = rs.getString("hight");
+                int price = rs.getInt("price");
+                productSizes.add(new ProductSizes(diameter, hight, price));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.closeConnection(connection);
         }
-
-    } catch (SQLException e) {
-        throw new RuntimeException(e);
+        return productSizes;
     }
-    JDBCUtil.closeConnection(connection);
-    return re;
-}
+
     public static void main(String[] args) {
 //        Product p = new Product();
 //        p.setId(1);

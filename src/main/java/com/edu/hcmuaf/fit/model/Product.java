@@ -14,39 +14,41 @@ public class Product {
     private int id;
     private String nameProduct;
     private int quantity;
-    private String diameter;
-    private String height;
-    private int price;
     private String description;
-    private Date created_at;
-    private Date updated_at;
+    private Date createdAt;
+    private Date updatedAt;
     private ArrayList<ProductImages> productImages;
+    private ArrayList<ProductSizes> productSizes;
     private List<Integer> categoryId;
 
     public Product() {
     }
 
 
-    public Product(String nameProduct, int quantity, String diameter, String height, int price, String description) {
+    public Product(String nameProduct, int quantity, ArrayList<ProductSizes> productSizes, String description) {
         this.nameProduct = nameProduct;
         this.quantity = quantity;
-        this.diameter = diameter;
-        this.height = height;
-        this.price = price;
+        this.productSizes = productSizes;
         this.description = description;
     }
 
-    public Product(int id, String nameProduct, int quantity, String diameter, String height, int price, String description, Date created_at, Date updated_at, ArrayList<ProductImages> productImages) {
+    public Product(int id, String nameProduct, int quantity, ArrayList<ProductSizes> productSizes, String description, Date createdAt, Date updated_at, ArrayList<ProductImages> productImages) {
         this.id = id;
         this.nameProduct = nameProduct;
         this.quantity = quantity;
-        this.diameter = diameter;
-        this.height = height;
-        this.price = price;
+        this.createdAt = createdAt;
         this.description = description;
-        this.created_at = created_at;
-        this.updated_at = updated_at;
+        this.updatedAt = createdAt;
+        this.productSizes = productSizes;
         this.productImages = productImages;
+    }
+
+    public Product(int id, String nameProduct, int quantity, String description, ArrayList<ProductSizes> productSizes) {
+        this.id = id;
+        this.nameProduct = nameProduct;
+        this.quantity = quantity;
+        this.description = description;
+        this.productSizes = productSizes;
     }
 
     public int getId() {
@@ -73,28 +75,12 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public String getDiameter() {
-        return diameter;
+    public List<ProductSizes> getSizes() {
+        return productSizes;
     }
 
-    public void setDiameter(String diameter) {
-        this.diameter = diameter;
-    }
-
-    public String getHeight() {
-        return height;
-    }
-
-    public void setHeight(String height) {
-        this.height = height;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
+    public void setSizes(List<ProductSizes> sizes) {
+        this.productSizes = productSizes;
     }
 
     public String getDescription() {
@@ -106,19 +92,19 @@ public class Product {
     }
 
     public Date getCreated_at() {
-        return created_at;
+        return createdAt;
     }
 
     public void setCreated_at(Date created_at) {
-        this.created_at = created_at;
+        this.createdAt = createdAt;
     }
 
     public Date getUpdated_at() {
-        return updated_at;
+        return updatedAt;
     }
 
     public void setUpdated_at(Date updated_at) {
-        this.updated_at = updated_at;
+        this.updatedAt = updated_at;
     }
 
     public ArrayList<ProductImages> getProductImages() {
@@ -161,18 +147,18 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", nameProduct='" + nameProduct + '\'' +
-                ", quantity=" + quantity +
-                ", diameter='" + diameter + '\'' +
-                ", height='" + height + '\'' +
-                ", price=" + price +
-                ", description='" + description + '\'' +
-                ", created_at=" + created_at +
-                ", updated_at=" + updated_at +
-                ", productImages=" + productImages +
-                ", categoryId=" + categoryId +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append("Product {")
+                .append("id=").append(id)
+                .append(", productName='").append(nameProduct).append('\'')
+                .append(", quantity=").append(quantity)
+                .append(", description='").append(description).append('\'')
+                .append(", createdAt=").append(createdAt)
+                .append(", updatedAt=").append(updatedAt)
+                .append(", categoryId=").append(categoryId)
+                .append(", images=").append(productImages != null ? productImages.toString() : "[]")
+                .append(", sizes=").append(productSizes != null ? productSizes.toString() : "[]")
+                .append('}');
+        return sb.toString();
     }
 }

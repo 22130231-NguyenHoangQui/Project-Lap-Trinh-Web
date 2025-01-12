@@ -263,7 +263,7 @@ function saveProductData(encodedProduct) {
     console.log("Sản phẩm được lưu:", product);
 
     // Chuyển hướng sang trang chi tiết sản phẩm
-    window.location.href = 'detailProduct.html';
+    window.location.href = 'detailProduct.jsp';
 }
 
 const imagesByCategory = {
