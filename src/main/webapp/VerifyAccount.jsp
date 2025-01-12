@@ -11,10 +11,11 @@
           integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/settingAll.css">
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/fotter.css">
-    <link rel="stylesheet" href="../css/authentic.css">
+    <link rel="stylesheet" href="./css/settingAll.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/fotter.css">
+    <link rel="stylesheet" href="./css/authentic.css">
+    <link rel="stylesheet" href="./css/FW.css">
 </head>
 
 <body>
