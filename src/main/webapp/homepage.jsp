@@ -26,7 +26,7 @@
     <jsp:include page="./header.jsp"></jsp:include>
 </header>
 <div style="height: 389.469px; touch-action: pan-y;">
-    <img width="1020" height="388" src="../image/imghomepage/logo/banhsinhnhat-home-banner.jpg" alt=""
+    <img width="1020" height="388" src="./image/imghomepage/logo/banhsinhnhat-home-banner.jpg" alt=""
          style="width: 100%;">
 </div>
 <main id="main">
