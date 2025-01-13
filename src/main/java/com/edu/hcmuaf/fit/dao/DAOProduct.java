@@ -150,9 +150,9 @@ public class DAOProduct {
             ResultSet resultSet = pr.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
-                String diameter = resultSet.getString("diameter");
+                int diameter = resultSet.getInt("diameter");
                 double price = resultSet.getDouble("price");
-                String height = resultSet.getString("height");
+                int height = resultSet.getInt("height");
                 int idProduct = resultSet.getInt("productId");
 
                 SizePrice sp = new SizePrice(id, idProduct, diameter, height, price);
@@ -457,8 +457,8 @@ public class DAOProduct {
             ResultSet rs = pr.executeQuery();
             while (rs.next()) {
                 double price = rs.getDouble("price");
-                String diameter = rs.getString("diameter");
-                String height = rs.getString("height");
+                int diameter = rs.getInt("diameter");
+                int height = rs.getInt("height");
                 int idProduct = rs.getInt("productId");
                 SizePrice sizePrice = new SizePrice();
                 sizePrice.setIdProduct(idProduct);
@@ -478,8 +478,8 @@ public class DAOProduct {
         String sql = "INSERT INTO productsizes (diameter, height, price, productId) VALUES (?, ?, ?, ?)";
         try (Connection conn = JDBCUtil.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, sizePrice.getDiameter());
-            stmt.setString(2, sizePrice.getHeight());
+            stmt.setInt(1, sizePrice.getDiameter());
+            stmt.setInt(2, sizePrice.getHeight());
             stmt.setDouble(3, sizePrice.getPrice());
             stmt.setInt(4, sizePrice.getIdProduct());
             return stmt.executeUpdate(); // Trả về số hàng bị ảnh hưởng
@@ -494,8 +494,8 @@ public class DAOProduct {
         try (Connection conn = JDBCUtil.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setDouble(1, sizePrice.getPrice());
-            stmt.setString(2, sizePrice.getDiameter());
-            stmt.setString(3, sizePrice.getHeight());
+            stmt.setInt(2, sizePrice.getDiameter());
+            stmt.setInt(3, sizePrice.getHeight());
             stmt.setInt(4, sizePrice.getIdProduct());
             return stmt.executeUpdate(); // Trả về số hàng bị ảnh hưởng
         } catch (SQLException e) {
@@ -508,8 +508,8 @@ public class DAOProduct {
         String sql = "DELETE FROM productsizes WHERE diameter = ? AND height = ? AND productId = ?";
         try (Connection conn = JDBCUtil.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, sizePrice.getDiameter());
-            stmt.setString(2, sizePrice.getHeight());
+            stmt.setInt(1, sizePrice.getDiameter());
+            stmt.setInt(2, sizePrice.getHeight());
             stmt.setInt(3, sizePrice.getIdProduct());
             return stmt.executeUpdate(); // Trả về số hàng bị ảnh hưởng
         } catch (SQLException e) {
@@ -543,6 +543,10 @@ public class DAOProduct {
     public static void main(String[] args) {
         Product p = getProductById(1);
         System.out.println(p);
+
+        System.out.println( getPriceByDiameter(1,16));
+
+
     }
 
     public static int delProduct(int id) {
@@ -573,5 +577,40 @@ public class DAOProduct {
 
     public static String getCategoriesByProductId(int productId) {
         return null;
+    }
+    public static int getPriceByDiameter(int productId, int diameter) {
+        int price = 0; // Đổi kiểu trả về thành int
+        String query = "SELECT price FROM productsizes WHERE productId = ? AND diameter = ?";
+        try (Connection conn = JDBCUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, productId);
+            ps.setDouble(2, diameter);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    double rawPrice = rs.getDouble("price");
+                    price = (int) Math.round(rawPrice); // Làm tròn giá trị và ép kiểu về int
+                    System.out.println("Giá trước khi làm tròn: " + rawPrice + ", Giá sau khi làm tròn: " + price);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return price;
+    }
+
+
+    public static int decreaseQuantity(Product p, int quantity) {
+        int re = 0;
+        Connection connection = JDBCUtil.getConnection();
+        String sql = "update products set quantity = ? where id =?";
+        try {
+            PreparedStatement pr = connection.prepareStatement(sql);
+            pr.setInt(1, p.getQuantity()-quantity);
+            pr.setInt(2, p.getId());
+            re = pr.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return re;
     }
 }

@@ -86,7 +86,7 @@ function addToCart() {
   window.location.href = '../Cart.jsp';
 }
 function ToPayment(){  
-  window.location.href = "../pages/payment.html"; 
+  window.location.href = "../payment.jsp";
 }
 
 

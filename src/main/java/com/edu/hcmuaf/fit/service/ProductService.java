@@ -3,7 +3,6 @@ package com.edu.hcmuaf.fit.service;
 import com.edu.hcmuaf.fit.dao.DAOProduct;
 import com.edu.hcmuaf.fit.model.Product;
 import com.edu.hcmuaf.fit.model.ProductImages;
-import com.edu.hcmuaf.fit.model.ProductSizes;
 import com.edu.hcmuaf.fit.model.SizePrice;
 
 import java.sql.SQLException;
@@ -214,5 +213,14 @@ public class ProductService {
 
     public String getCategoriesByProductId(int productId) {
         return DAOProduct.getCategoriesByProductId(productId);
+    }
+
+    public int decreaseQuantity(Product p, int quantity) {
+        return DAOProduct.decreaseQuantity(p,quantity);
+
+    }
+
+    public double getPriceByDiameter(int id, int desiredDiameter) {
+        return DAOProduct.getPriceByDiameter(id, desiredDiameter);
     }
 }

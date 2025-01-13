@@ -229,7 +229,7 @@
                                             </a>
 
                                             <button class="btn-add payment" type="button" onclick="ToPayment()"style="border-radius: 10px;">
-                                                <a href="pages/payment.html">MUA NGAY</a>
+                                                <a href="payment.jsp">MUA NGAY</a>
                                             </button>
                                             <input type="hidden" name="gtm4wp_id" value="29736">
                                             <input type="hidden" name="gtm4wp_internal_id" value="29736">

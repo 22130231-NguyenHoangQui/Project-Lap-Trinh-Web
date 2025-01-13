@@ -101,7 +101,8 @@
             <span class="cart-total">Tổng cộng:0 đ</span>
             <div>
                 <a id="continue-shopping" href="homepage.jsp" class="btn btn-continue">Tiếp tục mua hàng</a>
-                <a id="checkout" href="pages/payment.html" class="btn btn-custom">Thanh toán</a>
+
+                <a id="checkout" href="payment.jsp" class="btn btn-custom">Thanh toán</a>
 
             </div>
         </div>
