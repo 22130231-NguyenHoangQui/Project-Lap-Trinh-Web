@@ -44,4 +44,12 @@ public class CategoryService  {
     public int updateCategory(Category c) throws SQLException {
         return DAOCategory.updateCategory(c);
     }
+
+    public Category latestCategory() {
+        return null;
+    }
+
+    public int insertImageOfCategory(int id, String fileName) {
+        return 0;
+    }
 }

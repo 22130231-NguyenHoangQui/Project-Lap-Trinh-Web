@@ -48,16 +48,18 @@ public class DAOCategory {
     public static ArrayList<Category> listCategory() {
         ArrayList<Category> list = new ArrayList<>();
         Connection connection = JDBCUtil.getConnection();
-        String sql = "SELECT ca.id, ca.Name, ca.categoryName FROM categories ca";  // sửa category_id thành id và name_category thành Name
+        String sql = "SELECT ca.id, ca.categoryName, ca.imageUrl   FROM categories ca";  // sửa category_id thành id và name_category thành Name
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
             ResultSet resultSet = pre.executeQuery();
             while (resultSet.next()) {
                 Category category = new Category();
                 int idCategory = resultSet.getInt("id");  // sửa category_id thành id
-                String categoryName = resultSet.getString("Name");  // sửa name_category thành Name
+                String categoryName = resultSet.getString("categoryName");  // sửa name_category thành Name
+                String imageUrl = resultSet.getString("imageUrl");
                 category.setName(categoryName);
                 category.setId(idCategory);
+                category.setImageUrl(imageUrl);
                 list.add(category);
             }
         } catch (SQLException e) {
@@ -142,11 +144,12 @@ public class DAOCategory {
     public static int insertCategory(Category c) {
         int re = 0;
         Connection connection = JDBCUtil.getConnection();
-        String sql = "insert into categories(name) " +
-                "values(?)";
+        String sql = "insert into categories(categoryName, imageUrl) " +
+                "values(?,?)";
         try {
             PreparedStatement pr = connection.prepareStatement(sql);
             pr.setString(1, c.getName());
+            pr.setString(2, c.getImageUrl());
             re = pr.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

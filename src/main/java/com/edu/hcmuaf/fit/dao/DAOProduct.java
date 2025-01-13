@@ -41,21 +41,32 @@ public class DAOProduct {
         ArrayList<Product> re = new ArrayList<>();
         Connection connection = JDBCUtil.getConnection();
         try {
-            String sql = "SELECT pro.product_id, pro.productName,pi.image_url, SUM(orr.quantity * pro.price) AS total_revenue\n" +
-                    "FROM OrderDetails orr\n" +
-                    "JOIN Product pro ON orr.product_id = pro.product_id\n" +
-                    "JOIN productimages pi ON pro.product_id = pi.product_id\n" +
-                    "GROUP BY pro.product_id\n" +
-                    "ORDER BY total_revenue DESC\n" +
-                    "LIMIT 10 OFFSET ?";
+            String sql = "SELECT \n" +
+                    "    pro.id AS product_id,\n" +
+                    "    pro.productName,\n" +
+                    "    pi.imageUrl,\n" +
+                    "    SUM(orr.quantity * ps.price) AS total_revenue\n" +
+                    "FROM \n" +
+                    "    OrderDetails orr\n" +
+                    "JOIN \n" +
+                    "    products pro ON orr.productId = pro.id\n" +
+                    "JOIN \n" +
+                    "    productsizes ps ON ps.productId = pro.id\n" +
+                    "JOIN \n" +
+                    "    productimages pi ON pro.id = pi.productId\n" +
+                    "GROUP BY \n" +
+                    "    pro.id, pro.productName, pi.imageUrl\n" +
+                    "ORDER BY \n" +
+                    "    total_revenue DESC\n" +
+                    "LIMIT 10 OFFSET ?;\n";
             PreparedStatement pr = connection.prepareStatement(sql);
             pr.setInt(1, offset);
             ResultSet rs = pr.executeQuery();
             while (rs.next()) {
                 int product_id = rs.getInt("product_id");
                 String nameProduct = rs.getString("productName");
-                String imageUrl = rs.getString("image_url");
-                int total_revenue = rs.getInt("total_revenue");
+//                String imageUrl = rs.getString("image_url");
+//                int total_revenue = rs.getInt("total_revenue");
                 Product product = new Product();
                 product.setNameProduct(nameProduct);
                 product.setId(product_id);
@@ -73,13 +84,14 @@ public class DAOProduct {
         ArrayList<Product> re = new ArrayList<>();
         Connection connection = JDBCUtil.getConnection();
         try {
-            String sql = "SELECT p.id, p.name_product, SUM(od.quantity) AS totalQuantity\n" +
-                    "FROM product p\n" +
-                    "JOIN orderdetails od ON p.product_id = od.product_id\n" +
-                    "JOIN orders o ON od.order_id = o.order_id\n" +
-                    "WHERE o.created_at BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 MONTH) AND CURDATE()\n" +
-                    "GROUP BY p.product_id, p.name_product\n" +
-                    "ORDER BY totalQuantity DESC\n" +
+            String sql = "SELECT p.id AS product_id, p.productName AS name_product, " +
+                    "SUM(od.quantity) AS total_quantity " +
+                    "FROM products p " +
+                    "JOIN orderdetails od ON p.id = od.productId " +
+                    "JOIN orders o ON od.orderId = o.id " +
+                    "WHERE o.createdAt BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 MONTH) AND CURDATE() " +
+                    "GROUP BY p.id, p.productName " +
+                    "ORDER BY total_quantity DESC " +
                     "LIMIT 10 OFFSET ?";
             PreparedStatement pr = connection.prepareStatement(sql);
             pr.setInt(1, offset);

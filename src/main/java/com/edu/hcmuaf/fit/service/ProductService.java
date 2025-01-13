@@ -25,9 +25,12 @@ public class ProductService {
     public static ArrayList<Product> listAllProduct(int offset) {
         ArrayList<Product> listProduct = DAOProduct.listProduct(offset);
         ArrayList<ProductImages> listImageOfProduct = null;
+        ArrayList<SizePrice> listSizeOfProduct = null;
         for (Product p : listProduct) {
             listImageOfProduct = DAOProduct.listImageOfProduct(p);
             p.setProductImages(listImageOfProduct);
+            listSizeOfProduct = DAOProduct.listPriceOfProduct(p.getId());
+            p.setSizePrices(listSizeOfProduct);
         }
         return listProduct;
     }
@@ -36,10 +39,13 @@ public class ProductService {
     public static ArrayList<Product> listProductBestSelling(int offset) {
         ArrayList<Product> listProduct = DAOProduct.listProductBestSelling(offset);
         ArrayList<ProductImages> listImageOfProduct = null;
+        ArrayList<SizePrice> listSizeOfProduct = null;
+
         for (Product p : listProduct) {
             listImageOfProduct = DAOProduct.listImageOfProduct(p);
             p.setProductImages(listImageOfProduct);
-
+            listSizeOfProduct = DAOProduct.listPriceOfProduct(p.getId());
+            p.setSizePrices(listSizeOfProduct);
         }
         return listProduct;
     }
@@ -48,9 +54,13 @@ public class ProductService {
     public static ArrayList<Product> listProductBestSellingInMonth(int offset) {
         ArrayList<Product> result = DAOProduct.listProductBessInMonth(offset);
         ArrayList<ProductImages> listImageOfProduct = null;
+        ArrayList<SizePrice> listSizeOfProduct = null;
+
         for (Product p : result) {
             listImageOfProduct = DAOProduct.listImageOfProduct(p);
             p.setProductImages(listImageOfProduct);
+            listSizeOfProduct = DAOProduct.listPriceOfProduct(p.getId());
+            p.setSizePrices(listSizeOfProduct);
         }
         return result;
     }
@@ -135,7 +145,9 @@ public class ProductService {
         ArrayList<Product> listProduct = ProductService.getInstance().listProductRandom(0);
         Product highestPricedProduct = null;
         Product lowestPricedProduct = null;
-        for (Product p : listProduct) {
+        ArrayList<Product> listProductBestSelling = ProductService.getInstance().listProductBestSelling(0);
+
+        for (Product p : listProductBestSelling) {
 
             System.out.println(p);
         }

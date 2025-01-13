@@ -138,62 +138,64 @@
 
                 </div>
             </div>
-            <div class="col large-9">
-                <div class="shop-container">
-                    <div class="products row  row-small large-columns-4 medium-columns-3 small-columns padding-p"
-                         id="content">
-                        <%
-                            ArrayList<Product> listProductRandom = (ArrayList<Product>) request.getAttribute("listProductRandom");
-                            for (Product product_list : listProductRandom) {
-                        %>
-                        <div class="col">
-                            <div class="col-inner">
-                                <div class="product-small box">
-                                    <div class="box-image">
-                                        <a href="#" class="product-link">
-                                            <img width="247" height="296" src="<%=url%>\Product\<%=(product_list.getProductImages().get(0).getUrl())%>" alt="...">
-                                        </a>
-                                    </div>
-                                    <div class="box-text text-center">
-                                        <div class="title-wrapper">
-                                            <p>
-                                                <a href="#"
-                                                   onclick="saveProductData('<%= product_list.getId() %>')">
+<%--            --%>
+<%--            <div class="col large-9">--%>
+<%--                <div class="shop-container">--%>
+<%--                    <div class="products row  row-small large-columns-4 medium-columns-3 small-columns padding-p"--%>
+<%--                         id="content">--%>
+<%--                        <%--%>
+<%--                            ArrayList<Product> listProductRandom = (ArrayList<Product>) request.getAttribute("listProductRandom");--%>
+<%--                            for (Product product_list : listProductRandom) {--%>
+<%--                        %>--%>
+<%--                        <div class="col">--%>
+<%--                            <div class="col-inner">--%>
+<%--                                <div class="product-small box">--%>
+<%--                                    <div class="box-image">--%>
+<%--                                        <a href="#" class="product-link">--%>
+<%--                                            <img width="247" height="296" src="<%=url%>\Product\<%=(product_list.getProductImages().get(0).getUrl())%>" alt="...">--%>
+<%--                                        </a>--%>
+<%--                                    </div>--%>
+<%--                                    <div class="box-text text-center">--%>
+<%--                                        <div class="title-wrapper">--%>
+<%--                                            <p>--%>
+<%--                                                <a href="#"--%>
+<%--                                                   onclick="saveProductData('<%= product_list.getId() %>')">--%>
 
-                                                    <%= product_list.getId() %> - <%= product_list.getNameProduct() %>
+<%--                                                    <%= product_list.getId() %> - <%= product_list.getNameProduct() %>--%>
 
-                                                </a>
-                                            </p>
-                                        </div>
-                                        <div class="price-wrapper">
-                    <span class="price">
-                        <span class="woocommerce-Price-amount amount">
-                            <bdi style="font-weight: bold;"><%=nf.format( product_list.getPrice()) %></bdi>
-                        </span>
-                    </span>
-                                        </div>
-                                        <div class="add-to-cart-button">
-                                            <a href="#" onclick="saveProductData('<%= product_list.getId() %>')">THÊM VÀO GIỎ</a>
-                                        </div>
-                                        <div class="product-description" style="display:none;">
-                                                <span class="description-id">Mã: <span
-                                                        class="sku"><%= product_list.getId() %></span></span>
-                                            <%--                                                <span class="description-content">Mô tả: <br>${product_list.description}</span>--%>
-                                        </div>
-                                        <div class="size-wrapper" style="display:none;">
-                                            <%--                                                <p ><strong>Đường kính:</strong> ${product_list.diameter}</p> <!-- Hiển thị đường kính -->--%>
-                                            <%--                                                <p><strong>Chiều cao:</strong> ${product_list.height}</p> <!-- Hiển thị chiều cao -->--%>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <% } %>
-                    </div>
+<%--                                                </a>--%>
+<%--                                            </p>--%>
+<%--                                        </div>--%>
+<%--                                        <div class="price-wrapper">--%>
+<%--                    <span class="price">--%>
+<%--                        <span class="woocommerce-Price-amount amount">--%>
+<%--                            <bdi style="font-weight: bold;"><%=nf.format( product_list.getPrice()) %></bdi>--%>
+<%--                        </span>--%>
+<%--                    </span>--%>
+<%--                                        </div>--%>
+<%--                                        <div class="add-to-cart-button">--%>
+<%--                                            <a href="#" onclick="saveProductData('<%= product_list.getId() %>')">THÊM VÀO GIỎ</a>--%>
+<%--                                        </div>--%>
+<%--                                        <div class="product-description" style="display:none;">--%>
+<%--                                                <span class="description-id">Mã: <span--%>
+<%--                                                        class="sku"><%= product_list.getId() %></span></span>--%>
+<%--                                            &lt;%&ndash;                                                <span class="description-content">Mô tả: <br>${product_list.description}</span>&ndash;%&gt;--%>
+<%--                                        </div>--%>
+<%--                                        <div class="size-wrapper" style="display:none;">--%>
+<%--                                            &lt;%&ndash;                                                <p ><strong>Đường kính:</strong> ${product_list.diameter}</p> <!-- Hiển thị đường kính -->&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                                <p><strong>Chiều cao:</strong> ${product_list.height}</p> <!-- Hiển thị chiều cao -->&ndash;%&gt;--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                        <% } %>--%>
+<%--                    </div>--%>
 
 
-                </div>
-            </div>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--      --%>
         </div>
     </div>
 </main>

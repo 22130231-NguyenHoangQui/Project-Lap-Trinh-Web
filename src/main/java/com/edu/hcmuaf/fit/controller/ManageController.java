@@ -30,8 +30,8 @@ public class ManageController extends HttpServlet {
 //            request.setAttribute("listAllInvoice", listAllInvoice);
 //            ArrayList<Supplier> suplist = SupplierService.getInstance().listAllSupplier();
 //            request.setAttribute("listAllSup", suplist);
-//            ArrayList<Category> listCategory = CategoryService.getInstance().getListCategory();
-//            request.setAttribute("listCategory", listCategory);
+            ArrayList<Category> listCategory = CategoryService.getInstance().getListCategory();
+            request.setAttribute("listCategory", listCategory);
 //            Double getTotalForToday = InvoiceService.getInstance().getTotalRevenueForToday();
 //            request.setAttribute("getTotalForToday", getTotalForToday);
             ArrayList<Product> listAllProduct = ProductService.getInstance().listProductRandom(0);

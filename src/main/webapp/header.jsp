@@ -118,7 +118,7 @@
 
                     </ul>
                     <div style="position: relative; width: 45%; margin-right: 20px;">
-                        <form action="<%=url%>/LoadProductByName-servlet" method="get" style="width: 100%;">
+                        <form action="<%=url%>/LoadProductByName" method="get" style="width: 100%;">
                             <input type="search" id="keyword" class="form-control autocomplete-field js-ls"
                                    placeholder="Tìm kiếm bánh sinh nhật,..." autocomplete="off"
                                    name="search"

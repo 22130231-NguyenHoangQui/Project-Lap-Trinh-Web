@@ -635,9 +635,7 @@
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                             Hủy
                                         </button>
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#editProductModal">
-                                            <i class="fa-solid fa-pen"></i> Sửa
+                                        <button type="button" class="btn btn-primary" onclick="addProduct()">Lưu
                                         </button>
                                     </div>
                                 </form>
@@ -778,20 +776,20 @@
                         <thead>
                         <tr>
                             <th>STT</th>
-                            <th>ID</th>
                             <th>TÊN</th>
                             <th>HÌNH ẢNH</th>
                         </tr>
                         </thead>
                         <tbody id="innerCate">
                         <%
-//                            ArrayList<Category> listCate = request.getAttribute();
+                            ArrayList<Category> listCate = (ArrayList<Category>) request.getAttribute("listCategory");
                             int sttC =1;
+                            for (Category list : listCate) {
                         %>
                         <tr>
-                            <td class="cate1">1</td>
-                            <td class="cate1">101</td>
-                            <td class="cate1">Danh mục 1</td>
+                            <td class="cate1"><%=list.getId()%></td>
+                            <td class="cate1"><%=list.getName()%></td>
+                            <td class="cate1"><%=list.getImageUrl()%></td>
                             <td>
                                 <button class="icon-button" onclick="deleteRowCate(this)">
                                     <i class="fa-solid fa-trash"></i>
@@ -801,34 +799,24 @@
                                 </button>
                             </td>
                         </tr>
-                        <tr>
-                            <td class="cate1">2</td>
-                            <td class="cate1">102</td>
-                            <td class="cate1">Danh mục 2</td>
-                            <td>
-                                <button class="icon-button" onclick="deleteRowCate(this)">
-                                    <i class="fa-solid fa-trash"></i>
-                                </button>
-                                <button class="icon-button" onclick="openEditFormCate(this)">
-                                    <i class="fa-solid fa-pen"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <!-- Các danh mục tiếp theo -->
+                        <%
+                            sttC++;
+                            }
+                        %>
                         </tbody>
                     </table>
 
-                    <nav>
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item active">
-                                <a class="page-link" href="#" onclick="changePage(1)">1</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" onclick="changePage(2)">2</a>
-                            </li>
-                            <!-- Các trang tiếp theo -->
-                        </ul>
-                    </nav>
+<%--                    <nav>--%>
+<%--                        <ul class="pagination justify-content-center">--%>
+<%--                            <li class="page-item active">--%>
+<%--                                <a class="page-link" href="#" onclick="changePage(1)">1</a>--%>
+<%--                            </li>--%>
+<%--                            <li class="page-item">--%>
+<%--                                <a class="page-link" href="#" onclick="changePage(2)">2</a>--%>
+<%--                            </li>--%>
+<%--                            <!-- Các trang tiếp theo -->--%>
+<%--                        </ul>--%>
+<%--                    </nav>--%>
 
                 </div>
                     <div class="modal fade" id="addCate" tabindex="-1" aria-labelledby="addCateLabel" aria-hidden="true">
@@ -840,16 +828,16 @@
                                 </div>
                                 <div class="modal-body">
                                     <!-- Form thêm danh mục -->
-                                    <form id="addCateForm">
+                                    <form id="add-cate" action="" method="post">
                                         <div class="mb-3">
                                             <label class="form-label">Tên Danh Mục</label>
-                                            <input type="text" class="form-control" name="nameCateAdd" id="nameCateAdd" placeholder="Nhập tên danh mục">
+                                            <input type="text" class="form-control" name="nameCateAdd" id="nameCateAdd" placeholder="Nhập tên danh mục" >
                                         </div>
                                         <div class="mb-3">
                                             <label for="imageCateAdd" class="form-label">Chọn Ảnh</label>
-                                            <input type="file" class="form-control" id="imageCateAdd" accept="image/*">
+                                            <input type="file" class="form-control" name="image" id="imageCateAdd" accept="image/*">
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Thêm</button>
+                                        <button type="button" class="btn btn-primary" onclick="addCate()">Thêm</button>
                                     </form>
                                 </div>
                             </div>
@@ -1868,37 +1856,44 @@
 
 </script>
 <script>
+    var categoryId = "";
     function addCate() {
         var flag = true;
         var nameInput = document.getElementById("nameCateAdd");
         var imageInput = document.getElementById("imageCateAdd");
-        var error = document.getElementById("errNameCateAdd");
-
+        // var error = document.getElementById("errNameCateAdd");
+        console.log(nameInput.value)
         // Kiểm tra trường tên danh mục
-        if (nameInput.value === "") {
-            error.innerHTML = 'Vui lòng nhập danh mục mới!';
-            flag = false;
-        } else {
-            error.innerHTML = '';
-        }
+        // if (nameInput.value === "") {
+        //     error.innerHTML = 'Vui lòng nhập danh mục mới!';
+        //     flag = false;
+        // } else {
+        //     error.innerHTML = '';
+        // }
 
         // Kiểm tra ảnh
-        if (imageInput.files.length === 0) {
-            error.innerHTML = 'Vui lòng chọn ảnh!';
-            flag = false;
-        }
+        // if (imageInput.files.length === 0) {
+        //     error.innerHTML = 'Vui lòng chọn ảnh!';
+        //     flag = false;
+        // }
+        // console.log(nameInput.value);
 
         if (flag) {
-            var name = nameInput.value;
+            var nameCate = nameInput.value;
             var formData = new FormData();
-            formData.append("nameCateAdd", name);
-            formData.append("imageCateAdd", imageInput.files[0]); // Thêm ảnh vào formData
-
+            var fileInputs = document.getElementsByName("image");
+            formData.append("nameCate", nameCate);
+            for (var i = 0; i < fileInputs.length; i++) {
+                var fileInput = fileInputs[i];
+                formData.append("image", fileInput.files[0]);
+            }
             // Gửi yêu cầu AJAX
             $.ajax({
                 url: 'addCategory',
                 type: 'POST',
-                data: formData,
+                data: {
+                    nameCate: nameCate;
+                },
                 processData: false, // Để tránh jQuery xử lý dữ liệu
                 contentType: false, // Để không gửi Content-Type
                 success: function (data) {
@@ -1972,11 +1967,12 @@
     }
     function innerEditCategory(cateId) {
         categoryId = cateId;
+        console.log(categoryId)
         $.ajax({
             type: "GET",
             url: "loadDetailCategory",
             data: {
-                id: cateId
+                id: categoryId
             },
             success: function (data) {
                 var c = data.category;
@@ -1987,8 +1983,7 @@
             }
         });
     }
-    var categoryId = "";
-    function editCate() {
+    // function editCate() {
 </script>
 </body>
 

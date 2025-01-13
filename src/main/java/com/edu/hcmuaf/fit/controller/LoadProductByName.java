@@ -9,7 +9,7 @@ import com.edu.hcmuaf.fit.service.ProductService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-@WebServlet(name = "LoadProductByNameServlet", value = "/LoadProductByName-servlet")
+@WebServlet(name = "LoadProductByName", value = "/LoadProductByName")
 public class LoadProductByName extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setCharacterEncoding("UTF-8");

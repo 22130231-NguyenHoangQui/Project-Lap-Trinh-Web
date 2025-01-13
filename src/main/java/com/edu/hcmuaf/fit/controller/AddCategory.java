@@ -12,7 +12,7 @@ import jakarta.servlet.annotation.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-@WebServlet(name = "AddCategoryServlet", value = "/AddCategory-servlet")
+@WebServlet(name = "addCategory", value = "/addCategory")
 public class AddCategory extends HttpServlet {
     // Thư mục để lưu ảnh
     private static final String IMAGE_DIR = "/path/to/upload/directory"; // Cập nhật lại đường dẫn đúng
@@ -25,9 +25,10 @@ public class AddCategory extends HttpServlet {
 
         // Lấy thông tin danh mục từ form
         String categoryName = request.getParameter("nameCateAdd");
+        String imageCate = request.getParameter("imageCateAdd");
 
         // Tạo đối tượng Category
-        Category category = new Category(categoryName);
+        Category category = new Category(categoryName,imageCate);
         String res = "";
 
         // Thêm danh mục vào cơ sở dữ liệu
