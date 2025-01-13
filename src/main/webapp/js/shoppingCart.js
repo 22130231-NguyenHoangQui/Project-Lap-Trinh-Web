@@ -54,6 +54,6 @@ checkoutLink.addEventListener('click', (event) => {
   closeCartModal(); 
 
   setTimeout(() => {
-      window.top.location.href = '../pages/payment.html'; 
+      window.top.location.href = '../payment.jsp';
   }, 200);
 });
