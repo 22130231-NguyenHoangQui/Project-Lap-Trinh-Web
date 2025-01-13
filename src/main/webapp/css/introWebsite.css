@@ -70,7 +70,7 @@ aside {
     padding: 5px 0;
 }
 
-
+h
 /* Thiết kế của dropdown tìm kiếm */
 .dropdown-search {
     display: none;
@@ -248,17 +248,7 @@ aside {
 
 
 
-/* Nút button */
-.btn-outline-light {
-    color: var(--text-light);
-    border-color: var(--text-light);
-}
 
-.btn-outline-light:hover {
-    background-color: var(--text-light);
-    color: var(--primary-color);
-    border-color: var(--text-light);
-}
 
 /* Navbar */
 .navbar.bg-primary {
@@ -306,11 +296,6 @@ aside {
 
 
 
-/* Footer */
-footer {
-    background-color: var(--dark-color);
-    color: var(--text-light);
-}
 
 .custom-policy-btn {
     color: #1E90FF !important;

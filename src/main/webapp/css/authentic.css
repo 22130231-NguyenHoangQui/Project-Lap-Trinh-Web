@@ -1,92 +1,98 @@
-
-
-/* Container */
-.container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-grow: 1;
-    padding: 20px;
-}
-main{
-    background: linear-gradient(to bottom, #eef2f3, #a9cff0);
-}
-/* Hộp xác thực */
-.verification-box {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    text-align: center;
-    position: relative;
+/* Biến chung */
+:root {
+    --font_size_all: 1rem;
+    --font_weight_all: 500;
+    --color_backgroud:#3a97e9;
+    --font_family: "Poppins", sans-serif;
+    --color: #212529;
+    --line_height: 1.2rem;
+    --color_gray: #767676;
 }
 
-/* Nút bỏ qua */
-.skip-button {
-    float: right;
-    background: none;
-    border: none;
-    color: #007BFF;
-    font-size: 14px;
-    cursor: pointer;
-    margin-top: -10px;
-    margin-right: -10px;
+/* Reset và cấu hình mặc định */
+* {
+    font-size: var(--font_size_all);
+    font-weight: var(--font_weight_all);
+    font-family: var(--font_family);
+    color: var(--color);
+    line-height: var(--line_height);
 }
 
-/* Icon */
-.icon.icon1 {
-    display: flex;
-    justify-content: center;
-    font-size: 60px;
-    color: #1E90FF;
-    margin-bottom: 20px;
-}
-
-/* Tiêu đề và mô tả */
-h2 {
-    font-size: 20px;
-    color: #333333;
-    margin-bottom: 10px;
-}
-
-p {
-    font-size: 14px;
-    color: #666666;
-    margin-bottom: 20px;
-}
-
-/* Form */
-form {
+body {
+    min-height: 100%;
     display: flex;
     flex-direction: column;
+    padding: 0 !important;
 }
 
-input[type="text"] {
+/* Định dạng form */
+.signup {
+    padding: 30px 0;
+}
+
+.contain {
+    box-sizing: border-box;
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, .14);
+    width: 400px;
+    background: #FFFFFF;
+    margin: auto;
+    border-radius: 5px;
+    text-align: center; /* Căn chữ vào giữa */
+}
+
+.signup-content {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Căn giữa các nội dung bên trong */
+    justify-content: center;
+}
+
+.form-group {
     padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Căn giữa nội dung trong nhóm */
 }
 
-input[type="text"]:focus {
-    outline: none;
-    border-color: #1E90FF;
-    box-shadow: 0 0 5px rgba(30, 144, 255, 0.5);
+.form-group input {
+    width: 100%;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 10px 0;
+    text-indent: 5px;
+    text-align: center; /* Căn chữ trong ô input */
 }
 
-/* Nút xác nhận */
-.confirm-button {
+.form-group input:focus {
+    outline-color: rgba(194, 219, 254, 1);
+}
+
+button {
+    margin-bottom: 10px;
+    background: #3a97e9;
+    color: white;
     padding: 10px;
-    font-size: 16px;
-    color: #ffffff;
-    background-color: #1E90FF;
+    padding-right: 16px;
+    font-weight: 700;
     border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    text-align: center;
+    border-radius: 5px;
+    width: 100%;
 }
 
-.confirm-button:hover {
-    background-color: #203be9;
+/* Xác thực */
+.verify {
+    margin: 10px;
+}
+
+.verify a {
+    text-decoration-line: none;
+    color: #3a97e9;
+}
+
+/* Căn giữa chữ trong phần xác thực */
+.verify p {
+    text-align: center;
 }

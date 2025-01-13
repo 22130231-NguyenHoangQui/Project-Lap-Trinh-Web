@@ -84,7 +84,7 @@ public class Payment extends HttpServlet {
             Email.sendEmail(a.getEmail(), "Xác nhận đơn hàng từ ITCAKE", startContent + "<br>" + content + endContent);
 
             // Chuyển hướng người dùng sau khi thanh toán
-            response.sendRedirect(url + "/Payment.jsp");
+            response.sendRedirect(url + "/payment.jsp");
         }
     }
 

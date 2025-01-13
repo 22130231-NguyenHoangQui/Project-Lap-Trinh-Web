@@ -17,7 +17,7 @@
 </head>
 <body>
     <header>
-        <jsp:include page="Products/header.jsp"></jsp:include>
+        <jsp:include page="header.jsp"></jsp:include>
     </header>
     <%  String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath(); %>
     <!-- Thanh điều hướng -->
@@ -40,8 +40,8 @@
     <!-- Nội dung các tab -->
     <div class="tab-content main">
         <!-- Phần giới thiệu -->
-        <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="about-tab">
-            <header class="hero py-5 text-center bg-light">
+        <div class="tab-pane fade show active" id="about" >
+            <div class="hero py-5 text-center bg-light">
                 <div class="container">
                     <h1 class="display-4 fw-bold text-primary">
                         <i class="fas fa-birthday-cake"></i> Hãy ăn mừng khoảnh khắc với những chiếc bánh của chúng tôi
@@ -50,7 +50,7 @@
                         Ngon miệng, đẹp mắt và làm từ tâm, bánh của chúng tôi là lựa chọn hoàn hảo cho mọi dịp đặc biệt!
                     </p>
                 </div>
-            </header>
+            </div>
             <section class="py-5 bg-white">
                 <div class="container text-center">
                     <h2 class="fw-bold mb-4 text-success">

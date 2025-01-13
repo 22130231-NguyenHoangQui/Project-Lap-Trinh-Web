@@ -20,7 +20,7 @@
 %>
 <body>
 <header>
-    <jsp:include page="Products/header.jsp"></jsp:include>
+    <jsp:include page="header.jsp"></jsp:include>
 </header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
