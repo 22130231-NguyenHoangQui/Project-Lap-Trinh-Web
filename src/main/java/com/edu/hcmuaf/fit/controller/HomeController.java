@@ -18,18 +18,18 @@ public class HomeController extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("html/text; charset= UTF-8");
 
-        ArrayList<Category> listCategory = CategoryService.getInstance().getListCategory(1);
-        request.setAttribute("listCategory", listCategory);
+//        ArrayList<Category> listCategory = CategoryService.getInstance().getListCategory(0);
+//        request.setAttribute("listCategory", listCategory);
 
-//        //load 6 sản phẩm
-//        ArrayList<Product> listSixProduct = ProductService.getInstance().listSixProduct(1);
-//        request.setAttribute("listP", listSixProduct);
+        ArrayList<Product> listSixProduct = ProductService.getInstance().listAllProduct(0);
+        request.setAttribute("listP", listSixProduct);
 //        load sản phẩm đang là xu hướng
-//        ArrayList<Product> listProductBestSelling = ProductService.getInstance().listProductBestSelling(1);
-//        request.setAttribute("listProductBestSelling", listProductBestSelling);
-//       load sản phẩm đang bán chạy trong tháng
-//        ArrayList<Product> listProductMonth = ProductService.getInstance().listProductBestSellingInMonth(1);
-//        request.setAttribute("listProductMonth", listProductMonth);
+        ArrayList<Product> listProductBestSelling = ProductService.getInstance().listProductBestSelling(0);
+        request.setAttribute("listProductBestSelling", listProductBestSelling);
+//        load sản phẩm đang bán chạy trong tháng
+        ArrayList<Product> listProductMonth = ProductService.getInstance().listProductBestSellingInMonth(0);
+        request.setAttribute("listProductMonth", listProductMonth);
+
         try {
             request.getRequestDispatcher("homepage.jsp").forward(request, response);
         } catch (ServletException e) {

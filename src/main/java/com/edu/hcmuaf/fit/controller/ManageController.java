@@ -21,8 +21,8 @@ public class ManageController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("html/text; charset= UTF-8");
-        HttpSession session = request.getSession();
-        Object obj = session.getAttribute("account");
+//        HttpSession session = request.getSession();
+//        Object obj = session.getAttribute("account");
 //        if (obj == null) {
 //            response.sendRedirect("SignIn.jsp");
 //        } else {
@@ -32,12 +32,12 @@ public class ManageController extends HttpServlet {
 //            request.setAttribute("listAllSup", suplist);
             ArrayList<Category> listCategory = CategoryService.getInstance().getListCategory();
             request.setAttribute("listCategory", listCategory);
-            Double getTotalForToday = InvoiceService.getInstance().getTotalRevenueForToday();
-            request.setAttribute("getTotalForToday", getTotalForToday);
-            ArrayList<Product> listAllProduct = ProductService.getInstance().listSixProduct(0);
+//            Double getTotalForToday = InvoiceService.getInstance().getTotalRevenueForToday();
+//            request.setAttribute("getTotalForToday", getTotalForToday);
+            ArrayList<Product> listAllProduct = ProductService.getInstance().listProductRandom(0);
             request.setAttribute("listAllProduct", listAllProduct);
-//            ArrayList<Account> listAllAccount = AccountService.getInstance().listAllAccount();
-//            request.setAttribute("listAllAccount", listAllAccount);
+            ArrayList<Account> listAllAccount = AccountService.getInstance().listAllAccount();
+            request.setAttribute("listAllAccount", listAllAccount);
 
             try {
                 request.getRequestDispatcher("ManageAdmin.jsp").forward(request, response);

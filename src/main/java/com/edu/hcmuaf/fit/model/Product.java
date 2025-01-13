@@ -14,35 +14,77 @@ import java.util.Locale;
 
 public class Product {
     private int id;
-    public String nameProduct;
+    private int idCate;
+    private String nameProduct;
     private int quantity;
     private String description;
-    private Date createdAt;
-    private Date updatedAt;
+    private Date created_at;
+    private Date updated_at;
     private ArrayList<ProductImages> productImages;
-    private ArrayList<ProductSizes> productSizes;
-    private int categoryId;
-    public Product() {
-    }
+    private ArrayList<SizePrice> sizePrices;
+    private boolean status;
 
-
-    public Product(String nameProduct, int quantity, ArrayList<ProductSizes> productSizes, String description) {
-        this.nameProduct = nameProduct;
-        this.quantity = quantity;
-        this.productSizes = productSizes;
-        this.description = description;
-    }
-
-    public Product(int id, String nameProduct, int quantity, ArrayList<ProductSizes> productSizes, String description, Date createdAt, Date updated_at, ArrayList<ProductImages> productImages) {
+    public Product(int id, int idCate, String nameProduct, int quantity, String description, Date created_at, Date updated_at, ArrayList<ProductImages> productImages, ArrayList<SizePrice> sizePrices, boolean status) {
         this.id = id;
-        this.categoryId = categoryId;
+        this.idCate = idCate;
         this.nameProduct = nameProduct;
         this.quantity = quantity;
         this.description = description;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
         this.productImages = productImages;
-        this.productSizes = productSizes;
+        this.sizePrices = sizePrices;
+        this.status = status;
+    }
+
+    public Product(int id, int idCate, String nameProduct, int quantity, String description,boolean status) {
+        this.id = id;
+        this.idCate = idCate;
+        this.nameProduct = nameProduct;
+        this.quantity = quantity;
+        this.description = description;
+        this.status = status;
+    }
+
+    public Product(int id, String nameProduct, int quantity, String description) {
+        this.id = id;
+        this.nameProduct = nameProduct;
+        this.quantity = quantity;
+        this.description = description;
+    }
+
+    public Product(String nameProduct, int quantity, String description) {
+        this.nameProduct = nameProduct;
+        this.quantity = quantity;
+        this.description = description;
+    }
+
+    public Product(int idCate, String nameProduct, int quantity, String description, boolean status) {
+        this.idCate = idCate;
+        this.nameProduct = nameProduct;
+        this.quantity = quantity;
+        this.description = description;
+        this.status = status;
+    }
+
+    public Product() {
+
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", idCate=" + idCate +
+                ", nameProduct='" + nameProduct + '\'' +
+                ", quantity=" + quantity +
+                ", description='" + description + '\'' +
+                ", created_at=" + created_at +
+                ", updated_at=" + updated_at +
+                ", productImages=" + productImages +
+                ", sizePrices=" + sizePrices +
+                ", status=" + status +
+                '}';
     }
 
     public int getId() {
@@ -54,11 +96,11 @@ public class Product {
     }
 
     public int getIdCate() {
-        return categoryId;
+        return idCate;
     }
 
     public void setIdCate(int idCate) {
-        this.categoryId = idCate;
+        this.idCate = idCate;
     }
 
     public String getNameProduct() {
@@ -77,14 +119,6 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public ArrayList<ProductSizes> getSizes() {
-        return productSizes;
-    }
-
-    public void setSizes(ArrayList<ProductSizes> sizes) {
-        this.productSizes = productSizes;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -94,19 +128,19 @@ public class Product {
     }
 
     public Date getCreated_at() {
-        return createdAt;
+        return created_at;
     }
 
-    public void setCreated_at(Date createdAt) {
-        this.createdAt = createdAt;
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
     }
 
     public Date getUpdated_at() {
-        return updatedAt;
+        return updated_at;
     }
 
     public void setUpdated_at(Date updated_at) {
-        this.updatedAt = updatedAt;
+        this.updated_at = updated_at;
     }
 
     public ArrayList<ProductImages> getProductImages() {
@@ -117,115 +151,19 @@ public class Product {
         this.productImages = productImages;
     }
 
-    public int getCategoryId() {
-        return categoryId;
+    public ArrayList<SizePrice> getSizePrices() {
+        return sizePrices;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+    public void setSizePrices(ArrayList<SizePrice> sizePrices) {
+        this.sizePrices = sizePrices;
     }
 
-    private void loadCategoryId() {
-        String sql = "SELECT ca.category_id \n" +
-                "FROM categoryproduct cp\n" +
-                "JOIN category ca ON cp.category_id = ca.category_id\n" +
-                "WHERE cp.product_id = ?\n" +
-                "LIMIT 1";
-        try (Connection connection = JDBCUtil.getConnection();
-             PreparedStatement pr = connection.prepareStatement(sql)) {
-
-            pr.setInt(1, this.id); // Sử dụng id của sản phẩm hiện tại
-            ResultSet resultSet = pr.executeQuery();
-
-            while (resultSet.next()) {
-//                categoryId.add(resultSet.getInt("category_id"));
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public boolean isStatus() {
+        return status;
     }
 
-//    public String getFormattedPrice() {
-//        NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
-//        return format.format(this.price);
-//    }
-
-    public double getPrice() {
-        if (productSizes != null && !productSizes.isEmpty()) {
-            return productSizes.get(0).getPrice(); // Lấy giá của kích cỡ đầu tiên
-        }
-        return 0;
-    }
-
-    public ArrayList<String> getAllProductImages() {
-        ArrayList<String> imageUrls = new ArrayList<>();
-
-        if (this.productImages != null) {
-            for (ProductImages productImage : this.productImages) {
-                imageUrls.add(productImage.getUrl());
-            }
-        }
-
-        return imageUrls;
-    }
-
-    public double getMinPrice() {
-        double minPrice = Double.MAX_VALUE; // Khởi tạo giá trị tối đa
-
-        if (productSizes != null && !productSizes.isEmpty()) {
-            for (ProductSizes size : productSizes) {
-                double price = size.getPrice();
-                if (price < minPrice) {
-                    minPrice = price;
-                }
-            }
-        }
-
-        return minPrice;
-    }
-
-    public double getMaxPrice() {
-        double maxPrice = Double.MIN_VALUE; // Khởi tạo giá trị tối thiểu
-
-        if (productSizes != null && !productSizes.isEmpty()) {
-            for (ProductSizes size : productSizes) {
-                double price = size.getPrice();
-                if (price > maxPrice) {
-                    maxPrice = price;
-                }
-            }
-        }
-
-        return maxPrice;
-    }
-
-    public String getFormattedPrice(double price) {
-        NumberFormat format = NumberFormat.getNumberInstance(new Locale("vi", "VN"));
-        format.setGroupingUsed(true); // Kích hoạt phân cách hàng nghìn
-        return format.format(price); // Trả về giá đã định dạng
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Product {")
-                .append("id=").append(id)
-                .append(", productName='").append(nameProduct).append('\'')
-                .append(", quantity=").append(quantity)
-                .append(", description='").append(description).append('\'')
-                .append(", createdAt=").append(createdAt)
-                .append(", updatedAt=").append(updatedAt)
-                .append(", categoryId=").append(categoryId)
-                .append(", images=").append(productImages != null ? productImages.toString() : "[]")
-                .append(", sizes=").append(productSizes != null ? productSizes.toString() : "[]")
-                .append('}');
-        return sb.toString();
-    }
-
-    public static void main(String[] args) {
-        Product p = new Product();
-//        p.setPrice(5000000.0);
-//
-//        System.out.println(p.getFormattedPrice());
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

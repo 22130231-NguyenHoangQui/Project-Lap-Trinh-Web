@@ -1,3 +1,5 @@
+<%@ page import="com.edu.hcmuaf.fit.model.Product" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
@@ -22,11 +24,14 @@
 </head>
 
 <body>
+<%
+    String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+%>
 <header>
-    <jsp:include page="./header.jsp"></jsp:include>
+    <jsp:include page="Products/header.jsp"></jsp:include>
 </header>
 <div style="height: 389.469px; touch-action: pan-y;">
-    <img width="1020" height="388" src="./image/imghomepage/logo/banhsinhnhat-home-banner.jpg" alt=""
+    <img width="1020" height="388" src="../image/imghomepage/logo/banhsinhnhat-home-banner.jpg" alt=""
          style="width: 100%;">
 </div>
 <main id="main">
@@ -72,22 +77,28 @@
         <h4>Xu hướng</h4>
         <div class="row " style="padding-bottom: 30px;">
             <!-- Box 1 -->
-            <c:forEach var="productBest" items="${listProductBestSelling}">
+                <%
+                    ArrayList<Product> productBest = (ArrayList<Product>) request.getAttribute("listProductBestSelling");
+                    if (!productBest.isEmpty() && productBest != null) {
+                        for (Product p : productBest) {%>
                 <div class="  col-md-4 col-lg-3 box-hover">
 
                     <div class="col-inner">
                         <div class="product-small box" style="border: 1px solid #e5e5e5;">
                             <a href="" style="margin-left: auto; margin-right: auto;">
                                 <div class="box-image">
-                                    <img width="247" height="296"
-                                         src="${productBest.productImages[0].imageId}"
-                                         alt="" style="width: 100%;">
+<%--                                    <img width="247" height="296"--%>
+<%--                                         src="${productBest.productImages[0].imageId}"--%>
+<%--                                         alt="" style="width: 100%;">--%>
+    <a href="<%=url%>/detail-product?pid=<%=p.getId()%>&cid=<%=p.getIdCate()%>">
+        <img src="<%=url%>\Products\<%=(p.getProductImages().isEmpty())?"":p.getProductImages().get(0).getUrl()%>" class="card-img-top img_p" alt="...">
+    </a>
                                 </div>
                                 <div class="box-text text-center">
                                     <div class="title-wrapper">
                                         <p style="padding-top: 10px;">
-                                            <span class="s3_c">${productBest.nameProduct}</span>
-                                            <span class="s3_c text-fontweight">400,000đ</span>
+                                            <span class="s3_c"><%=p.getNameProduct()%></span>
+                                            <span class="s3_c text-fontweight"><%=p.getSizePrices().get(0).getPrice()%></span>
                                         </p>
                                     </div>
                                 </div>
@@ -95,91 +106,35 @@
                         </div>
                     </div>
                 </div>
-            </c:forEach>
-            <div class="  col-md-4 col-lg-3 box-hover">
-                <div class="col-inner">
-                    <div class="product-small box" style="border: 1px solid #e5e5e5;">
-                        <a href="" style="margin-left: auto; margin-right: auto;">
-                            <div class="box-image">
-                                <img width="247" height="296"
-                                     src="https://banhsinhnhat.com/media/cache/db/6c/db6c0687a748a5dfad0fd8b5423fa9df.jpg"
-                                     alt="" style="width: 100%;">
-                            </div>
-                            <div class="box-text text-center">
-                                <div class="title-wrapper">
-                                    <p style="padding-top: 10px;">
-                                        <span class="s3_c">Set quà tết Hiếu nghĩa</span>
-                                        <span class="s3_c text-fontweight">650,000đ</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="  col-md-4 col-lg-3 box-hover">
-                <div class="col-inner">
-                    <div class="product-small box" style="border: 1px solid #e5e5e5;">
-                        <a href="" style="margin-left: auto; margin-right: auto;">
-                            <div class="box-image">
-                                <img width="247" height="296"
-                                     src="https://banhsinhnhat.com/media/cache/75/41/7541ffc2a714dd54e331ff0c5ffb7ed1.jpg"
-                                     alt="" style="width: 100%;">
-                            </div>
-                            <div class="box-text text-center">
-                                <div class="title-wrapper">
-                                    <p style="padding-top: 10px;">
-                                        <span class="s3_c">Set 12 cupcake rực rỡ</span>
-                                        <span class="s3_c text-fontweight">420,000đ</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="  col-md-4 col-lg-3 box-hover">
-                <div class="col-inner">
-                    <div class="product-small box" style="border: 1px solid #e5e5e5;">
-                        <a href="" style="margin-left: auto; margin-right: auto;">
-                            <div class="box-image">
-                                <img width="247" height="296"
-                                     src="https://banhsinhnhat.com/media/cache/3f/6c/3f6c333153e40c954bbe8c0b17f0a6b1.jpg"
-                                     alt="" style="width: 100%;">
-                            </div>
-                            <div class="box-text text-center">
-                                <div class="title-wrapper">
-                                    <p style="padding-top: 10px;">
-                                        <span class="s3_c">Bánh Chúc Thành Công</span>
-                                        <span class="s3_c text-fontweight">550,000đ</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            <%
+                    }
+                }
+            %>
         </div>
     </div>
 
     <div class="container padding-all-top">
         <h4>Bán chạy trong tháng</h4>
         <div class="row " style="padding-bottom: 30px;">
-            <c:forEach var="productMonth" items="${listProductMonth}">
+            <%
+                ArrayList<Product> productMonth = (ArrayList<Product>) request.getAttribute("listProductMonth");
+                if (!productBest.isEmpty() && productBest != null) {
+                    for (Product p : productMonth) {%>
+
                 <div class="  col-md-4 col-lg-3 box-hover">
                     <div class="col-inner">
                         <div class="product-small box" style="border: 1px solid #e5e5e5;">
                             <a href="" style="margin-left: auto; margin-right: auto;">
                                 <div class="box-image">
-                                    <img width="247" height="296"
-                                         src="https://banhsinhnhat.com/media/cache/ad/55/ad55e0a0aa561ac868764601b9a2a42b.jpg"
-                                         alt="" style="width: 100%;">
+                                    <a href="<%=url%>/detail-product?pid=<%=p.getId()%>&cid=<%=p.getIdCate()%>">
+                                        <img src="<%=url%>\Products\<%=(p.getProductImages().isEmpty())?"":p.getProductImages().get(0).getUrl()%>" class="card-img-top img_p" alt="...">
+                                    </a>
                                 </div>
                                 <div class="box-text text-center">
                                     <div class="title-wrapper">
                                         <p style="padding-top: 10px;">
-                                            <span class="s3_c">${productMonth.nameProduct}</span>
-                                            <span class="s3_c text-fontweight">360,000đ</span>
+                                            <span class="s3_c"><%=p.getNameProduct()%></span>
+                                            <span class="s3_c text-fontweight"><%=p.getSizePrices().get(0).getPrice()%></span>
                                         </p>
                                     </div>
                                 </div>
@@ -187,216 +142,13 @@
                         </div>
                     </div>
                 </div>
-            </c:forEach>
-            <div class="  col-md-4 col-lg-3 box-hover">
-                <div class="col-inner">
-                    <div class="product-small box" style="border: 1px solid #e5e5e5;">
-                        <a href="" style="margin-left: auto; margin-right: auto;">
-                            <div class="box-image">
-                                <img width="247" height="296"
-                                     src="https://banhsinhnhat.com/media/cache/db/6c/db6c0687a748a5dfad0fd8b5423fa9df.jpg"
-                                     alt="" style="width: 100%;">
-                            </div>
-                            <div class="box-text text-center">
-                                <div class="title-wrapper">
-                                    <p style="padding-top: 10px;">
-                                        <span class="s3_c">Set quà tết hiếu nghĩa</span>
-                                        <span class="s3_c text-fontweight">650,000đ</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="  col-md-4 col-lg-3 box-hover">
-                <div class="col-inner">
-                    <div class="product-small box" style="border: 1px solid #e5e5e5;">
-                        <a href="" style="margin-left: auto; margin-right: auto;">
-                            <div class="box-image">
-                                <img width="247" height="296"
-                                     src="https://banhsinhnhat.com/media/cache/47/a6/47a618389d6a092995f30c860e5386a6.jpg"
-                                     alt="" style="width: 100%;">
-                            </div>
-                            <div class="box-text text-center">
-                                <div class="title-wrapper">
-                                    <p style="padding-top: 10px;">
-                                        <span class="s3_c">Bánh công chúa Elsa</span>
-                                        <span class="s3_c text-fontweight">320,000đ</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="  col-md-4 col-lg-3 box-hover">
-                <div class="col-inner">
-                    <div class="product-small box" style="border: 1px solid #e5e5e5;">
-                        <a href="" style="margin-left: auto; margin-right: auto;">
-                            <div class="box-image">
-                                <img width="247" height="296"
-                                     src="https://banhsinhnhat.com/media/cache/71/a3/71a377fc7e0553c673fac38bf67b5f34.jpg"
-                                     alt="" style="width: 100%;">
-                            </div>
-                            <div class="box-text text-center">
-                                <div class="title-wrapper">
-                                    <p style="padding-top: 10px;">
-                                        <span class="s3_c">Set cupcake Bó hoa mùa xuân</span>
-                                        <span class="s3_c text-fontweight">1,500,000đ</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            <%
+                    }
+                }
+            %>
+
         </div>
     </div>
-
-    <div class="container padding-all-top">
-        <h4>Set quà tết </h4>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5" style="display: flex;">
-            <!-- Box 1 -->
-            <div class="  col-md-4 col-lg-3 box-hover">
-
-                <div class="col-inner">
-                    <div class="product-small box" style="border: 1px solid #e5e5e5;">
-                        <a href="" style="margin-left: auto; margin-right: auto;">
-                            <div class="box-image">
-                                <img width="247" height="296"
-                                     src="https://banhsinhnhat.com/media/cache/db/6c/db6c0687a748a5dfad0fd8b5423fa9df.jpg"
-                                     alt="" style="width: 100%;">
-                            </div>
-                            <div class="box-text text-center">
-                                <div class="title-wrapper">
-                                    <p style="padding-top: 10px;">
-                                        <span class="s3_c">Set quà tết hiếu nghĩa</span>
-                                        <span class="s3_c text-fontweight">650,000đ</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container padding-all-top">
-        <h4>Bánh hoa</h4>
-        <div class="row" style="display: flex;">
-            <div class="  col-md-4 col-lg-3 box-hover">
-
-                <div class="col-inner">
-                    <div class="product-small box" style="border: 1px solid #e5e5e5;">
-                        <a href="" style="margin-left: auto; margin-right: auto;">
-                            <div class="box-image">
-                                <img width="247" height="296"
-                                     src="https://banhsinhnhat.com/media/cache/49/d5/49d5a4f485ac173239ec37efaf7f0454.jpg"
-                                     alt="" style="width: 100%;">
-                            </div>
-                            <div class="box-text text-center">
-                                <div class="title-wrapper">
-                                    <p style="padding-top: 10px;">
-                                        <span class="s3_c">Bánh Cánh Đồng Hoa</span>
-                                        <span class="s3_c text-fontweight">450,000đ</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="  col-md-4 col-lg-3 box-hover">
-
-                <div class="col-inner">
-                    <div class="product-small box" style="border: 1px solid #e5e5e5;">
-                        <a href="" style="margin-left: auto; margin-right: auto;">
-                            <div class="box-image">
-                                <img width="247" height="296"
-                                     src="https://banhsinhnhat.com/media/cache/e1/fd/e1fdd3bf34e16309d749e2a5878f2d70.jpg"
-                                     alt="" style="width: 100%;">
-                            </div>
-                            <div class="box-text text-center">
-                                <div class="title-wrapper">
-                                    <p style="padding-top: 10px;">
-                                        <span class="s3_c">Bánh Hoa Mẫu Đơn Trắng</span>
-                                        <span class="s3_c text-fontweight">450,000đ</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="  col-md-4 col-lg-3 box-hover">
-
-                <div class="col-inner">
-                    <div class="product-small box" style="border: 1px solid #e5e5e5;">
-                        <a href="" style="margin-left: auto; margin-right: auto;">
-                            <div class="box-image">
-                                <img width="247" height="296"
-                                     src="https://banhsinhnhat.com/media/cache/f6/ea/f6eaaf2d0190ed18ef887b0d17294fbb.jpg"
-                                     alt="" style="width: 100%;">
-                            </div>
-                            <div class="box-text text-center">
-                                <div class="title-wrapper">
-                                    <p style="padding-top: 10px;">
-                                        <span class="s3_c">Bánh hoa trang nhã pastel</span>
-                                        <span class="s3_c text-fontweight">450,000đ</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="  col-md-4 col-lg-3 box-hover">
-
-                <div class="col-inner">
-                    <div class="product-small box" style="border: 1px solid #e5e5e5;">
-                        <a href="" style="margin-left: auto; margin-right: auto;">
-                            <div class="box-image">
-                                <img width="247" height="296"
-                                     src="https://banhsinhnhat.com/media/cache/21/b1/21b199ed68dd9b65b4f579e00cbe38aa.jpg"
-                                     alt="" style="width: 100%;">
-                            </div>
-                            <div class="box-text text-center">
-                                <div class="title-wrapper">
-                                    <p style="padding-top: 10px;">
-                                        <span class="s3_c">Bánh kem bó hoa</span>
-                                        <span class="s3_c text-fontweight">450,000đ</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="  col-md-4 col-lg-3 box-hover">
-                <div class="col-inner">
-                    <div class="product-small box" style="border: 1px solid #e5e5e5;">
-                        <a href="" style="margin-left: auto; margin-right: auto;">
-                            <div class="box-image">
-                                <img width="247" height="296"
-                                     src="https://banhsinhnhat.com/media/cache/e6/87/e687e1a883f46a6d3124b1c9747bf13f.jpg"
-                                     alt="" style="width: 100%;">
-                            </div>
-                            <div class="box-text text-center">
-                                <div class="title-wrapper">
-                                    <p style="padding-top: 10px;">
-                                        <span class="s3_c">Bánh hoa lãng mạn</span>
-                                        <span class="s3_c text-fontweight">450,000đ</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     <div class="container padding-all-top">
         <h4>Cảm nhận khách hàng</h4>
@@ -582,11 +334,11 @@
     </div>
 </main>
 <footer>
-    <jsp:include page="./Footer.jsp"></jsp:include>
+    <jsp:include page="Footer.jsp"></jsp:include>
 </footer>
 
 
-<script src="./js/homepage.js"></script>
+<script src="../js/homepage.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>

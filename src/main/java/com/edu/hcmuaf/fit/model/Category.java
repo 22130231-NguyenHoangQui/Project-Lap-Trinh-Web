@@ -15,6 +15,20 @@ public class Category {
     public Category() {
     }
 
+    public Category(int id, String name) {
+
+    }
+
+    public Category(String categoryName) {
+        this.name = categoryName;
+    }
+
+    public Category(String categoryName, String imageCate) {
+        this.name = categoryName;
+        this.imageUrl = imageCate;
+    }
+
+
     public int getId() {
         return id;
     }
