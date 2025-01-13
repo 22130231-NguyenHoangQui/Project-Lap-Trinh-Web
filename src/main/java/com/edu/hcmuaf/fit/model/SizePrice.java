@@ -1,17 +1,13 @@
 package com.edu.hcmuaf.fit.model;
 
-import java.text.NumberFormat;
-import java.util.Locale;
-
-public class ProductSizes {
+public class SizePrice {
     private int id;
     private int idProduct;
     private String diameter;
     private String height;
     private double price;
 
-
-    public ProductSizes(int id, int idProduct, String diameter, String height, double price) {
+    public SizePrice(int id, int idProduct, String diameter, String height, double price) {
         this.id = id;
         this.idProduct = idProduct;
         this.diameter = diameter;
@@ -19,17 +15,7 @@ public class ProductSizes {
         this.price = price;
     }
 
-    public ProductSizes(int id, String diameter, String height, double price) {
-        this.id = id;
-        this.diameter = diameter;
-        this.height = height;
-        this.price = price;
-    }
-
-    public ProductSizes(String diameter, String height, double price) {
-        this.diameter = diameter;
-        this.height = height;
-        this.price = price;
+    public SizePrice() {
     }
 
     public int getId() {
@@ -38,6 +24,14 @@ public class ProductSizes {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getIdProduct() {
+        return idProduct;
+    }
+
+    public void setIdProduct(int idProduct) {
+        this.idProduct = idProduct;
     }
 
     public String getDiameter() {
@@ -60,18 +54,18 @@ public class ProductSizes {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
     @Override
     public String toString() {
-        return "ProductSize{" +
+        return "SizePrice{" +
                 "id=" + id +
+                ", idProduct=" + idProduct +
                 ", diameter='" + diameter + '\'' +
                 ", height='" + height + '\'' +
                 ", price=" + price +
                 '}';
     }
 }
-
