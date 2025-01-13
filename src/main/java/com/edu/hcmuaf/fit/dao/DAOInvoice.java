@@ -161,14 +161,10 @@ public class DAOInvoice {
         }
         return re;
     }
-import java.sql.*;
-import java.util.ArrayList;
+    public static ArrayList<OrderDetail> getOrderDetailsWithAccounts() {
+        ArrayList<OrderDetail> orderDetails = new ArrayList<>();
 
-    public class AccountDAO {
-
-        public static ArrayList<Account> listAccountsVIP() throws SQLException {
-            ArrayList<Account> vipAccounts = new ArrayList<>();
-            String sql = """
+        String sql = """
             SELECT u.id, u.userName, u.email, u.phoneNumber, SUM(od.quantity) AS total_quantity
             FROM accounts u
             JOIN Orders o ON u.id = o.accountId
@@ -178,34 +174,38 @@ import java.util.ArrayList;
             LIMIT 20;
         """;
 
-            Connection connection = JDBCUtil.getConnection(); // Lấy kết nối từ JDBCUtil
-            try {
-                PreparedStatement statement = connection.prepareStatement(sql);
-                ResultSet resultSet = statement.executeQuery();
+        try (Connection connection = JDBCUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
 
-                while (resultSet.next()) {
-                    // Tạo đối tượng Account dựa trên dữ liệu trả về từ ResultSet
-                    Account account = new Account();
-                    account.setId(resultSet.getInt("id"));
-                    account.setUserName(resultSet.getString("userName"));
-                    account.setEmail(resultSet.getString("email"));
-                    account.setPhoneNumber(resultSet.getString("phoneNumber"));
-                    account.setTotalQuantity(resultSet.getInt("total_quantity"));
+            while (resultSet.next()) {
+                // Tạo đối tượng Account
+                Account account = new Account(
+                        resultSet.getInt("id"),
+                        resultSet.getString("userName"),
+                        resultSet.getString("email"),
+                        resultSet.getString("phoneNumber")
+                );
 
-                    // Thêm đối tượng vào danh sách VIP
-                    vipAccounts.add(account);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-                throw e;
-            } finally {
-                if (connection != null) {
-                    connection.close(); // Đóng kết nối
-                }
+                // Tạo đối tượng OrderDetail
+                OrderDetail orderDetail = new OrderDetail();
+                orderDetail.setQuantity(resultSet.getInt("total_quantity"));
+                orderDetail.setAccount(account);
+
+                // Thêm vào danh sách
+                orderDetails.add(orderDetail);
             }
 
-            return vipAccounts;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
+        return orderDetails;
+    }
+
+    public static void main(String[] args) {
+       ;
+        System.out.println( getOrderDetailsWithAccounts());
     }
 
 

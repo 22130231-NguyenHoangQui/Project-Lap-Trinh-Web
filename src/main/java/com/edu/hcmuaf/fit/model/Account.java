@@ -102,6 +102,13 @@ public class Account {
     public Account() {
     }
 
+    public Account(int id, String userName, String email, String phoneNumber) {
+        this.id = id;
+        this.userName = userName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+
     public int getId() {
         return id;
     }
@@ -239,5 +246,5 @@ public class Account {
                 ", status=" + status +
                 '}';
     }
-    
+
 }

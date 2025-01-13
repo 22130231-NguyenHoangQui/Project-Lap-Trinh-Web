@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.edu.hcmuaf.fit.model.Account;
 import com.edu.hcmuaf.fit.model.Category;
+import com.edu.hcmuaf.fit.model.OrderDetail;
 import com.edu.hcmuaf.fit.model.Product;
 import com.edu.hcmuaf.fit.service.AccountService;
 import com.edu.hcmuaf.fit.service.CategoryService;
@@ -34,6 +35,7 @@ public class ManageController extends HttpServlet {
         ArrayList<Category> listCategory = CategoryService.getInstance().getListCategory();
         request.setAttribute("listCategory", listCategory);
         Double getTotalForToday = InvoiceService.getInstance().getTotalRevenueForToday();
+
         request.setAttribute("getTotalForToday", getTotalForToday);
         int getDT = InvoiceService.getInstance().doanhThu();
         request.setAttribute("getDT", getDT);
@@ -41,6 +43,10 @@ public class ManageController extends HttpServlet {
         double monthdt = InvoiceService.getInstance().totalPriceMonth();
         request.setAttribute("monthdt", monthdt);
         request.setAttribute("productbd", productbd);
+
+        ArrayList<OrderDetail> cusMax = InvoiceService.getInstance().getListOrderDetail();
+        request.setAttribute("cusMax", cusMax);
+
         ArrayList<Product> listAllProduct = ProductService.getInstance().listProductRandom(0);
         request.setAttribute("listAllProduct", listAllProduct);
         ArrayList<Account> listAllAccount = AccountService.getInstance().listAllAccount();

@@ -3,6 +3,7 @@
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="com.edu.hcmuaf.fit.model.Product" %>
 <%@ page import="com.edu.hcmuaf.fit.model.Category" %>
+<%@ page import="com.edu.hcmuaf.fit.model.OrderDetail" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -152,49 +153,37 @@
                             <div class="col-md-12">
                                 <div class="card shadow">
                                     <div class="card-header bg-primary text-white text-center">
-                                        <h5>Top Lượt Xem Gần Đây</h5>
+                                        <h5>Khách hàng có lượt mua cao nhất</h5>
                                     </div>
                                     <div class="card-body">
                                         <table class="table table-striped table-bordered">
                                             <thead>
                                             <tr>
-                                                <th>Ngày</th>
-                                                <th>Mã sản phẩm</th>
-                                                <th>Tên sản phẩm</th>
-                                                <th>Lượt xem</th>
+                                                <th>STT</th>
+                                                <th>Họ và Tên</th>
+                                                <th>Email</th>
+                                                <th>Số điện thoại</th>
+                                                <th>Lượng mua sản phẩm</th>
+
                                             </tr>
                                             </thead>
                                             <tbody>
+                                            <%
+                                                ArrayList<OrderDetail> listCusMax = (ArrayList<OrderDetail>) request.getAttribute("cusMax");
+                                                if (!listCusMax.isEmpty() || listCusMax != null) {
+                                                    int sttA = 1;
+                                                    for (OrderDetail a : listCusMax) {
+                                            %>
                                             <tr>
-                                                <td>1</td>
-                                                <td>SP001</td>
-                                                <td>Bánh sinh nhật A</td>
-                                                <td>50</td>
+                                                <td><%=a.getAccount().getId()%></td>
+                                                <td><%=a.getAccount().getUserName()%></td>
+                                                <td><%=a.getAccount().getEmail()%></td>
+                                                <td><%=a.getAccount().getPhoneNumber()%></td>
+                                                <td><%=a.getQuantity()%></td>
                                             </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>SP002</td>
-                                                <td>Bánh sinh nhật B</td>
-                                                <td>45</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>SP003</td>
-                                                <td>Bánh sinh nhật C</td>
-                                                <td>40</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>SP004</td>
-                                                <td>Bánh sinh nhật D</td>
-                                                <td>30</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>SP005</td>
-                                                <td>Bánh sinh nhật E</td>
-                                                <td>25</td>
-                                            </tr>
+                                            <%
+                                                    sttA++;
+                                                    }}%>
                                             </tbody>
                                         </table>
                                     </div>
@@ -791,7 +780,7 @@
                             <td class="cate1"><%=list.getName()%></td>
                             <td class="cate1"><%=list.getImageUrl()%></td>
                             <td>
-                                <button class="icon-button" onclick="deleteRowCate(this)">
+                                <button class="icon-button" onclick="deleteCategory('<%=list.getId()%>')">
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
                                 <button class="icon-button" onclick="openEditFormCate(this)">
@@ -843,8 +832,34 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Modal chỉnh sửa danh mục -->
+                    <div class="modal fade" id="editCateModal" tabindex="-1" aria-labelledby="editCateModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editCateModalLabel">Chỉnh Sửa Danh Mục</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Form chỉnh sửa danh mục -->
+                                    <form id="edit-cate-form">
+                                        <input type="hidden" id="editCateId">
+                                        <div class="mb-3">
+                                            <label for="editCateName" class="form-label">Tên Danh Mục</label>
+                                            <input type="text" class="form-control" id="editCateName" name="editCateName" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="editCateImage" class="form-label">Cập Nhật Ảnh</label>
+                                            <input type="file" class="form-control" id="editCateImage" name="editCateImage" accept="image/*">
+                                        </div>
+                                        <button type="button" class="btn btn-primary" onclick="updateCategory()">Lưu Thay Đổi</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="container mt-5 d-none" style="width: auto;" id="mngInvoice">
+                    <div class="container mt-5 d-none" style="width: auto;" id="mngInvoice">
                     <table class="table">
                         <thead>
                         <tr>
@@ -1854,83 +1869,61 @@
 
     }
 
-</script>
-<script>
+
     var categoryId = "";
     function addCate() {
-        var flag = true;
-        var nameInput = document.getElementById("nameCateAdd");
-        var imageInput = document.getElementById("imageCateAdd");
-        // var error = document.getElementById("errNameCateAdd");
-        console.log(nameInput.value)
-        // Kiểm tra trường tên danh mục
-        // if (nameInput.value === "") {
-        //     error.innerHTML = 'Vui lòng nhập danh mục mới!';
-        //     flag = false;
-        // } else {
-        //     error.innerHTML = '';
-        // }
+        const name = document.getElementById("nameCateAdd").value.trim();
+        const image = document.getElementById("imageCateAdd").files[0];
 
-        // Kiểm tra ảnh
-        // if (imageInput.files.length === 0) {
-        //     error.innerHTML = 'Vui lòng chọn ảnh!';
-        //     flag = false;
-        // }
-        // console.log(nameInput.value);
-
-        if (flag) {
-            var nameCate = nameInput.value;
-            var formData = new FormData();
-            var fileInputs = document.getElementsByName("image");
-            formData.append("nameCate", nameCate);
-            for (var i = 0; i < fileInputs.length; i++) {
-                var fileInput = fileInputs[i];
-                formData.append("image", fileInput.files[0]);
-            }
-            // Gửi yêu cầu AJAX
-            $.ajax({
-                url: 'addCategory',
-                type: 'POST',
-                data: {
-                    nameCate: nameCate;
-                },
-                processData: false, // Để tránh jQuery xử lý dữ liệu
-                contentType: false, // Để không gửi Content-Type
-                success: function (data) {
-                    try {
-                        var jsonData = JSON.parse(data);
-                        var res = jsonData.res;
-                        var htmlData = jsonData.htmlData;
-                        alert(res);
-                        var row = document.getElementById("innerCategory");
-                        row.innerHTML = "";
-                        for (var i = 0; i < htmlData.length; i++) {
-                            var c = htmlData[i];
-                            row.innerHTML += "<tr data-category-id='" + c.id + "'>" +
-                                "<input type='hidden' class='id' value='" + c.id + "'>" +
-                                "<td>" + (i + 1) + "</td>" +
-                                "<td>" + c.id + "</td>" +
-                                "<td>" + c.name + "</td>" +
-                                "<td>" +
-                                "<img src='" + c.imageUrl + "' alt='Image' style='width: 50px; height: 50px; object-fit: cover;'>" + // Hiển thị ảnh
-                                "<div class='d-flex w-100 justify-content-center'>" +
-                                "<button class='delete btnAdd bgcolor bd-full me-1' title='Xóa' aria-hidden='true' onclick='deleteCategory(\"" + c.id + "\")' data-bs-toggle='modal' data-bs-target=''><i class='fa fa-trash-o text-color'></i></button>" +
-                                "<button class='editCate btnAdd bgcolor bd-full' title='Chỉnh sửa danh mục' aria-hidden='true' data-bs-toggle='modal' data-bs-target='#editCate' onclick='innerEditCategory(\"" + c.id + "\")'><i class='fa fa-pencil text-color'></i></button>" +
-                                "</div>" +
-                                "</td>" +
-                                "</tr>";
-                        }
-                    } catch (e) {
-                        console.error("Xảy ra lỗi khi xử lý phản hồi JSON:", e);
-                    }
-                },
-                error: function (error) {
-                    console.error("Xảy ra lỗi:", error);
-                }
-            });
+        if (!name || !image) {
+            alert("Vui lòng nhập đầy đủ thông tin!");
+            return;
         }
-        return false;
+
+        const formData = new FormData();
+        formData.append("name", name);
+        formData.append("image", image);
+
+        fetch("/addCategory", {
+            method: "POST",
+            body: formData,
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Thêm danh mục thành công!");
+                    // Thêm danh mục vào bảng mà không tải lại trang
+                    const tbody = document.getElementById("innerCate");
+                    const newRow = document.createElement("tr");
+
+                    newRow.innerHTML = `
+                    <td class="cate1">${data.category.id}</td>
+                    <td class="cate1">${data.category.name}</td>
+                    <td class="cate1"><img src="${data.category.imageUrl}" alt="Hình ảnh" style="width: 50px;"></td>
+                    <td>
+                        <button class="icon-button" onclick="deleteRowCate(this)">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                        <button class="icon-button" onclick="openEditFormCate(this)">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                    </td>
+                `;
+                    tbody.appendChild(newRow);
+
+                    // Đóng modal
+                    const modal = bootstrap.Modal.getInstance(document.getElementById("addCate"));
+                    modal.hide();
+                } else {
+                    alert("Thêm danh mục thất bại!");
+                }
+            })
+            .catch(error => {
+                console.error("Lỗi:", error);
+                alert("Đã xảy ra lỗi khi thêm danh mục.");
+            });
     }
+
 
     function deleteCategory(categoryId) {
         var confirmation = confirm("Bạn có chắc muốn xóa ?");

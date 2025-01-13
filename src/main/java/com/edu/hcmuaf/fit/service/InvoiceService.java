@@ -3,6 +3,9 @@ package com.edu.hcmuaf.fit.service;
 import com.edu.hcmuaf.fit.dao.DAOInvoice;
 import com.edu.hcmuaf.fit.model.Order;
 import com.edu.hcmuaf.fit.model.OrderDetail;
+import org.eclipse.tags.shaded.org.apache.xpath.operations.Or;
+
+import java.util.ArrayList;
 
 public class InvoiceService {
     static InvoiceService instance;
@@ -45,5 +48,8 @@ public class InvoiceService {
     }
     public double totalPriceMonth() {
         return DAOInvoice.tongDoanhThu();
+    }
+    public ArrayList<OrderDetail> getListOrderDetail() {
+        return DAOInvoice.getOrderDetailsWithAccounts();
     }
 }

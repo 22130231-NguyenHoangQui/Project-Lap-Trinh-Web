@@ -70,24 +70,30 @@ public class DAOCategory {
     }
 
     public static void main(String[] args) {
-        ArrayList<Category> list1 = listCategory(0);
-        for (Category category : list1) {
-            System.out.println(category);
-        }
+//        ArrayList<Category> list1 = listCategory(0);
+//        for (Category category : list1) {
+//            System.out.println(category);
+//        }
+//    getCategoryById(1);
+        System.out.println(getCategoryById(1));
     }
 
     public static Category getCategoryById(int id) {
         Category category = null;
         Connection connection = JDBCUtil.getConnection();
-        String sql = "Select id, categoryName from categories where id =?";
+        String sql = "Select id, categoryName, imageUrl from categories where id =?";
         try {
             PreparedStatement pr = connection.prepareStatement(sql);
             pr.setInt(1, id);
             ResultSet resultSet = pr.executeQuery();
             while (resultSet.next()) {
                 int idCate = resultSet.getInt("id");
-                String name = resultSet.getString("name");
+                String name = resultSet.getString("categoryName");
+                String imageUrl = resultSet.getString("imageUrl");
                 category = new Category(id, name);
+                category.setId(idCate);
+                category.setName(name);
+                category.setImageUrl(imageUrl);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -103,9 +109,6 @@ public class DAOCategory {
             s.setInt(1, id);
             ResultSet resultSet = s.executeQuery();
             if (resultSet.next()) {
-                s = connection.prepareStatement("delete from suppliers where idCate =?");
-                s.setInt(1, id);
-                s.executeUpdate();
                 s = connection.prepareStatement("delete from products where idCate =?");
                 s.setInt(1, id);
                 s.executeUpdate();
@@ -156,5 +159,6 @@ public class DAOCategory {
         }
         return re;
     }
+
 
 }

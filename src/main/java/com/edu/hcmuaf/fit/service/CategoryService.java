@@ -25,15 +25,17 @@ public class CategoryService  {
 
     }
 
+    public static int updateCategory(Category c) {
+        return DAOCategory.updateCategory(c);
+    }
+
     public static void main(String[] args) {
 //        getInstance().getListCategory(0);
 //        for (Category category : getInstance().getListCategory(0)) {
 //            System.out.println(category);
 //        }
-        getInstance().getListCategory();
-        for (Category category : getInstance().getListCategory()) {
-            System.out.println(category);
-        }
+//        getInstance().getListCategory();
+        System.out.println(getCategoryById(2));
 
     }
 //    load all danh mục
@@ -44,7 +46,7 @@ public class CategoryService  {
     public ArrayList<Category> listCategory() {
         return DAOCategory.listCategory();
     }
-    public Category getCategoryById(int id) {
+    public static Category getCategoryById(int id) {
         return DAOCategory.getCategoryById(id);
     }
     //Thêm danh mục
@@ -54,10 +56,6 @@ public class CategoryService  {
         return  DAOCategory.delCategory(id);
     }
     // Chỉnh sửa cập nhật danh mục
-    public int updateCategory(Category c) throws SQLException {
-        return DAOCategory.updateCategory(c);
-    }
-
     public Category latestCategory() {
         return null;
     }
@@ -65,5 +63,6 @@ public class CategoryService  {
     public int insertImageOfCategory(int id, String fileName) {
         return 0;
     }
+
 
 }
