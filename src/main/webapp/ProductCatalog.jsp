@@ -47,7 +47,6 @@
 
 %>
 
-
 <main id="main">
 
     <div class="container">

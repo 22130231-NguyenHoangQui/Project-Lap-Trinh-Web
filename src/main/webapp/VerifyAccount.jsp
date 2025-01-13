@@ -11,10 +11,11 @@
           integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/settingAll.css">
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/fotter.css">
-    <link rel="stylesheet" href="../css/authentic.css">
+    <link rel="stylesheet" href="./css/settingAll.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/fotter.css">
+    <link rel="stylesheet" href="./css/authentic.css">
+    <link rel="stylesheet" href="./css/changePassword.css">
 </head>
 
 <body>
@@ -35,7 +36,7 @@
                 <form id="verify-form" class="signup-form" action="<%=url%>/verifyAccount" method="post" onsubmit="return verifyAccount()">
                     <div class="text-end pe-4">
                         <% Object obj = session.getAttribute("account"); %>
-                        <a class="text-decoration-none" href="<%=url%>/<%=(obj==null)?"SignIn.jsp":"homePage"%>">Bỏ qua</a>
+                        <a class="text-decoration-none" href="<%=url%>/<%=(obj==null)?"signIn.jsp":"homepage"%>">Bỏ qua</a>
                     </div>
                     <img src="images/verify.jpg" alt="" width="400px">
                     <h5>Xác thực tài khoản của bạn</h5>

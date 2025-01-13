@@ -4,6 +4,7 @@
 }
 
 .contain {
+    position: relative;
     box-sizing: border-box;
     box-shadow: 0 3px 10px 0 rgba(0, 0, 0, .14);
     width: 400px;
@@ -76,12 +77,11 @@ button {
 
 .close-btn {
     position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 20px;
-    color: #999;
-    cursor: pointer;
-    transition: color 0.3s ease;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    color: #797777;
+    text-decoration: none;
 }
 
 .close-btn:hover {
@@ -89,5 +89,9 @@ button {
 }
 body {
     font-family: Tahoma, sans-serif;
-    background-color: #ddf1f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #a9cff0;
 }

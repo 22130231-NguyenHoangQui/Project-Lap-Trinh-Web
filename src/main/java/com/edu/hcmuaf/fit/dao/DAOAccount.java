@@ -84,7 +84,7 @@ public class DAOAccount {
     public static int registerAccount(Account a) {
         int re = 0;
         Connection connection = JDBCUtil.getConnection();
-        String sql = "insert into accounts(name, userName, password, gender, phoneNumber, birthDay, address,addressReceive, email) values(?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into accounts(name, userName, password, gender, phoneNumber, birthDay, address,addressReceive, email,role,status) values(?,?,?,?,?,?,?,?,?,1,0)";
         try {
             PreparedStatement pr = connection.prepareStatement(sql);
             pr.setString(1, a.getName());
@@ -125,7 +125,7 @@ public class DAOAccount {
     public static int updateStateVerify(VerifyAccount v) {
         int re = 0;
         Connection connection = JDBCUtil.getConnection();
-        String sql = "update verify_account set stateVerify =? where idAccount =?";
+        String sql = "update verifyaccount set stateVerify =? where idAccount =?";
         try {
             PreparedStatement pr = connection.prepareStatement(sql);
             pr.setBoolean(1, v.isStateVerify());
@@ -205,7 +205,7 @@ public class DAOAccount {
         VerifyAccount verifyAccount = null;
         Connection connection = JDBCUtil.getConnection();
         String sql = "Select idAccount, verifyCode, timeCode, stateVerify " +
-                "from verify_account " +
+                "from verifyaccount " +
                 "where idAccount = ?";
         try {
             PreparedStatement pr = connection.prepareStatement(sql);
@@ -302,7 +302,7 @@ public class DAOAccount {
     public static VerifyAccount getVrfOfAccount(int idAccount) {
         VerifyAccount verifyAccount = null;
         Connection connection = JDBCUtil.getConnection();
-        String sql = "Select stateVerify from verify_account where idAccount =?";
+        String sql = "Select stateVerify from verifyaccount where idAccount =?";
         try {
             PreparedStatement pr = connection.prepareStatement(sql);
             pr.setInt(1, idAccount);

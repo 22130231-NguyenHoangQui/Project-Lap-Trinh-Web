@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-');
 
-  var breadcrumbHtml = '<a href="../homepage.jsp">Trang Chủ</a>';
+  var breadcrumbHtml = '<a href="../pages/homepage.html">Trang Chủ</a>';
   var urlPath = '/';
 
   path.forEach(function (part, index) {
