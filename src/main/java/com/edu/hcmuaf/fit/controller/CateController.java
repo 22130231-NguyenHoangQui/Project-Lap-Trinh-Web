@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.edu.hcmuaf.fit.model.Category;
 import com.edu.hcmuaf.fit.model.Product;
+import com.edu.hcmuaf.fit.model.SizePrice;
 import com.edu.hcmuaf.fit.service.CategoryService;
 import com.edu.hcmuaf.fit.service.ProductService;
 import jakarta.servlet.ServletException;
@@ -26,29 +27,29 @@ public class CateController extends HttpServlet {
 //        load sản phẩm ngẫu nhiên nếu vô trang danh mục
         ArrayList<Product> listProduct = ProductService.getInstance().listProductRandom(0);
         request.setAttribute("listProductRandom", listProduct);
+// Tìm sản phẩm có giá cao nhất và thấp nhất
+         double highestPrice = Double.MIN_VALUE;
+         double lowestPrice = Double.MAX_VALUE;
 
-         // Tìm sản phẩm có giá cao nhất và thấp nhất
-//         Product highestPricedProduct = null;
-//         Product lowestPricedProduct = null;
-//
-//         for (Product p : listProduct) {
-//             if (highestPricedProduct == null || p.getPrice() > highestPricedProduct.getPrice()) {
-//                 highestPricedProduct = p;
-//             }
-//             if (lowestPricedProduct == null || p.getPrice() < lowestPricedProduct.getPrice()) {
-//                 lowestPricedProduct = p;
-//
-//             }
-//
-//         }
-//         int highestPrice = (int) Math.round(highestPricedProduct.getPrice());
-//         int lowestPrice = (int) Math.round(lowestPricedProduct.getPrice());
+         for (Product product : listProduct) {
+             for (SizePrice sizePrice : product.getSizePrices()) {
+                 double price = sizePrice.getPrice(); // Giả sử SizePrice có phương thức getPrice()
+                 if (price > highestPrice) {
+                     highestPrice = price;
+                 }
+                 if (price < lowestPrice) {
+                     lowestPrice = price;
+                 }
+             }
+         }
+         int highest = (int) Math.round(highestPrice);
+         int lowest = (int) Math.round(lowestPrice);
 
 //         String highestPrice = highestPricedProduct != null ? highestPricedProduct.getFormattedPrice() : "N/A";
 //         String lowestPrice = lowestPricedProduct != null ? lowestPricedProduct.getFormattedPrice() : "N/A";
 //
-//         request.setAttribute("lowestPrice", lowestPrice);
-//         request.setAttribute("highestPrice", highestPrice);
+         request.setAttribute("lowestPrice",lowest);
+         request.setAttribute("highestPrice",  highest);
         try {
             request.getRequestDispatcher("ProductCatalog.jsp").forward(request, response);
         } catch (ServletException e) {

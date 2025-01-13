@@ -1,7 +1,7 @@
 <%@ page import="com.edu.hcmuaf.fit.model.Category" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.edu.hcmuaf.fit.model.Account" %>
-<%--<%@ page import="com.edu.hcmuaf.fit.model.Cart" %>--%>
+<%@ page import="com.edu.hcmuaf.fit.model.Cart" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <html>
@@ -9,13 +9,13 @@
     <title>Header</title>
 </head>
 <body>
-<%--<%--%>
+
 <%  String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath(); %>
-<%--    Cart cart = (Cart) session.getAttribute("Cart");--%>
-<%--    int qtt = (cart != null) ? cart.list().size() : 0;--%>
-<%--    String quantityItem = qtt + "";--%>
-<%--    if (qtt > 99) quantityItem = "99+";--%>
-<%--%>--%>
+<%  Cart cart = (Cart) session.getAttribute("Cart");
+    int qtt = (cart != null) ? cart.list().size() : 0;
+    String quantityItem = qtt + "";
+    if (qtt > 99) quantityItem = "99+";
+%>
 <% Object obj = session.getAttribute("account");
     Account account = null;%>
 <header>
@@ -123,7 +123,10 @@
                                    placeholder="Tìm kiếm bánh sinh nhật,..." autocomplete="off"
                                    name="search"
                                    style="width: 100%; padding-right: 40px; padding-left: 10px; font-size: 16px; height: 33px;">
-                            <button type="submit" style="all: unset; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+                            <button type="submit" style="all: unset; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"
+                                    data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
+                                    aria-controls="navbarTogglerDemo01" aria-expanded="false"
+                                    aria-label="Toggle navigation">
                                 <i class="fa-solid fa-magnifying-glass" style="color: gray; font-size: 16px;"></i>
                             </button>
                         </form>
@@ -133,12 +136,15 @@
                         <div class="row balance-row">
                             <div class="bag-shop">
                                 <div class="col1 d-flex justify-content-between" style="gap: 10px;">
-                                    <i class="fa-solid fa-bag-shopping"></i>
+                                    <i class="fa-solid fa-bag-shopping" style="font-size: 25px;"></i>
                                     <button id="cart-button" class="col1 text"
                                             style="background: none; border: none; cursor: pointer;">
                                         GIỎ HÀNG
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            <%=quantityItem%>
+                                            <span class="visually-hidden">unread messages</span>
+                                        </span>
                                     </button>
-
                                 </div>
 
                                 <div class="col1">

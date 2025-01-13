@@ -24,10 +24,18 @@ import java.io.IOException;
             String quantityText = request.getParameter("quantity");
             int quantity = Integer.parseInt(quantityText);
             Cart c = (Cart) session.getAttribute("Cart");
-            if (c == null) c = new Cart();
-            Product p = ProductService.getInstance().getProductById(idProduct);
-            if (p != null) c.put(p);
-
+            if(c == null) c= new Cart();
+            if (c.get(idProduct) != null) {
+                int quantityAvailable = c.get(idProduct).getQuantity();
+                if(quantity <= quantityAvailable) {
+                    c.put(idProduct, quantity);
+                }else {
+                    request.setAttribute("errQuantity","Trong kho chỉ còn lại " + quantityAvailable + " sản phẩm '" +c.get(idProduct).getNameProduct() +"'");
+                }
+            }else{
+                Product p = ProductService.getInstance().getProductById(idProduct);
+                if (p != null) c.put(p);
+            }
             session.setAttribute("Cart", c);
             try {
                 request.getRequestDispatcher("Cart.jsp").forward(request, response);

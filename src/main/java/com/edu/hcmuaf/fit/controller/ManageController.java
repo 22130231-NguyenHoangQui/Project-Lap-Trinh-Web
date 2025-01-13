@@ -24,7 +24,7 @@ public class ManageController extends HttpServlet {
 //        HttpSession session = request.getSession();
 //        Object obj = session.getAttribute("account");
 //        if (obj == null) {
-//            response.sendRedirect("SignIn.jsp");
+//            response.sendRedirect("signIn.jsp");
 //        } else {
 //            ArrayList<Invoice> listAllInvoice = InvoiceService.getInstance().listInvoice();
 //            request.setAttribute("listAllInvoice", listAllInvoice);

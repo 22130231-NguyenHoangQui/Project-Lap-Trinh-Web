@@ -27,9 +27,6 @@ public class Payment extends HttpServlet {
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("account");
         Cart cart = (Cart) session.getAttribute("Cart");
-        if (cart == null) {
-            cart = new Cart();
-        }
         Iterator<Product> it = cart.list().iterator();
         double sum = (double) session.getAttribute("Sum"); // Tổng tiền từ giỏ hàng
         int diameter = (int) session.getAttribute("diameter");

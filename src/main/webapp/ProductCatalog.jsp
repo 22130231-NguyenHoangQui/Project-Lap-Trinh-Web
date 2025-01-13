@@ -35,7 +35,7 @@
             + request.getContextPath();
 %>
 <header>
-    <jsp:include page="Products/header.jsp"></jsp:include>
+    <jsp:include page="header.jsp"></jsp:include>
 </header>
 <div class="is-medium">
     <div class="container"></div>
@@ -90,7 +90,7 @@
                                     <div class="price_slider_handle" id="handle-right"></div>
                                 </div>
                                 <div class="price_slider_amount" data-step="10">
-                                    <button type="submit" class="button button-loc">Lọc</button>
+                                    <button type="button" class="button button-loc">Lọc</button>
                                     <div class="price_label">
                                         Giá <span class="from">10000</span> — <span class="to">10000000</span>
                                     </div>
@@ -123,7 +123,7 @@
                             %>
                             <li class="cat-item" data-category="banh_cac_ngay_le">
 <%--                                <a href="#" >${listCate1.}</a>--%>
-                                <a href="#" onclick="loadProductByIdCate(<%=listCate1.getId()%>)"><%=listCate1.getName()%></a>
+                                <a href="" onclick="loadProductByIdCate(<%=listCate1.getId()%>)"><%=listCate1.getName()%></a>
 
                             </li>
 
@@ -224,21 +224,37 @@
         }
     });
 
-
     function filterByPrice() {
-        var minPrice = document.querySelector('.price_label .from').innerText.replace(/[^0-9.-]+/g, "");
-        var maxPrice = document.querySelector('.price_label .to').innerText.replace(/[^0-9.-]+/g, "");
-
-        minPrice = parseFloat(minPrice);
-        maxPrice = parseFloat(maxPrice);
-
-        // Lọc lại sản phẩm trong content
+        // Lấy tất cả các sản phẩm trong content
         var products = document.querySelectorAll('.product-small');
-        console.log(products)
+        var prices = [];
+
+        // Duyệt qua các sản phẩm để lấy tất cả các giá
         products.forEach(function (product) {
             var priceText = product.querySelector('.price bdi').innerText.replace(/[^0-9.-]+/g, ""); // Lấy giá của sản phẩm
+            console.log("giatruoc",priceText);
             var price = parseFloat(priceText);
 
+            console.log("gia sau",price);
+            if (!isNaN(price)) {
+                prices.push(price);
+            }
+        });
+
+        // Tính toán giá thấp nhất và cao nhất từ các sản phẩm
+        var minPrice = Math.min(...prices); // Giá  thấp nhất
+        var maxPrice = Math.max(...prices); // Giá cao nhất
+
+        console.log("Giá thấp nhất:", minPrice);
+        console.log("Giá cao nhất:", maxPrice);
+
+        // Lọc lại sản phẩm trong content
+        products.forEach(function (product) {
+            var priceText = product.querySelector('.price bdi').innerText.replace(/[^0-9-]+/g, ""); // Lấy giá của sản phẩm
+            console.log("price text ne",priceText);
+            var price = parseInt(priceText);
+            console.log("gia san pham",price);
+            console.log(product)
             if (price >= minPrice && price <= maxPrice) {
                 product.style.display = "block"; // Hiển thị sản phẩm nếu giá nằm trong phạm vi
             } else {
@@ -246,6 +262,87 @@
             }
         });
     }
+
+    // Cập nhật thanh trượt
+    document.addEventListener('DOMContentLoaded', function () {
+        const leftHandle = document.getElementById('handle-left');
+        const rightHandle = document.getElementById('handle-right');
+        const priceRange = document.querySelector('.price_slider_range');
+        const fromLabel = document.querySelector('.price_label .from');
+        const toLabel = document.querySelector('.price_label .to');
+        console.log(${lowest});
+        console.log(${highest});
+        const minValue = Math.round(parseFloat('${lowest}'));
+        const maxValue = Math.round(parseFloat('${highest}'));
+        const step = 10000;
+        console.log(minValue);
+        console.log(maxValue);
+        let leftValue = minValue;
+        let rightValue = maxValue;
+
+        function updateSlider() {
+            const rangeWidth = document.querySelector('.price_slider').offsetWidth;
+            const leftPercent = ((leftValue - minValue) / (maxValue - minValue)) * 100;
+            const rightPercent = ((rightValue - minValue) / (maxValue - minValue)) * 100;
+
+            if (priceRange) {
+                priceRange.style.left = leftPercent + '%';  // Nối % vào giá trị của leftPercent
+                priceRange.style.width = rightPercent - leftPercent + '%';
+            }
+            leftHandle.style.left = leftPercent + '%';
+            rightHandle.style.left = 'calc(' + rightPercent + '% - 20px)';
+
+            fromLabel.textContent = formatCurrency(leftValue);
+            toLabel.textContent = formatCurrency(rightValue);
+        }
+
+        function formatCurrency(value) {
+            return value.toLocaleString('vi-VN', {style: 'currency', currency: 'VND'});
+        }
+
+        let isLeftDragging = false;
+        let isRightDragging = false;
+
+        leftHandle.addEventListener('mousedown', function () {
+            console.log("Left handle mousedown");
+            isLeftDragging = true;
+        });
+
+        rightHandle.addEventListener('mousedown', function () {
+            console.log("Left handle mousedown");
+            isRightDragging = true;
+        });
+
+        document.addEventListener('mousemove', function (e) {
+            if (isLeftDragging || isRightDragging) {
+                const sliderRect = document.querySelector('.price_slider').getBoundingClientRect();
+                const mouseX = e.clientX - sliderRect.left;
+                const sliderWidth = sliderRect.width;
+                let newValue = ((mouseX / sliderWidth) * (maxValue - minValue)) + minValue;
+
+                if (isLeftDragging) {
+                    if (newValue < rightValue) {
+                        leftValue = Math.max(minValue, Math.min(newValue, rightValue - step));
+                        updateSlider();
+                    }
+                }
+
+                if (isRightDragging) {
+                    if (newValue > leftValue) {
+                        rightValue = Math.min(maxValue, Math.max(newValue, leftValue + step));
+                        updateSlider();
+                    }
+                }
+            }
+        });
+
+        document.addEventListener('mouseup', function () {
+            isLeftDragging = false;
+            isRightDragging = false;
+        });
+
+        updateSlider();
+    });
 
     document.addEventListener('DOMContentLoaded', function () {
         const leftHandle = document.getElementById('handle-left');
@@ -333,6 +430,7 @@
         updateSlider();
     });
     var idCateCurrent = 0;
+
     function loadProductByIdCate(categoryId) {
         $.ajax({
             url: 'LoadProductByIdCate', // URL không thay đổi
@@ -341,52 +439,18 @@
                 cid: categoryId // Truyền categoryId trong phần data
             },
             success: function(response) {
-                // Cập nhật giao diện với danh sách sản phẩm mới
-
                 var productContainer = $('#content'); // Khu vực hiển thị sản phẩm
                 productContainer.empty(); // Xóa sản phẩm hiện tại
 
-                response.forEach(function(product) {
-                    console.log(product.image);
-                    console.log(product.name);
-                    var productHtml = `
-                <div class="col">
-                    <div class="col-inner">
-                        <div class="product-small box">
-                            <div class="box-image">
-                                <a href="#" class="product-link">
-                                    <img src="${product.image}" class="card-img-top img_p" id="img_center" alt="...">
-                                </a>
-                            </div>
-                            <div class="box-text text-center">
-                                <div class="title-wrapper">
-                                    <p><a href="#">${product.name}</a></p>
-                                </div>
-                                <div class="price-wrapper">
-                                    <span class="price">
-                                        <span class="woocommerce-Price-amount amount">
-                                            <bdi style="font-weight: bold;">${product.price}</bdi>
-                                        </span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>`;
-                    // jsonProduct.put("id", p.getId());
-                    // jsonProduct.put("name", p.getNameProduct());
-                    // jsonProduct.put("price", p.getSizePrices().get(0).getPrice());
-                    // jsonProduct.put("image", p.getProductImages().get(0).getUrl()); // Lưu URL hình ảnh
-                    // jsonProduct.put("description", p.getDescription());
-                    // jsonProduct.put("quantity", p.getQuantity());
-                    productContainer.append(productHtml);
-                });
+                // Chèn trực tiếp HTML vào trong phần tử #content
+                productContainer.append(response);
             },
             error: function() {
                 alert("Không thể tải sản phẩm.");
             }
         });
     }
+
 
     function searchProduct(event) {
         if (event) {
