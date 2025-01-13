@@ -151,7 +151,8 @@ public class ProductService {
         Product highestPricedProduct = null;
         Product lowestPricedProduct = null;
         ArrayList<Product> listProductBestSelling = ProductService.getInstance().listProductBestSelling(0);
-
+        ArrayList<SizePrice> list = ProductService.getInstance().getProductSizeByProductIdAndDiameter(1);
+        System.out.println(list);
         for (Product p : listProductBestSelling) {
 
             System.out.println(p);
@@ -223,4 +224,21 @@ public class ProductService {
     public double getPriceByDiameter(int id, int desiredDiameter) {
         return DAOProduct.getPriceByDiameter(id, desiredDiameter);
     }
+    public ArrayList<SizePrice> getProductSizeByProductIdAndDiameter(int id) {
+        return DAOProduct.getProductSizeByProductIdAndDiameter(id);
+    }
+    public String getMinPriceByProductId(int productId) {
+        return DAOProduct.getMinPriceByProductId(productId);
+    }
+
+    public String getMaxPriceByProductId(int productId) {
+        return DAOProduct.getMaxPriceByProductId(productId);
+    }
+
+
+
+    public ArrayList<Integer> getDiametersByProductId(int productId) {
+        return DAOProduct.getDiametersByProductId(productId);
+    }
+
 }

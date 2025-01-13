@@ -36,4 +36,14 @@ public class InvoiceService {
     public int insertInvoiceDetail(OrderDetail idt) {
         return DAOInvoice.insertOrderDetail(idt);
     }
+
+    public  int doanhThu() {
+        return DAOInvoice.doanhThuToday();
+    }
+    public int productBN() {
+        return DAOInvoice.soLuongBan();
+    }
+    public double totalPriceMonth() {
+        return DAOInvoice.tongDoanhThu();
+    }
 }

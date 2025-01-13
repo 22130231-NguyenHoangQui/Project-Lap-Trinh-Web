@@ -6,6 +6,7 @@ import com.edu.hcmuaf.fit.model.SizePrice;
 import com.edu.hcmuaf.fit.util.JDBCUtil;
 
 import java.sql.*;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -541,10 +542,11 @@ public class DAOProduct {
     }
 
     public static void main(String[] args) {
-        Product p = getProductById(1);
-        System.out.println(p);
+//        Product p = getProductById(1);
+//        System.out.println(p);
 
-        System.out.println( getPriceByDiameter(1,16));
+//        System.out.println( getPriceByDiameter(1,16));
+        System.out.println(getProductSizeByProductIdAndDiameter(1));
 
 
     }
@@ -612,5 +614,115 @@ public class DAOProduct {
             throw new RuntimeException(e);
         }
         return re;
+    }
+
+    public static ArrayList<SizePrice> getProductSizeByProductIdAndDiameter(int productId) {
+        ArrayList<SizePrice> re = new ArrayList<>();
+        String query = "SELECT id, diameter, price, height, productId FROM productsizes WHERE productId = ?";
+
+        try (Connection conn = JDBCUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, productId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) { // Sử dụng while thay vì if
+                    // Tạo đối tượng SizePrice từ kết quả truy vấn
+                    SizePrice sizePrice = new SizePrice();
+                    sizePrice.setId(rs.getInt("id")); // Lưu ý sửa lại cột "id"
+                    sizePrice.setDiameter(rs.getInt("diameter"));
+                    sizePrice.setHeight(rs.getInt("height"));
+                    sizePrice.setPrice(rs.getDouble("price"));
+                    sizePrice.setIdProduct(rs.getInt("productId")); // Nếu cần
+                    re.add(sizePrice);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return re;
+    }
+
+    // Hàm lấy danh sách các kích thước của sản phẩm theo IdProduct
+    public static ArrayList<Integer> getDiametersByProductId(int productId) {
+        ArrayList<Integer> diameters = new ArrayList<>();
+        String query = "SELECT diameter FROM productsizes WHERE productId = ?";
+
+        try (Connection conn = JDBCUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, productId); // Đặt tham số cho productId
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    int diameter = rs.getInt("diameter");
+                    // Thêm mỗi kích thước vào danh sách
+                    diameters.add(diameter);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return diameters;
+    }
+
+
+
+    // Phương thức lấy giá min của sản phẩm theo ID
+    public static String getMinPriceByProductId(int productId) {
+        double minPrice = Double.MAX_VALUE; // Khởi tạo giá trị tối đa
+
+        // Câu lệnh SQL để lấy tất cả giá của các kích cỡ liên quan đến sản phẩm
+        String sql = "SELECT price FROM productSizes WHERE productId = ?";
+
+        try (Connection connection = JDBCUtil.getConnection();
+             PreparedStatement pr = connection.prepareStatement(sql)) {
+
+            pr.setInt(1, productId);
+            ResultSet resultSet = pr.executeQuery();
+
+            while (resultSet.next()) {
+                double price = resultSet.getDouble("price");
+
+                if (price < minPrice) {
+                    minPrice = price;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return minPrice == Double.MAX_VALUE ? "0" : formatPrice(minPrice);
+    }
+
+    // Phương thức lấy giá max của sản phẩm theo ID
+    public static String getMaxPriceByProductId(int productId) {
+        double maxPrice = Double.MIN_VALUE; // Khởi tạo giá trị tối thiểu
+
+        // Câu lệnh SQL để lấy tất cả giá của các kích cỡ liên quan đến sản phẩm
+        String sql = "SELECT price FROM productSizes WHERE productId = ?";
+
+        try (Connection connection = JDBCUtil.getConnection();
+             PreparedStatement pr = connection.prepareStatement(sql)) {
+
+            pr.setInt(1, productId);
+            ResultSet resultSet = pr.executeQuery();
+
+            while (resultSet.next()) {
+                double price = resultSet.getDouble("price");
+
+                if (price > maxPrice) {
+                    maxPrice = price;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return maxPrice == Double.MIN_VALUE ? "0" : formatPrice(maxPrice);
+    }
+    // Phương thức định dạng giá sản phẩm
+    public static String formatPrice(double price) {
+        DecimalFormat formatter = new DecimalFormat("#,###");
+        return formatter.format(price);
     }
 }

@@ -90,7 +90,7 @@
 <%--                                    <img width="247" height="296"--%>
 <%--                                         src="${productBest.productImages[0].imageId}"--%>
 <%--                                         alt="" style="width: 100%;">--%>
-    <a href="<%=url%>\DetailProduct?pid=<%=p.getId()%>">
+    <a href="<%=url%>\DetailProduct?pid=<%=p.getId()%>&cid=<%=p.getIdCate()%>">
         <img src="<%=url%>\Products\<%=(p.getProductImages().isEmpty())?"":p.getProductImages().get(0).getUrl()%>" class="card-img-top img_p" alt="...">
     </a>
                                 </div>

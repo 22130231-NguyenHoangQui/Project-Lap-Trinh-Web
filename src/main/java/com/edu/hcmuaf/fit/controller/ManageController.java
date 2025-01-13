@@ -30,20 +30,27 @@ public class ManageController extends HttpServlet {
 //            request.setAttribute("listAllInvoice", listAllInvoice);
 //            ArrayList<Supplier> suplist = SupplierService.getInstance().listAllSupplier();
 //            request.setAttribute("listAllSup", suplist);
-            ArrayList<Category> listCategory = CategoryService.getInstance().getListCategory();
-            request.setAttribute("listCategory", listCategory);
-//            Double getTotalForToday = InvoiceService.getInstance().getTotalRevenueForToday();
-//            request.setAttribute("getTotalForToday", getTotalForToday);
-            ArrayList<Product> listAllProduct = ProductService.getInstance().listProductRandom(0);
-            request.setAttribute("listAllProduct", listAllProduct);
-            ArrayList<Account> listAllAccount = AccountService.getInstance().listAllAccount();
-            request.setAttribute("listAllAccount", listAllAccount);
 
-            try {
-                request.getRequestDispatcher("ManageAdmin.jsp").forward(request, response);
-            } catch (ServletException e) {
-                throw new RuntimeException(e);
-            }
+        ArrayList<Category> listCategory = CategoryService.getInstance().getListCategory();
+        request.setAttribute("listCategory", listCategory);
+        Double getTotalForToday = InvoiceService.getInstance().getTotalRevenueForToday();
+        request.setAttribute("getTotalForToday", getTotalForToday);
+        int getDT = InvoiceService.getInstance().doanhThu();
+        request.setAttribute("getDT", getDT);
+        int productbd = InvoiceService.getInstance().productBN();
+        double monthdt = InvoiceService.getInstance().totalPriceMonth();
+        request.setAttribute("monthdt", monthdt);
+        request.setAttribute("productbd", productbd);
+        ArrayList<Product> listAllProduct = ProductService.getInstance().listProductRandom(0);
+        request.setAttribute("listAllProduct", listAllProduct);
+        ArrayList<Account> listAllAccount = AccountService.getInstance().listAllAccount();
+        request.setAttribute("listAllAccount", listAllAccount);
+
+        try {
+            request.getRequestDispatcher("ManageAdmin.jsp").forward(request, response);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        }
 //        }
     }
 }

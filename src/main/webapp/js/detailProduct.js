@@ -131,59 +131,6 @@ function initializeRatingSystem(starSelector, ratingSelector) {
   });
 }
 initializeRatingSystem(".stars a", "#rating");
-
-
-
-document.addEventListener("DOMContentLoaded", function () {
-  const unitPrice = 250000; // Giá mỗi sản phẩm
-  const priceElement = document.querySelector("#product-price"); // Thẻ hiển thị giá
-  const quantityInput = document.querySelector("#quantity-1"); // Input số lượng
-
-  // Hàm cập nhật giá
-  function updatePrice() {
-    const quantity = parseInt(quantityInput.value) || 1;
-    const totalPrice = unitPrice * quantity;
-    priceElement.textContent = totalPrice.toLocaleString("vi-VN") + "₫";
-  }
-
-  // Hàm xử lý tăng/giảm số lượng
-  function handleQuantityChange(buttonSelector) {
-    const buttons = document.querySelectorAll(buttonSelector);
-
-    buttons.forEach((button) => {
-      button.addEventListener("click", function () {
-        const step = parseInt(quantityInput.getAttribute("step")) || 1;
-        const min = parseInt(quantityInput.getAttribute("min")) || 1;
-        let currentValue = parseInt(quantityInput.value) || 1;
-
-        if (button.classList.contains("input-reduce")) {
-          // Đảm bảo giá trị không nhỏ hơn min
-          currentValue = Math.max(min, currentValue - step);
-        } else if (button.classList.contains("input-increase")) {
-          currentValue += step; // Tăng giá trị
-        }
-
-        quantityInput.value = currentValue;
-        updatePrice(); // Cập nhật giá sau khi thay đổi số lượng
-      });
-    });
-  }
-
-  // Lắng nghe sự kiện thay đổi số lượng trực tiếp từ input
-  quantityInput.addEventListener("input", function () {
-    const currentValue = parseInt(quantityInput.value) || 1;
-    quantityInput.value = Math.max(1, currentValue); // Đảm bảo giá trị không nhỏ hơn 1
-    updatePrice();
-  });
-
-  // Kích hoạt hàm tăng/giảm
-  handleQuantityChange(".is-form");
-
-  // Cập nhật giá ban đầu (nếu cần)
-  updatePrice();
-});
-
-
 /**
  * hàm để click button thì chuyến
  * sang trang shoppingcart

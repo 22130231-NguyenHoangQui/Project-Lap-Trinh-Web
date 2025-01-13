@@ -2,6 +2,8 @@ package com.edu.hcmuaf.fit.controller;
 
 import com.edu.hcmuaf.fit.model.Category;
 import com.edu.hcmuaf.fit.model.Product;
+import com.edu.hcmuaf.fit.model.ProductSizes;
+import com.edu.hcmuaf.fit.model.SizePrice;
 import com.edu.hcmuaf.fit.service.CategoryService;
 import com.edu.hcmuaf.fit.service.ProductService;
 import jakarta.servlet.ServletException;
@@ -10,6 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet(name = "product", value = "/DetailProduct")
 public class ProductController extends HttpServlet {
@@ -20,18 +23,48 @@ public class ProductController extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
 
         String productIdParam = request.getParameter("pid");
-//        String cateIdParam = request.getParameter("cid");
+        String sizeParam = request.getParameter("size");
+        String cateIdParam = request.getParameter("cid");
+
         if (productIdParam != null && !productIdParam.isEmpty()) {
             try {
                 int productId = Integer.parseInt(productIdParam);
-//                int cateId = Integer.parseInt(cateIdParam);
+                int cateId = -1; // Giá trị mặc định khi không có tham số `cid`
+
+                // Kiểm tra xem tham số `cid` có tồn tại không
+                if (cateIdParam != null && !cateIdParam.isEmpty()) {
+                    cateId = Integer.parseInt(cateIdParam);
+                }
+
                 // Gọi ProductService để lấy thông tin sản phẩm từ DB
                 Product product = ProductService.getInstance().getDetailProductById(productId);
-//                Category category = CategoryService.getInstance().getCategoryById(cateId);
+                Category category = null;
+
+                // Nếu có `cateId`, lấy category theo id
+                if (cateId != -1) {
+                    category = CategoryService.getInstance().getCategoryById(cateId);
+                }
+
                 if (product != null) {
-//                    request.setAttribute("category", category);
-                    request.setAttribute("product", product); // Chuyển sản phẩm vào request
-                    request.getRequestDispatcher("detailProduct.jsp").forward(request, response); // Chuyển đến trang chi tiết
+                    // Lấy giá trị min và max của sản phẩm
+                    String minPrice = ProductService.getInstance().getMinPriceByProductId(productId);
+                    String maxPrice = ProductService.getInstance().getMaxPriceByProductId(productId);
+                    ArrayList<Integer> diameters = ProductService.getInstance().getDiametersByProductId(productId);
+                    double price = -1; // Giá mặc định nếu không có kích thước hợp lệ
+                    ArrayList<SizePrice> sizePriceList  = ProductService.getInstance().getProductSizeByProductIdAndDiameter(productId);
+                    SizePrice lowestSizePrice = sizePriceList.isEmpty() ? null : sizePriceList.get(0);
+                    String nameCate = category != null ? category.getName() : "";
+
+                    request.setAttribute("cateName", nameCate);
+                    request.setAttribute("lowestSizePrice", lowestSizePrice);
+                    request.setAttribute("priceSize", sizePriceList);
+                    request.setAttribute("product", product);
+                    request.setAttribute("minPrice", minPrice);
+                    request.setAttribute("maxPrice", maxPrice);
+                    request.setAttribute("diameters", diameters);
+                    request.setAttribute("selectedPrice", price);
+
+                    request.getRequestDispatcher("detailProduct.jsp").forward(request, response);
                 } else {
                     response.sendError(HttpServletResponse.SC_NOT_FOUND, "Sản phẩm không tồn tại"); // Nếu không tìm thấy sản phẩm
                 }

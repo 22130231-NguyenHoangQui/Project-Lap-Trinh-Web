@@ -79,7 +79,7 @@ public class DAOCategory {
     public static Category getCategoryById(int id) {
         Category category = null;
         Connection connection = JDBCUtil.getConnection();
-        String sql = "Select id, name from categories where id =?";
+        String sql = "Select id, categoryName from categories where id =?";
         try {
             PreparedStatement pr = connection.prepareStatement(sql);
             pr.setInt(1, id);

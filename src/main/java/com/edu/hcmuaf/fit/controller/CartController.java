@@ -23,6 +23,7 @@ import java.io.IOException;
             int idProduct = Integer.parseInt(idProductText);
             String quantityText = request.getParameter("quantity");
             int quantity = Integer.parseInt(quantityText);
+            String size = request.getParameter("size");
             Cart c = (Cart) session.getAttribute("Cart");
             if(c == null) c= new Cart();
             if (c.get(idProduct) != null) {

@@ -118,7 +118,7 @@
                                 <div class="card shadow-sm">
                                     <div class="card-body">
                                         <h5 class="card-title">Đơn hàng hôm nay</h5>
-                                        <p id="orders-today" class="card-text text-primary fs-4">0</p>
+                                        <p id="orders-today" class="card-text text-primary fs-4"><%=request.getAttribute("getDT")%></p>
                                     </div>
                                 </div>
                             </div>
@@ -126,7 +126,7 @@
                                 <div class="card shadow-sm">
                                     <div class="card-body">
                                         <h5 class="card-title">Doanh thu hôm nay</h5>
-                                        <p id="revenue-today" class="card-text text-success fs-4">0 VND</p>
+                                        <p id="revenue-today" class="card-text text-success fs-4"><%=request.getAttribute("getTotalForToday")%></p>
                                     </div>
                                 </div>
                             </div>
@@ -134,7 +134,7 @@
                                 <div class="card shadow-sm">
                                     <div class="card-body">
                                         <h5 class="card-title">Sản phẩm bán được</h5>
-                                        <p id="products-sold" class="card-text text-info fs-4">0</p>
+                                        <p id="products-sold" class="card-text text-info fs-4"><%= request.getAttribute("productbd")%></p>
                                     </div>
                                 </div>
                             </div>
@@ -142,7 +142,7 @@
                                 <div class="card shadow-sm">
                                     <div class="card-body">
                                         <h5 class="card-title">Tổng doanh thu tháng</h5>
-                                        <p id="monthly-revenue" class="card-text text-warning fs-4">0 VND</p>
+                                        <p id="monthly-revenue" class="card-text text-warning fs-4"><%=request.getAttribute("monthdt")%></p>
                                     </div>
                                 </div>
                             </div>
@@ -248,18 +248,18 @@
                                 </td>
                                 <td><%=a.getEmail()%>
                                 </td>
-                                <%if (a.getRole() == 0) {%>
-                                <td>Admin</td>
-                                <% } else if (a.getRole() == 1) {%>
-                                <td>User</td>
-                                <%}%>
-                                <%if (a.getVerifyAccount().isStateVerify()) {%>
-                                <td>Đã xác thực</td>
-                                <%
-                                } else {
-                                %>
-                                <td>Chưa xác thực</td>
-                                <%}%>
+<%--                                <%if (a.getRole() == 0) {%>--%>
+<%--                                <td>Admin</td>--%>
+<%--                                <% } else if (a.getRole() == 1) {%>--%>
+<%--                                <td>User</td>--%>
+<%--                                <%}%>--%>
+<%--                                <%if (a.getVerifyAccount().isStateVerify()) {%>--%>
+<%--                                <td>Đã xác thực</td>--%>
+<%--                                <%--%>
+<%--                                } else {--%>
+<%--                                %>--%>
+<%--                                <td>Chưa xác thực</td>--%>
+<%--                                <%}%>--%>
                                 <%if (a.isStatus()) {%>
                                 <td>Hoạt động</td>
                                 <% } else {%>

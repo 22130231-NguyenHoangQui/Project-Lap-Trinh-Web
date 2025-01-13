@@ -38,7 +38,11 @@
         <div class="table-responsive">
             <table class="table table-bordered align-middle">
                 <thead class="table">
-
+                <%
+                    String errQuantity = (String) request.getAttribute("errQuantity");
+                    errQuantity = (errQuantity == null) ? "" : errQuantity;
+                %>
+                <p class="mb-0 mt-4 text-danger text-center"><%=errQuantity%></p>
                     <tr>
                         <th>Sản phẩm</th>
                         <th>Chi tiết</th>
