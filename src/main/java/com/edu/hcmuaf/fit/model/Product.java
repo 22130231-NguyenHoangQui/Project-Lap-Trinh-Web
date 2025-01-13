@@ -23,6 +23,7 @@ public class Product {
     private ArrayList<ProductImages> productImages;
     private ArrayList<SizePrice> sizePrices;
     private boolean status;
+    private int quatityOrder;
 
     public Product(int id, int idCate, String nameProduct, int quantity, String description, Date created_at, Date updated_at, ArrayList<ProductImages> productImages, ArrayList<SizePrice> sizePrices, boolean status) {
         this.id = id;
@@ -69,6 +70,14 @@ public class Product {
 
     public Product() {
 
+    }
+
+    public int getQuatityOrder() {
+        return quatityOrder;
+    }
+
+    public void setQuatityOrder(int quatityOrder) {
+        this.quatityOrder = quatityOrder;
     }
 
     @Override
@@ -166,4 +175,14 @@ public class Product {
     public void setStatus(boolean status) {
         this.status = status;
     }
+
+
+    public void quantityUp() {
+        this.quantity++;
+    }
+
+    public void quantityUp(int quantity) {
+        setQuantity(quantity);
+    }
+
 }

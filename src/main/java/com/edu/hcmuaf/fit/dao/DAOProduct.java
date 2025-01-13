@@ -171,26 +171,29 @@ public class DAOProduct {
         ArrayList<Product> re = new ArrayList<>();
         Connection connection = JDBCUtil.getConnection();
         try {
-            String sql = "SELECT p.product_id,ca.category_id,p.name_product,p.quantity,p.diameter,p.price,p.height,p.description\n" +
-                    "FROM product as p\n" +
-                    "JOIN categoryproduct capo ON p.product_id = capo.product_id\n" +
-                    "JOIN category ca ON capo.category_id = ca.category_id\n" +
-                    "WHERE ca.category_id = ?\n" +
+            // Sửa lại câu SQL phù hợp với cấu trúc bảng mới
+            String sql = "SELECT p.id, p.productName, p.quantity, p.description, p.createdAt, p.updatedAt " +
+                    "FROM products AS p " +
+                    "JOIN categories AS ca ON p.categoryId = ca.id " +
+                    "WHERE ca.id = ? " +
                     "LIMIT 6 OFFSET ?";
             PreparedStatement pr = connection.prepareStatement(sql);
-            pr.setInt(1, id);
-            pr.setInt(2, offset);
+            pr.setInt(1, id); // Truyền vào categoryId
+            pr.setInt(2, offset); // Truyền vào offset để phân trang
             ResultSet resultSet = pr.executeQuery();
             while (resultSet.next()) {
-                int product_id = resultSet.getInt("product_id");
-                int category = resultSet.getInt("category_id");
-                String name = resultSet.getString("name_product");
-                int price = resultSet.getInt("price");
+                int product_id = resultSet.getInt("id"); // Lấy id sản phẩm
+                String productName = resultSet.getString("productName"); // Lấy tên sản phẩm
+                int quantity = resultSet.getInt("quantity"); // Lấy số lượng
+                String description = resultSet.getString("description"); // Lấy mô tả
+                // Các trường khác như createdAt và updatedAt nếu cần cũng có thể lấy thêm
+
                 Product product = new Product();
-                product.setNameProduct(name);
-                product.setId(product_id);
-//                product.setPrice(price);
-//                product.getCategoryId();
+                product.setId(product_id); // Set id sản phẩm
+                product.setNameProduct(productName); // Set tên sản phẩm
+                product.setQuantity(quantity); // Set số lượng
+                product.setDescription(description); // Set mô tả
+
                 re.add(product);
             }
             JDBCUtil.closeConnection(connection);
@@ -198,7 +201,6 @@ public class DAOProduct {
             throw new RuntimeException(e);
         }
         return re;
-
     }
 
     // load 12 sản phẩm ngẫu nhiên
@@ -206,7 +208,7 @@ public class DAOProduct {
         ArrayList<Product> re = new ArrayList<>();
         Connection connection = JDBCUtil.getConnection();
         try {
-            String sql = "SELECT * FROM Products  ORDER BY RAND() LIMIT 10";
+            String sql = "SELECT * FROM Products  ORDER BY RAND() LIMIT 12";
             PreparedStatement pr = connection.prepareStatement(sql);
             ResultSet resultSet = pr.executeQuery();
             while (resultSet.next()) {
@@ -234,12 +236,11 @@ public class DAOProduct {
         ArrayList<Product> re = new ArrayList<>();
         Connection connection = JDBCUtil.getConnection();
         String[] tuKhoa = nameProduct.split("\\s+");
-        StringBuilder sqlbuilder = new StringBuilder("SELECT p.product_id, p.name_product, p.price, p.quantity, p.description, pi.image_url\n" +
-                "FROM Product p\n" +
-                "JOIN ProductImages pi ON p.product_id = pi.product_id\n" +
+        StringBuilder sqlbuilder = new StringBuilder("SELECT p.id, p.productName, p.quantity, p.description\n" +
+                "FROM Products p\n" +
                 "WHERE");
         for (int i = 0; i < tuKhoa.length; i++) {
-            sqlbuilder.append(" p.name_product COLLATE utf8mb4_general_ci LIKE ?");
+            sqlbuilder.append(" p.productName COLLATE utf8mb4_general_ci LIKE ?");
             if (i < tuKhoa.length - 1) {
                 sqlbuilder.append(" AND");
             }
@@ -251,9 +252,9 @@ public class DAOProduct {
             }
             ResultSet resultSet = pr.executeQuery();
             while (resultSet.next()) {
-                int product_id = resultSet.getInt("product_id");
-                String name = resultSet.getString("name_product");
-                int price = resultSet.getInt("price");
+                int product_id = resultSet.getInt("id");
+                String name = resultSet.getString("productName");
+//                int price = resultSet.getInt("price");
                 Product product = new Product();
                 product.setNameProduct(name);
                 product.setId(product_id);
@@ -567,5 +568,10 @@ public class DAOProduct {
         }
         JDBCUtil.closeConnection(connection);
         return re;
+    }
+
+
+    public static String getCategoriesByProductId(int productId) {
+        return null;
     }
 }

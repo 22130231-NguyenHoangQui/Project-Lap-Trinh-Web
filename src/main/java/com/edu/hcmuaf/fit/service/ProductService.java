@@ -3,6 +3,7 @@ package com.edu.hcmuaf.fit.service;
 import com.edu.hcmuaf.fit.dao.DAOProduct;
 import com.edu.hcmuaf.fit.model.Product;
 import com.edu.hcmuaf.fit.model.ProductImages;
+import com.edu.hcmuaf.fit.model.ProductSizes;
 import com.edu.hcmuaf.fit.model.SizePrice;
 
 import java.sql.SQLException;
@@ -83,10 +84,12 @@ public class ProductService {
     public static ArrayList<Product> listProductByIdCate(int id, int offset) {
         ArrayList<Product> listProduct = DAOProduct.listProductByIdCate(id, offset);
         ArrayList<ProductImages> listImageOfProduct = null;
+        ArrayList<SizePrice> listSizeOfProduct = null;
         for (Product p : listProduct) {
             listImageOfProduct = DAOProduct.listImageOfProduct(p);
             p.setProductImages(listImageOfProduct);
-
+            listSizeOfProduct = DAOProduct.listPriceOfProduct(p.getId());
+            p.setSizePrices(listSizeOfProduct);
         }
         return listProduct;
     }
@@ -95,9 +98,12 @@ public class ProductService {
     public static ArrayList<Product> listProductByName(String name) {
         ArrayList<Product> listProduct = DAOProduct.listProductByName(name);
         ArrayList<ProductImages> listImageOfProduct = null;
+        ArrayList<SizePrice> listSizeOfProduct = null;
         for (Product p : listProduct) {
             listImageOfProduct = DAOProduct.listImageOfProduct(p);
             p.setProductImages(listImageOfProduct);
+            listSizeOfProduct = DAOProduct.listPriceOfProduct(p.getId());
+            p.setSizePrices(listSizeOfProduct);
         }
         return listProduct;
     }
@@ -189,5 +195,24 @@ public class ProductService {
 
     public int delProduct(int id) {
         return DAOProduct.delProduct(id);
+    }
+
+    // Phương thức lấy sản phẩm theo ID
+    public static Product getDetailProductById(int productId) {
+        Product product = DAOProduct.getProductById(productId); // Giả sử DAOProduct có phương thức này
+        if (product != null) {
+            // Lấy thông tin hình ảnh của sản phẩm
+            ArrayList<ProductImages> getImagesByProductId = DAOProduct.getImagesByProductId(productId);
+            product.setProductImages(getImagesByProductId);
+
+            // Lấy thông tin kích cỡ của sản phẩm
+            ArrayList<SizePrice> listSizeOfProduct = DAOProduct.listPriceOfProduct(productId);
+            product.setSizePrices(listSizeOfProduct);
+        }
+        return product;
+    }
+
+    public String getCategoriesByProductId(int productId) {
+        return DAOProduct.getCategoriesByProductId(productId);
     }
 }

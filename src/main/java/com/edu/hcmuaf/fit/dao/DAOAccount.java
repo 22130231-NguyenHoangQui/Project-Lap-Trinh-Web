@@ -84,7 +84,7 @@ public class DAOAccount {
     public static int registerAccount(Account a) {
         int re = 0;
         Connection connection = JDBCUtil.getConnection();
-        String sql = "insert into accounts(name, userName, password, gender, phoneNumber, birthDay, address,addressReceive, email,role,status) values(?,?,?,?,?,?,?,?,?,1,0)";
+        String sql = "insert into accounts(name, userName, password, gender, phoneNumber, birthDay, address,addressReceive, email,role,status) values(?,?,?,?,?,?,?,?,?,1,1)";
         try {
             PreparedStatement pr = connection.prepareStatement(sql);
             pr.setString(1, a.getName());
