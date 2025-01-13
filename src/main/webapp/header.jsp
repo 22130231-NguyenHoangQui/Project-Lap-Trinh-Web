@@ -11,7 +11,8 @@
 <body>
 
 <%  String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath(); %>
-<%  Cart cart = (Cart) session.getAttribute("Cart");
+
+    Cart cart = (Cart) session.getAttribute("Cart");
     int qtt = (cart != null) ? cart.list().size() : 0;
     String quantityItem = qtt + "";
     if (qtt > 99) quantityItem = "99+";
@@ -124,9 +125,10 @@
                                    name="search"
                                    style="width: 100%; padding-right: 40px; padding-left: 10px; font-size: 16px; height: 33px;">
                             <button type="submit" style="all: unset; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"
-                                    data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
-                                    aria-controls="navbarTogglerDemo01" aria-expanded="false"
-                                    aria-label="Toggle navigation">
+
+                                        data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
+                                        aria-controls="navbarTogglerDemo01" aria-expanded="false"
+
                                 <i class="fa-solid fa-magnifying-glass" style="color: gray; font-size: 16px;"></i>
                             </button>
                         </form>

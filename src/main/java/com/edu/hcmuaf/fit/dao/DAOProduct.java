@@ -578,6 +578,7 @@ public class DAOProduct {
     public static String getCategoriesByProductId(int productId) {
         return null;
     }
+
     public static int getPriceByDiameter(int productId, int diameter) {
         int price = 0; // Đổi kiểu trả về thành int
         String query = "SELECT price FROM productsizes WHERE productId = ? AND diameter = ?";
@@ -613,4 +614,5 @@ public class DAOProduct {
         }
         return re;
     }
+
 }
