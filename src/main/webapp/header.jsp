@@ -162,9 +162,9 @@
                                             %>
                                             <li class="dropdown-item">Xin chào: <span class="fw-bold name"><%=account.getName()%></span></li>
                                             <li><hr class="dropdown-divider"></li>
-                                            <li><a class="dropdown-item" href="<%=url%>/manage">Quản lý</a></li>
+                                            <li><a class="dropdown-item" href="<%=url%>/manageAdmin">Quản lý</a></li>
                                             <li><hr class="dropdown-divider"></li>
-                                            <li><a class="dropdown-item" href="<%=url%>/changeInformation.jsp">Thay đổi thông tin</a></li>
+                                            <li><a class="dropdown-item" href="<%=url%>/changeInformation">Thay đổi thông tin</a></li>
                                             <li><hr class="dropdown-divider"></li>
                                             <li><a class="dropdown-item" href="<%=url%>/changePassword">Đổi mật khẩu</a></li>
                                             <li><hr class="dropdown-divider"></li>

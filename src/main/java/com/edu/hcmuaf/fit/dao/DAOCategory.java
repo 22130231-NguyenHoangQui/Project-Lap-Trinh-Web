@@ -70,7 +70,7 @@ public class DAOCategory {
     }
 
     public static void main(String[] args) {
-        ArrayList<Category> list1 = listCategory();
+        ArrayList<Category> list1 = listCategory(0);
         for (Category category : list1) {
             System.out.println(category);
         }
@@ -156,4 +156,5 @@ public class DAOCategory {
         }
         return re;
     }
+
 }

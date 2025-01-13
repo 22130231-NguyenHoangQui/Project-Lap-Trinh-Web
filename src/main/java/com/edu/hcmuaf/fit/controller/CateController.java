@@ -11,7 +11,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
-@WebServlet(name = "CateControllerServlet", value = "/CateController-servlet")
+@WebServlet(name = "cate", value = "/cate")
 public class CateController extends HttpServlet {
      public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setCharacterEncoding("UTF-8");
@@ -24,8 +24,8 @@ public class CateController extends HttpServlet {
         ArrayList<Category> listCate = CategoryService.getInstance().getListCategory();
         request.setAttribute("listCate", listCate);
 //        load sản phẩm ngẫu nhiên nếu vô trang danh mục
-//        ArrayList<Product> listProduct = ProductService.getInstance().listProductRandom(0);
-//        request.setAttribute("listProductRandom", listProduct);
+        ArrayList<Product> listProduct = ProductService.getInstance().listProductRandom(0);
+        request.setAttribute("listProductRandom", listProduct);
 
          // Tìm sản phẩm có giá cao nhất và thấp nhất
 //         Product highestPricedProduct = null;

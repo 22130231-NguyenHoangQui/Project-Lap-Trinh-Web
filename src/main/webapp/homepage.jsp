@@ -28,7 +28,7 @@
     String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
 %>
 <header>
-    <jsp:include page="Products/header.jsp"></jsp:include>
+    <jsp:include page="header.jsp"></jsp:include>
 </header>
 <div style="height: 389.469px; touch-action: pan-y;">
     <img width="1020" height="388" src="../image/imghomepage/logo/banhsinhnhat-home-banner.jpg" alt=""
@@ -90,7 +90,7 @@
 <%--                                    <img width="247" height="296"--%>
 <%--                                         src="${productBest.productImages[0].imageId}"--%>
 <%--                                         alt="" style="width: 100%;">--%>
-    <a href="<%=url%>/detail-product?pid=<%=p.getId()%>&cid=<%=p.getIdCate()%>">
+    <a href="<%=url%>\DetailProduct?pid=<%=p.getId()%>">
         <img src="<%=url%>\Products\<%=(p.getProductImages().isEmpty())?"":p.getProductImages().get(0).getUrl()%>" class="card-img-top img_p" alt="...">
     </a>
                                 </div>
@@ -126,7 +126,7 @@
                         <div class="product-small box" style="border: 1px solid #e5e5e5;">
                             <a href="" style="margin-left: auto; margin-right: auto;">
                                 <div class="box-image">
-                                    <a href="<%=url%>/detail-product?pid=<%=p.getId()%>&cid=<%=p.getIdCate()%>">
+                                    <a href="<%=url%>/DetailProduct?pid=<%=p.getId()%>&cid=<%=p.getIdCate()%>">
                                         <img src="<%=url%>\Products\<%=(p.getProductImages().isEmpty())?"":p.getProductImages().get(0).getUrl()%>" class="card-img-top img_p" alt="...">
                                     </a>
                                 </div>

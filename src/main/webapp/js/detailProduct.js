@@ -83,7 +83,7 @@ function addToCart() {
   localStorage.setItem('cart', JSON.stringify(productsInCart));
 
   // Chuyển hướng tới trang giỏ hàng
-  window.location.href = '../pages/shoppingCart.html';
+  window.location.href = '../Cart.jsp';
 }
 function ToPayment(){  
   window.location.href = "../pages/payment.html"; 
@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const cartButton = document.getElementById("cart-button");
 
   cartButton.addEventListener("click", function () {
-      window.location.href = "shoppingCart.html"; 
+      window.location.href = "Cart.jsp";
   });
 });
 

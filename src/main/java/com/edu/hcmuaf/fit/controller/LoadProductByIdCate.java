@@ -1,64 +1,49 @@
-package com.edu.hcmuaf.fit.controller;import java.io.*;
-import java.text.NumberFormat;
-import java.util.ArrayList;
+package com.edu.hcmuaf.fit.controller;
 
 import com.edu.hcmuaf.fit.model.Product;
 import com.edu.hcmuaf.fit.service.ProductService;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
+import java.io.*;
+import java.util.ArrayList;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 @WebServlet(name = "LoadProductByIdCate", value = "/LoadProductByIdCate")
 public class LoadProductByIdCate extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        // Đặt mã hóa UTF-8 cho request và response
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html");
+        response.setContentType("application/json"); // Đổi content type thành JSON
+
+        // Lấy tham số categoryId từ request
         String cid = request.getParameter("cid");
         ArrayList<Product> productsCate = ProductService.listProductByIdCate(Integer.parseInt(cid), 0);
-        String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
-        PrintWriter out = response.getWriter();
-        NumberFormat nf = NumberFormat.getCurrencyInstance();
-        for (Product p : productsCate) {
+        System.out.println(productsCate);
+        // Tạo JSONArray để chứa danh sách sản phẩm
+        JSONArray jsonArray = new JSONArray();
 
-            out.println(" <div class=\"col\">\n" +
-                    "    <div class=\"col-inner\">\n" +
-                    "        <div class=\"product-small box\">\n" +
-                    "            <div class=\"box-image\">\n" +
-                    "                <a href=\"#\" class=\"product-link\" onclick=\"saveProductData('${productData}')\">\n" +
-                    "                    <img width=\"247\" height=\"296\" src=\"${product.image}\" alt=\"${product.name}\">\n" +
-                    "                </a>\n" +
-                    "            </div>\n" +
-                    "            <div class=\"box-text text-center\">\n" +
-                    "                <div class=\"title-wrapper\">\n" +
-                    "                    <p>\n" +
-                    "                        <a href=\"#\" > p.getNameProduct()</a>\n" +
-                    "                    </p>\n" +
-                    "                </div>\n" +
-                    "                <div class=\"price-wrapper\">\n" +
-                    "                    <span class=\"price\">\n" +
-                    "                        <span class=\"woocommerce-Price-amount amount\">\n" +
-                    "                            <bdi style=\"font-weight: bold;\">p.getPrice()</bdi>\n" +
-                    "                        </span>\n" +
-                    "                    </span>\n" +
-                    "                </div>\n" +
-                    "                <div class=\"add-to-cart-button\">\n" +
-                    "                    <a href=\"#\" onclick=\"saveProductData('${productData}')\">THÊM VÀO GIỎ</a>\n" +
-                    "                </div>\n" +
-                    "                <div class=\"product-description\" style=\"display:none;\">\n" +
-                    "                    <span class=\"description-id\">Mã: <span class=\"sku\">${product.id}</span></span>\n" +
-                    "                    <span class=\"description-content\">Mô tả: <br>${product.description}</span>\n" +
-                    "                </div>\n" +
-                    "                 <div class=\"size-wrapper\" style=\"display:none;\">\n" +
-                    "                    <p ><strong>Đường kính:</strong> ${product.diameter}</p> <!-- Hiển thị đường kính -->\n" +
-                    "                    <p><strong>Chiều cao:</strong> ${product.height}</p> <!-- Hiển thị chiều cao -->\n" +
-                    "                </div>\n" +
-                    "            </div>\n" +
-                    "        </div>\n" +
-                    "    </div>\n" +
-                    "</div>");
+        // Duyệt qua danh sách sản phẩm và thêm vào JSON array
+        for (Product p : productsCate) {
+            JSONObject jsonProduct = new JSONObject();
+            jsonProduct.put("id", p.getId());
+            jsonProduct.put("name", p.getNameProduct());
+            jsonProduct.put("price", p.getSizePrices().get(0).getPrice());
+            jsonProduct.put("image", p.getProductImages().get(0).getUrl()); // Lưu URL hình ảnh
+            jsonProduct.put("description", p.getDescription());
+            jsonProduct.put("quantity", p.getQuantity());
+
+            // Thêm sản phẩm vào mảng JSON
+            jsonArray.put(jsonProduct);
         }
 
+        // Trả về JSON
+        PrintWriter out = response.getWriter();
+        out.print(jsonArray.toString());
+        out.flush();
     }
 
     public void destroy() {

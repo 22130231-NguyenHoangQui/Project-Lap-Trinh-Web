@@ -18,9 +18,21 @@ public class CategoryService  {
         return instance;
     }
 //    load danh mục bán chạy nhất
-    public ArrayList<Category> getListCategory(int offset) {
+    public static ArrayList<Category> getListCategory(int offset) {
         ArrayList<Category> result = DAOCategory.listCategory(offset);
         return result;
+
+    }
+
+    public static void main(String[] args) {
+//        getInstance().getListCategory(0);
+//        for (Category category : getInstance().getListCategory(0)) {
+//            System.out.println(category);
+//        }
+        getInstance().getListCategory();
+        for (Category category : getInstance().getListCategory()) {
+            System.out.println(category);
+        }
 
     }
 //    load all danh mục

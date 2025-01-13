@@ -1,17 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page import="com.edu.hcmuaf.fit.model.Product" %>
-<%@ page import="com.edu.hcmuaf.fit.model.ProductImages" %>
-<%@ page import="com.edu.hcmuaf.fit.model.ProductSizes" %>
+
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="com.edu.hcmuaf.fit.model.Cart" %>
+<%@ page import="com.edu.hcmuaf.fit.model.Product" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chi Tiết Sản Phẩm</title>
+    <title>chi tiết sản phẩm</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -95,8 +94,11 @@
 
 <body>
 <header>
+
     <jsp:include page="header.jsp"></jsp:include>
 </header>
+
+
 <div class="is-medium">
     <div class="container"></div>
 </div>
@@ -104,11 +106,12 @@
     <%
         String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
                 + request.getContextPath();
+    %>
+    <%
 
         NumberFormat nF = NumberFormat.getCurrencyInstance();
         Cart cart = (Cart) session.getAttribute("Cart");
         Product product = (Product) request.getAttribute("product");
-
         if (product != null) {
     %>
     <div class="container">
@@ -122,31 +125,51 @@
                                  style="flex-direction: column; opacity: 1; justify-content: center; padding-bottom: 30px;">
                                 <div class="pr-image d-flex"
                                      style=" justify-content: center; width: 100%; height: 100%; padding: 15px; border: 1px solid #e5e5e5; ">
-                                    <c:if test="${not empty product.productImages}">
-                                        <img class="product-image" id="product-img"
-                                             src="${product.productImages[0].url}"
-                                             alt="Ảnh sản phẩm" style="width: 100%; height: 80%;">
-                                    </c:if>
+
+
+                                    <img class="product-image" id="product-img"
+                                         src="..\image\imghomepage\product\product_danhmuc\theo_danh_muc\banh_bento\BBT03.png"
+                                         alt="Bánh 1" style="width: 100%; height: 80%;">
+
+
+
                                 </div>
                                 <div class="thumbnail-images d-flex">
                                     <span class="arrow-left">&#8592;</span>
-                                    <%-- Lặp qua danh sách ảnh của sản phẩm --%>
-                                    <c:forEach var="imageUrl" items="${product.allProductImages}">
-                                        <img class="thumbnail" src="${imageUrl}" alt="Ảnh sản phẩm">
-                                    </c:forEach>
+                                    <img class="thumbnail"
+                                         src="image/image_demo.jpg"
+                                         alt="Bánh 1">
+                                    <img class="thumbnail"
+                                         src="image/image_demo1.jpg"
+                                         alt="Bánh 2">
+                                    <img class="thumbnail"
+                                         src="image/image_demo2.jpg"
+                                         alt="Bánh 3">
+                                    <img class="thumbnail"
+                                         src="image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_bento/BBT04.png"
+                                         alt="Bánh 4">
+                                    <img class="thumbnail"
+                                         src="image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_bento/BBT04.png"
+                                         alt="Bánh 4">
+                                    <img class="thumbnail"
+                                         src="image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_bento/BBT04.png"
+                                         alt="Bánh 4">
+                                    <img class="thumbnail"
+                                         src="image/imghomepage/product/product_danhmuc/theo_danh_muc/banh_bento/BBT04.png"
+                                         alt="Bánh 4">
                                     <span class="arrow-right">&#8594;</span>
                                 </div>
                             </div>
                         </div>
                         <div class="pr-right-contai col">
-                            <h1 class="product-title" id="product-title"><%= product.getNameProduct() %>
-                            </h1>
+                            <h1 class="product-title" id="product-title">BHQ156 - Bánh Xoài Chanh Leo</h1>
                             <div class="is-divider"></div>
                             <div class="price-wrapper">
                                 <p class="product-page-price ">
-                                    <span class="price-amount"><bdi>${product.getFormattedPrice(product.minPrice)}<span
-                                            class="price-symbol">₫</span>-<bdi>${product.getFormattedPrice(product.maxPrice)}<span
-                                            class="price-symbol">₫</span></bdi></span>
+                                        <span class="price-amount"><bdi>250.000<span
+                                                class="price-symbol">₫</span></bdi></span> – <span
+                                        class="price-amount"><bdi>500.000<span
+                                        class="price-symbol">₫</span></bdi></span>
                                 </p>
                             </div>
                             <form class="variations-form" action="#">
@@ -188,12 +211,24 @@
                                                    data-target="#quantity-1">
                                         </div>
                                         <div class="btn-add-contai">
-                                            <button class="btn-add cart" type="button" onclick="addToCart()"
-                                                    style="border-radius: 10px;">
+                                            <%
+                                                int quantity = 1;
+                                                if (cart != null) {
+                                                    if (cart.get(product.getId()) != null) {
+                                                        quantity = cart.get(product.getId()).getQuantity() + 1;
+                                                    }
+                                                } else {
+                                                    quantity = product.getQuantity();
+                                                }
+                                            %>
+                                            <a href="<%=url%>/cartController?id=<%=product.getId()%>&quantity=<%=quantity%>">
+
+                                            <button class="btn-add cart" type="button"  style="border-radius: 10px;">
                                                 THÊM VÀO GIỎ HÀNG
                                             </button>
-                                            <button class="btn-add payment" type="button" onclick="ToPayment()"
-                                                    style="border-radius: 10px;">
+                                            </a>
+
+                                            <button class="btn-add payment" type="button" onclick="ToPayment()"style="border-radius: 10px;">
                                                 <a href="pages/payment.html">MUA NGAY</a>
                                             </button>
                                             <input type="hidden" name="gtm4wp_id" value="29736">
@@ -236,16 +271,14 @@
                     </div>
                     <div class="container mt-3"
                          style="padding-top: 30px; border: 1px solid #e5e5e5;  width: auto;">
-                        <ul class="d-flex nav nav-mtdg">
-                            <li style="margin-right: 0;"><a href="#" class="tab-link active" data-tab="description">Mô
-                                Tả</a></li>
-                            <li style="margin-right: 0;"><a href="#" class="tab-link" data-tab="review">Đánh Giá</a>
-                            </li>
+                        <ul class="d-flex nav nav-mtdg" >
+                            <li style="margin-right: 0;"><a href="#" class="tab-link active" data-tab="description">Mô Tả</a></li>
+                            <li style="margin-right: 0;"><a href="#" class="tab-link" data-tab="review">Đánh Giá</a></li>
                         </ul>
                         <div id="description" class="content active">
 
 
-                            <h1 style="text-align: center;"><strong></strong></h1>
+                            <h1 style="text-align: center;"><strong>Bánh Tiramisu Dâu Tây</strong></h1>
                             <p>Bánh Tiramisu Dâu Tây vẽ hình bầu trời xanh với những đám mây trắng và cồng vồng sặc
                                 sỡ.</p>
                             <p>Thông tin chi tiết ảnh mẫu:<br>- Bánh cốt vani, kem tươi, trang trí cầu vồng.<br></p>
@@ -277,8 +310,7 @@
                             <h4><strong>Nhận diện bánh thương hiệu IT CAKE</strong></h4>
                             <ul>
                                 <li>Bánh đi kèm hộp có tên, địa chỉ, sđt của công ty được in trên vỏ hộp, đế bánh có
-                                    dán logo IT CAKE màu vàng
-                                </li>
+                                    dán logo IT CAKE màu vàng</li>
                                 <li>Đồ tặng kèm theo bánh sinh nhật gồm: Dao cắt bánh + Nến sinh nhật + Thìa + Đĩa
                                 </li>
                                 <li>IT CAKE nhận chuyển bánh tận nhà, chi phí tính tùy theo độ xa gần</li>
@@ -316,6 +348,7 @@
                         </div>
 
 
+
                         <div class="pr-footer-contai content" id="review">
                             <div class="panels" style="width: 100%;">
                                 <div class="panel-reviews" id="tab-reviews" role="tabpanel"
@@ -331,7 +364,7 @@
                                                 <div class="comment-respond" id="respond">
                                                     <h3 class="comment-reply-title" id="reply-title">Hãy là người
                                                         đầu
-                                                        tiên nhận xét “TRMS4 – Bánh Tiramisu Dâu Tây”
+                                                        tiên nhận xét “TRMS4  – Bánh Tiramisu Dâu Tây”
                                                         <small><a rel="nofollow" id="cancel-comment-reply-link"
                                                                   href="#" style="display:none;">Hủy</a>
                                                         </small>
@@ -430,20 +463,15 @@
                     </div>
 
 
+
+
                 </div>
             </div>
         </div>
     </div>
+
+    <%}%>
 </main>
-} else {
-%>
-<!-- Thông báo khi không tìm thấy sản phẩm -->
-<div>
-    <p>Không tìm thấy sản phẩm nào!</p>
-</div>
-<%
-    }
-%>
 <footer>
     <div class="footer-top">
         <div class="ft-uniform">
@@ -485,7 +513,11 @@
             <h6>CHÍNH SÁCH</h6>
             <div class="is-divider"></div>
             <ul class="ft-policy">
+                <<<<<<< HEAD:src/main/webapp/detailProduct.jsp
                 <li><a href="pages/deliveryPolicy.html">Chính sách đổi, trả,hoàn tiền</a></li>
+                =======
+                <li><a href="../deliveryPolicy.jsp">Chính sách đổi, trả,hoàn tiền</a></li>
+                >>>>>>> 6181b2c9d6d968f986c0cbcfdb23836ece1daac3:src/main/webapp/pages/detailProduct.html
                 <li><a href="/pages/chinh-sach-giao-dich-thanh-toan">Chính sách bảo mật</a></li>
                 <li><a href="/pages/chinh-sach-doi-tra">Hướng dẫn thanh toán</a></li>
             </ul>
