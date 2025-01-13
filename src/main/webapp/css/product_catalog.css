@@ -1,0 +1,372 @@
+
+/* =================
+    is-medium và overlay
+    =========== */
+
+    
+    .is-medium {
+        font-size: 16px;
+        color: white;
+        font-weight: 550;
+        text-decoration: none;
+        background-color: #5ea8f3;
+        padding: 10px 10px;
+        }
+    
+    .is-medium .divider {
+        color: white;
+        margin: 0 5px;
+    }
+    
+    .is-medium a {
+        text-decoration: none;
+        color: white;
+    }
+    
+    .is-medium a:hover {
+        text-decoration: underline;
+    }
+    
+
+
+/* =====================================
+   Title Page Styles
+===================================== */
+/* some */
+.fill {
+    height: 100%;
+    left: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+}
+
+
+.featured-title {
+
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+
+}
+
+.breadcrumbs {
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: 0;
+    padding: 0;
+}
+
+.uppercase {
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+.orderby {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding-left: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    opacity: 1;
+}
+
+option {
+    font-weight: normal;
+    display: block;
+    padding-block-start: 0px;
+    padding-block-end: 1px;
+    min-block-size: 1.2em;
+    padding-inline: 2px;
+    white-space: nowrap;
+}
+
+.dark .form-flat .select {
+
+    border-color: hsla(0, 0%, 100%, .09);
+}
+
+.woocommerce-ordering,
+.woocommerce-ordering select {
+    display: inline-block;
+    margin: 5px 0;
+}
+
+.form-flat input:not([type=submit]),
+.form-flat select,
+.form-flat textarea {
+    background-color: rgba(230, 219, 219, 0.856);
+    border-color: rgba(0, 0, 0, .09);
+    border-radius: 99px;
+    box-shadow: none;
+    color: currentColor !important;
+}
+
+/* =====================================
+    SIDE BAR
+======================================*/
+
+/* === aside1 */
+
+.widget {
+    margin-bottom: 1.5rem;
+}
+
+.sidebar-inner div form {
+    display: flex;
+    border: #d8d8d8 1px solid;
+}
+
+.sidebar-inner div form .search-input-container {
+    flex-grow: 1;
+   
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+}
+
+.sidebar-inner div form .aws-search-btn {
+    display: flex;
+    flex-grow: 0;
+    align-items: center;
+    justify-content: center;
+    background-color: #ededed;
+
+}
+
+.search-input-container,
+.aws-search-btn {
+    border: none;
+}
+
+.aws-search-field {
+    border: none;
+    outline: none;
+
+
+}
+
+.aws-search-field::placeholder {
+    font-size: 12px;
+    color: #888;
+
+}
+
+
+.aws-search-btn_icon {
+    border: none;
+}
+
+/* aside2 */
+.price_slider {
+    position: relative;
+    height: 8px;
+    background-color: #ddd;
+    border-radius: 4px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.price_slider_range {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: #333;
+    border-radius: 4px;
+}
+
+.price_slider_handle {
+    position: absolute;
+    top: -5px;
+    /*left: 10px ;*/
+    width: 20px;
+    height: 20px;
+    background-color: #333;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    z-index: 1;
+}
+
+.price_slider_amount {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.price_label {
+    font-size: 14px;
+}
+
+.button.button-loc {
+    background-color: #666666;
+    color: white;
+    border: none;
+    padding: 3px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.widget form .price_slider_wrapper .price_slider_amount button .price_label   {
+    white-space: nowrap; 
+}
+
+/* custom */
+.widget_text .custom-html-widget p {
+    width: 100%;
+
+}
+
+.widget_text .custom-html-widget p a {
+
+    display: block;
+    width: 100%;
+
+}
+
+/* Aside woocommerce */
+aside#woocommerce_product_categories-15 .product-categories {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+aside#woocommerce_product_categories-15 .product-categories li {
+    border-bottom: #353c46 1px solid;
+}
+
+.woocommerce .product-categories li a {
+    text-decoration: none;
+    list-style-type: none;
+}
+.widget .product-categories .cat-item a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    position: relative;
+    color: #334862;
+}
+
+.widget .product-categories .cat-item a:hover {
+    color: black;
+}
+
+/* active  */
+.product-categories li.active {
+    border-left: 4px solid #007bff; 
+    background-color: #f9f9f9;  
+    font-weight: bold;
+    padding-left: 5px;
+      
+}
+
+
+
+/* =====================
+Wideget Styles
+======================*/
+.widget>ul>li>a {
+    display: inline-block;
+    flex: 1;
+    width: 100%;
+    padding: 6px 0;
+}
+/* ================ end col large-3 first */
+
+/* =====================================
+    col large-9 two
+    =================================== */
+.row-small>.col {
+    margin-bottom: 0;
+    padding-bottom: 19.6px;
+    padding-left: 20px;
+}
+
+.col-inner {
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    flex: 1 0 auto;
+    position: relative;
+    width: 100%;
+    border: #3331 1px solid;
+
+}
+
+.box {
+    position: relative;
+    width: 100%;
+}
+
+.box-image {
+    height: auto;
+    width: 100%;
+    padding: 10px 10px;
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
+}
+.box-image img {
+    display: block; 
+    margin: 0 auto; 
+    max-width: 100%; 
+    height: auto; 
+}
+
+
+.box-text .text-center {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.box-text p {
+    margin-bottom: .1em;
+    margin-top: .1em;
+}
+
+.box a {
+    display: inline-block;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.add-to-cart-button {
+    padding-top: 10px;
+}
+
+.add-to-cart-button a {
+    padding: 5px 10px;
+    background:linear-gradient(to right , #1d55ee, #6688f7);;
+    font-size: 0.8em;
+    font-weight: 500;
+    color: #d8d8d8;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+.title-wrapper {
+   display:flex;
+   justify-content: center;
+   
+}
+.title-wrapper a, .title-wrapper a span {
+    display: block;
+    width: 200px;
+    height: 40px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    line-height: 40px;
+   
+}
+.price-wrapper .woocommerce-Price-amount {
+    font-weight: bold;
+}
+
