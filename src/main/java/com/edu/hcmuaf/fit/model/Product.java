@@ -185,4 +185,7 @@ public class Product {
         setQuantity(quantity);
     }
 
+    public void setFirstImageUrl(String firstImageUrl) {
+
+    }
 }

@@ -1,9 +1,6 @@
 package com.edu.hcmuaf.fit.controller;
 
-import com.edu.hcmuaf.fit.model.Category;
-import com.edu.hcmuaf.fit.model.Product;
-import com.edu.hcmuaf.fit.model.ProductSizes;
-import com.edu.hcmuaf.fit.model.SizePrice;
+import com.edu.hcmuaf.fit.model.*;
 import com.edu.hcmuaf.fit.service.CategoryService;
 import com.edu.hcmuaf.fit.service.ProductService;
 import jakarta.servlet.ServletException;
@@ -54,7 +51,11 @@ public class ProductController extends HttpServlet {
                     ArrayList<SizePrice> sizePriceList  = ProductService.getInstance().getProductSizeByProductIdAndDiameter(productId);
                     SizePrice lowestSizePrice = sizePriceList.isEmpty() ? null : sizePriceList.get(0);
                     String nameCate = category != null ? category.getName() : "";
-
+                    ArrayList<String> imageUrls = new ArrayList<>();
+                    ArrayList<ProductImages> productImages = ProductService.getInstance().getProductImages(productId);
+                    for (ProductImages productImage : productImages) {
+                        imageUrls.add(productImage.getUrl()); // Lấy URL của từng hình ảnh
+                    }
                     request.setAttribute("cateName", nameCate);
                     request.setAttribute("lowestSizePrice", lowestSizePrice);
                     request.setAttribute("priceSize", sizePriceList);
@@ -63,6 +64,7 @@ public class ProductController extends HttpServlet {
                     request.setAttribute("maxPrice", maxPrice);
                     request.setAttribute("diameters", diameters);
                     request.setAttribute("selectedPrice", price);
+                    request.setAttribute("product.getProductImages", imageUrls);
 
                     request.getRequestDispatcher("detailProduct.jsp").forward(request, response);
                 } else {

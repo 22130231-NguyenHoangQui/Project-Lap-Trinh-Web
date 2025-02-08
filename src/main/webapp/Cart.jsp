@@ -29,7 +29,7 @@
     <header>
             <jsp:include page="header.jsp"></jsp:include>
     </header>
-<a href="<%=url%>/homePage" class="color-gray lbhv text-decoration-none">Trang chủ  <i class="fa fa-angle-right color-gray" aria-hidden="true"></i>  </a> <span class="text-color">Giỏ hàng</span>
+
 
 <% Cart cart = (Cart) session.getAttribute("Cart");
         if (cart != null && !cart.list().isEmpty()) {%>
@@ -70,24 +70,17 @@
                         <p class="text-muted"><%= p.getDescription() %></p>
                     </td>
                     <td>
-                        <% if (p.getSizePrices() != null && !p.getSizePrices().isEmpty()) { %>
-                        <%= nf.format(p.getSizePrices().get(0).getPrice()) %>
-                        <% } else { %>
-                        No Price Available
-                        <% } %>
+                        <span class="unit-price" data-id="<%= p.getId() %>"><%= request.getAttribute("priceOfId") %></span>
                     </td>
 
                     <td>
-                        <input type="number" name="quantity_<%= p.getId() %>" value="<%= p.getQuantity() %>" class="form-control" min="1" onchange="updateCart('<%= p.getId() %>', this.value)">
+                        <input type="number" name="quantity_<%= p.getId() %>" value="<%= p.getQuantity() %>"
+                               class="form-control" min="1"
+                               onchange="calculateTotalPrice('<%= p.getId() %>', <%= request.getAttribute("priceOfId") %>, this)">
                     </td>
-                    <td>
-                        <% if (p.getSizePrices() != null && !p.getSizePrices().isEmpty()) { %>
-                        <%= nf.format(p.getSizePrices().get(0).getPrice()) %>
-                        <% } else { %>
-                        No Price Available
-                        <% } %>
+                    <td class="total-price" data-id="<%= p.getId() %>">
+                        <%= request.getAttribute("priceOfId") %>
                     </td>
-
                     <td>
                         <button class="btn btn-danger" onclick="removeFromCart('<%= p.getId() %>')">Xóa</button>
                     </td>
@@ -102,11 +95,12 @@
             </table>
         </div>
         <div class="d-flex justify-content-between align-items-center mt-3">
+
             <span class="cart-total">Tổng cộng:0 đ</span>
             <div>
-                <a id="continue-shopping" href="homepage.jsp" class="btn btn-continue">Tiếp tục mua hàng</a>
+                <a id="continue-shopping" href="<%=url%>/homepage.jsp" class="btn btn-continue">Tiếp tục mua hàng</a>
 
-                <a id="checkout" href="payment.jsp" class="btn btn-custom">Thanh toán</a>
+                <a id="checkout" href="<%=url%>/payment.jsp" class="btn btn-custom">Thanh toán</a>
 
             </div>
         </div>
@@ -121,61 +115,7 @@
 
     <%}%>
     <!-- Chân trang -->
-    <footer>
-        <div class="footer-top">
-            <div class="ft-uniform">
-                <h6>GIỚI THIỆU</h6>
-                <div class="is-divider"></div>
-                <div class="ft-introduce">
-                    <p><a href="../pages/home.html" title="Đi tới Trang Chủ">IT Cake</a> – Bánh sinh nhật đậm chất riêng
-                        của bạn, chúng tôi tự hào mang đến những chiếc bánh sinh
-                        nhật tươi ngon, thiết kế độc đáo và sáng tạo theo yêu cầu. Hãy để IT Cake cùng bạn tạo nên những
-                        khoảnh khắc ngọt ngào và đáng nhớ nhất.</p>
-                    <div class="ft-img">
-                        <a href="//theme.hstatic.net/1000313040/1000406925/14/hg_img1.png?v=2177"
-                            data-fancybox="home-gallery-images" data-caption=""><img
-                                src="//theme.hstatic.net/1000313040/1000406925/14/hg_img_thumb1.png?v=2177" alt=""></a>
-                    </div>
-                </div>
-            </div>
-            <div class="ft-uniform">
-                <h6>LIÊN HỆ</h6>
-                <div class="is-divider"></div>
-                <div class="ft-contact">
-                    <div class="ft-contact-address">
-                        <i class="bi bi-geo-alt-fill" aria-hidden="true"></i> Đại Học Nông Lâm TP.Hồ Chí Minh, Phường
-                        Linh
-                        Trung, Q.Thủ Đức, TP.Hồ Chí Minh
-                    </div>
-                    <div class="ft-contact-tel">
-                        <i class="bi bi-telephone-fill" aria-hidden="true"></i><a href="tel:#"> 0123 456 789</a>
-                    </div>
-                    <div class="ft-contact-email">
-                        <i class="bi bi-envelope-fill" aria-hidden="true"></i><a href="#"> itcake@gmail.com</a>
-                    </div>
-                    <div class="ft-contact-facebook">
-                        <i class="bi bi-facebook" aria-hidden="true"></i><a href="#"> www.facebook-itcake.com</a>
-                    </div>
-                </div>
-            </div>
-            <div class="ft-uniform">
-                <h6>CHÍNH SÁCH</h6>
-                <div class="is-divider"></div>
-                <ul class="ft-policy">
-                    <li><a href="deliveryPolicy.jsp">Chính sách đổi, trả,hoàn tiền</a></li>
-                    <li><a href="/pages/chinh-sach-giao-dich-thanh-toan">Chính sách bảo mật</a></li>
-                    <li><a href="/pages/chinh-sach-doi-tra">Hướng dẫn thanh toán</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <div class="ft-copyright">
-                Copyrights © 2024 by <a target="_blank" href="../pages/home.html" title="Đi tới Trang Chủ">IT Cake</a>.
-                <!--blank chuyển trang ở tab mới-->
-            </div>
-        </div>
-    </footer>
-    <!-- External JS -->
+
 <%--    <script src="js/cart.js"></script>--%>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

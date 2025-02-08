@@ -123,3 +123,25 @@ function updateTotal() {
         promoMessage.style.color = '#dc3545';
     }
 }
+
+
+function calculateTotalPrice(productId, unitPrice, quantityInput) {
+    // Lấy giá trị số lượng từ input
+    const quantity = parseInt(quantityInput.value, 10);
+    if (isNaN(quantity) || quantity < 1) {
+        alert("Số lượng không hợp lệ!");
+        return;
+    }
+
+    // Tính tổng giá
+    const totalPrice = unitPrice * quantity;
+
+    // Hiển thị tổng giá trong cột "total-price"
+    const totalPriceElement = document.querySelector(`.total-price[data-id='${productId}']`);
+    if (totalPriceElement) {
+        totalPriceElement.textContent = totalPrice.toLocaleString("vi-VN", {
+            style: "currency",
+            currency: "VND"
+        });
+    }
+}

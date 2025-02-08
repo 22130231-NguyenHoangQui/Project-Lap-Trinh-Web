@@ -24,6 +24,7 @@ import java.io.IOException;
             String quantityText = request.getParameter("quantity");
             int quantity = Integer.parseInt(quantityText);
             String size = request.getParameter("size");
+            int sizeInt = Integer.parseInt(size);
             Cart c = (Cart) session.getAttribute("Cart");
             if(c == null) c= new Cart();
             if (c.get(idProduct) != null) {
@@ -35,6 +36,8 @@ import java.io.IOException;
                 }
             }else{
                 Product p = ProductService.getInstance().getProductById(idProduct);
+                double priceOfId = ProductService.getInstance().getPriceByDiameter(idProduct,sizeInt);
+                request.setAttribute("priceOfId",priceOfId);
                 if (p != null) c.put(p);
             }
             session.setAttribute("Cart", c);

@@ -1,6 +1,7 @@
 package com.edu.hcmuaf.fit.controller;
 
 import java.io.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.edu.hcmuaf.fit.model.Category;
@@ -23,12 +24,16 @@ public class DeleteCategory extends HttpServlet {
 
         JSONArray htmlDataArray = new JSONArray();
         ArrayList<Category> listCategory = null;
-        if (CategoryService.getInstance().delCategory(idCate) > 0) {
-            listCategory = CategoryService.getInstance().listCategory();
-            res = "Xóa thành công!";
-        } else {
-            res = "Đã xảy ra lỗi!";
-            listCategory = CategoryService.getInstance().listCategory();
+        try {
+            if (CategoryService.getInstance().delCategory(idCate) > 0) {
+                listCategory = CategoryService.getInstance().listCategory();
+                res = "Xóa thành công!";
+            } else {
+                res = "Đã xảy ra lỗi!";
+                listCategory = CategoryService.getInstance().listCategory();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         for (Category c : listCategory) {
             JSONObject cateJSON = new JSONObject();

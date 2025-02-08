@@ -1,3 +1,11 @@
+<%@ page import="com.edu.hcmuaf.fit.model.Account" %>
+<%@ page import="com.edu.hcmuaf.fit.model.Cart" %>
+<%@ page import="java.text.NumberFormat" %>
+<%@ page import="com.edu.hcmuaf.fit.model.Product" %>
+<%@ page import="com.edu.hcmuaf.fit.model.ProductSizes" %>
+<%@ page import="java.util.Iterator" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -14,357 +22,345 @@
     <link rel="stylesheet" href="css/header.css">
 </head>
 <body>
-    <header>
-        <div class="header-wrapper">
-            <div class="header-top">
-                <div class="container d-flex justify-content-between align-items-center">
-                    <div class="d-flex flex-col flex-left">
-                        <ul class="nav nav-left nav-small">
-
-                            <li class="html li-first delivery-info">Đặt bánh lấy ngay tại Thành phố Hồ Chí Minh</li>
-                            <li class="html li-first">Hệ thống bánh sinh nhật chính hãng</li>
-                            <li class="html li-first">Hotline: 01234576789</li>
-                        </ul>
-                    </div>
-                    <div class="flex-col hide-for-medium flex-right">
-                        <ul class="nav top-bar-nav nav-right nav-small  nav-divided">
-                            <li class="html header-social-icons ">
-                                <div class="social-icons follow-icons">
-                                    <a href="" class="button icon circle">
-                                        <i class="fa-brands fa-facebook" style=" margin-right: auto;"></i>
-                                    </a>
-                                    <a href="" class="button icon circle">
-
-                                        <i class="fa-brands fa-instagram"></i>
-                                    </a>
-                                    <a href="" class="button icon circle">
-
-                                        <i class="fa-regular fa-envelope"></i>
-                                    </a>
-                                    <a href="" class="button icon circle">
-                                            
-                                        <i class="fa-solid fa-phone"></i>
-                                    </a>
-
-                                    <a href="" class="button icon circle">
-
-                                        <i class="fa-brands fa-pinterest"></i>
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+<header>
+    <jsp:include page="header.jsp"></jsp:include>
+</header>
+<%
+    String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+%>
+<!--page content-->
+<%
+    Account a =(Account) session.getAttribute("account");
+    if (a == null) {
+%>
+<div class="container p-0 mgt text-center fw-bold">Bạn chưa đăng nhập! <a href = <%=url%>/signIn.jsp>Đăng nhập</a></div>
+<%
+        return;
+    }
+%>
+<%
+    Cart c =(Cart) session.getAttribute("Cart");
+    double sumPay = 0;
+    double shippingFee=0;
+    if (!a.getVerifyAccount().isStateVerify()) {
+%>
+<div class="container p-0 mgt text-center fw-bold">Bạn chưa xác thực tài khoản <a href = <%=url%>/reVerifyCode>Xác thực ngay</a></div>
+<%
+}
+//else if (a != null && c!=null ) {
+%>
+<div class="container my-5">
+    <h2 class="text-center mb-4">Thanh toán</h2>
+    <!-- Thông tin khách hàng và địa chỉ nhận hàng -->
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <div class="card p-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5>Địa chỉ nhận hàng</h5>
+                    <button class="btn btn-link p-0" onclick="editCustomerInfo()">
+                        <i class="fas fa-edit"></i>
+                    </button>
                 </div>
-            </div>
-        </div>
-
-        <div class="header-center color-header-center ">
-            <div class="container d-flex" style="width: 100%;">
-                <div class="row row-center d-flex justify-content-between  align-items-center">
-                    <div class="col-sm-1 col-md-1 col-lg-1 img-logo"
-                        style="display: block; width: 10%; padding-left: 10px;">
-                        <a href="homepage.jsp">
-                            <img src="image/imghomepage/logo/logo1.jpg" alt="" class="img-logo-detail">
-
-                        </a>
-                    </div>
-                    <div class=" col-sm-4 col-md-8 col-lg-11 d-flex justify-content-between align-items-center "
-                        style="width: 87%; height: 100%;">
-                        <ul class=" nav d-flex  list-item" style="margin-left: 10px; width: 25%;">
-
-
-
-                            <a href="homepage.jsp">
-                                <li>Trang chủ</li>
-                            </a>
-                            <div class="dropdown" style=" display:flex; align-items: center;  height: 100%; ">
-                                <a href="ProductCatalog.jsp" data-id="2">
-                                    <li>Danh mục</li>
-
-                                </a>
-                                <ul class="dropdown-menu menu-danhmuc">
-                                    <p
-                                        style="text-wrap: nowrap; padding: 0 10px; font-weight: bold; background-color: white;">
-                                        Danh mục bánh sinh nhật</p>
-                                    <li><a href="#" class="product-link" data-category="banh_an_nhe">Bánh Ăn
-                                            Nhẹ</a></li>
-                                    <li><a href="#" data-category="banh_cac_ngay_le">Bánh Các Ngày Lễ</a></li>
-                                    <li><a href="#" data-category="banh_chai_ruou">Bánh Chai Rượu Và Ly
-                                            Bia Sang Trọng</a></li>
-                                    <li><a href="#" class="product-link" data-category="banh_chu_nhat">Bánh Chủ
-                                            Nhật</a>
-                                    </li>
-                                    <li><a href="#" data-category="banh_cong_chua">Bánh Công Chúa</a>
-                                    </li>
-                                    <li><a href="#" data-category="banh_giang_sinh">Bánh Giáng Sinh
-                                            (Noel)</a></li>
-                                    <li><a href="#" data-category="banh_hoa_qua_tuoi">Bánh Hoa Quả Tươi
-                                            Theo Mùa</a></li>
-                                    <li><a href="#" data-category="banh_khung_long">Bánh Khủng Long</a>
-                                    </li>
-                                    <li><a href="#" data-category="banh_ki_niem_ngay">Bánh Kỉ niệm ngày
-                                            cưới</a></li>
-                                    <li><a href="#" data-category="banh_lich">Bánh Lịch</a></li>
-                                    <li><a href="#" data-category="banh_mousse">Bánh Mousse</a></li>
-
-                                </ul>
-                            </div>
-                            <a href="introWebsite.jsp">
-                                <li>Giới thiệu</li>
-                            </a>
-
-                        </ul>
-                        <div style="position: relative; width: 45%; margin-right: 20px;">
-                            <input type="search" id="keyword" class="form-control autocomplete-field js-ls"
-                                placeholder="Tìm kiếm bánh sinh nhật,..." autocomplete="off"
-                                style="width: 100%; padding-right: 40px; padding-left: 10px; font-size: 16px; height: 33px;">
-                        
-                            <i class="fa-solid fa-magnifying-glass"
-                                style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: gray; font-size: 16px; cursor: pointer;"></i>
-                        </div>
-                        
-
-
-
-
-
-
-                        <div class="d-flex">
-                            <div class="row balance-row">
-                                <div class="bag-shop">
-                                    <div class="col1 d-flex justify-content-between" style="gap: 10px;">
-                                        <i class="fa-solid fa-bag-shopping"></i>
-                                        <button id="cart-button" class="col1 text"
-                                            style="background: none; border: none; cursor: pointer;">
-                                            GIỎ HÀNG
-                                        </button>
-
-                                    </div>
-
-                                    <div class="col1">
-                                        <div class="dropdown">
-                                            <button class="btn btn-secondary dropdown-toggle" type="button"
-                                                id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Tài Khoản
-                                            </button>
-                                            <ul class="dropdown-menu account-dropdown-menu"
-                                                aria-labelledby="dropdownMenuButton">
-                                                <li><a class="dropdown-item" href="SignIn.html">Đăng Nhập</a></li>
-                                                <li><a class="dropdown-item" href="SignUp.html">Đăng Ký</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-    </header>
-    <div class="container my-5">
-        <h2 class="text-center mb-4">Thanh toán</h2>
-        
-        <!-- Thông tin khách hàng và địa chỉ nhận hàng -->
-        <div class="row mb-3">
-            <div class="col-md-6">
-                <div class="card p-4">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h5>Địa chỉ nhận hàng</h5>
-                        <button class="btn btn-link p-0" onclick="editCustomerInfo()">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                    </div>
-                    <ul class="list-unstyled mb-0">
-                        <li><strong>Họ tên:</strong> <span id="customer-name-display">Nguyễn Văn A</span></li>
-                        <li><strong>Số điện thoại:</strong> <span id="customer-phone-display">0123 456 789</span></li>
-                        <li><strong>Email:</strong> <span id="customer-email-display">nguyenvana@example.com</span></li>
-                        <li><strong>Địa chỉ nhận hàng:</strong> <span id="shipping-address-display" class="mb-0">137 Trần Văn Ơn, Quận 9, TP.HCM</span></li>
-                    </ul>
-                </div>
-            </div>
-    
-            
-            <div class="col-md-6">
-                <div class="card p-4">
-                    <div class="s14_gt">THỜI GIAN GIAO HÀNG:</div>
-                    <ul class="s14_gn">
-                        <li>Khung giờ giao hàng: 08:00 - 19:00 thứ 2 - Chủ Nhật. </li>
-                        <li>Thời gian giao hàng dự kiến có thể thay đổi tùy vào khu vực và đơn vị vận chuyển.</li>
-                        <li>Miễn phí vận chuyển trong bán kính 3km cho các đơn hàng trên 450,000</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!-- Form chỉnh sửa thông tin và địa chỉ khách hàng -->
-        <div class="modal-form d-none" id="edit-customer-form">
-            <div class="modal-content">
-                <h5>Chỉnh sửa thông tin khách hàng</h5>
-                <form>
-                    <div class="mb-3">
-                        <label for="customer-name" class="form-label">Họ tên</label>
-                        <input type="text" id="customer-name" class="form-control" value="Nguyễn Văn A">
-                    </div>
-                    <div class="mb-3">
-                        <label for="customer-phone" class="form-label">Số điện thoại</label>
-                        <input type="text" id="customer-phone" class="form-control" value="0123 456 789">
-                    </div>
-                    <div class="mb-3">
-                        <label for="customer-email" class="form-label">Email</label>
-                        <input type="email" id="customer-email" class="form-control" value="nguyenvana@example.com">
-                    </div>
-                    <div class="mb-3">
-                        <label for="shipping-address" class="form-label">Địa chỉ nhận hàng</label>
-                        <input type="text" id="shipping-address" class="form-control" value="137 Trần Văn Ơn, Quận 9, TP.HCM">
-                    </div>
-                    <button type="button" class="btn btn-success" onclick="saveCustomerInfo()">Lưu</button>
-                    <button type="button" class="btn btn-second" onclick="closeCustomerForm()">Hủy</button>
-                </form>
-            </div>
-        </div>
-
-        <!-- Bảng sản phẩm -->
-        <table class="table table-bordered align-middle">
-            <thead class="table-secondary">
-                <tr>
-                    <th>STT</th>
-                    <th>Sản phẩm</th>
-                    <th>Kích thước</th>
-                    <th>Đơn giá</th>
-                    <th>Số lượng</th>
-                    <th>Thành tiền</th>
-                </tr>
-            </thead>
-            <tbody id="product-list">
-                <!-- Sản phẩm mẫu -->
-                <tr>
-                    <td>1</td>
-                    <td>
-                        <img src="http://127.0.0.1:5500/image/imghomepage/product/product_danhmuc/7.webp" alt="TRMS4 - Tiramisu Dâu Tây"  class="img-fluid rounded" style="max-width: 80px;">
-                        <span class="ms-2">Bánh Tiramisu Dâu Tây</span>
-                    </td>
-                    <td>16cm</td>
-                    <td>120,000₫</td>
-                    <td>4</td>
-                        
-                    <td class="subtotal">480,000₫</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <!-- Tổng thanh toán  -->
-        <div class="card p-4">
-            <h5>Thông tin thanh toán</h5>
-            <div class="mb-3">
-                <div class="input-group">
-                    <button class="btn btn-outline-secondary" id="view-discounts-btn">Xem mã giảm giá</button>
-                    <input type="text" class="form-control" id="discount-code" placeholder="Nhập mã giảm giá">
-                    <button class="btn btn-outline-secondary" onclick="applyDiscount()">Áp dụng</button>
-                </div>
-                <div class="message-to-shop mt-4">
-                    <label for="shopMessage" class="form-label">Lời nhắn:</label>
-                    <textarea id="shopMessage" class="form-control" rows="3" placeholder="Nhập lời nhắn cho shop tại đây..."></textarea>
-                </div>
-            </div>
-            <p>Tổng tiền hàng: <span id="total-price">480.000₫</span></p>
-            <p>Phí vận chuyển: <span>Miễn phí</span></p>
-            <p><strong>Tổng thanh toán: <span id="final-price">480.000₫</span></strong></p>
-        </div>
-                <!-- Modal hiển thị mã giảm giá -->
-        <div class="modal-form d-none" id="discount-modal">
-            <div class="modal-content">
-                <h5>Danh sách mã giảm giá</h5>
-                <ul id="discount-list">
-                    <li data-code="DISCOUNT10" class="discount-item">
-                        <div>
-                            <strong>Mã: DISCOUNT10</strong> - Giảm 10%<br>
-                            <span>Thời hạn đến: 31/12/2024</span>
-                        </div>
-                    </li>
-                    <li data-code="FREESHIP" class="discount-item">
-                        <div>
-                            <strong>Mã: FREESHIP</strong> - Miễn phí vận chuyển<br>
-                            <span>Thời hạn đến: 15/01/2025</span>
-                        </div>
-                    </li>
+                <ul class="list-unstyled mb-0">
+                    <li><strong>Họ tên:</strong> <span id="fullName"><%=a.getName()%></span></li>
+                    <li><strong>Số điện thoại:</strong><span id="phoneNumber"><%=a.getPhoneNumber()%></span></li>
+                    <li><strong>Email:</strong> <span id="email"><%=a.getEmail()%></span></li>
+                    <li><strong>Địa chỉ nhận hàng:</strong><span id="address"><%=a.getAddressReceive()%></span> </li>
                 </ul>
-                <button type="button" class="btn btn-success" onclick="closeDiscountModal()">Đóng</button>
             </div>
         </div>
-        <button class="btn btn-success btn-lg mt-3" onclick="window.location.href = 'pages/orderSuccessfully.html'">Đặt hàng</button>
+        <div class="col-lg-2 col-sm-2 mt-1 text-end">
+            <button class="btnAdd bgcolor bd-full" id ="editInFor" data-bs-toggle="modal" data-bs-target="#changeInfor"><i class="fa fa-pencil text-color " title="Chỉnh sửa thông tin liên hệ" aria-hidden="true"></i></button>
+        </div>
+        <div class="modal fade" id="changeInfor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa thông tin liên hệ</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="changeNam" onsubmit="return check()" method="post" action="ChangeInforInPayment">
+                            <%
+                                String res = (String) request.getAttribute("res");
+                                res = (res == null) ? "" : res;
+                            %>
+                            <table>
+                                <thead>
+                                <div class="text-end">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <tr>
+                                    <td colspan="4">
+                                        <h5 class="pt-3 pb-1"> THAY ĐỔI THÔNG TIN </h5>
+                                        <div class="text-danger text-center w-100" id="error"><%= res %></div>
+                                    </td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td colspan="2">
+                                        <%
+                                            if (a.getVerifyAccount().isStateVerify()) { %>
+                                        <label class="w-100">Tài khoản đã xác thực <i class="fa fa-check-circle text-success" aria-hidden="true"></i></label>
+                                        <% } else { %>
+                                        <label class="w-100">Tài khoản của bạn chưa xác thực, <a href="reVerifyCode">xác thực ngay</a></label>
+                                        <% } %>
+                                    </td>
+                                </tr>
+                                <tr id="changeName">
+                                    <td>
+                                        <label>Họ và tên</label>
+                                    </td>
+                                    <td class="w-50">
+                                        <div id="InName">
+                                            <input id="HienThiTen" name="TenHT" type="text" value="<%= a.getName() %>">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr id="changeSDT">
+                                    <td>
+                                        <label>Số điện thoại</label>
+                                    </td>
+                                    <td>
+                                        <div id="InSDT">
+                                            <input id="HienThiSDT" name="SDTHT" type="text" value="<%= a.getPhoneNumber() %>">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr id="changegGmail">
+                                    <td>
+                                        <label>Email</label>
+                                    </td>
+                                    <td>
+                                        <div id="InGmail">
+                                            <input id="HienThiGmail" name="GmailHT" type="text" value="<%= a.getEmail() %>">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>Giới tính</label>
+                                    </td>
+                                    <td>
+                                        <div class="gender">
+                                            <label class="ms-0" for="male">Nam</label><input class="ms-2 me-3" type="radio" id="male" name="gender" value="Nam" <%= a.getGender().equals("Nam") ? "checked" : "" %> >
+                                            <label for="female">Nữ</label> <input class="ms-2 me-3" type="radio" id="female" name="gender" value="Nữ" <%= a.getGender().equals("Nữ") ? "checked" : "" %>>
+                                            <label for="other">Khác</label> <input class="ms-2 me-3" type="radio" id="other" name="gender" value="Khác" <%= a.getGender().equals("Khác") ? "checked" : "" %>>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr id="changeNgaySinh">
+                                    <td>
+                                        <label>Ngày sinh</label>
+                                    </td>
+                                    <td>
+                                        <div id="InNS">
+                                            <input id="HienThiNS" name="HienThiNS" type="date" value="<%= a.getBirthDay() %>">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr id="changeDC">
+                                    <td>
+                                        <label>Địa chỉ</label>
+                                    </td>
+                                    <td>
+                                        <div id="InDiaChi">
+                                            <input id="HienThiDC" name="DCHT" type="text" value="<%= a.getAddress() %>">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr id="changeDCReceive">
+                                    <td>
+                                        <label>Địa chỉ nhận hàng</label>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <input id="HienThiDCReice" name="DCNHHT" type="text" value="<%= a.getAddressReceive() %>">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr id="SubmitSB">
+                                    <td colspan="2">
+                                        <div><button id="submit" name="SB" style="color: white">LƯU</button></div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-6">
+            <div class="card p-4">
+                <div class="s14_gt">THỜI GIAN GIAO HÀNG:</div>
+                <ul class="s14_gn">
+                    <li>Khung giờ giao hàng: 08:00 - 19:00 thứ 2 - Chủ Nhật. </li>
+                    <li>Thời gian giao hàng dự kiến có thể thay đổi tùy vào khu vực và đơn vị vận chuyển.</li>
+                    <li>Miễn phí vận chuyển trong bán kính 3km cho các đơn hàng trên 450,000</li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <!-- Chân trang -->
-    <footer>
-        <!-- <div class="footer"> -->
-            <!-- Footer Top -->
-            <div class="footer-top">
-                <!-- Giới thiệu -->
-                <div class="ft-uniform">
-                    <h6>GIỚI THIỆU</h6>
-                    <div class="is-divider"></div>
-                    <div class="ft-introduce">
-                        <p>
-                            <a href="../pages/home.html" title="Đi tới Trang Chủ">IT Cake</a> – Bánh sinh nhật đậm chất riêng của bạn. Chúng tôi tự hào mang đến những chiếc bánh sinh nhật tươi ngon, thiết kế độc đáo và sáng tạo theo yêu cầu. 
-                            Hãy để IT Cake cùng bạn tạo nên những khoảnh khắc ngọt ngào và đáng nhớ nhất.
-                        </p>
-                        <div class="ft-img">
-                            <a href="//theme.hstatic.net/1000313040/1000406925/14/hg_img1.png?v=2177"
-                               data-fancybox="home-gallery-images" data-caption="">
-                                <img src="//theme.hstatic.net/1000313040/1000406925/14/hg_img_thumb1.png?v=2177" alt="Hình ảnh IT Cake">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Liên hệ -->
-                <div class="ft-uniform">
-                    <h6>LIÊN HỆ</h6>
-                    <div class="is-divider"></div>
-                    <div class="ft-contact">
-                        <div class="ft-contact-address">
-                            <i class="bi bi-geo-alt-fill" aria-hidden="true"></i> 
-                            Đại Học Nông Lâm TP.Hồ Chí Minh, Phường Linh Trung, Q.Thủ Đức, TP.Hồ Chí Minh
-                        </div>
-                        <div class="ft-contact-tel">
-                            <i class="bi bi-telephone-fill" aria-hidden="true"></i> 
-                            <a href="tel:#">0123 456 789</a>
-                        </div>
-                        <div class="ft-contact-email">
-                            <i class="bi bi-envelope-fill" aria-hidden="true"></i> 
-                            <a href="mailto:itcake@gmail.com">itcake@gmail.com</a>
-                        </div>
-                        <div class="ft-contact-facebook">
-                            <i class="bi bi-facebook" aria-hidden="true"></i> 
-                            <a href="#">www.facebook-itcake.com</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Chính sách -->
-                <div class="ft-uniform">
-                    <h6>CHÍNH SÁCH</h6>
-                    <div class="is-divider"></div>
-                    <ul class="ft-policy">
-                        <li><a href="deliveryPolicy.jsp">Chính sách đổi, trả,hoàn tiền</a></li>
-                        <li><a href="/pages/chinh-sach-giao-dich-thanh-toan">Chính sách bảo mật</a></li>
-                        <li><a href="/pages/chinh-sach-doi-tra">Hướng dẫn thanh toán</a></li>
-                    </ul>
-                </div>
+
+    <!-- Bảng sản phẩm -->
+    <table class="table table-bordered align-middle">
+        <thead class="table-secondary">
+        <tr>
+            <th>STT</th>
+            <th>Sản phẩm</th>
+            <th>Đường kính</th>
+            <th>Đơn giá</th>
+            <th>Số lượng</th>
+            <th>Thành tiền</th>
+        </tr>
+        </thead>
+        <tbody >
+        <%
+            NumberFormat nF = NumberFormat.getCurrencyInstance();
+            Iterator<Product> it = c.list().iterator();
+            int stt = 1;
+            Product p;
+
+            while(it.hasNext()) {
+                p = it.next();
+        %>
+        <!-- Sản phẩm mẫu -->
+        <tr>
+            <td><%=stt%></td>
+            <td>
+                <img src="<%=url%>/Products/<%=
+    (p.getProductImages().isEmpty()) ? "" : p.getProductImages().get(0).getUrl()
+%>" class="img-fluid rounded" style="max-width: 80px;">
+                <span class="ms-2"><%= p.getNameProduct() %></span>
+            </td>
+            <td>
+              <%=session.getAttribute("BuyNowPrice")%>
+            </td>
+            <td>
+               <%= session.getAttribute("BuyNowPrice")%>
+            </td>
+            <td><%= p.getQuantity() %></td>
+
+
+            <td class="subtotal">
+                <%=
+                    sumPay
+                %>
+            </td>
+
+<%--        <%--%>
+<%--                sumPay += p.getSizePrices().get(0).getPrice()*p.getQuantity();--%>
+<%--                stt++;--%>
+<%--            }--%>
+<%--            session.setAttribute("Sum",sumPay);--%>
+<%--        %>--%>
+                <%
+    if (p.getSizePrices() != null && !p.getSizePrices().isEmpty()) {
+        double price = p.getSizePrices().get(0).getPrice();
+        int quantity = p.getQuantity();
+        sumPay += price * quantity;
+    } else {
+        // Nếu p.getSizePrices() là null hoặc rỗng, có thể xử lý trường hợp này như là 0 hoặc thông báo lỗi.
+        // Ví dụ, bạn có thể cho sumPay = 0 trong trường hợp này
+        sumPay += 0; // Hoặc xử lý theo cách khác
+    }
+%>
+
+        </tbody>
+    </table>
+
+    <!-- Tổng thanh toán  -->
+    <div class="card p-4">
+        <h5>Thông tin thanh toán</h5>
+        <div class="mb-3">
+            <div class="message-to-shop mt-4">
+                <label for="shopMessage" class="form-label">Lời nhắn:</label>
+                <textarea id="shopMessage" class="form-control" rows="3" placeholder="Nhập lời nhắn cho shop tại đây..."></textarea>
             </div>
-            <!-- Footer Bottom -->
-            <div class="footer-bottom">
-                <div class="ft-copyright">
-                    Copyrights © 2024 by 
-                    <a target="_blank" href="homepage.jsp" title="Đi tới Trang Chủ">IT Cake</a>.
-                </div>
-            </div>
-        <!-- </div> -->
-        
-    </footer>
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- External JS -->
-    <script src="js/payment.js"></script>
+        </div>
+        <p>Tổng tiền hàng: <span id="total-price"><%=nF.format(sumPay)%></span></p>
+        <p>Phí vận chuyển: <span><%=nF.format(shippingFee)%></span></p>
+        <p><strong>Tổng thanh toán: <span id="final-price"><%=nF.format(sumPay+shippingFee)%></span></strong></p>
+    </div>
+    <!-- Modal hiển thị mã giảm giá -->
+    <div class="modal-form d-none" id="discount-modal">
+        <div class="modal-content">
+            <h5>Danh sách mã giảm giá</h5>
+            <ul id="discount-list">
+                <li data-code="DISCOUNT10" class="discount-item">
+                    <div>
+                        <strong>Mã: DISCOUNT10</strong> - Giảm 10%<br>
+                        <span>Thời hạn đến: 31/12/2024</span>
+                    </div>
+                </li>
+                <li data-code="FREESHIP" class="discount-item">
+                    <div>
+                        <strong>Mã: FREESHIP</strong> - Miễn phí vận chuyển<br>
+                        <span>Thời hạn đến: 15/01/2025</span>
+                    </div>
+                </li>
+            </ul>
+            <button type="button" class="btn btn-success" onclick="closeDiscountModal()">Đóng</button>
+        </div>
+    </div>
+    <div class="pay text-end mt-2">
+        <a href="<%=url%>/Payment">
+            <button id="btnPay" >Đặt hàng</button>
+        </a>
+    </div>
+</div>
+<%--<%--%>
+<%--}else if((String)session.getAttribute("donePayment")!=null){--%>
+<%--%>--%>
+<div class="container p-0 mgt text-center fw-bold">Đơn hàng của bạn đã được đặt. Bạn có thể kiểm tra lại đơn hàng trên Email! <a href = <%=url%>/homepage>Mua hàng tiếp!</a></div>
+<div class="text-center mb-4">
+    <img src="image/comfirm.png" alt="" class="imgbg">
+</div>
+<%
+    }
+%>
+<!-- Chân trang -->
+<footer>
+    <jsp:include page="Footer.jsp"></jsp:include>
+</footer>
+<script>
+    function updateTotalMoney() {
+        $('tr').each(function () {
+            var amountText = $(this).find('td:eq(6) span').text();
+            var priceText = $(this).find('td:eq(5) span').text();
+            priceText = priceText.replace(/\./g, "");
+            var amount = parseInt(amountText);
+            var price = parseInt(priceText);
+            var total = amount * price;
+            total = total.toLocaleString('en-US');
+            total = total.replace(/\,/g, ".")
+            $(this).find('td:eq(7) span').text(total);
+        })
+    }
+    updateTotalMoney(); //gọi hàm tính thành tiền sau khi load web
+    function totalMoneyPay() {
+        var total = 0;
+        $('tr').each(function () {
+            var moneyText = $(this).find('td:eq(7) span').text();
+            moneyText = moneyText.replace(/\./g, "");
+            var money = parseInt(moneyText);
+            if (!isNaN(money)) {
+                total += money;
+            }
+        })
+        total = total.toLocaleString('en-US');
+        total = total.replace(/\,/g, ".")
+        $('#totalMoney').text(total);
+        $('#totalPay').text(total);
+    }
+    totalMoneyPay();
+</script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- External JS -->
 </body>
 </html>

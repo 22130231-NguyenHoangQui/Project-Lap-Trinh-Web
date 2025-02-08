@@ -44,7 +44,7 @@ public class Payment extends HttpServlet {
         String endContent = "Tổng tiền: " + nF.format(sum);
 
         Product p;
-        Order invoice = new Order(0, a.getId(), Calendar.getInstance().getTime(), sum, "Thanh toán khi nhận hàng", address);
+        Order invoice = new Order(0, a.getId(), Calendar.getInstance().getTime(), sum, 1, address);
 
         if (InvoiceService.getInstance().insertOrder(invoice) > 0) {
             Order latest = InvoiceService.getInstance().latestInvoice();

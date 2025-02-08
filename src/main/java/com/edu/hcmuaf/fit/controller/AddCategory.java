@@ -15,7 +15,7 @@ import org.json.JSONObject;
 @WebServlet(name = "addCategory", value = "/addCategory")
 public class AddCategory extends HttpServlet {
     // Thư mục để lưu ảnh
-    private static final String IMAGE_DIR = "/path/to/upload/directory"; // Cập nhật lại đường dẫn đúng
+    private static final String IMAGE_DIR = "D:\\du_an\\GitHub\\Project-Lap-Trinh-Web\\src\\main\\webapp\\Products"; // Cập nhật lại đường dẫn đúng
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ServletException {
         request.setCharacterEncoding("UTF-8");
@@ -47,6 +47,7 @@ public class AddCategory extends HttpServlet {
                         // Lưu ảnh vào thư mục
                         String filePath = IMAGE_DIR + File.separator + fileName;
                         part.write(filePath);
+                        System.out.println(123);
                     }
                 }
             }

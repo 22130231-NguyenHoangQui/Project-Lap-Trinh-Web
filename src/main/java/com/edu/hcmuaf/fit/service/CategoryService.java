@@ -52,7 +52,7 @@ public class CategoryService  {
     //Thêm danh mục
     public int insertCategory(Category c){ return  DAOCategory.insertCategory(c);}
     //Xoá danh mục
-    public  int delCategory(int id) {
+    public  int delCategory(int id) throws SQLException {
         return  DAOCategory.delCategory(id);
     }
     // Chỉnh sửa cập nhật danh mục

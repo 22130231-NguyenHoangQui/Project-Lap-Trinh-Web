@@ -1,12 +1,10 @@
 package com.edu.hcmuaf.fit.controller;
 
 import java.io.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.edu.hcmuaf.fit.model.Account;
-import com.edu.hcmuaf.fit.model.Category;
-import com.edu.hcmuaf.fit.model.OrderDetail;
-import com.edu.hcmuaf.fit.model.Product;
+import com.edu.hcmuaf.fit.model.*;
 import com.edu.hcmuaf.fit.service.AccountService;
 import com.edu.hcmuaf.fit.service.CategoryService;
 import com.edu.hcmuaf.fit.service.InvoiceService;
@@ -27,10 +25,14 @@ public class ManageController extends HttpServlet {
 //        if (obj == null) {
 //            response.sendRedirect("signIn.jsp");
 //        } else {
-//            ArrayList<Invoice> listAllInvoice = InvoiceService.getInstance().listInvoice();
-//            request.setAttribute("listAllInvoice", listAllInvoice);
-//            ArrayList<Supplier> suplist = SupplierService.getInstance().listAllSupplier();
-//            request.setAttribute("listAllSup", suplist);
+        ArrayList<Order> listAllInvoice = null;
+        try {
+            listAllInvoice = InvoiceService.getInstance().listOrder();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        request.setAttribute("listAllInvoice", listAllInvoice);
+
 
         ArrayList<Category> listCategory = CategoryService.getInstance().getListCategory();
         request.setAttribute("listCategory", listCategory);

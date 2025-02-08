@@ -1,5 +1,6 @@
 package com.edu.hcmuaf.fit.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Order {
@@ -7,10 +8,11 @@ public class Order {
     private int idAccount;
     private Date createdAt;
     private double totalInvoice;
-    private String statusOrder;
+    private int statusOrder;
     private String address;
     private String description;
-    public Order(int id, int idAccount, Date createdAt, double totalInvoice, String statusOrder, String address) {
+    private ArrayList<OrderDetail> details;
+    public Order(int id, int idAccount, Date createdAt, double totalInvoice, int statusOrder, String address) {
         this.id = id;
         this.idAccount = idAccount;
         this.createdAt = createdAt;
@@ -19,7 +21,30 @@ public class Order {
         this.address = address;
     }
 
-    public Order(int id, int idAccount, Date createdAt, double totalInvoice, String statusOrder, String address, String description) {
+    public Order(int id, int idAccount, Date startDate, int status) {
+        this.id = id;
+        this.idAccount = idAccount;
+        this.createdAt = startDate;
+        this.statusOrder = status;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public ArrayList<OrderDetail> getDetails() {
+        return details;
+    }
+
+    public void setDetails(ArrayList<OrderDetail> details) {
+        this.details = details;
+    }
+
+    public Order(int id, int idAccount, Date createdAt, double totalInvoice, int statusOrder, String address, String description) {
         this.id = id;
         this.idAccount = idAccount;
         this.createdAt = createdAt;
@@ -31,6 +56,22 @@ public class Order {
 
     public Order() {
     }
+
+    public Order(int id, int idAccount, String address, Date startDate, int status) {
+        this.id = id;
+            this.address = address;
+            this.statusOrder = status;
+    }
+
+    public Order(int id, int id1, String address, int totalInvoice, int statusOrder, Date date) {
+            this.id = id;
+            this.idAccount = id1;
+            this.address = address;
+            this.totalInvoice = totalInvoice;
+            this.statusOrder = statusOrder;
+            this.createdAt = date;
+    }
+
 
     public int getId() {
         return id;
@@ -64,11 +105,11 @@ public class Order {
         this.totalInvoice = totalInvoice;
     }
 
-    public String getStatusOrder() {
+    public int getStatusOrder() {
         return statusOrder;
     }
 
-    public void setStatusOrder(String statusOrder) {
+    public void setStatusOrder(int statusOrder) {
         this.statusOrder = statusOrder;
     }
 
@@ -79,4 +120,5 @@ public class Order {
     public void setAddress(String address) {
         this.address = address;
     }
+
 }

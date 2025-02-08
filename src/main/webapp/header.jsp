@@ -2,6 +2,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.edu.hcmuaf.fit.model.Account" %>
 <%@ page import="com.edu.hcmuaf.fit.model.Cart" %>
+<%@ page import="com.edu.hcmuaf.fit.model.Product" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <html>
@@ -21,7 +22,7 @@
 <header>
     <div class="header-wrapper">
         <div class="header-top">
-            <div class="container d-flex justify-content-between align-items-center">
+            <div class="container d-flex justify-content-between align-items-center" style="padding: 0px">
                 <div class="d-flex flex-col flex-left">
                     <ul class="nav nav-left nav-small">
 
@@ -62,11 +63,11 @@
         </div>
     </div>
     <div class="header-center color-header-center ">
-        <div class="container d-flex" style="width: 100%;">
+        <div class="container d-flex" style="width: 100%; padding: 0px;" >
             <div class="row row-center d-flex justify-content-between  align-items-center">
                 <div class="col-sm-1 col-md-1 col-lg-1 img-logo"
                      style="display: block; width: 10%; padding-left: 10px;">
-                    <a href="./homepage.jsp">
+                    <a href="<%=url%>/homepage.jsp">
                         <img src="./image/imghomepage/logo/logo1.jpg" alt="" class="img-logo-detail">
 
                     </a>
@@ -81,36 +82,10 @@
                             <li>Trang chủ</li>
                         </a>
                         <div class="dropdown  " style=" display:flex; align-items: center;  height: 100%; " >
-                            <a href="<%=url%>/CateController-servlet" data-id="2">
+                            <a href="<%=url%>/cate" data-id="2">
                                 <li>Danh mục</li>
 
                             </a>
-                            <ul class="dropdown-menu menu-danhmuc">
-                                <p
-                                        style="text-wrap: nowrap; padding: 0 10px; font-weight: bold; background-color: white;">
-                                    Danh mục bánh sinh nhật</p>
-                                <li><a href="#" class="product-link" data-category="banh_an_nhe">Bánh Ăn
-                                    Nhẹ</a></li>
-                                <li><a href="#" data-category="banh_cac_ngay_le">Bánh Các Ngày Lễ</a></li>
-                                <li><a href="#" data-category="banh_chai_ruou">Bánh Chai Rượu Và Ly
-                                    Bia Sang Trọng</a></li>
-                                <li><a href="#" class="product-link" data-category="banh_chu_nhat">Bánh Chủ
-                                    Nhật</a>
-                                </li>
-                                <li><a href="#" data-category="banh_cong_chua">Bánh Công Chúa</a>
-                                </li>
-                                <li><a href="#" data-category="banh_giang_sinh">Bánh Giáng Sinh
-                                    (Noel)</a></li>
-                                <li><a href="#" data-category="banh_hoa_qua_tuoi">Bánh Hoa Quả Tươi
-                                    Theo Mùa</a></li>
-                                <li><a href="#" data-category="banh_khung_long">Bánh Khủng Long</a>
-                                </li>
-                                <li><a href="#" data-category="banh_ki_niem_ngay">Bánh Kỉ niệm ngày
-                                    cưới</a></li>
-                                <li><a href="#" data-category="banh_lich">Bánh Lịch</a></li>
-                                <li><a href="#" data-category="banh_mousse">Bánh Mousse</a></li>
-
-                            </ul>
                         </div>
                         <a href="./introWebsite.jsp">
                             <li>Giới thiệu</li>
@@ -118,10 +93,10 @@
 
                     </ul>
                     <div style="position: relative; width: 45%; margin-right: 20px;">
-                        <form action="<%=url%>/LoadProductByName" method="get" style="width: 100%;">
+                        <form action="/SearchProductByName" method="get" style="width: 100%;">
                             <input type="search" id="keyword" class="form-control autocomplete-field js-ls"
                                    placeholder="Tìm kiếm bánh sinh nhật,..." autocomplete="off"
-                                   name="search"
+                                   name="s"
                                    style="width: 100%; padding-right: 40px; padding-left: 10px; font-size: 16px; height: 33px;">
                             <button type="submit" style="all: unset; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"
                                     data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
@@ -132,6 +107,28 @@
                         </form>
                     </div>
 
+                    <!-- Hiển thị kết quả tìm kiếm trong cate.jsp -->
+                    <% if (request.getAttribute("listProductByName") != null) {
+                        ArrayList<Product> listProductByName = (ArrayList<Product>) request.getAttribute("listProductByName");
+                        if (!listProductByName.isEmpty()) { %>
+                    <div>
+                        <h3>Kết quả tìm kiếm:</h3>
+                        <ul>
+                            <% for (Product product : listProductByName) { %>
+                            <li>
+                                <h4><%= product.getNameProduct() %></h4>
+                                <p><%= product.getDescription() %></p>
+                                <!-- Lấy URL của ảnh sản phẩm đầu tiên -->
+                                <% if (product.getProductImages() != null && !product.getProductImages().isEmpty()) { %>
+                                <img src="<%= product.getProductImages().get(0).getUrl() %>" alt="<%= product.getNameProduct() %>" style="width: 100px; height: auto;">
+                                <% } %>
+                            </li>
+                            <% } %>
+                        </ul>
+                    </div>
+                    <% } } %>
+
+
                     <div class="d-flex">
                         <div class="row balance-row">
                             <div class="bag-shop">
@@ -140,7 +137,7 @@
                                     <button id="cart-button" class="col1 text"
                                             style="background: none; border: none; cursor: pointer;">
                                         GIỎ HÀNG
-                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        <span class="start-100 badge rounded-pill bg-danger " style="margin-left:4px; margin-bottom: 10px">
                                             <%=quantityItem%>
                                             <span class="visually-hidden">unread messages</span>
                                         </span>
@@ -180,7 +177,7 @@
                                             %>
                                             <li class="dropdown-item">Xin chào: <span class="fw-bold name"><%=account.getName()%></span></li>
                                             <li><hr class="dropdown-divider"></li>
-                                            <li><a class="dropdown-item" href="<%=url%>/history">Lịch sử mua hàng</a></li>
+                                            <li><a class="dropdown-item" href="<%=url%>/HistoryBuy.jsp">Lịch sử mua hàng</a></li>
                                             <li><hr class="dropdown-divider"></li>
                                             <li><a class="dropdown-item" href="<%=url%>/changeInformation.jsp">Thay đổi thông tin</a></li>
                                             <li><hr class="dropdown-divider"></li>

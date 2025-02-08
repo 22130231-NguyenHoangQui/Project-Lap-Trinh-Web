@@ -100,7 +100,7 @@ public class DAOProduct {
             while (rs.next()) {
                 int product_id = rs.getInt("product_id");
                 String nameProduct = rs.getString("name_product");
-                int totalQuantity = rs.getInt("totalQuantity");
+//                int totalQuantity = rs.getInt("totalQuantity");
                 Product product = new Product();
                 product.setNameProduct(nameProduct);
                 product.setId(product_id);
@@ -720,9 +720,64 @@ public class DAOProduct {
 
         return maxPrice == Double.MIN_VALUE ? "0" : formatPrice(maxPrice);
     }
+    public static List<Product> searchProductsByName(String name) {
+        List<Product> productList = new ArrayList<>();
+        String query = "SELECT * FROM products WHERE nameProduct LIKE ?";
+
+        try (Connection connection = JDBCUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, "%" + name + "%"); // tìm kiếm tên gần đúng
+
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                Product product = new Product(
+                        rs.getInt("id"),
+                        rs.getInt("idCate"),
+                        rs.getString("nameProduct"),
+                        rs.getInt("quantity"),
+                        rs.getString("description"),
+                        rs.getDate("created_at"),
+                        rs.getDate("updated_at"),
+                        getProductImages(rs.getInt("id")),
+                        null, // SizePrices có thể được thêm vào sau
+                        rs.getBoolean("status")
+                );
+                productList.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return productList;
+    }
+
+    public static ArrayList<ProductImages> getProductImages(int productId) {
+        ArrayList<ProductImages> images = new ArrayList<>();
+        String query = "SELECT * FROM productImages WHERE productId = ?";
+
+        try (Connection connection = JDBCUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, productId);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                images.add(new ProductImages(rs.getString("url"), rs.getInt("productId")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return images;
+    }
     // Phương thức định dạng giá sản phẩm
     public static String formatPrice(double price) {
         DecimalFormat formatter = new DecimalFormat("#,###");
         return formatter.format(price);
+    }
+
+    public String getFirstImageUrl(Product product) {
+        if (product != null && product.getProductImages() != null && !product.getProductImages().isEmpty()) {
+            return product.getProductImages().get(0).getUrl(); // Lấy URL của ảnh đầu tiên
+        }
+        return null;
     }
 }

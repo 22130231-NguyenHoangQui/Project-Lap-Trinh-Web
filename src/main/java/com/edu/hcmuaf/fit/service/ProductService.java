@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class ProductService {
     static ProductService instance;
 
-    private ProductService() {
+    public ProductService() {
 
     }
 
@@ -147,16 +147,17 @@ public class ProductService {
     }
 
     public static void main(String[] args) {
-        ArrayList<Product> listProduct = ProductService.getInstance().listProductRandom(0);
-        Product highestPricedProduct = null;
-        Product lowestPricedProduct = null;
-        ArrayList<Product> listProductBestSelling = ProductService.getInstance().listProductBestSelling(0);
-        ArrayList<SizePrice> list = ProductService.getInstance().getProductSizeByProductIdAndDiameter(1);
-        System.out.println(list);
-        for (Product p : listProductBestSelling) {
-
-            System.out.println(p);
-        }
+//        ArrayList<Product> listProduct = ProductService.getInstance().listProductRandom(0);
+//        Product highestPricedProduct = null;
+//        Product lowestPricedProduct = null;
+//        ArrayList<Product> listProductBestSelling = ProductService.getInstance().listProductBestSelling(0);
+//        ArrayList<SizePrice> list = ProductService.getInstance().getProductSizeByProductIdAndDiameter(1);
+//        System.out.println(list);
+//        for (Product p : listProductBestSelling) {
+//
+//            System.out.println(p);
+//        }
+        getPriceByDiameter(1,16);
 //        for (Product p : listProduct) {
 //            if (highestPricedProduct == null || p.getPrice() > highestPricedProduct.getPrice()) {
 //                highestPricedProduct = p;
@@ -188,6 +189,8 @@ public class ProductService {
     public static Product getProductById(int id) {
         Product product = DAOProduct.getProductById(id);
         ArrayList<ProductImages> listImageOfProduct = DAOProduct.listImageOfProduct(product);
+        ArrayList<SizePrice> listPriceOfProduct = DAOProduct.listPriceOfProduct(product.getId());
+        product.setSizePrices(listPriceOfProduct);
         product.setProductImages(listImageOfProduct);
         return product;
     }
@@ -221,7 +224,7 @@ public class ProductService {
 
     }
 
-    public double getPriceByDiameter(int id, int desiredDiameter) {
+    public static double getPriceByDiameter(int id, int desiredDiameter) {
         return DAOProduct.getPriceByDiameter(id, desiredDiameter);
     }
     public ArrayList<SizePrice> getProductSizeByProductIdAndDiameter(int id) {
@@ -240,5 +243,17 @@ public class ProductService {
     public ArrayList<Integer> getDiametersByProductId(int productId) {
         return DAOProduct.getDiametersByProductId(productId);
     }
+    public ArrayList<Product> searchProductsByName(String name) {
+        return (ArrayList<Product>) DAOProduct.searchProductsByName(name);
+    }
+    public String getFirstImageUrl(Product product) {
+        if (product != null && product.getProductImages() != null && !product.getProductImages().isEmpty()) {
+            return product.getProductImages().get(0).getUrl(); // Lấy URL của ảnh đầu tiên
+        }
+        return null;
+    }
 
+
+    public ArrayList<ProductImages> getProductImages(int productId) {
+        return DAOProduct.getProductImages(productId);}
 }

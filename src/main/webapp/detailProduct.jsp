@@ -140,7 +140,9 @@
                                         if (allProductImages != null) {
                                             for (String imageUrl : allProductImages) {
                                     %>
-                                    <img class="thumbnail" src="<%= imageUrl %>" alt="Ảnh sản phẩm">
+                                    <img class="thumbnail"  src="<%=url%>/Products/<%=(product.getProductImages().isEmpty())?"":product.getProductImages().get(0).getUrl()%>alt="Ảnh sản phẩm">
+<%--                                    <img src="<%=url%>/Products/<%=(product_list.getProductImages().isEmpty())?"":product_list.getProductImages().get(0).getUrl()%>" class="card-img-top img_p" id = "img_center" alt="...">--%>
+
                                     <%
                                             }
                                         }
@@ -213,7 +215,7 @@
                                             <input class="input-reduce is-form" type="button" value="-"
                                                    data-target="#quantity-1">
                                             <input class="input-qt" id="quantity-1" name="quantity" value="1"
-                                                   size="4" min="1" max step="1" placeholder inputmode="numeric"
+                                                   size="4" min="1" max="<%=product.getQuantity()%>" step="1" placeholder inputmode="numeric"
                                                    autocomplete="off">
                                             <input class="input-increase is-form" type="button" value="+"
                                                    data-target="#quantity-1">
@@ -236,12 +238,12 @@
                                                 </button>
                                             </a>
 
-                                            <button class="btn-add payment" type="button" onclick="ToPayment()"
-                                                    style="border-radius: 10px;">
-                                                <a href ="<%=url%>/PaymentBuyNow?id=<%=product.getId()%>&quantity=1" id="buy-now-link">
-                                                    <button id="buynow">Mua ngay</button>
+<%--                                            <button class="btn-add payment" type="button" onclick="ToPayment()"--%>
+<%--                                                    style="border-radius: 10px;">--%>
+                                                <a href ="<%=url%>/PaymentBuyNow?id=<%=product.getId()%>&quantity=1&size=" id="buy-now-link">
+                                                    <button class="btn-add cart" type="button" style="border-radius: 10px">Mua ngay</button>
                                                 </a>
-                                            </button>
+<%--                                            </button>--%>
 
                                         </div>
                                     </div>
@@ -568,7 +570,7 @@
         // Các phần tử cần thiết
         const priceElement = document.querySelector("#product-price"); // Thẻ hiển thị giá
         const quantityInput = document.querySelector("#quantity-1"); // Input số lượng
-        const sizeSelect = document.getElementById("size-banh"); // Dropdown chọn kích thước
+        const sizeSelect = document.getElementById("sizeSelect"); // Dropdown chọn kích thước
 
         // Hàm cập nhật giá
         function updatePrice() {
@@ -647,7 +649,48 @@
         var size = this.value;
         var link = document.getElementById('addToCartLink');
         var url = link.getAttribute('href');
-        link.setAttribute('href', url.split('&size=')[0] + '&size=' + size); // Cập nhật URL với giá trị size đã chọn
+        var linkBuy = document.getElementById('buy-now-link');
+        var url1 = linkBuy.getAttribute('href');
+        linkBuy.setAttribute('href', url1.split('&size=')[0] + '&size=' + size);
+        link.setAttribute('href', url.split('&size=')[0] + '&size=' + size);
+    });
+
+    $(document).ready(function () {
+        var count = 1;
+        var increase = $('#increase');
+        var decrease = $('#decrease');
+        var amount = $('#amount');
+        var url = "<%= url %>";
+        var productId = <%= product.getId() %>;
+        var buynowlink = document.getElementById("buy-now-link");
+
+        increase.click(function () {
+            count++;
+            amount.val(count);
+            buynowlink.href = `${url}/PaymentBuyNow?id=${productId}&quantity=${count}`;
+        });
+
+        decrease.click(function () {
+            if (count > 1) {
+                count--;
+            }
+            amount.val(count);
+            buynowlink.href = `${url}/PaymentBuyNow?id=${productId}&quantity=${count}`;
+        });
+
+        amount.change(function () {
+            const inputValue = parseInt(amount.val());
+            var quantityAvai = <%= product.getQuantity() %>;
+            if (inputValue > quantityAvai) {
+                alert("Số lượng trong kho không đủ!");
+                amount.val(quantityAvai);
+            } else if (inputValue < 1) {
+                amount.val(1);
+            } else {
+                count = inputValue;
+            }
+            buynowlink.href = `${url}/PaymentBuyNow?id=${productId}&quantity=${count}`;
+        });
     });
 </script>
 

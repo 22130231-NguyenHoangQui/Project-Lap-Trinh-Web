@@ -100,8 +100,8 @@ public class DAOCategory {
         }
         return category;
     }
-
-    public static int delCategory(int id) {
+    //Xoá danh mục
+    public static synchronized int delCategory(int id) throws SQLException {
         int re = 0;
         Connection connection = JDBCUtil.getConnection();
         try {
@@ -109,17 +109,36 @@ public class DAOCategory {
             s.setInt(1, id);
             ResultSet resultSet = s.executeQuery();
             if (resultSet.next()) {
-                s = connection.prepareStatement("delete from products where idCate =?");
+                // Xóa tất cả các bản ghi trong bảng orderdetails có productId liên quan
+                s = connection.prepareStatement("delete from orderdetails where productId in (select id from products where categoryId = ?)");
                 s.setInt(1, id);
                 s.executeUpdate();
+
+                // Xóa tất cả các bản ghi trong bảng productImages có productId liên quan
+                s = connection.prepareStatement("delete from productImages where productId in (select id from products where categoryId = ?)");
+                s.setInt(1, id);
+                s.executeUpdate();
+
+                // Xóa tất cả các bản ghi trong bảng productSizes có productId liên quan
+                s = connection.prepareStatement("delete from productSizes where productId in (select id from products where categoryId = ?)");
+                s.setInt(1, id);
+                s.executeUpdate();
+
+                // Xóa tất cả các sản phẩm trong bảng products thuộc categoryId
+                s = connection.prepareStatement("delete from products where categoryId =?");
+                s.setInt(1, id);
+                s.executeUpdate();
+
+                // Cuối cùng, xóa category
                 s = connection.prepareStatement("delete from categories where id =?");
                 s.setInt(1, id);
                 re = s.executeUpdate();
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            JDBCUtil.closeConnection(connection);
         }
-        JDBCUtil.closeConnection(connection);
         return re;
     }
 
