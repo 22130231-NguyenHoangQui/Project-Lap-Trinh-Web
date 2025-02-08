@@ -4,6 +4,7 @@
 <%@ page import="com.edu.hcmuaf.fit.model.Product" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="com.edu.hcmuaf.fit.model.Category" %>
+<%@ page import="com.edu.hcmuaf.fit.model.Cart" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,7 +44,8 @@
 <%
     ArrayList<Product> listProduct = (ArrayList<Product>) request.getAttribute("listProductByName");
     ArrayList<Product> listProduct1;
-    NumberFormat nf = NumberFormat.getCurrencyInstance();
+    NumberFormat nF = NumberFormat.getCurrencyInstance();
+    Cart cart = (Cart) session.getAttribute("Cart");
 
 %>
 
@@ -100,21 +102,17 @@
                         </form>
 
                     </aside>
-                    <%--                    <c:forEach var="listOk" items="${}"></c:forEach>--%>
+                    <%
+                        ArrayList<Category> listCateBanChay = (ArrayList<Category>) request.getAttribute("listCateOk");
+                        for (Category c : listCateBanChay) {
+                    %>
                     <aside id="custom_html-5" class="widget_text widget widget_custom_html">
                         <div class="textwidget custom-html-widget">
-                            <p><a href="" style="text-decoration: none; color: inherit; font-weight: bold;">Bánh Kem
-                                Bento
-                                Cake 80k</a></p>
+                            <p><a href="" style="text-decoration: none; color: inherit; font-weight: bold;"><%=c.getName()%></a></p>
                         </div>
                     </aside>
-                    <aside id="custom_html-6" class="widget_text widget widget_custom_html">
-                        <div class="textwidget custom-html-widget">
-                            <p><a href="" style="text-decoration: none; color: inherit; font-weight: bold;">Bánh Kem
-                                Mini
-                                120k</a></p>
-                        </div>
-                    </aside>
+                    <%
+                        }%>
 
                     <aside id="woocommerce_product_categories-15"
                            class="widget woocommerce widget_product_categories">
@@ -126,7 +124,9 @@
                                 for (Category listCate1 : listCate) {
                             %>
                             <li class="cat-item" data-category="banh_cac_ngay_le">
-                                <a href="#" onclick="loadProductByIdCate(${listCate1.id})">${listCate1.name}</a>
+<%--                                <a href="#" >${listCate1.}</a>--%>
+                                <a href="" onclick="loadProductByIdCate(<%=listCate1.getId()%>)"><%=listCate1.getName()%></a>
+
                             </li>
 
                             <% } %>
@@ -137,6 +137,7 @@
 
                 </div>
             </div>
+
             <div class="col large-9">
                 <div class="shop-container">
                     <div class="products row  row-small large-columns-4 medium-columns-3 small-columns padding-p"
@@ -149,8 +150,11 @@
                             <div class="col-inner">
                                 <div class="product-small box">
                                     <div class="box-image">
-                                        <a href="#" class="product-link">
-                                            <img width="247" height="296" src="<%=url%>\Product\<%=(product_list.getProductImages().get(0).getUrl())%>" alt="...">
+                                        <a href="<%=url%>\DetailProduct?pid=<%=product_list.getId()%>&cid=<%=product_list.getIdCate()%>"  class="product-link">
+
+                                            <img src="<%=url%>/Products/<%=(product_list.getProductImages().isEmpty())?"":product_list.getProductImages().get(0).getUrl()%>" class="card-img-top img_p" id = "img_center" alt="...">
+
+<%--                                            <img src="<%=url%>/Products/<%=(product_list.getProductImages().isEmpty())?"":product_list.getProductImages().get(0).getUrl()%>" class="card-img-top img_p" id = "img_center" alt="...">--%>
                                         </a>
                                     </div>
                                     <div class="box-text text-center">
@@ -167,10 +171,31 @@
                                         <div class="price-wrapper">
                     <span class="price">
                         <span class="woocommerce-Price-amount amount">
-                            <bdi style="font-weight: bold;"><%=nf.format( product_list.getPrice()) %></bdi>
+                         <bdi style="font-weight: bold;">
+    <%
+        Double price = product_list.getSizePrices().get(0).getPrice();
+        if (price != null && !price.isNaN()) {
+            out.print(nF.format(price));
+        } else {
+            out.print("N/A"); // Giá trị mặc định nếu không có giá trị
+        }
+    %>
+</bdi>
+
+
                         </span>
                     </span>
                                         </div>
+                                        <%
+                                            int quantity = 1;
+                                            if (cart != null) {
+                                                if (cart.get(product_list.getId()) != null) {
+                                                    quantity = cart.get(product_list.getId()).getQuantity() + 1;
+                                                }
+                                            } else {
+                                                quantity = product_list.getQuantity();
+                                            }
+                                        %>
                                         <div class="add-to-cart-button">
                                             <a href="#" onclick="saveProductData('<%= product_list.getId() %>')">THÊM VÀO GIỎ</a>
                                         </div>
@@ -191,64 +216,15 @@
                     </div>
 
 
+
                 </div>
             </div>
+
         </div>
     </div>
 </main>
 <footer>
-    <div class="footer-top">
-        <div class="ft-uniform">
-            <h6>GIỚI THIỆU</h6>
-            <div class="is-divider"></div>
-            <div class="ft-introduce">
-                <p><a href="../pages/home.html" title="Đi tới Trang Chủ">IT Cake</a> – Bánh sinh nhật đậm chất riêng
-                    của bạn, chúng tôi tự hào mang đến những chiếc bánh sinh
-                    nhật tươi ngon, thiết kế độc đáo và sáng tạo theo yêu cầu. Hãy để IT Cake cùng bạn tạo nên những
-                    khoảnh khắc ngọt ngào và đáng nhớ nhất.</p>
-                <div class="ft-img">
-                    <a href="//theme.hstatic.net/1000313040/1000406925/14/hg_img1.png?v=2177"
-                       data-fancybox="home-gallery-images" data-caption=""><img
-                            src="//theme.hstatic.net/1000313040/1000406925/14/hg_img_thumb1.png?v=2177" alt=""></a>
-                </div>
-            </div>
-        </div>
-        <div class="ft-uniform">
-            <h6>LIÊN HỆ</h6>
-            <div class="is-divider"></div>
-            <div class="ft-contact">
-                <div class="ft-contact-address">
-                    <i class="bi bi-geo-alt-fill" aria-hidden="true"></i> Đại Học Nông Lâm TP.Hồ Chí Minh, Phường
-                    Linh
-                    Trung, Q.Thủ Đức, TP.Hồ Chí Minh
-                </div>
-                <div class="ft-contact-tel">
-                    <i class="bi bi-telephone-fill" aria-hidden="true"></i><a href="tel:#"> 0123 456 789</a>
-                </div>
-                <div class="ft-contact-email">
-                    <i class="bi bi-envelope-fill" aria-hidden="true"></i><a href="#"> itcake@gmail.com</a>
-                </div>
-                <div class="ft-contact-facebook">
-                    <i class="bi bi-facebook" aria-hidden="true"></i><a href="#"> www.facebook-itcake.com</a>
-                </div>
-            </div>
-        </div>
-        <div class="ft-uniform">
-            <h6>CHÍNH SÁCH</h6>
-            <div class="is-divider"></div>
-            <ul class="ft-policy">
-                <li><a href="deliveryPolicy.jsp">Chính sách đổi, trả,hoàn tiền</a></li>
-                <li><a href="/pages/chinh-sach-giao-dich-thanh-toan">Chính sách bảo mật</a></li>
-                <li><a href="/pages/chinh-sach-doi-tra">Hướng dẫn thanh toán</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <div class="ft-copyright">
-            Copyrights © 2024 by <a target="_blank" href="../pages/home.html" title="Đi tới Trang Chủ">IT Cake</a>.
-            <!--blank chuyển trang ở tab mới-->
-        </div>
-    </div>
+   <jsp:include page="Footer.jsp"></jsp:include>
 </footer>
 
 <%--<script src="js/productcatalog.js"></script>--%>
@@ -273,20 +249,17 @@
             console.error("Form lọc không tìm thấy");
         }
     });
-
-
     function filterByPrice() {
-        var minPrice = document.querySelector('.price_label .from').innerText.replace(/[^0-9.-]+/g, "");
-        var maxPrice = document.querySelector('.price_label .to').innerText.replace(/[^0-9.-]+/g, "");
+        var minPrice = document.querySelector('.price_label .from').innerText.replace(/[^0-9-]+/g, "");
+        var maxPrice = document.querySelector('.price_label .to').innerText.replace(/[^0-9-]+/g, "");
 
         minPrice = parseFloat(minPrice);
         maxPrice = parseFloat(maxPrice);
 
         // Lọc lại sản phẩm trong content
-        var products = document.querySelectorAll('.product-small');
-        console.log(products)
-        products.forEach(function (product) {
-            var priceText = product.querySelector('.price bdi').innerText.replace(/[^0-9.-]+/g, ""); // Lấy giá của sản phẩm
+        var products = document.querySelectorAll('.product-small'); // Lấy tất cả sản phẩm
+        products.forEach(function(product) {
+            var priceText = product.querySelector('.price bdi').innerText.replace(/[^0-9-]+/g, ""); // Lấy giá của sản phẩm
             var price = parseFloat(priceText);
 
             if (price >= minPrice && price <= maxPrice) {
@@ -296,39 +269,34 @@
             }
         });
     }
-
+    // Cập nhật thanh trượt
     document.addEventListener('DOMContentLoaded', function () {
         const leftHandle = document.getElementById('handle-left');
         const rightHandle = document.getElementById('handle-right');
         const priceRange = document.querySelector('.price_slider_range');
         const fromLabel = document.querySelector('.price_label .from');
         const toLabel = document.querySelector('.price_label .to');
-
+        console.log(${lowestPrice});
+        console.log(${highestPrice});
         const minValue = Math.round(parseFloat('${lowestPrice}'));
         const maxValue = Math.round(parseFloat('${highestPrice}'));
         const step = 10000;
-        console.log(minValue);
-        console.log(maxValue);
+        console.log("hai",minValue);
+        console.log("ba",maxValue);
         let leftValue = minValue;
         let rightValue = maxValue;
 
-
         function updateSlider() {
-
-
             const rangeWidth = document.querySelector('.price_slider').offsetWidth;
             const leftPercent = ((leftValue - minValue) / (maxValue - minValue)) * 100;
             const rightPercent = ((rightValue - minValue) / (maxValue - minValue)) * 100;
 
-
             if (priceRange) {
                 priceRange.style.left = leftPercent + '%';  // Nối % vào giá trị của leftPercent
                 priceRange.style.width = rightPercent - leftPercent + '%';
-
             }
             leftHandle.style.left = leftPercent + '%';
             rightHandle.style.left = 'calc(' + rightPercent + '% - 20px)';
-
 
             fromLabel.textContent = formatCurrency(leftValue);
             toLabel.textContent = formatCurrency(rightValue);
@@ -349,7 +317,6 @@
         rightHandle.addEventListener('mousedown', function () {
             console.log("Left handle mousedown");
             isRightDragging = true;
-
         });
 
         document.addEventListener('mousemove', function (e) {
@@ -383,22 +350,28 @@
         updateSlider();
     });
 
-    function loadProductByIdCate(idCate) {
+    var idCateCurrent = 0;
+
+    function loadProductByIdCate(categoryId) {
         $.ajax({
-            url: "LoadProductByIdCate",
-            method: "GET",
+            url: 'LoadProductByIdCate', // URL không thay đổi
+            method: 'GET',
             data: {
-                cid: idCate
+                cid: categoryId // Truyền categoryId trong phần data
             },
-            success: function (data) {
-                var row = document.getElementById("content");
-                row.innerHTML = data;
+            success: function(response) {
+                var productContainer = $('#content'); // Khu vực hiển thị sản phẩm
+                productContainer.empty(); // Xóa sản phẩm hiện tại
+
+                // Chèn trực tiếp HTML vào trong phần tử #content
+                productContainer.append(response);
             },
-
-
+            error: function() {
+                alert("Không thể tải sản phẩm.");
+            }
         });
-
     }
+
 
     function searchProduct(event) {
         if (event) {
@@ -411,7 +384,7 @@
             productContainer.innerHTML = originalContent;  // Đặt lại nội dung ban đầu
         } else if (searchQuery.length >= 2) {
             $.ajax({
-                url: "/LoadProductByName-servlet",
+                url: "/LoadProductByName",
                 method: "GET",
                 data: {s: searchQuery},
                 success: function (response) {

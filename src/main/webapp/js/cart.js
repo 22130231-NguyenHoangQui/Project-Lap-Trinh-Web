@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     path.forEach(function (part, index) {
         urlPath += part + '/';
-        if (index === path.length - 1 && part === 'shoppingCart.html') {
+        if (index === path.length - 1 && part === 'Cart.jsp') {
             breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">Giỏ hàng</a>';
         } else {
             breadcrumbHtml += ' <span class="divider">/</span> <a href="' + urlPath + '">' + part.replace(/-/g, ' ') + '</a>';
@@ -121,5 +121,27 @@ function updateTotal() {
     } else {
         promoMessage.innerText = `Mua thêm ${(450000 - total).toLocaleString()}₫ để được miễn phí vận chuyển.`;
         promoMessage.style.color = '#dc3545';
+    }
+}
+
+
+function calculateTotalPrice(productId, unitPrice, quantityInput) {
+    // Lấy giá trị số lượng từ input
+    const quantity = parseInt(quantityInput.value, 10);
+    if (isNaN(quantity) || quantity < 1) {
+        alert("Số lượng không hợp lệ!");
+        return;
+    }
+
+    // Tính tổng giá
+    const totalPrice = unitPrice * quantity;
+
+    // Hiển thị tổng giá trong cột "total-price"
+    const totalPriceElement = document.querySelector(`.total-price[data-id='${productId}']`);
+    if (totalPriceElement) {
+        totalPriceElement.textContent = totalPrice.toLocaleString("vi-VN", {
+            style: "currency",
+            currency: "VND"
+        });
     }
 }

@@ -1,11 +1,10 @@
 package com.edu.hcmuaf.fit.controller;
 
 import java.io.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.edu.hcmuaf.fit.model.Account;
-import com.edu.hcmuaf.fit.model.Category;
-import com.edu.hcmuaf.fit.model.Product;
+import com.edu.hcmuaf.fit.model.*;
 import com.edu.hcmuaf.fit.service.AccountService;
 import com.edu.hcmuaf.fit.service.CategoryService;
 import com.edu.hcmuaf.fit.service.InvoiceService;
@@ -21,29 +20,45 @@ public class ManageController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("html/text; charset= UTF-8");
-        HttpSession session = request.getSession();
-        Object obj = session.getAttribute("account");
+//        HttpSession session = request.getSession();
+//        Object obj = session.getAttribute("account");
 //        if (obj == null) {
-//            response.sendRedirect("SignIn.jsp");
+//            response.sendRedirect("signIn.jsp");
 //        } else {
-//            ArrayList<Invoice> listAllInvoice = InvoiceService.getInstance().listInvoice();
-//            request.setAttribute("listAllInvoice", listAllInvoice);
-//            ArrayList<Supplier> suplist = SupplierService.getInstance().listAllSupplier();
-//            request.setAttribute("listAllSup", suplist);
-            ArrayList<Category> listCategory = CategoryService.getInstance().getListCategory();
-            request.setAttribute("listCategory", listCategory);
-            Double getTotalForToday = InvoiceService.getInstance().getTotalRevenueForToday();
-            request.setAttribute("getTotalForToday", getTotalForToday);
-            ArrayList<Product> listAllProduct = ProductService.getInstance().listSixProduct(0);
-            request.setAttribute("listAllProduct", listAllProduct);
-//            ArrayList<Account> listAllAccount = AccountService.getInstance().listAllAccount();
-//            request.setAttribute("listAllAccount", listAllAccount);
+        ArrayList<Order> listAllInvoice = null;
+        try {
+            listAllInvoice = InvoiceService.getInstance().listOrder();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        request.setAttribute("listAllInvoice", listAllInvoice);
 
-            try {
-                request.getRequestDispatcher("ManageAdmin.jsp").forward(request, response);
-            } catch (ServletException e) {
-                throw new RuntimeException(e);
-            }
+
+        ArrayList<Category> listCategory = CategoryService.getInstance().getListCategory();
+        request.setAttribute("listCategory", listCategory);
+        Double getTotalForToday = InvoiceService.getInstance().getTotalRevenueForToday();
+
+        request.setAttribute("getTotalForToday", getTotalForToday);
+        int getDT = InvoiceService.getInstance().doanhThu();
+        request.setAttribute("getDT", getDT);
+        int productbd = InvoiceService.getInstance().productBN();
+        double monthdt = InvoiceService.getInstance().totalPriceMonth();
+        request.setAttribute("monthdt", monthdt);
+        request.setAttribute("productbd", productbd);
+
+        ArrayList<OrderDetail> cusMax = InvoiceService.getInstance().getListOrderDetail();
+        request.setAttribute("cusMax", cusMax);
+
+        ArrayList<Product> listAllProduct = ProductService.getInstance().listProductRandom(0);
+        request.setAttribute("listAllProduct", listAllProduct);
+        ArrayList<Account> listAllAccount = AccountService.getInstance().listAllAccount();
+        request.setAttribute("listAllAccount", listAllAccount);
+
+        try {
+            request.getRequestDispatcher("ManageAdmin.jsp").forward(request, response);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        }
 //        }
     }
 }

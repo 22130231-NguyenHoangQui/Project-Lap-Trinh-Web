@@ -1,17 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page import="com.edu.hcmuaf.fit.model.Product" %>
-<%@ page import="com.edu.hcmuaf.fit.model.ProductImages" %>
-<%@ page import="com.edu.hcmuaf.fit.model.ProductSizes" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="com.edu.hcmuaf.fit.model.Cart" %>
+<%@ page import="com.edu.hcmuaf.fit.model.Product" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.edu.hcmuaf.fit.model.SizePrice" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chi Tiết Sản Phẩm</title>
+    <title>chi tiết sản phẩm</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -95,8 +95,11 @@
 
 <body>
 <header>
+
     <jsp:include page="header.jsp"></jsp:include>
 </header>
+
+
 <div class="is-medium">
     <div class="container"></div>
 </div>
@@ -104,11 +107,12 @@
     <%
         String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
                 + request.getContextPath();
+    %>
+    <%
 
         NumberFormat nF = NumberFormat.getCurrencyInstance();
         Cart cart = (Cart) session.getAttribute("Cart");
         Product product = (Product) request.getAttribute("product");
-
         if (product != null) {
     %>
     <div class="container">
@@ -130,10 +134,19 @@
                                 </div>
                                 <div class="thumbnail-images d-flex">
                                     <span class="arrow-left">&#8592;</span>
-                                    <%-- Lặp qua danh sách ảnh của sản phẩm --%>
-                                    <c:forEach var="imageUrl" items="${product.allProductImages}">
-                                        <img class="thumbnail" src="${imageUrl}" alt="Ảnh sản phẩm">
-                                    </c:forEach>
+                                    <%
+                                        // Lấy danh sách hình ảnh từ attribute "allProductImages"
+                                        ArrayList<String> allProductImages = (ArrayList<String>) request.getAttribute("product.allProductImages");
+                                        if (allProductImages != null) {
+                                            for (String imageUrl : allProductImages) {
+                                    %>
+                                    <img class="thumbnail"  src="<%=url%>/Products/<%=(product.getProductImages().isEmpty())?"":product.getProductImages().get(0).getUrl()%>alt="Ảnh sản phẩm">
+<%--                                    <img src="<%=url%>/Products/<%=(product_list.getProductImages().isEmpty())?"":product_list.getProductImages().get(0).getUrl()%>" class="card-img-top img_p" id = "img_center" alt="...">--%>
+
+                                    <%
+                                            }
+                                        }
+                                    %>
                                     <span class="arrow-right">&#8594;</span>
                                 </div>
                             </div>
@@ -144,8 +157,8 @@
                             <div class="is-divider"></div>
                             <div class="price-wrapper">
                                 <p class="product-page-price ">
-                                    <span class="price-amount"><bdi>${product.getFormattedPrice(product.minPrice)}<span
-                                            class="price-symbol">₫</span>-<bdi>${product.getFormattedPrice(product.maxPrice)}<span
+                                    <span class="price-amount"><bdi>${minPrice}<span
+                                            class="price-symbol">₫</span> - <bdi>${maxPrice}<span
                                             class="price-symbol">₫</span></bdi></span>
                                 </p>
                             </div>
@@ -154,81 +167,111 @@
                                     <tbody>
                                     <tr>
                                         <th class="label">
-                                            <label for="size-banh-1">Size bánh:</label>
+                                            <label >Size bánh:</label>
                                         </th>
                                         <td class="value">
-                                            <select class name="attribute-size-banh" id="size-banh-1">
-                                                <option value>Chọn một tùy chọn</option>
-                                                <option class="attached" value="14" selected="selected">14 cm
+                                            <select name="attribute-size-banh" id="sizeSelect" onchange="updatePrice()">
+                                                <option value="">Chọn một tùy chọn</option>
+                                                <%
+                                                    ArrayList<SizePrice> sizePriceList = (ArrayList<SizePrice>) request.getAttribute("priceSize");
+                                                    SizePrice lowestSizePrice = (SizePrice) request.getAttribute("lowestSizePrice");
+
+                                                    if (sizePriceList != null) {
+                                                        for (SizePrice sp : sizePriceList) {
+                                                            // Kiểm tra xem đây có phải là kích thước thấp nhất không
+                                                            boolean isLowest = lowestSizePrice != null && sp.getDiameter() == lowestSizePrice.getDiameter();
+                                                %>
+                                                <option value="<%= sp.getDiameter() %>" data-price="<%= sp.getPrice() %>"
+                                                        <%= isLowest ? "selected" : "" %>>
+                                                    <%= sp.getDiameter() %> cm
                                                 </option>
-                                                <option class="attached" value="16">16 cm</option>
-                                                <option class="attached" value="18">18 cm</option>
-                                                <option class="attached" value="20">20 cm</option>
-                                                <option class="attached" value="22">22 cm</option>
-                                                <option class="attached" value="24">24 cm</option>
+                                                <%
+                                                        }
+                                                    }
+                                                %>
                                             </select>
                                         </td>
+
                                     </tr>
                                     </tbody>
                                 </table>
                                 <div class="single-variation">
                                     <div class="price-contai">
-                                            <span class="price" id="product-price">
-                                                250.000₫
-                                            </span>
+   <span class="price" id="product-price">
+    <%
+         lowestSizePrice = (SizePrice) request.getAttribute("lowestSizePrice");
+        if (lowestSizePrice != null) {
+            out.print(new java.text.DecimalFormat("#,###₫").format(lowestSizePrice.getPrice()));
+        } else {
+            out.print("Chọn kích thước để xem giá");
+        }
+    %>
+</span>
+
                                     </div>
+
                                     <div class="add-quantity">
                                         <div class="btn-quatity">
                                             <input class="input-reduce is-form" type="button" value="-"
                                                    data-target="#quantity-1">
                                             <input class="input-qt" id="quantity-1" name="quantity" value="1"
-                                                   size="4" min="1" max step="1" placeholder inputmode="numeric"
+                                                   size="4" min="1" max="<%=product.getQuantity()%>" step="1" placeholder inputmode="numeric"
                                                    autocomplete="off">
                                             <input class="input-increase is-form" type="button" value="+"
                                                    data-target="#quantity-1">
                                         </div>
                                         <div class="btn-add-contai">
-                                            <button class="btn-add cart" type="button" onclick="addToCart()"
-                                                    style="border-radius: 10px;">
-                                                THÊM VÀO GIỎ HÀNG
-                                            </button>
-                                            <button class="btn-add payment" type="button" onclick="ToPayment()"
-                                                    style="border-radius: 10px;">
-                                                <a href="pages/payment.html">MUA NGAY</a>
-                                            </button>
-                                            <input type="hidden" name="gtm4wp_id" value="29736">
-                                            <input type="hidden" name="gtm4wp_internal_id" value="29736">
-                                            <input type="hidden" name="gtm4wp_name"
-                                                   value="BHQ156 - Bánh sinh nhật Dâu tươi sáng">
-                                            <input type="hidden" name="gtm4wp_sku" value="BHQ156">
-                                            <input type="hidden" name="gtm4wp_category"
-                                                   value="Danh muc 1 - danhmuc">
-                                            <input type="hidden" name="gtm4wp_price" value="250000">
-                                            <input type="hidden" name="gtm4wp_stocklevel" value="">
-                                            <input type="hidden" name="add-to-cart" value="29736">
-                                            <input type="hidden" name="add-to-cart" value="29736">
-                                            <input type="hidden" name="variation_id" class="variation_id"
-                                                   value="29739">
+                                            <%
+                                                int quantity = 1;
+                                                if (cart != null) {
+                                                    if (cart.get(product.getId()) != null) {
+                                                        quantity = cart.get(product.getId()).getQuantity() + 1;
+                                                    }
+                                                } else {
+                                                    quantity = product.getQuantity();
+                                                }
+                                            %>
+                                            <a href="<%=url%>/cartController?id=<%=product.getId()%>&quantity=<%=quantity%>&size=" id="addToCartLink">
+
+                                                <button class="btn-add cart" type="button" style="border-radius: 10px;">
+                                                    THÊM VÀO GIỎ HÀNG
+                                                </button>
+                                            </a>
+
+<%--                                            <button class="btn-add payment" type="button" onclick="ToPayment()"--%>
+<%--                                                    style="border-radius: 10px;">--%>
+                                                <a href ="<%=url%>/PaymentBuyNow?id=<%=product.getId()%>&quantity=1&size=" id="buy-now-link">
+                                                    <button class="btn-add cart" type="button" style="border-radius: 10px">Mua ngay</button>
+                                                </a>
+<%--                                            </button>--%>
+
                                         </div>
                                     </div>
                                 </div>
                             </form>
+                            <!-- Phần mô tả sản phẩm -->
                             <div class="product-description" id="product-description" style="display: block;">
-                                    <span class="description-id">
-                                        <p><strong> Mã: TRMS4</strong>
-                                            <span class="sku"></span>
-                                    </span> </p>
+    <span class="description-id">
+        <p><strong>Mã: <%=product.getId()%></strong>
+            <span class="sku"></span>
+        </p>
+    </span>
                                 <p>
                                     <strong>Đường kính: </strong>
-                                    <span class="product-diameter"></span></p>
+                                    <span class="product-diameter">
+            <%= lowestSizePrice != null ? lowestSizePrice.getDiameter() + " cm" : "Chưa có thông tin" %>
+        </span>
+                                </p>
                                 <p>
                                     <strong>Chiều cao: </strong>
-                                    <span class="product-height"></span></p>
-                                <p><strong>Danh mục: </strong>
-                                    <a href=""> Bánh Sinh Nhật - Bánh Kem - Bánh Gâto, Bento Cake</a>
+                                    <span class="product-height">
+            <%= lowestSizePrice != null ? lowestSizePrice.getHeight() + " cm" : "Chưa có thông tin" %>
+        </span>
                                 </p>
-                                <span class="description-content"></span>
-
+                                <p><strong>Danh mục: </strong>
+                                    <a href=""> <%= request.getAttribute("cateName") %></a>
+                                </p>
+                                <span class="description-content"><%=product.getDescription()%></span>
                             </div>
 
 
@@ -245,10 +288,10 @@
                         <div id="description" class="content active">
 
 
-                            <h1 style="text-align: center;"><strong></strong></h1>
-                            <p>Bánh Tiramisu Dâu Tây vẽ hình bầu trời xanh với những đám mây trắng và cồng vồng sặc
-                                sỡ.</p>
-                            <p>Thông tin chi tiết ảnh mẫu:<br>- Bánh cốt vani, kem tươi, trang trí cầu vồng.<br></p>
+                            <h1 style="text-align: center;"><strong><%=product.getNameProduct()%>
+                            </strong></h1>
+                            <p><%=product.getDescription()%>
+                            </p>
                             <h2>Các size bánh cơ bản tại IT CAKE:</h2>
                             <p>– Size_16 cao ~8cm (3 – 5 người ăn)<br>– Size_18 cao ~8cm (5 – 7 người ăn)<br>–
                                 Size_20 cao ~8cm (7 – 9 người ăn)<br>– Size_22 cao ~8cm (9 – 11 người ăn)<br>–
@@ -434,70 +477,11 @@
             </div>
         </div>
     </div>
+
+    <%}%>
 </main>
-} else {
-%>
-<!-- Thông báo khi không tìm thấy sản phẩm -->
-<div>
-    <p>Không tìm thấy sản phẩm nào!</p>
-</div>
-<%
-    }
-%>
 <footer>
-    <div class="footer-top">
-        <div class="ft-uniform">
-            <h6>GIỚI THIỆU</h6>
-            <div class="is-divider"></div>
-            <div class="ft-introduce">
-                <p><a href="../pages/home.html" title="Đi tới Trang Chủ">IT Cake</a> – Bánh sinh nhật đậm chất riêng
-                    của bạn, chúng tôi tự hào mang đến những chiếc bánh sinh
-                    nhật tươi ngon, thiết kế độc đáo và sáng tạo theo yêu cầu. Hãy để IT Cake cùng bạn tạo nên những
-                    khoảnh khắc ngọt ngào và đáng nhớ nhất.</p>
-                <div class="ft-img">
-                    <a href="//theme.hstatic.net/1000313040/1000406925/14/hg_img1.png?v=2177"
-                       data-fancybox="home-gallery-images" data-caption=""><img
-                            src="//theme.hstatic.net/1000313040/1000406925/14/hg_img_thumb1.png?v=2177" alt=""></a>
-                </div>
-            </div>
-        </div>
-        <div class="ft-uniform">
-            <h6>LIÊN HỆ</h6>
-            <div class="is-divider"></div>
-            <div class="ft-contact">
-                <div class="ft-contact-address">
-                    <i class="bi bi-geo-alt-fill" aria-hidden="true"></i> Đại Học Nông Lâm TP.Hồ Chí Minh, Phường
-                    Linh
-                    Trung, Q.Thủ Đức, TP.Hồ Chí Minh
-                </div>
-                <div class="ft-contact-tel">
-                    <i class="bi bi-telephone-fill" aria-hidden="true"></i><a href="tel:#"> 0123 456 789</a>
-                </div>
-                <div class="ft-contact-email">
-                    <i class="bi bi-envelope-fill" aria-hidden="true"></i><a href="#"> itcake@gmail.com</a>
-                </div>
-                <div class="ft-contact-facebook">
-                    <i class="bi bi-facebook" aria-hidden="true"></i><a href="#"> www.facebook-itcake.com</a>
-                </div>
-            </div>
-        </div>
-        <div class="ft-uniform">
-            <h6>CHÍNH SÁCH</h6>
-            <div class="is-divider"></div>
-            <ul class="ft-policy">
-                <li><a href="pages/deliveryPolicy.html">Chính sách đổi, trả,hoàn tiền</a></li>
-                <li><a href="/pages/chinh-sach-giao-dich-thanh-toan">Chính sách bảo mật</a></li>
-                <li><a href="/pages/chinh-sach-doi-tra">Hướng dẫn thanh toán</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <div class="ft-copyright">
-
-            Copyrights © 2024 by <a target="_blank" href="../pages/home.html" title="Đi tới Trang Chủ">IT Cake</a>.
-
-        </div>
-    </div>
+    <jsp:include page="Footer.jsp"></jsp:include>
 </footer>
 
 
@@ -567,7 +551,149 @@
 
     });
 
+    function updatePrice() {
+        const selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
+        const pricePerUnit = parseFloat(selectedOption.getAttribute("data-price")) || 0; // Giá của size
+        const quantity = parseInt(quantityInput.value) || 1; // Lấy số lượng từ input
+
+        // Tính tổng giá
+        const totalPrice = pricePerUnit * quantity;
+
+        // Cập nhật giá hiển thị
+        priceElement.textContent = new Intl.NumberFormat("vi-VN", {
+            style: "currency",
+            currency: "VND",
+        }).format(totalPrice);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // Các phần tử cần thiết
+        const priceElement = document.querySelector("#product-price"); // Thẻ hiển thị giá
+        const quantityInput = document.querySelector("#quantity-1"); // Input số lượng
+        const sizeSelect = document.getElementById("sizeSelect"); // Dropdown chọn kích thước
+
+        // Hàm cập nhật giá
+        function updatePrice() {
+            const selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
+            const pricePerUnit = parseFloat(selectedOption.getAttribute("data-price")) || 0; // Giá của size
+            const quantity = parseInt(quantityInput.value) || 1; // Lấy số lượng từ input
+
+            // Tính tổng giá
+            const totalPrice = pricePerUnit * quantity;
+
+            // Cập nhật giá hiển thị
+            priceElement.textContent = new Intl.NumberFormat("vi-VN", {
+                style: "currency",
+                currency: "VND",
+            }).format(totalPrice);
+        }
+
+        // Hàm xử lý tăng/giảm số lượng
+        function handleQuantityChange(buttonSelector) {
+            const buttons = document.querySelectorAll(buttonSelector);
+
+            buttons.forEach((button) => {
+                button.addEventListener("click", function () {
+                    const step = parseInt(quantityInput.getAttribute("step")) || 1; // Bước tăng
+                    const min = parseInt(quantityInput.getAttribute("min")) || 1;  // Giá trị nhỏ nhất
+                    let currentValue = parseInt(quantityInput.value); // Lấy giá trị hiện tại
+
+                    // Kiểm tra nếu giá trị không phải là một số hợp lệ
+                    if (isNaN(currentValue)) {
+                        currentValue = 1; // Nếu không phải số hợp lệ, đặt lại thành 1
+                    }
+
+                    // Xử lý giảm số lượng
+                    if (button.classList.contains("input-reduce")) {
+                        // Giảm số lượng nhưng không nhỏ hơn min
+                        currentValue = Math.max(min, currentValue - step);
+                    }
+                    // Xử lý tăng số lượng
+                    else if (button.classList.contains("input-increase")) {
+                        currentValue += step; // Tăng số lượng
+                    }
+
+                    // Cập nhật lại giá trị trong input
+                    quantityInput.value = currentValue;
+
+                    // Cập nhật giá sau khi thay đổi số lượng
+                    updatePrice();
+                });
+            });
+        }
+
+        // Lắng nghe sự kiện thay đổi từ dropdown size
+        sizeSelect.addEventListener("change", updatePrice);
+
+        // Lắng nghe sự kiện thay đổi số lượng trực tiếp từ input
+        quantityInput.addEventListener("input", function () {
+            const currentValue = parseInt(quantityInput.value) || 1;
+            quantityInput.value = Math.max(1, currentValue); // Đảm bảo giá trị không nhỏ hơn 1
+            updatePrice();
+        });
+
+        // Kích hoạt hàm tăng/giảm
+        handleQuantityChange(".is-form");
+
+        // Cập nhật giá ban đầu (nếu cần)
+        updatePrice();
+    });
+
+
+
+
+
 </script>
+<script>
+    document.getElementById('sizeSelect').addEventListener('change', function() {
+        var size = this.value;
+        var link = document.getElementById('addToCartLink');
+        var url = link.getAttribute('href');
+        var linkBuy = document.getElementById('buy-now-link');
+        var url1 = linkBuy.getAttribute('href');
+        linkBuy.setAttribute('href', url1.split('&size=')[0] + '&size=' + size);
+        link.setAttribute('href', url.split('&size=')[0] + '&size=' + size);
+    });
+
+    $(document).ready(function () {
+        var count = 1;
+        var increase = $('#increase');
+        var decrease = $('#decrease');
+        var amount = $('#amount');
+        var url = "<%= url %>";
+        var productId = <%= product.getId() %>;
+        var buynowlink = document.getElementById("buy-now-link");
+
+        increase.click(function () {
+            count++;
+            amount.val(count);
+            buynowlink.href = `${url}/PaymentBuyNow?id=${productId}&quantity=${count}`;
+        });
+
+        decrease.click(function () {
+            if (count > 1) {
+                count--;
+            }
+            amount.val(count);
+            buynowlink.href = `${url}/PaymentBuyNow?id=${productId}&quantity=${count}`;
+        });
+
+        amount.change(function () {
+            const inputValue = parseInt(amount.val());
+            var quantityAvai = <%= product.getQuantity() %>;
+            if (inputValue > quantityAvai) {
+                alert("Số lượng trong kho không đủ!");
+                amount.val(quantityAvai);
+            } else if (inputValue < 1) {
+                amount.val(1);
+            } else {
+                count = inputValue;
+            }
+            buynowlink.href = `${url}/PaymentBuyNow?id=${productId}&quantity=${count}`;
+        });
+    });
+</script>
+
 </body>
 
 </html>

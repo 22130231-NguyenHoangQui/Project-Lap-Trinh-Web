@@ -89,4 +89,11 @@ public class AccountService {
         return DAOAccount.updateInforAccount(a);
     }
 
+    public static void main(String[] args) {
+        AccountService ac = new AccountService();
+        ac.listAllAccount();
+        for(Account a:ac.listAllAccount()) {
+            System.out.println(a);
+        }
+    }
 }
